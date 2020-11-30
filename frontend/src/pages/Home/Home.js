@@ -1,17 +1,17 @@
 import React from 'react';
 import Pagination from '@material-ui/lab/Pagination';
+import { classes as classesProps } from 'src/common/classes';
 
-import CardProject from '../CardProject';
-
+import CardProject from 'src/common/components/CardProject';
+import Footer from 'src/common/components/Footer';
 import './home.scss';
 
-const Home = ({}) => {
-  console.log('home');
+// eslint-disable-next-line arrow-body-style
+const Home = ({ classes }) => {
   return (
-    <main className="home">
-      <h2 className="home__subtitle"> Derniers projets publiés</h2>
-  
-      <div className="home__latest-project">
+    <main className={classes.home}>
+      <h2 className={classes.subtitle}> Derniers projets publiés</h2>
+      <div className={classes.latestProject}>
         <CardProject />
         <CardProject />
         <CardProject />
@@ -21,13 +21,13 @@ const Home = ({}) => {
         <CardProject />
         <CardProject />
       </div>
-      <Pagination className="home__pagination" count={10} size="small" />
+      <Pagination className={classes.pagination} count={10} size="small" />
     </main>
   );
 };
 
 Home.propTypes = {
-
+  ...classesProps,
 };
 
 export default Home;

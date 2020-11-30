@@ -15,15 +15,13 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // import './cardProject.scss';
-import { mergeClasses } from '@material-ui/styles';
+// import { mergeClasses } from '@material-ui/styles';
 import { classes as classesProps } from 'src/common/classes';
 import cardImage from './card-image.png';
 import avatar from './avatar.png';
 
-// eslint-disable-next-line no-empty-pattern
+// eslint-disable-next-line arrow-body-style
 const CardProject = ({ classes }) => {
-  console.log('je suis dans card');
-
   return (
     <Card className={classes.card}>
       <CardActionArea>

@@ -1,0 +1,19 @@
+@use 'src/common/styles/vars';
+
+.footer{
+  width: 100%;
+  margin: 0;
+  padding: 1em 0;
+  background-color: vars.$dark-blue;
+  display: flex;
+  justify-content: center;
+  color: vars.$white;
+
+  &__infos{
+    margin: 0 1em;
+  }
+
+  &__legalMention{
+    margin: 0 1em;
+  }
+}

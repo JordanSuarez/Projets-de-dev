@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './profile_edition.scss';
+import styles from './styles';
 
 // eslint-disable-next-line arrow-body-style
 const ProfileEdition = () => {
@@ -13,4 +14,4 @@ ProfileEdition.propTypes = {
 
 };
 
-export default ProfileEdition;
+export default withStyles(styles)(ProfileEdition);

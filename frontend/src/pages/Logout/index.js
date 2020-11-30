@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './logout.scss';
+import styles from './styles';
 
 // eslint-disable-next-line arrow-body-style
 const Logout = () => {
@@ -13,4 +14,4 @@ Logout.propTypes = {
 
 };
 
-export default Logout;
+export default withStyles(styles)(Logout);

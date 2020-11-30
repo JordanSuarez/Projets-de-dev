@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './register.scss';
+import styles from './styles';
 
 // eslint-disable-next-line arrow-body-style
 const Register = () => {
@@ -13,4 +14,4 @@ Register.propTypes = {
 
 };
 
-export default Register;
+export default withStyles(styles)(Register);

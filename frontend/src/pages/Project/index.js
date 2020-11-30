@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './project.scss';
+import styles from './styles';
 
 // eslint-disable-next-line arrow-body-style
 const Project = () => {
@@ -13,4 +14,4 @@ Project.propTypes = {
 
 };
 
-export default Project;
+export default withStyles(styles)(Project);

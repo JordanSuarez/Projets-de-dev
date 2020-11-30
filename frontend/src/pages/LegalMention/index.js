@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './legal_mention.scss';
+import styles from './styles';
 
 // eslint-disable-next-line arrow-body-style
 const LegalMention = () => {
@@ -13,4 +14,4 @@ LegalMention.propTypes = {
 
 };
 
-export default LegalMention;
+export default withStyles(styles)(LegalMention);
