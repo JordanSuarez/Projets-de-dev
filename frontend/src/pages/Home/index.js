@@ -1,4 +1,5 @@
 import React from 'react';
+import Pagination from '@material-ui/lab/Pagination';
 
 import CardProject from '../CardProject';
 
@@ -20,6 +21,7 @@ const Home = ({}) => {
         <CardProject />
         <CardProject />
       </div>
+      <Pagination className="home__pagination" count={10} size="small" />
     </main>
   );
 };
