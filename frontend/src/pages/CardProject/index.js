@@ -7,12 +7,14 @@ import {
   CardMedia,
   Typography,
   Avatar,
-  FavoriteBorderIcon,
 } from '@material-ui/core';
+// icone coeur border
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+// icone coeur plein
+// eslint-disable-next-line no-unused-vars
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import './cardProject.scss';
-
-// image a supprimer lors de la dynamisation
 import cardImage from './card-image.png';
 import avatar from './avatar.png';
 
@@ -29,7 +31,7 @@ const CardProject = ({ }) => {
           title="image website"
         />
         <CardContent className="card__text">
-          <Typography className="card__text__title" gutterBottom variant="h5" component="h3">
+          <Typography className="card__text__title" component="h3">
             Super projet de site
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">

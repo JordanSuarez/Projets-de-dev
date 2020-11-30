@@ -8,21 +8,22 @@
   &__image{
       height: 200px;
   }
-  
+
   &__text{
     text-align: center;
     margin-bottom: 2em;
     background-color: vars.$white;
 
     &__title{
-
+      font-size: 1.5em !important;
+      padding-bottom: 0.5em ;
     }
   }
 
   &__link{
     display: flex;
     justify-content: space-between;
-    background-color: vars.$blue;
+    background-color: vars.$dark-blue;
     height: 70px;
 
     &__like{

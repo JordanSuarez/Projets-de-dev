@@ -8,7 +8,8 @@ const Home = ({}) => {
   console.log('home');
   return (
     <main className="home">
-      <h2> Derniers projets publiés</h2>
+      <h2 className="home__subtitle"> Derniers projets publiés</h2>
+  
       <div className="home__latest-project">
         <CardProject />
         <CardProject />
