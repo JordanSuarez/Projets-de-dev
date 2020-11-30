@@ -16,6 +16,7 @@ import contactRouting from 'src/pages/Contact/config/routing';
 import legalMentionRouting from 'src/pages/LegalMention/config/routing';
 import errorRouting from 'src/pages/404/config/routing';
 
+
 // eslint-disable-next-line import/prefer-default-export
 export const routes = [
   homeRouting,
