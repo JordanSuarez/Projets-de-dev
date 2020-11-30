@@ -1,7 +1,7 @@
-import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core';
 
-import Navigation from './component';
-
+import Navigation from './Navigation';
+import styles from './styles';
 // const mapStateToProps = (state) => ({
 // //   title: state.home.title,
 // });
@@ -14,4 +14,4 @@ import Navigation from './component';
 
 // export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
 
-export default Navigation;
+export default withStyles(styles)(Navigation);

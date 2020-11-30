@@ -13,21 +13,21 @@ import {
   getProfilesListRoute,
   getProfileRoute,
   getContactRoute,
-  getCreationProjectRoute,
   getHomeRoute,
   getRegisterRoute,
 } from 'src/common/routing/routesResolver';
+import { classes as classesProps } from 'src/common/classes';
 import NavLink from './NavLink';
-import './navigation.scss';
-import { inherits } from 'util';
 
-const Navigation = () => {
+const Navigation = ({ classes }) => {
   const history = useHistory();
-  const [userAnchorEl, setUserAnchorEl] = useState(null);
   const [mainAnchorEl, setMainAnchorEl] = useState(null);
+  // TODO plug redux instead of state
   const [isLogged, setIsLogged] = useState(true);
-  const openUserMenu = Boolean(userAnchorEl);
   const openMainMenu = Boolean(mainAnchorEl);
+
+  // Close burger menu
+  const handleClose = (state) => state(null);
 
   const routes = [
     {
@@ -47,34 +47,11 @@ const Navigation = () => {
     },
   ];
 
-  function handleClose(state) {
-    return state(null);
-  }
-
   // Routes
-  function handlePageDisplay(route) {
-    return history.push(route);
-  }
-
-  function handleLogout() {
-    return history.push(getLogoutRoute());
-  }
-
-  function handleLogin() {
-    return history.push(getLoginRoute());
-  }
-
-  function handleRegister() {
-    return history.push(getRegisterRoute());
-  }
-
-  function handleProfilePage() {
-    return history.push(getProfileRoute(1));
-  }
-
-  function handleCreateProject() {
-    return history.push(getCreationProjectRoute());
-  }
+  const handleLogout = () => history.push(getLogoutRoute());
+  const handleLogin = () => history.push(getLoginRoute());
+  const handleRegister = () => history.push(getRegisterRoute());
+  const handleProfilePage = () => history.push(getProfileRoute(1));
 
   return (
     <div>
@@ -90,7 +67,7 @@ const Navigation = () => {
                   aria-haspopup="true"
                   onClick={(event) => setMainAnchorEl(event.currentTarget)}
                 >
-                  <MenuIcon fontSize="large" />
+                  <MenuIcon fontSize="large" className={classes.burger} />
                 </IconButton>
                 <Menu
                   id="menu-appbar-types"
@@ -108,26 +85,57 @@ const Navigation = () => {
                   onClose={() => handleClose(setMainAnchorEl)}
                 >
                   {routes.map(({ name, route }) => (
-                    <MenuItem key={name} onClick={() => handlePageDisplay(route)}>
-                      {name}
+                    <MenuItem key={name}>
+                      <NavLink
+                        label={name}
+                        route={route}
+                        activeClassName={classes.itemLinkActive}
+                        className={classes.menuItem}
+                      />
                     </MenuItem>
+
                   ))}
                   <Hidden smUp>
                     {isLogged
-                      ? <MenuItem onClick={handleProfilePage}>Profil</MenuItem>
-                      : <MenuItem onClick={handleLogin}>Connexion</MenuItem>}
+                      ? (
+                        <MenuItem
+                          onClick={handleProfilePage}
+                          className={classes.menuItem}
+                        >
+                          Profil
+                        </MenuItem>
+                      )
+                      : (
+                        <MenuItem
+                          onClick={handleLogin}
+                          className={classes.menuItem}
+                        >Connexion
+                        </MenuItem>
+                      )}
                     {isLogged
-                      ? <MenuItem onClick={handleLogout}>Se déconnecter</MenuItem>
-                      : <MenuItem onClick={handleRegister}>Inscription</MenuItem>}
+                      ? (
+                        <MenuItem
+                          onClick={handleLogout}
+                          className={classes.menuItem}
+                        >
+                          Se déconnecter
+                        </MenuItem>
+                      )
+                      : (
+                        <MenuItem
+                          onClick={handleRegister}
+                          className={classes.menuItem}
+                        >
+                          Inscription
+                        </MenuItem>
+                      )}
                   </Hidden>
                 </Menu>
               </Grid>
             </Hidden>
-            <Hidden mdUp>
-              <div className="navigation__logo" />
-            </Hidden>
             <Hidden smDown>
-              <div className="navigation__wrapper">
+              <div className={classes.wrapper}>
+                <div className={classes.logo} />
                 {routes.map(({
                   name, route,
                 }) => (
@@ -135,21 +143,24 @@ const Navigation = () => {
                     key={name}
                     label={name}
                     route={route}
+                    activeClassName={classes.itemLinkActive}
+                    className={classes.itemLink}
                   />
                 ))}
+
               </div>
             </Hidden>
             <Hidden xsDown>
               <Grid container alignItems="center" justify="flex-end" spacing={2}>
                 <Grid item>
                   {isLogged
-                    ? <Button onClick={handleProfilePage} label="Profil" variant="contained" className="navigation__button">Profil</Button>
-                    : <Button onClick={handleLogin} label="Connexion" variant="contained" className="navigation__button">Connexion</Button>}
+                    ? <Button onClick={handleProfilePage} label="Profil" variant="contained" className={classes.button}>Profil</Button>
+                    : <Button onClick={handleLogin} label="Connexion" variant="contained" className={classes.button}>Connexion</Button>}
                 </Grid>
                 <Grid item>
                   {isLogged
-                    ? <Button onClick={handleLogout} label="Se déconnecter" variant="contained" className="navigation__button">Se déconnecter</Button>
-                    : <Button onClick={handleRegister} label="Connexion" variant="contained" className="navigation__button">Inscription</Button>}
+                    ? <Button onClick={handleLogout} label="Se déconnecter" variant="contained" className={classes.button}>Se déconnecter</Button>
+                    : <Button onClick={handleRegister} label="Connexion" variant="contained" className={classes.button}>Inscription</Button>}
                 </Grid>
               </Grid>
             </Hidden>
@@ -162,6 +173,7 @@ const Navigation = () => {
 };
 
 Navigation.propTypes = {
+  ...classesProps,
 };
 
 export default Navigation;
