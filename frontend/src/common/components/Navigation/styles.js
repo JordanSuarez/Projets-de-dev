@@ -2,16 +2,35 @@ import logo from 'src/common/assets/images/logo.png';
 
 export default ({ palette }) => ({
   navigation: {
-
+    minHeight: '5rem',
+    display: 'flex',
+    justifyContent: 'center',
   },
   burger: {
     color: palette.darkBlue,
   },
-  logo: {
+  logoDesktop: {
     backgroundImage: `url(${logo})`,
-    height: '6rem',
-    width: '6rem',
-    backgroundSize: '100%',
+    height: '5rem',
+    width: '5rem',
+    backgroundPositionY: '90%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
+  logoMobile: {
+    backgroundImage: `url(${logo})`,
+    height: '5rem',
+    width: '5rem',
+    backgroundPositionY: '90%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    marginLeft: 'calc(39% - 2rem)',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   wrapper: {
     display: 'flex',
@@ -35,5 +54,19 @@ export default ({ palette }) => ({
   button: {
     backgroundColor: palette.darkBlue,
     color: palette.yellow,
+  },
+  search: {
+    position: 'relative',
+    // borderRadius: theme.shape.borderRadius,
+    marginLeft: 0,
+    width: '100%',
+  },
+  searchIcon: {
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
