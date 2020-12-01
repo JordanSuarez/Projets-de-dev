@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react';
 
 import { Form as FormRff } from 'react-final-form';
 import Editor from 'src/common/components/QuillEditor';
-import { Autocomplete } from 'mui-rff';
-import { TextField, Checkbox, Button } from '@material-ui/core';
+import { Autocomplete, TextField as Field } from 'mui-rff';
+import {
+  Checkbox, Button, TextField,
+} from '@material-ui/core';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { classes as classesProps } from 'src/common/classes';
+import FileBase64 from 'react-file-base64';
 import top100Films from './data';
 
 const Form = ({ classes }) => {
   const [optionsSelected, setOptionsSelected] = useState([]);
   const [optionsChecked, setOptionsChecked] = useState([]);
   const [formValues, setFormValues] = useState();
+  const [imageBase64, setImageBase64] = useState('');
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
@@ -41,7 +45,12 @@ const Form = ({ classes }) => {
   }, []);
 
   const onSubmit = (values) => {
+    console.log(values);
     setFormValues({ ...values });
+  };
+
+  const getFiles = (files) => {
+    setImageBase64(files.base64);
   };
 
   const initialValues = {
@@ -55,6 +64,8 @@ const Form = ({ classes }) => {
       <h2 className={classes.subtitle}>
         Créer un projet
       </h2>
+      {imageBase64.length > 0 && <img src={imageBase64} alt="illustration du projet" className={classes.imageInput} />}
+
       <FormRff
         onSubmit={onSubmit}
         initialValues={initialValues}
@@ -65,7 +76,8 @@ const Form = ({ classes }) => {
           <form onSubmit={handleSubmit} className={classes.form}>
             <div className={classes.leftContainer}>
               <div>
-                <TextField
+                <Field
+                  name="title"
                   variant="outlined"
                   label="Titre de mon projet"
                   placeholder="Titre de mon projet"
@@ -73,32 +85,32 @@ const Form = ({ classes }) => {
                 />
               </div>
               <div>
-                <TextField
+                <Field
+                  name="githubLink"
                   variant="outlined"
                   label="Lien Github du projet"
                   placeholder="Lien Github du projet"
-                  name="githubLink"
                   fullWidth
-
                 />
               </div>
               <div>
-                <TextField
+                <Field
+                  name="projectLink"
                   variant="outlined"
                   label="Lien du projet en ligne"
                   placeholder="Lien du projet en ligne"
-                  name="projectLink"
                   fullWidth
-
                 />
               </div>
               <div className={classes.imageContainer}>
                 <h3 className={classes.imageTitle}>Ajoutez une Image de présentation</h3>
-                <TextField
-                  variant="outlined"
-                  type="file"
-                  name="imageUpload"
-                />
+
+                <div>
+                  <FileBase64
+                    hidden
+                    onDone={getFiles}
+                  />
+                </div>
               </div>
             </div>
             <div className={classes.rightContainer}>

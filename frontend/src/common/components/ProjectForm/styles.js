@@ -35,5 +35,7 @@ export default ({ palette }) => ({
   autoComplete: {
     margin: '1rem',
   },
-  
+  imageInput: {
+    width: '5rem',
+  },
 });
