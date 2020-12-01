@@ -8,6 +8,6 @@ Create new database "projets_de_dev_development" or edit the name in config/conf
 
 Change username, password and database info in config/config.json
 
-Run migration `sequelize db:migrate`
+Run migrations `sequelize db:migrate`
 
 Run the app in development mode : `npm start`
