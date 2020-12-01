@@ -9,13 +9,13 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { classes as classesProps } from 'src/common/classes';
 import top100Films from './data';
 
-const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
-
 const Form = ({ classes }) => {
   const [optionsSelected, setOptionsSelected] = useState([]);
   const [optionsChecked, setOptionsChecked] = useState([]);
   const [formValues, setFormValues] = useState();
+
+  const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+  const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   useEffect(() => {
     setOptionsSelected([
@@ -52,7 +52,7 @@ const Form = ({ classes }) => {
 
   return (
     <div>
-      <h2>
+      <h2 className={classes.subtitle}>
         Créer un projet
       </h2>
       <FormRff
@@ -62,73 +62,102 @@ const Form = ({ classes }) => {
         render={({
           handleSubmit,
         }) => (
-          <form onSubmit={handleSubmit}>
-            <TextField
-              variant="outlined"
-              label="Titre de mon projet"
-              placeholder="Titre de mon projet"
-            />
-
-            <TextField
-              variant="outlined"
-              type="file"
-              label="image"
-              name="imageUpload"
-            />
-            <Autocomplete
-              name="selectField"
-              className={classes.autoComplete}
-              filterSelectedOptions
-              multiple
-              id="tags-outlined"
-              options={top100Films}
-              getOptionValue={(option) => option}
-              getOptionLabel={(option) => option.title}
-              value={optionsSelected}
-              onChange={(_e, values) => {
-                setOptionsSelected(values);
-              }}
-              getOptionSelected={(option, value) => option.title === value.title}
-              defaultValue={initialValues.selectField}
-              renderInput={(params) => (
+          <form onSubmit={handleSubmit} className={classes.form}>
+            <div className={classes.leftContainer}>
+              <div>
                 <TextField
-                  {...params}
                   variant="outlined"
-                  label="filterSelectedOptions"
-                  placeholder="Favorites"
+                  label="Titre de mon projet"
+                  placeholder="Titre de mon projet"
+                  fullWidth
                 />
-              )}
-            />
-            <Autocomplete
-              defaultValue={initialValues.checkBox}
-              className={classes.autoComplete}
-              name="checkBox"
-              multiple
-              id="checkboxes-tags-demo"
-              options={top100Films}
-              disableCloseOnSelect
-              getOptionValue={(option) => option}
-              getOptionLabel={(option) => option.title}
-              value={optionsChecked}
-              onChange={(_e, values) => {
-                setOptionsChecked(values);
-              }}
-              getOptionSelected={(option, value) => option.title === value.title}
-              renderOption={(option, { selected }) => (
-                <>
-                  <Checkbox
-                    icon={icon}
-                    checkedIcon={checkedIcon}
-                    style={{ marginRight: 8 }}
-                    checked={selected}
+              </div>
+              <div>
+                <TextField
+                  variant="outlined"
+                  label="Lien Github du projet"
+                  placeholder="Lien Github du projet"
+                  name="githubLink"
+                  fullWidth
+
+                />
+              </div>
+              <div>
+                <TextField
+                  variant="outlined"
+                  label="Lien du projet en ligne"
+                  placeholder="Lien du projet en ligne"
+                  name="projectLink"
+                  fullWidth
+
+                />
+              </div>
+              <div className={classes.imageContainer}>
+                <h3 className={classes.imageTitle}>Ajoutez une Image de présentation</h3>
+                <TextField
+                  variant="outlined"
+                  type="file"
+                  name="imageUpload"
+                />
+              </div>
+            </div>
+            <div className={classes.rightContainer}>
+              <Autocomplete
+                name="selectField"
+                className={classes.autoComplete}
+                filterSelectedOptions
+                multiple
+                id="tags-outlined"
+                options={top100Films}
+                getOptionValue={(option) => option}
+                getOptionLabel={(option) => option.title}
+                value={optionsSelected}
+                onChange={(_e, values) => {
+                  setOptionsSelected(values);
+                }}
+                getOptionSelected={(option, value) => option.title === value.title}
+                defaultValue={initialValues.selectField}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Catégorie(s) du projet"
+                    placeholder="Catégorie(s) du projet"
                   />
-                  {option.title}
-                </>
-              )}
-              renderInput={(params) => (
-                <TextField name="tttt" {...params} variant="outlined" label="Checkboxes" placeholder="Favorites" />
-              )}
-            />
+                )}
+              />
+              <Autocomplete
+                defaultValue={initialValues.checkBox}
+                className={classes.autoComplete}
+                name="checkBox"
+                multiple
+                id="checkboxes-tags-demo"
+                options={top100Films}
+                disableCloseOnSelect
+                getOptionValue={(option) => option}
+                getOptionLabel={(option) => option.title}
+                value={optionsChecked}
+                onChange={(_e, values) => {
+                  setOptionsChecked(values);
+                }}
+                getOptionSelected={(option, value) => option.title === value.title}
+                renderOption={(option, { selected }) => (
+                  <>
+                    <Checkbox
+                      icon={icon}
+                      checkedIcon={checkedIcon}
+                      style={{ marginRight: 8 }}
+                      checked={selected}
+                    />
+                    {option.title}
+                  </>
+                )}
+                renderInput={(params) => (
+                  <TextField name="tttt" {...params} variant="outlined" label="Ajouter un ou plusieurs collaborateur(s)" placeholder="Ajouter un ou plusieurs collaborateur(s)" />
+                )}
+              />
+            </div>
+
             <Editor name="description" />
             <Button type="submit">Submit</Button>
             <pre>{JSON.stringify(formValues, 0, 2)}</pre>

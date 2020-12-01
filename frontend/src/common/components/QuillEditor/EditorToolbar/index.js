@@ -18,7 +18,7 @@ export const modules = {
 };
 
 export const formats = [
-  'header', 'size',
+  'header', 'size', 'font',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
   'link', 'image', 'video',

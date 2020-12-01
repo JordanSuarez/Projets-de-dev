@@ -4,24 +4,28 @@ import { classes as classesProps } from 'src/common/classes';
 
 import CardProject from 'src/common/components/CardProject';
 import './home.scss';
+import Base from 'src/common/components/Base';
 
 // eslint-disable-next-line arrow-body-style
 const Home = ({ classes }) => {
   return (
-    <main className={classes.home}>
-      <h2 className={classes.subtitle}> Derniers projets publiés</h2>
-      <div className={classes.latestProject}>
-        <CardProject />
-        <CardProject />
-        <CardProject />
-        <CardProject />
-        <CardProject />
-        <CardProject />
-        <CardProject />
-        <CardProject />
-      </div>
-      <Pagination className={classes.pagination} count={10} size="small" />
-    </main>
+    <Base>
+      <main className={classes.home}>
+        <h2 className={classes.subtitle}> Derniers projets publiés</h2>
+        <div className={classes.latestProject}>
+          <CardProject />
+          <CardProject />
+          <CardProject />
+          <CardProject />
+          <CardProject />
+          <CardProject />
+          <CardProject />
+          <CardProject />
+        </div>
+        <Pagination className={classes.pagination} count={10} size="small" />
+      </main>
+    </Base>
+
   );
 };
 
