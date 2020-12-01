@@ -1,11 +1,6 @@
-import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import Navigation from 'src/common/components/Navigation';
+import Home from './Home';
+import styles from './styles';
 
-const Home = () => (
-  <>
-    <Navigation />
-  </>
-);
-
-export default Home;
+export default withStyles(styles)(Home);
