@@ -92,27 +92,48 @@ module.exports = {
 				return res.status(400).json({ 'error': 'missing parameters' });
 			}
 
-		models.User.findOne({
-			where: { email: email }
-		})
-		.then((userFound) => {
-			if (userFound) {
-				bcrypt.compare(password, userFound.password, (errBycrypt, resBycrypt) => {
-					if(resBycrypt) {
-						return res.status(200).json({
-							'userId': userFound.id,
-							'token': jwtUtils.generateTokenForUser(userFound)
+			asyncLib.waterfall([
+
+				(done) => {
+					models.User.findOne({
+						where: { email: email }
+					})
+					.then((userFound) => {
+						done(null, userFound);
+					})
+					.catch((err) => {
+						return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
+					});
+				},
+
+				(userFound, done) => {
+					if (userFound) {
+						bcrypt.compare(password, userFound.password, (errBycrypt, resBycrypt) => {
+							done(null, userFound, resBycrypt);	
 						});
+					} else {
+						return res.status(404).json({ 'error': 'L\'utilisateur n\'existe pas dans la base de donnée'});
+					}
+				},
+
+				(userFound, resBycrypt, done) => {
+					if(resBycrypt) {
+						done(userFound);
 					} else {
 						return res.status(403).json({ 'error': 'Mot de passe invalide' });
 					}
-				});
-			} else {
-				return res.status(404).json({ 'error': 'L\'utilisateur n\'existe pas dans la base de donnée'});
-			}
-		})
-		.catch((err) => {
-			return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
-		});
-	},
+				}
+
+			], (userFound) => {
+				if (userFound) {
+					return res.status(200).json({
+						'userId': userFound.id,
+						'token': jwtUtils.generateTokenForUser(userFound)
+					});
+				} else {
+					return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
+				}
+			});
+		},	
 }
+
