@@ -10,7 +10,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.Project.hasMany(models.Tag);
+      models.Project.belongsToMany(models.Tag, {
+        foreignKey: 'project_id',
+        as: 'tags',
+        through: 'ProjectTags',
+      });
       models.Project.belongsTo(models.User, {
         foreignKey: {
           allowNull: false
