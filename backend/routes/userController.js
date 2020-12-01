@@ -1,7 +1,8 @@
 // Imports
-const bcrypt = require('bcrypt');
+const bcrypt   = require('bcrypt');
 const jwtUtils = require('../utils/jwt.utils');
-const models = require('../models');
+const models   = require('../models');
+const asyncLib = require('async');
 
 //constantes
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -9,8 +10,10 @@ const PASSWORD_REGEX = /^(?=.*\d).{4,15}$/;
 
 //Routes
 module.exports = {
+
     register: (req, res) => {
-      const username = req.body.username;
+			
+			const username = req.body.username;
       const email = req.body.email;
 	  	const password = req.body.password;
 			
@@ -30,37 +33,56 @@ module.exports = {
 				return res.status(400).json({'error': 'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'})
 			}			
 			
-			models.User.findOne({
-				attributes: ['email'],
-				where: { email: email}
-			})
-			.then((userFound) => {
-				if (!userFound) {
-					bcrypt.hash(password, 5, (err, bcryptedPassword ) => {
-						const newUser = models.User.create({
-							email:email,
-							username:username,
-							password: bcryptedPassword,
-							isAdmin: 0
-						})
-						.then((newUser) => {
-              return res.status(201).json({
-                'userId': newUser.id
-              })
-            })
-            .catch((err) => {
-              return res.status(500).json({'error': 'le nom d\'utilisateur et/ou l\'email est déjà utilisé'})
-            })
+			asyncLib.waterfall([
+				
+				(done) => {
+					models.User.findOne({
+						attributes: ['email'],
+						where: { email: email}
 					})
-				} else {
-					return res.status(409).json({ 'error': 'le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
+					.then((userFound) => {
+						done(null, userFound);
+					})
+					.catch((err) => {
+						return res.status(500).json({ 'error': 'Erreur lors de la verification de l\'utilisateur'});
+					});
+				},
+
+				(userFound, done) => {
+					if (!userFound) {
+						bcrypt.hash(password, 5, (err, bcryptedPassword ) => {
+							done(null, userFound, bcryptedPassword);
+						});
+					} else {
+						return res.status(409).json({ 'error': 'le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
+					}
+				},
+
+				(userFound, bcryptedPassword, done) => {
+					const newUser = models.User.create({
+						email:email,
+						username:username,
+						password: bcryptedPassword,
+						isAdmin: 0
+					})
+					.then ((newUser) => {
+						done(newUser);
+					})
+					.catch((err) => {
+						return res.status(500).json({'error': 'Impossible d\'enregistrer l\'utilisateur'});
+					});
 				}
-			})
-			.catch((err) => {
-				return res.status(500).json({ 'error': 'Erreur lors de la verification de l\'utilisateur'});
-			});
-    },
-		
+			], (newUser) => {
+				if(newUser) {
+					return res.status(201).json({
+					'userId': newUser.id
+				});
+			} else {
+				return res.status(500).json({'error': 'Impossible d\'enregistrer l\'utilisateur'});
+			}
+		});
+	},
+
 		login: (req, res) => {
 		
 			const email = req.body.email;
@@ -69,8 +91,6 @@ module.exports = {
 			if (email == null ||  password == null) {
 				return res.status(400).json({ 'error': 'missing parameters' });
 			}
-
-		// TODO Faire les vérifications de longueur, caractères etc.
 
 		models.User.findOne({
 			where: { email: email }
