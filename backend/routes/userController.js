@@ -25,7 +25,6 @@ module.exports = {
 			if (!EMAIL_REGEX.test(email)) {
 				return res.status(400).json({'error': 'L\'email saisi est invalide'})
 			}
-			// TODO Faire les vérifications de longueur, caractères etc.
 
 			if (!PASSWORD_REGEX.test(password)) {
 				return res.status(400).json({'error': 'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'})
