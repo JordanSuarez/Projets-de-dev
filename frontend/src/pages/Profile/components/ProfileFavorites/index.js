@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './profile_favorites.scss';
+import styles from './styles';
 
 // eslint-disable-next-line arrow-body-style
 const ProfilesFavorites = () => {
@@ -13,4 +14,4 @@ ProfilesFavorites.propTypes = {
 
 };
 
-export default ProfilesFavorites;
+export default withStyles(styles)(ProfilesFavorites);

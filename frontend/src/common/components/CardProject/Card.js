@@ -14,24 +14,24 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // eslint-disable-next-line no-unused-vars
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-import './cardProject.scss';
+// import './cardProject.scss';
+// import { mergeClasses } from '@material-ui/styles';
+import { classes as classesProps } from 'src/common/classes';
 import cardImage from './card-image.png';
 import avatar from './avatar.png';
 
-// eslint-disable-next-line no-empty-pattern
-const CardProject = ({ }) => {
-  console.log('je suis dans card');
-
+// eslint-disable-next-line arrow-body-style
+const CardProject = ({ classes }) => {
   return (
-    <Card className="card">
+    <Card className={classes.card}>
       <CardActionArea>
         <CardMedia
-          className="card__image"
+          className={classes.image}
           image={cardImage}
           title="image website"
         />
-        <CardContent className="card__text">
-          <Typography className="card__text__title" component="h3">
+        <CardContent className={classes.text}>
+          <Typography className={classes.title} component="h3">
             Super projet de site
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
@@ -40,8 +40,8 @@ const CardProject = ({ }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions className="card__link">
-        <FavoriteBorderIcon className="card__link__like" />
+      <CardActions className={classes.link}>
+        <FavoriteBorderIcon className={classes.like} />
         <Avatar className="card__link__avatar" alt="Pikachu" src={avatar} />
       </CardActions>
     </Card>
@@ -50,7 +50,7 @@ const CardProject = ({ }) => {
 };
 
 CardProject.propTypes = {
-
+  ...classesProps,
 };
 
 export default CardProject;

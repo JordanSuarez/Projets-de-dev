@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './contact.scss';
+import styles from './styles';
 
 // eslint-disable-next-line arrow-body-style
 const Contact = () => {
@@ -13,4 +14,4 @@ Contact.propTypes = {
 
 };
 
-export default Contact;
+export default withStyles(styles)(Contact);
