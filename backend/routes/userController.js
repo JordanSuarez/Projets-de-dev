@@ -60,31 +60,39 @@ module.exports = {
 				return res.status(500).json({ 'error': 'Erreur lors de la verification de l\'utilisateur'});
 			});
     },
-    login: (req, res) => {
+		
+		login: (req, res) => {
+		
+			const email = req.body.email;
+			const password = req.body.password;
 
-			// TODO Faire les vérifications de longueur, caractères etc.
+			if (email == null ||  password == null) {
+				return res.status(400).json({ 'error': 'missing parameters' });
+			}
 
-			models.User.findOne({
-				where: { email: email }
-			})
-			.then((userFound) => {
-				if (userFound) {
-					bcrypt.compare(password, userFound.password, (errBycrypt, resBycrypt) => {
-						if(resBycrypt) {
-							return res.status(200).json({
-								'userId': userFound.id,
-								'token': jwtUtils.generateTokenForUser(userFound)
-							});
-						} else {
-							return res.status(403).json({ 'error': 'Mot de passe invalide' });
-						}
-					});
-				} else {
-					return res.status(404).json({ 'error': 'L\'utilisateur n\'existe pas dans la base de donnée'});
-				}
-			})
-			.catch((err) => {
-				return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
-			});
-    },
+		// TODO Faire les vérifications de longueur, caractères etc.
+
+		models.User.findOne({
+			where: { email: email }
+		})
+		.then((userFound) => {
+			if (userFound) {
+				bcrypt.compare(password, userFound.password, (errBycrypt, resBycrypt) => {
+					if(resBycrypt) {
+						return res.status(200).json({
+							'userId': userFound.id,
+							'token': jwtUtils.generateTokenForUser(userFound)
+						});
+					} else {
+						return res.status(403).json({ 'error': 'Mot de passe invalide' });
+					}
+				});
+			} else {
+				return res.status(404).json({ 'error': 'L\'utilisateur n\'existe pas dans la base de donnée'});
+			}
+		})
+		.catch((err) => {
+			return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
+		});
+	},
 }
