@@ -1,16 +1,6 @@
-import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './about.scss';
+import About from './About';
+import styles from './styles';
 
-// eslint-disable-next-line arrow-body-style
-const About = () => {
-  return (
-    <div> About </div>
-  );
-};
-
-About.propTypes = {
-
-};
-
-export default About;
+export default withStyles(styles)(About);
