@@ -1,0 +1,29 @@
+@use 'src/common/styles/_vars';
+
+.quill {
+  margin: 1rem;
+}
+
+.ql-container {
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+}
+
+/* Snow Theme */
+.ql-snow.ql-toolbar {
+  display: block;
+  background: vars.$yellow;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+/* Bubble Theme */
+.ql-bubble .ql-editor {
+  border: 1px solid vars.$dark-blue;
+  border-radius: 0.5em;
+}
+
+.ql-editor {
+  min-height: 18em;
+  background-color: vars.$white;
+}

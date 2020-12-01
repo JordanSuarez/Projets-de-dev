@@ -21,7 +21,7 @@ export const routes = [
   homeRouting,
   // projectRouting,
   // projectsListRouting,
-  // creationProjectRouting,
+  creationProjectRouting,
   // editionProjectRouting,
   // profileRouting,
   // profilesListRouting,
