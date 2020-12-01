@@ -1,0 +1,20 @@
+{
+  "name": "projets-de-dev",
+  "version": "1.0.0",
+  "description": "Backend du projet \"Projets De Dev\"",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5",
+    "nodemon": "^2.0.6",
+    "sequelize": "^6.3.5",
+    "sequelize-cli": "^6.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "Almigra, Alban, Jo, Celine",
+  "license": "ISC"
+}
