@@ -38,4 +38,25 @@ export default ({ palette }) => ({
   imageInput: {
     width: '5rem',
   },
+  buttonsWrapper: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'flex-end',
+  },
+  submitButton: {
+    margin: '4rem 1.3rem 3rem 2rem',
+    color: palette.yellow,
+    backgroundColor: palette.darkBlue,
+    '&:hover': {
+      backgroundColor: palette.blue,
+    },
+  },
+  quitButton: {
+    margin: '4rem 1.3rem 3rem 2rem',
+    color: palette.darkBlue,
+    '&:hover': {
+      color: palette.blue,
+      backgroundColor: palette.white,
+    },
+  },
 });
