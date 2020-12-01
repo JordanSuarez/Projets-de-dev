@@ -3,7 +3,6 @@ import Pagination from '@material-ui/lab/Pagination';
 import { classes as classesProps } from 'src/common/classes';
 
 import CardProject from 'src/common/components/CardProject';
-import Footer from 'src/common/components/Footer';
 import './home.scss';
 
 // eslint-disable-next-line arrow-body-style
