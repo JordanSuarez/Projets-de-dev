@@ -1,16 +1,6 @@
-import React from 'react';
+import { withStyles } from '@material-ui/core';
 
-import './error.scss';
+import Error from './Error';
+import styles from './styles';
 
-// eslint-disable-next-line arrow-body-style
-const Error = () => {
-  return (
-    <div> Error 404</div>
-  );
-};
-
-Error.propTypes = {
-
-};
-
-export default Error;
+export default withStyles(styles)(Error);
