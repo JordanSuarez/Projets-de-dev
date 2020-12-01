@@ -1,3 +1,6 @@
-import SearchBar from './SearchBar';
+import { withStyles } from '@material-ui/styles';
 
-export default SearchBar;
+import SearchBar from './SearchBar';
+import styles from './styles';
+
+export default withStyles(styles)(SearchBar);

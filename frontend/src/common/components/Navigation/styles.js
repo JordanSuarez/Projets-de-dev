@@ -55,18 +55,4 @@ export default ({ palette }) => ({
     backgroundColor: palette.darkBlue,
     color: palette.yellow,
   },
-  search: {
-    position: 'relative',
-    // borderRadius: theme.shape.borderRadius,
-    marginLeft: 0,
-    width: '100%',
-  },
-  searchIcon: {
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
 });

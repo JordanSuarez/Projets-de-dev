@@ -4,7 +4,6 @@ import {
   AppBar, Button, Grid, Hidden, IconButton, Menu, MenuItem, Toolbar,
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { isEmpty } from 'lodash';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
   getLogoutRoute,
@@ -18,13 +17,11 @@ import {
   getRegisterRoute,
 } from 'src/common/routing/routesResolver';
 import { classes as classesProps } from 'src/common/classes';
-import SearchBar from 'src/common/components/SearchBar';
 import NavLink from './NavLink';
 
 const Navigation = ({ classes }) => {
   const history = useHistory();
   const [mainAnchorEl, setMainAnchorEl] = useState(null);
-  const [inputValue, setInputValue] = useState('');
   // TODO plug redux instead of state
   const [isLogged, setIsLogged] = useState(true);
   const openMainMenu = Boolean(mainAnchorEl);
@@ -155,12 +152,6 @@ const Navigation = ({ classes }) => {
             </div>
           </Hidden>
           <Hidden xsDown>
-            <SearchBar
-              value={inputValue}
-              handleChange={(e) => {
-                setInputValue(e.target.value);
-              }}
-            />
             <Grid container alignItems="center" justify="flex-end" spacing={2}>
               <Grid item>
                 {isLogged
