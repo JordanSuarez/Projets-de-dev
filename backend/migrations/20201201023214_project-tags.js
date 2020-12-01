@@ -13,7 +13,7 @@ const Sequelize = require("sequelize");
 
 const info = {
   revision: 1,
-  name: "pikachu",
+  name: "project-tags",
   created: "2020-12-01T02:32:14.642Z",
   comment: "",
 };
