@@ -7,7 +7,8 @@ export const PROJECT_NEW = '/projects/new';
 export const PROJECT_EDIT = '/projects/:id/edit';
 export const PROFILES = '/profiles';
 export const PROFILE = '/profiles/:id';
-export const PROFILE_EDIT = '/profiles/:id/edit';
+export const USER_PROFILE = '/my-profile';
+export const PROFILE_EDIT = '/my-profile/edit';
 export const PROFILE_FAVORITES = '/profiles/:id/favorites';
 export const PROFILE_PROJECTS = '/profiles/:id/projects';
 export const LOGIN = '/login';
@@ -27,7 +28,8 @@ export const getEditionProjectRoute = (id) => generatePath(PROJECT_EDIT, { id })
 
 export const getProfilesListRoute = () => generatePath(PROFILES);
 export const getProfileRoute = (id) => generatePath(PROFILE, { id });
-export const getEditionProfileRoute = (id) => generatePath(PROFILE_EDIT, { id });
+export const getUserProfileRoute = () => generatePath(USER_PROFILE);
+export const getEditionProfileRoute = () => generatePath(PROFILE_EDIT);
 export const getProfileFavoritesRoute = (id) => generatePath(PROFILE_FAVORITES, { id });
 export const getProfileProjectsRoute = (id) => generatePath(PROFILE_PROJECTS, { id });
 
