@@ -39,8 +39,8 @@ const migrationCommands = (transaction) => {
             type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)'
           },
           updatedAt: {
-            allowNull: false,
-            type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'
+            allowNull: true,
+            type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)'
           },
         },
         { transaction },
@@ -137,9 +137,9 @@ const migrationCommands = (transaction) => {
             allowNull: false,
           },
           updatedAt: {
-            type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)',
+            type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)',
             field: "updatedAt",
-            allowNull: false,
+            allowNull: true,
           },
           UserId: {
             type: Sequelize.INTEGER,
@@ -164,9 +164,9 @@ const migrationCommands = (transaction) => {
             allowNull: false,
           },
           updatedAt: {
-            type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)',
+            type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)',
             field: "updatedAt",
-            allowNull: false,
+            allowNull: true,
           },
           project_id: {
             type: Sequelize.INTEGER,

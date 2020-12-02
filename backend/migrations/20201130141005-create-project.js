@@ -45,8 +45,8 @@ module.exports = {
         type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)'
       },
       updatedAt: {
-        allowNull: false,
-        type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'
+        allowNull: true,
+        type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)'
       }
     });
   },
