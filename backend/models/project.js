@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
     github_link: DataTypes.STRING,
     project_link: DataTypes.STRING,
-    user_id: DataTypes.INTEGER
+    //userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Project',
