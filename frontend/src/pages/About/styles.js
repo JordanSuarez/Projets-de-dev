@@ -1,15 +1,7 @@
 export default ({ palette }) => ({
-
-  home: {
+  about: {
     maxWidth: '1200px',
     margin: '0 auto',
-  },
-
-  image: {
-    height: '300px',
-    width: '100%',
-    objectFit: 'cover',
-
   },
 
   subtitle: {
@@ -18,15 +10,17 @@ export default ({ palette }) => ({
     color: palette.darkBlue,
   },
 
-  latestProject: {
+  listCard: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    paddingTop: '30px',
   },
 
-  pagination: {
-    width: '255px',
-    margin: '1em auto',
+  image: {
+    height: '300px',
+    width: '100%',
+    objectFit: 'cover',
   },
 
 });
