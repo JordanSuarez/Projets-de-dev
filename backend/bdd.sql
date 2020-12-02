@@ -15,6 +15,13 @@ INSERT INTO `ProjectTags` (`createdAt`, `updatedAt`, `project_id`, `tag_id`) VAL
 ('2020-12-02 04:20:08.000',	'2020-12-02 04:20:08.000',	1,	7),
 ('2020-12-02 04:20:57.000',	'2020-12-02 04:20:57.000',	1,	47);
 
+INSERT INTO `SequelizeMeta` (`name`) VALUES
+('20201130140844-create-user.js'),
+('20201130141005-create-project.js'),
+('20201130141119-create-tag.js'),
+('20201130141152-create-comment.js'),
+('20201201023214_project-tags.js');
+
 INSERT INTO `Tags` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
 (1,	'HTML/CSS',	NULL,	'2020-12-02 03:48:38.000',	'2020-12-02 03:48:38.000'),
 (2,	'Javascript',	NULL,	'2020-12-02 03:49:15.000',	'2020-12-02 03:49:15.000'),
@@ -70,4 +77,4 @@ INSERT INTO `Users` (`id`, `username`, `email`, `password`, `isAdmin`, `createdA
 (2,	'Alban',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01.000',	'2020-12-01 10:26:01.000'),
 (3,	'O\'Clock',	'hello@oclock.io',	'$2b$05$0uZEOS5VgnT7rvcCDos6XO9y1uQPzY4TzCewOqFRnpEF0L7odW/0i',	0,	'2020-12-02 03:13:20.000',	'2020-12-02 03:13:20.000');
 
--- 2020-12-02 04:14:31
+-- 2020-12-02 12:01:33
