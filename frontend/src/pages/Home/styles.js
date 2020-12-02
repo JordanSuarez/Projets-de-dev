@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 export default ({ palette }) => ({
 
   home: {
@@ -6,10 +5,17 @@ export default ({ palette }) => ({
     margin: '0 auto',
   },
 
+  image: {
+    height: '300px',
+    width: '100%',
+    objectFit: 'cover',
+
+  },
+
   subtitle: {
     padding: '1em',
     fontSize: '1.5em',
-    color: 'vars.$dark-blue',
+    color: palette.darkBlue,
   },
 
   latestProject: {
@@ -19,7 +25,7 @@ export default ({ palette }) => ({
   },
 
   pagination: {
-    width: '300px',
+    width: '255px',
     margin: '1em auto',
   },
 
