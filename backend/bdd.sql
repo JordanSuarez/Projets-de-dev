@@ -35,6 +35,8 @@ CREATE TABLE `Projects` (
   CONSTRAINT `Projects_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `Projects` (`id`, `title`, `description`, `vote`, `image`, `github_link`, `project_link`, `user_id`, `createdAt`, `updatedAt`) VALUES
+(1,	'DeviensDev - le site pour découvrir les métiers du développement',	'Créé par des développeurs, DeviensDev vous ouvre les portes du développement web en mettant à votre disposition toutes les clés pour comprendre le métier de développeur, vous initier au code et vous orienter vers les formations adéquates.',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://deviens.dev',	'https://github.com/O-clock-Alumni/DeviensDev',	'https://deviens.dev/',	3,	'2020-12-02 04:17:19',	'2020-12-02 04:17:19');
 
 DROP TABLE IF EXISTS `ProjectTags`;
 CREATE TABLE `ProjectTags` (
@@ -48,6 +50,10 @@ CREATE TABLE `ProjectTags` (
   CONSTRAINT `ProjectTags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `Tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+INSERT INTO `ProjectTags` (`createdAt`, `updatedAt`, `project_id`, `tag_id`) VALUES
+('2020-12-02 04:19:35',	'2020-12-02 04:19:35',	1,	1),
+('2020-12-02 04:20:08',	'2020-12-02 04:20:08',	1,	7),
+('2020-12-02 04:20:57',	'2020-12-02 04:20:57',	1,	47);
 
 DROP TABLE IF EXISTS `SequelizeMeta`;
 CREATE TABLE `SequelizeMeta` (
@@ -119,7 +125,9 @@ INSERT INTO `Tags` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
 (43,	'Objective-C',	NULL,	'2020-12-02 03:59:00',	'2020-12-02 03:59:00'),
 (44,	'Kotlin',	NULL,	'2020-12-02 03:59:52',	'2020-12-02 03:59:52'),
 (45,	'Swift',	NULL,	'2020-12-02 03:59:58',	'2020-12-02 03:59:58'),
-(46,	'SCSS',	NULL,	'2020-12-02 04:01:38',	'2020-12-02 04:01:38');
+(46,	'SCSS',	NULL,	'2020-12-02 04:01:38',	'2020-12-02 04:01:38'),
+(47,	'Gatsby',	NULL,	'2020-12-02 04:20:22',	'2020-12-02 04:20:22'),
+(48,	'Strapi',	NULL,	'2020-12-02 04:20:28',	'2020-12-02 04:20:28');
 
 DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
@@ -137,13 +145,7 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`id`, `username`, `email`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
 (1,	'Almigra',	'almigra.dev@gmail.com',	'$2b$05$D9wHO2GSVMQrCVVXFylNYeuc1AiVxd7ySz5JSEwyeUcBStYd68gPu',	0,	'2020-12-01 09:44:37',	'2020-12-01 09:44:37'),
-(2,	'Celine',	'celine@pikachu.com',	'$2b$05$X1MsHqdiK0uJxbohlz8eNuY/IvKTCc/qHcu6BzOgVFLTShZUybsii',	0,	'2020-12-01 10:19:11',	'2020-12-01 10:19:11'),
-(3,	'Test',	'Test@test.com',	'$2b$05$ZVPO0j79Yy5xIlIkDcbvXu/EgAVfFrQlaTr/ARxtowNeYKu4ELbM2',	0,	'2020-12-01 10:21:57',	'2020-12-01 10:21:57'),
-(4,	'Alban',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01',	'2020-12-01 10:26:01'),
-(5,	'Jo',	'Jo@pokemon.com',	'$2b$05$L/Y7fzDPXcwHlib0luDbs.e072UaGKR0GaPEnoOdytxhlxwnMmJhC',	0,	'2020-12-01 10:33:33',	'2020-12-01 10:33:33'),
-(8,	'Elisabeth',	'reineangleterre@gmail.com',	'$2b$05$Ts/m.cgP0doWw7qgmKpsge69Be/IkhuHxce8ZawwwHy3kwwTCpW72',	0,	'2020-12-01 11:55:37',	'2020-12-01 11:55:37'),
-(9,	'Boubli',	'bouli@gmail.com',	'$2b$05$zxkASGfWKuMGe5.Eq2daRurd96LuL.YPAKMssL0E0pVP29IjIIeI6',	0,	'2020-12-01 12:40:33',	'2020-12-01 12:40:33'),
-(12,	'Elisabetha',	'almigra.dev1@gmail.com',	'$2b$05$y08XmFCY7o6ktEvbBUrC..3ku3f3MCp5.uML7WUIiYrQO7b3hrIWS',	0,	'2020-12-01 13:20:32',	'2020-12-01 13:20:32'),
-(18,	'Elisabethaa',	'almigra.dev1m@gmail.com',	'$2b$05$TThvC6qnk73j6I0sa97mbejLB1oKxbH9Kv5vloGhuZedUxrgapEAO',	0,	'2020-12-02 02:42:27',	'2020-12-02 02:42:27');
+(2,	'Alban',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01',	'2020-12-01 10:26:01'),
+(3,	'O\'Clock',	'hello@oclock.io',	'$2b$05$0uZEOS5VgnT7rvcCDos6XO9y1uQPzY4TzCewOqFRnpEF0L7odW/0i',	0,	'2020-12-02 03:13:20',	'2020-12-02 03:13:20');
 
--- 2020-12-02 03:04:41
+-- 2020-12-02 03:26:18
