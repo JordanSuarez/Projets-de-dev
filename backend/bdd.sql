@@ -6,8 +6,9 @@ SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 
-INSERT INTO `Projects` (`id`, `title`, `description`, `vote`, `image`, `github_link`, `project_link`, `user_id`, `createdAt`, `updatedAt`) VALUES
-(1,	'DeviensDev - le site pour découvrir les métiers du développement',	'Créé par des développeurs, DeviensDev vous ouvre les portes du développement web en mettant à votre disposition toutes les clés pour comprendre le métier de développeur, vous initier au code et vous orienter vers les formations adéquates.',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://deviens.dev',	'https://github.com/O-clock-Alumni/DeviensDev',	'https://deviens.dev/',	3,	'2020-12-02 04:17:19.000',	'2020-12-02 04:17:19.000');
+INSERT INTO `Projects` (`id`, `title`, `description`, `vote`, `image`, `github_link`, `project_link`, `userId`, `createdAt`, `updatedAt`) VALUES
+(1,	'DeviensDev - le site pour découvrir les métiers du développement',	'Créé par des développeurs, DeviensDev vous ouvre les portes du développement web en mettant à votre disposition toutes les clés pour comprendre le métier de développeur, vous initier au code et vous orienter vers les formations adéquates.',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://deviens.dev',	'https://github.com/O-clock-Alumni/DeviensDev',	'https://deviens.dev/',	3,	'2020-12-02 04:17:19.000',	'2020-12-02 04:17:19.000'),
+(2,	'O\'Clock - Formation développeur web',	'Embarquez dans nos salles de classe virtuelles pour apprendre le métier de développeur, entouré de vos camarades de promotion et de vos formateurs. Un seul objectif : faire de vous un développeur web compétent, diplômé et recruté !',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://oclock.io',	NULL,	'https://oclock.io/',	3,	'2020-12-02 11:25:10.000',	NULL);
 
 INSERT INTO `ProjectTags` (`createdAt`, `updatedAt`, `project_id`, `tag_id`) VALUES
 ('2020-12-02 04:19:35.000',	'2020-12-02 04:51:14.000',	1,	1),
