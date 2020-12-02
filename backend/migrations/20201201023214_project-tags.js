@@ -60,7 +60,7 @@ const migrationCommands = (transaction) => {
             primaryKey: true,
             allowNull: false,
           },
-          name: { type: Sequelize.STRING, field: "name" },
+          username: { type: Sequelize.STRING, field: "username" },
           email: { type: Sequelize.STRING, field: "email" },
           password: { type: Sequelize.STRING, field: "password" },
           isAdmin: { type: Sequelize.BOOLEAN, field: "isAdmin" },
