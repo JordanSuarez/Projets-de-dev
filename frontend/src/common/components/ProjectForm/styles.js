@@ -28,6 +28,7 @@ export default ({ palette }) => ({
     marginBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'start',
   },
   inputFile: {
     position: 'relative',
