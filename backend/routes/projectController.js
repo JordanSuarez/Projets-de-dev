@@ -1,4 +1,6 @@
 const models   = require('../models');
+const jwtUtils = require('../utils/jwt.utils');
+const asyncLib = require('async');
 
 
 module.exports = {
@@ -26,5 +28,7 @@ module.exports = {
     .catch((error) => {
     return res.status(500).json('ERROR')
     })
-  }
+  },
+
+
 }
