@@ -1,3 +1,6 @@
+/* eslint-disable no-useless-escape */
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
@@ -17,7 +20,7 @@ const validate = (values) => {
   const errors = {};
   let validationEmail = null;
   let validationPassword = null;
-  const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
+  const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const regexPassword = /^(?=.*\d).{4,15}$/;
   if (regexEmail.test(values.email)) {
     validationEmail = true;
@@ -63,7 +66,7 @@ const validate = (values) => {
   return errors;
 };
 
-const Register = ({classes}) => {
+const Register = ({ classes }) => {
   const [formValues, setFormValues] = useState();
 
   const onSubmit = (values) => {
