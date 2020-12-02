@@ -1,6 +1,8 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 
 import { Form as FormRff } from 'react-final-form';
+// eslint-disable-next-line no-unused-vars
 import Editor from 'src/common/components/QuillEditor';
 import ReactQuill from 'react-quill';
 import { Autocomplete, TextField as Field } from 'mui-rff';
@@ -15,6 +17,7 @@ import FileBase64 from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
 import { modules, formats } from 'src/common/components/QuillEditor/EditorToolbar';
 import top100Films from './formData/fakeData';
+import './styles.scss';
 import fields from './formData/fields';
 import initialsValues from './formData/initialValues';
 
@@ -53,6 +56,7 @@ const Form = ({ classes }) => {
       projectLink: formState.projectLink,
       description: formState.description,
       imageUpload: formState.image,
+      imageUploadName: formState.imageName,
       tagsChecked: formState.tagsChecked,
       partnersSelected: formState.partnersSelected,
     });
@@ -70,7 +74,7 @@ const Form = ({ classes }) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
   const getFiles = (files) => {
-    setFormState({ ...formState, image: files.base64 });
+    setFormState({ ...formState, image: files.base64, imageName: files.name });
   };
   const handleChangeQuillEditorValue = (value) => {
     setFormState({ ...formState, description: value });
@@ -81,6 +85,7 @@ const Form = ({ classes }) => {
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   //   const required = (value) => ();
+  // eslint-disable-next-line consistent-return
   const onBlurField = (event) => {
     if (event.target.name === 'title') {
       return event.target.value === ''
@@ -134,18 +139,26 @@ const Form = ({ classes }) => {
                 </div>
               ))}
               <div className={classes.imageContainer}>
-                <h3 className={classes.imageTitle}>Ajoutez une Image de présentation</h3>
-                <FileBase64
-                  hidden
-                  onDone={getFiles}
-                />
-                {errorFields.image
-                    && (
-                    <div className={classes.errorImage}>
-                      * Une image est requise
-                    </div>
-                    )}
-                {formState.image.length > 0 && <img src={formState.image} alt="illustration du projet" className={classes.imageInput} />}
+                <h3 className={classes.imageTitle}>Ajouter une image de présentation</h3>
+                <div className={classes.inputFile}>
+                  <div className={classes.customUploadButton}>
+                    <label from="nul" className={classes.newButtonUpload}>
+                      Choisir un fichier
+                    </label>
+                    <p className={classes.fileName}>{formState.imageName} </p>
+                    <FileBase64
+                      hidden
+                      onDone={getFiles}
+                    />
+                  </div>
+                  {errorFields.image
+                      && (
+                      <div className={classes.errorImage}>
+                        * Une image est requise
+                      </div>
+                      )}
+                  {formState.image.length > 0 && <img src={formState.image} alt="illustration du projet" className={classes.imageInput} />}
+                </div>
               </div>
             </div>
             <div className={classes.rightContainer}>

@@ -6,6 +6,7 @@ export default {
   projectLink: '',
   description: templateEditor,
   image: '',
+  imageName: 'Aucun fichier choisi',
   tagsChecked: [
     {
       title: 'Inception',

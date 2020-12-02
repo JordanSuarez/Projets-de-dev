@@ -22,27 +22,66 @@ export default ({ palette }) => ({
     justifyContent: 'space-around',
     width: '45rem',
   },
+  // Upload type
   imageContainer: {
     position: 'relative',
     marginBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
   },
+  inputFile: {
+    position: 'relative',
+    color: '#78797d',
+    border: '#bcbdc4 1px solid',
+    display: 'flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    borderRadius: '4px',
+    paddingTop: '4px',
+  },
+  customUploadButton: {
+    color: '#78797d',
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '12px',
+    paddingTop: '4px',
+  },
+  newButtonUpload: {
+    zIndex: '-1',
+    padding: '8px 12px',
+    cursor: 'pointer',
+    borderRadius: '4px',
+    backgroundColor: palette.darkBlue,
+    fontSize: '12px',
+    color: palette.yellow,
+    margin: '1em 10px 1em 10px',
+    width: '115px',
+  },
+  fileName: {
+    fontSize: '12px',
+    width: '90px',
+    wordBreak: 'break-word',
+  },
   imageTitle: {
+    position: 'absolute',
+    zIndex: '3',
+    top: '-5px',
+    padding: '0 6px 0 4px',
+    color: '#78797d',
     fontSize: '0.8rem',
-    marginLeft: '0.2rem',
-    marginBottom: '1rem',
-    color: palette.darkBlue,
+    marginLeft: '0.7rem',
+    backgroundColor: palette.lightBlue,
+  },
+  imageInput: {
+    width: '12rem',
+    margin: '1em auto',
+    padding: '14px',
   },
   titleAutocomplete: {
     marginLeft: '1rem',
   },
   autoComplete: {
     margin: '1rem',
-  },
-  imageInput: {
-    width: '5rem',
-    marginTop: '1rem',
   },
   buttonsWrapper: {
     display: 'flex',
@@ -79,6 +118,6 @@ export default ({ palette }) => ({
   },
   errorImage: {
     color: palette.errorField,
-    marginTop: '1rem',
+    margin: '0.5em',
   },
 });
