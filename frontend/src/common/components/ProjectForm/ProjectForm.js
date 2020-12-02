@@ -15,45 +15,36 @@ import FileBase64 from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
 import { modules, formats } from 'src/common/components/QuillEditor/EditorToolbar';
 import top100Films from './formData/fakeData';
-import fields from './formData/textField';
-import templateEditor from './formData/templateEditor';
+import fields from './formData/fields';
+import initialsValues from './formData/initialValues';
 
 const Form = ({ classes }) => {
   const history = useHistory();
+  const FORM_STATE = 'formState';
   const [formValues, setFormValues] = useState();
-  const [formState, setFormState] = useState({
-    title: '',
-    githubLink: '',
-    projectLink: '',
-    description: templateEditor,
-    image: '',
-    tagsChecked: [
-      {
-        title: 'Inception',
-        year: 2010,
-      },
-      {
-        title: 'The Green Mile',
-        year: 1999,
-      },
-    ],
-    partnersSelected: [
-      {
-        title: 'The Shawshank Redemption',
-        year: 1994,
-      },
-      {
-        title: 'The Lord of the Rings: The Return of the King',
-        year: 2003,
-      },
-    ],
-
-  });
+  const [errorFields, setErrorFields] = useState({});
+  const getFormStateFromStorage = () => JSON.parse(localStorage.getItem(FORM_STATE));
+  // Get values from local storage if exist, else get value from state
+  const [formState, setFormState] = useState(
+    getFormStateFromStorage() !== null
+      ? getFormStateFromStorage()
+      : initialsValues,
+  );
+  const setFormStateToStorage = () => localStorage.setItem(FORM_STATE, JSON.stringify(formState));
 
   useEffect(() => {
-  }, []);
+    // Save to the localstorage form
+    setFormStateToStorage();
+  }, [formState]);
 
   const onSubmit = (values) => {
+    if (formState.tagsChecked.length === 0) {
+      return setErrorFields({ ...errorFields, tagsChecked: true });
+    }
+    if (formState.image === '') {
+      return setErrorFields({ ...errorFields, image: true });
+    }
+
     // TODO set values redux instead of react state
     setFormValues({
       ...values,
@@ -62,15 +53,21 @@ const Form = ({ classes }) => {
       projectLink: formState.projectLink,
       description: formState.description,
       imageUpload: formState.image,
+      tagsChecked: formState.tagsChecked,
+      partnersSelected: formState.partnersSelected,
     });
+
+    // TODO remove formState from localstorage on axios request
+    return localStorage.removeItem(FORM_STATE);
   };
 
   // Controlled Inputs
   const handleQuitForm = () => {
     history.push(getHomeRoute());
   };
-  const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+  const handleChange = (event) => {
+    setErrorFields({ ...errorFields, [event.target.name]: false });
+    setFormState({ ...formState, [event.target.name]: event.target.value });
   };
   const getFiles = (files) => {
     setFormState({ ...formState, image: files.base64 });
@@ -82,6 +79,29 @@ const Form = ({ classes }) => {
   // Icon for AutoComplete component
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
+
+  //   const required = (value) => ();
+  const onBlurField = (event) => {
+    if (event.target.name === 'title') {
+      return event.target.value === ''
+        ? setErrorFields({ ...errorFields, [event.target.name]: true })
+        : setErrorFields({ ...errorFields, [event.target.name]: false });
+    }
+    setErrorFields(
+      formState.tagsChecked.length === 0
+        ? { ...errorFields, tagsChecked: true }
+        : { ...errorFields, tagsChecked: false },
+    );
+  };
+
+  const getHelperText = (name) => {
+    if (name === 'title') {
+      return formState.title === '' ? 'Ce champ est requis' : ' ';
+    }
+    return '';
+  };
+
+  console.log(errorFields);
 
   return (
     <div>
@@ -104,29 +124,86 @@ const Form = ({ classes }) => {
                     label={label}
                     placeholder={placeholder}
                     fullWidth
-                    value={formState.name}
+                    value={formState[name]}
                     onChange={handleChange}
+                    required={name === 'title'}
+                    onBlur={onBlurField}
+                    error={errorFields[name]}
+                    helperText={getHelperText(name)}
                   />
                 </div>
               ))}
               <div className={classes.imageContainer}>
                 <h3 className={classes.imageTitle}>Ajoutez une Image de présentation</h3>
-                <div>
-                  <FileBase64
-                    hidden
-                    onDone={getFiles}
-                  />
-                  {formState.image.length > 0 && <img src={formState.image} alt="illustration du projet" className={classes.imageInput} />}
-                </div>
+                <FileBase64
+                  hidden
+                  onDone={getFiles}
+                />
+                {errorFields.image
+                    && (
+                    <div className={classes.errorImage}>
+                      * Une image est requise
+                    </div>
+                    )}
+                {formState.image.length > 0 && <img src={formState.image} alt="illustration du projet" className={classes.imageInput} />}
               </div>
             </div>
             <div className={classes.rightContainer}>
+              <div>
+                {errorFields.tagsChecked
+                && (
+                <div className={classes.errorTagsChecked}>
+                  * Au moins une catégorie est requise
+                </div>
+                )}
+                <Autocomplete
+                  className={classes.autoComplete}
+                  name="tagsChecked"
+                  multiple
+                  id="tagsChecked"
+                  options={top100Films}
+                  disableCloseOnSelect
+                  getOptionValue={(option) => option}
+                  getOptionLabel={(option) => option.title}
+                  value={formState.tagsChecked}
+                  onBlur={onBlurField}
+                  onChange={(event, values) => {
+                    setErrorFields(
+                      values.length === 0
+                        ? { ...errorFields, tagsChecked: true }
+                        : { ...errorFields, tagsChecked: false },
+                    );
+                    setFormState({ ...formState, tagsChecked: values });
+                  }}
+                  getOptionSelected={(option, value) => option.title === value.title}
+                  renderOption={(option, { selected }) => (
+                    <>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option.title}
+                    </>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Catégorie(s) du projet"
+                      placeholder="Catégorie(s) du projet"
+                    />
+                  )}
+                />
+              </div>
+
               <Autocomplete
-                name="selectField"
+                name="partnersSelected"
                 className={classes.autoComplete}
                 filterSelectedOptions
                 multiple
-                id="tags-outlined"
+                id="partnersSelected"
                 options={top100Films}
                 getOptionValue={(option) => option}
                 getOptionLabel={(option) => option.title}
@@ -139,38 +216,9 @@ const Form = ({ classes }) => {
                   <TextField
                     {...params}
                     variant="outlined"
-                    label="Catégorie(s) du projet"
-                    placeholder="Catégorie(s) du projet"
+                    label="Ajouter un ou plusieurs collaborateur(s)"
+                    placeholder="Ajouter un ou plusieurs collaborateur(s)"
                   />
-                )}
-              />
-              <Autocomplete
-                className={classes.autoComplete}
-                name="checkBox"
-                multiple
-                id="checkboxes-tags-demo"
-                options={top100Films}
-                disableCloseOnSelect
-                getOptionValue={(option) => option}
-                getOptionLabel={(option) => option.title}
-                value={formState.tagsChecked}
-                onChange={(event, values) => {
-                  setFormState({ ...formState, tagsChecked: values });
-                }}
-                getOptionSelected={(option, value) => option.title === value.title}
-                renderOption={(option, { selected }) => (
-                  <>
-                    <Checkbox
-                      icon={icon}
-                      checkedIcon={checkedIcon}
-                      style={{ marginRight: 8 }}
-                      checked={selected}
-                    />
-                    {option.title}
-                  </>
-                )}
-                renderInput={(params) => (
-                  <TextField {...params} variant="outlined" label="Ajouter un ou plusieurs collaborateur(s)" placeholder="Ajouter un ou plusieurs collaborateur(s)" />
                 )}
               />
             </div>
@@ -178,10 +226,17 @@ const Form = ({ classes }) => {
               theme="snow"
               value={formState.description}
               onChange={handleChangeQuillEditorValue}
-              placeholder="Write something awesome..."
+              placeholder="Décris ton projet..."
               modules={modules}
               formats={formats}
+              className={classes.editor}
             />
+            {errorFields.length > 0
+                && (
+                <div className={classes.errorForm}>
+                  * Au moins un champ requis n'est pas remplis
+                </div>
+                )}
             <div className={classes.buttonsWrapper}>
               <Button type="button" variant="outlined" className={classes.quitButton} onClick={handleQuitForm}>Abandonner</Button>
               <Button type="submit" variant="contained" className={classes.submitButton}>Soumettre</Button>

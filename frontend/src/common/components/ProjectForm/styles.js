@@ -23,11 +23,16 @@ export default ({ palette }) => ({
     width: '45rem',
   },
   imageContainer: {
+    position: 'relative',
     marginBottom: '1rem',
+    display: 'flex',
+    flexDirection: 'column',
   },
   imageTitle: {
     fontSize: '0.8rem',
-    marginLeft: '0.7rem',
+    marginLeft: '0.2rem',
+    marginBottom: '1rem',
+    color: palette.darkBlue,
   },
   titleAutocomplete: {
     marginLeft: '1rem',
@@ -37,6 +42,7 @@ export default ({ palette }) => ({
   },
   imageInput: {
     width: '5rem',
+    marginTop: '1rem',
   },
   buttonsWrapper: {
     display: 'flex',
@@ -58,5 +64,21 @@ export default ({ palette }) => ({
       color: palette.blue,
       backgroundColor: palette.white,
     },
+  },
+  editor: {
+    margin: '1rem',
+    width: '100%',
+  },
+  errorEditor: {
+    marginTop: '3rem',
+    marginLeft: '2rem',
+    color: palette.errorField,
+  },
+  errorTagsChecked: {
+    color: palette.errorField,
+  },
+  errorImage: {
+    color: palette.errorField,
+    marginTop: '1rem',
   },
 });
