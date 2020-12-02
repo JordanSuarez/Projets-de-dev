@@ -80,8 +80,8 @@ module.exports = {
 			} else {
 				return res.status(500).json({'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
 			}
-		});
-	},
+			});
+		},
 
 		login: (req, res) => {
 		
@@ -134,6 +134,28 @@ module.exports = {
 					return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
 				}
 			});
-		},	
+		},
+		
+		getUserProfile: (req, res) => {
+			const headerAuth = req.headers['authorization'];
+			const userId = jwtUtils.getUserId(headerAuth);
+
+			if (userId < 0){
+				return res.status(400).json({ 'error': 'Le token est invalide'});
+			}
+
+			models.User.findOne({
+				attributes: ['id', 'email', 'username'],
+				where: { id: userId }
+			}).then((user) => {
+				if (user) {
+					res.status(201).json(user);
+				} else {
+					res.status(404).json({ 'error': 'L\'utilisateur n\'a pas été trouvé' });
+				}
+			}).catch((err) => {
+				res.status(500).json({ 'error': 'impossible de chercher l\'utilisateur' });
+			});
+		}
 }
 
