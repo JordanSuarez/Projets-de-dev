@@ -26,7 +26,7 @@ module.exports = {
 			}
 
 			if (!EMAIL_REGEX.test(email)) {
-				return res.status(400).json({'error': 'L\'email saisi est invalide'})
+				return res.status(400).json({'error': 'L\'email saisie est invalide'})
 			}
 
 			if (!PASSWORD_REGEX.test(password)) {
@@ -44,7 +44,7 @@ module.exports = {
 						done(null, userFound);
 					})
 					.catch((err) => {
-						return res.status(500).json({ 'error': 'Erreur lors de la verification de l\'utilisateur'});
+						return res.status(500).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
 					});
 				},
 
@@ -54,7 +54,7 @@ module.exports = {
 							done(null, userFound, bcryptedPassword);
 						});
 					} else {
-						return res.status(409).json({ 'error': 'le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
+						return res.status(409).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
 					}
 				},
 
@@ -69,7 +69,7 @@ module.exports = {
 						done(newUser);
 					})
 					.catch((err) => {
-						return res.status(500).json({'error': 'Impossible d\'enregistrer l\'utilisateur'});
+						return res.status(500).json({'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
 					});
 				}
 			], (newUser) => {
@@ -78,7 +78,7 @@ module.exports = {
 					'userId': newUser.id
 				});
 			} else {
-				return res.status(500).json({'error': 'Impossible d\'enregistrer l\'utilisateur'});
+				return res.status(500).json({'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
 			}
 		});
 	},
@@ -89,7 +89,7 @@ module.exports = {
 			const password = req.body.password;
 
 			if (email == null ||  password == null) {
-				return res.status(400).json({ 'error': 'missing parameters' });
+				return res.status(400).json({ 'error': 'Merci de renseigner l\'email et le mot de passe'});
 			}
 
 			asyncLib.waterfall([
@@ -102,7 +102,7 @@ module.exports = {
 						done(null, userFound);
 					})
 					.catch((err) => {
-						return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
+						return res.status(500).json({'error': 'La combinaison d\'email et mot de passe est invalide'});
 					});
 				},
 
@@ -112,7 +112,7 @@ module.exports = {
 							done(null, userFound, resBycrypt);	
 						});
 					} else {
-						return res.status(404).json({ 'error': 'L\'utilisateur n\'existe pas dans la base de donnée'});
+						return res.status(404).json({ 'error': 'La combinaison d\'email et mot de passe est invalide'});
 					}
 				},
 
@@ -120,7 +120,7 @@ module.exports = {
 					if(resBycrypt) {
 						done(userFound);
 					} else {
-						return res.status(403).json({ 'error': 'Mot de passe invalide' });
+						return res.status(403).json({ 'error': 'La combinaison d\'email et mot de passe est invalide' });
 					}
 				}
 

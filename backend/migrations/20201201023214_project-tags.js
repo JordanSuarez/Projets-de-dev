@@ -35,14 +35,12 @@ const migrationCommands = (transaction) => {
           name: { type: Sequelize.STRING, field: "name" },
           image: { type: Sequelize.STRING, field: "image" },
           createdAt: {
-            type: Sequelize.DATE,
-            field: "createdAt",
             allowNull: false,
+            type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)'
           },
           updatedAt: {
-            type: Sequelize.DATE,
-            field: "updatedAt",
-            allowNull: false,
+            allowNull: true,
+            type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)'
           },
         },
         { transaction },
@@ -134,14 +132,14 @@ const migrationCommands = (transaction) => {
           project_link: { type: Sequelize.STRING, field: "project_link" },
           user_id: { type: Sequelize.INTEGER, field: "user_id" },
           createdAt: {
-            type: Sequelize.DATE,
+            type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)',
             field: "createdAt",
             allowNull: false,
           },
           updatedAt: {
-            type: Sequelize.DATE,
+            type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)',
             field: "updatedAt",
-            allowNull: false,
+            allowNull: true,
           },
           UserId: {
             type: Sequelize.INTEGER,
@@ -161,14 +159,14 @@ const migrationCommands = (transaction) => {
         "ProjectTags",
         {
           createdAt: {
-            type: Sequelize.DATE,
+            type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)',
             field: "createdAt",
             allowNull: false,
           },
           updatedAt: {
-            type: Sequelize.DATE,
+            type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)',
             field: "updatedAt",
-            allowNull: false,
+            allowNull: true,
           },
           project_id: {
             type: Sequelize.INTEGER,
