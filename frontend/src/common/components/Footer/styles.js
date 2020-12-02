@@ -2,7 +2,6 @@ export default ({ palette }) => ({
 
   footer: {
     width: '100%',
-    margin: '0',
     padding: '1em 0',
     backgroundColor: palette.darkBlue,
     display: 'flex',

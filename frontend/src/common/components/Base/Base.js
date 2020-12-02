@@ -9,10 +9,10 @@ const Base = ({ classes, children }) => {
   return (
     <div className={classes.container}>
       <Navigation />
-      <main>
+      <main className={classes.main}>
         {children}
       </main>
-      <Footer />
+      <Footer className={classes.footer} />
     </div>
   );
 };

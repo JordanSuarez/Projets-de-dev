@@ -11,7 +11,7 @@ const Home = ({ classes }) => {
   return (
     <Base>
       <img className={classes.image} src={headerImage} alt="header" />
-      <main className={classes.home}>
+      <div className={classes.home}>
         <h2 className={classes.subtitle}> Derniers projets publiés</h2>
         <div className={classes.latestProject}>
           <CardProject />
@@ -24,7 +24,7 @@ const Home = ({ classes }) => {
           <CardProject />
         </div>
         <Pagination className={classes.pagination} count={10} size="small" />
-      </main>
+      </div>
     </Base>
   );
 };
