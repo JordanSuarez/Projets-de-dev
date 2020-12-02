@@ -16,6 +16,10 @@ export default ({ palette }) => ({
     padding: '0.5em 0',
   },
 
+  textfield: {
+    marginBottom: '0.5em',
+  },
+
   containerButton: {
     display: 'flex',
     justifyContent: 'flex-end',

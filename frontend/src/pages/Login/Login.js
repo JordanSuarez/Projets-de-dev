@@ -45,6 +45,7 @@ const Login = ({ classes }) => {
             render={({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} noValidate>
                 <TextField
+                  className={classes.textfield}
                   type="email"
                   label="Email"
                   name="email"
@@ -52,6 +53,7 @@ const Login = ({ classes }) => {
                   required={true}
                 />
                 <TextField
+                  className={classes.textfield}
                   type="password"
                   label="Password"
                   name="password"
