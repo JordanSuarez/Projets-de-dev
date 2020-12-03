@@ -20,16 +20,16 @@ const SIGN_SECRET = '5azdgPzefUB77719zdzajrvmpBtcfU42FbiozeARW72162';
 	},
 
 	getUserId: (authorization) => {
-		const userId = -1;
 		const token = module.exports.parseAuthorization(authorization);
 		if(token != null) {
 			try {
 				const jwtToken = jwt.verify(token, SIGN_SECRET);
 				if(jwtToken != null) {
-					UserId = jwtToken.userId;
+          UserId = jwtToken.userId;
+          return UserId
 				}
 			} catch(err) {}
 		}
-		return UserId;
+		return UserId = -1;
 	}
 } 
