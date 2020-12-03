@@ -24,4 +24,4 @@ app.get('/', (req, res) => {
 
 app.use('/api/', apiRouter);
 
-app.listen(3001);
+app.listen(3003);
