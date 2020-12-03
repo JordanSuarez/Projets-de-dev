@@ -165,7 +165,9 @@ module.exports = {
 
 		getUsersList: (req, res) => {
 			models.Users.findAll({
-				attributes: ['id', 'username'],
+				attributes: ['id', 'username', 'userImage', 'tags'],
+				
+
 			})
 
 		}
