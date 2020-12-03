@@ -162,6 +162,10 @@ module.exports = {
 			}).catch((err) => {
 				res.status(500).json({ 'error': 'impossible de chercher l\'utilisateur' });
 			});
+		},
+
+		disconnetUser: (req, res) => {
+			
 		}
 }
 
