@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
@@ -43,6 +45,7 @@ const Login = ({ classes }) => {
             render={({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} noValidate>
                 <TextField
+                  className={classes.textfield}
                   type="email"
                   label="Email"
                   name="email"
@@ -50,6 +53,7 @@ const Login = ({ classes }) => {
                   required={true}
                 />
                 <TextField
+                  className={classes.textfield}
                   type="password"
                   label="Password"
                   name="password"

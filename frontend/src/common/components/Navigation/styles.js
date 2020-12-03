@@ -47,6 +47,9 @@ export default ({ palette }) => ({
     margin: '1rem',
     width: 'fit-content',
     whiteSpace: 'nowrap',
+    '&:hover': {
+      color: palette.blue,
+    },
   },
   itemLinkActive: {
     color: palette.yellow,
@@ -54,5 +57,8 @@ export default ({ palette }) => ({
   button: {
     backgroundColor: palette.darkBlue,
     color: palette.yellow,
+    '&:hover': {
+      backgroundColor: palette.blue,
+    },
   },
 });

@@ -10,6 +10,8 @@ exports.router = (() => {
     // Users routes
     apiRouter.route('/users/register/').post(userController.register);
     apiRouter.route('/users/login/').post(userController.login);
+    apiRouter.route('/users/me').get(userController.getUserProfile);
+    // Projects routes
     apiRouter.route('/projects/').get(projectController.index);
     apiRouter.route('/projects/:id').get(projectController.project);
     apiRouter.route('/projects/new').post(projectController.new);

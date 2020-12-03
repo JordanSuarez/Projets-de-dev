@@ -1,9 +1,9 @@
 import { PROJECT_NEW } from "src/common/routing/routesResolver";
-import ProfileCreation from "../index";
+import ProjectCreation from "../index";
 
 export default {
-  id: 'profileCreationPage',
+  id: 'projectCreationPage',
   path: PROJECT_NEW,
-  component: ProfileCreation,
+  component: ProjectCreation,
   requireAuthentication: true,
 }

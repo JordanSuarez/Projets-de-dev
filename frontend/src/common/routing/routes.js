@@ -4,6 +4,7 @@ import creationProjectRouting from 'src/pages/Project/components/ProjectCreation
 import editionProjectRouting from 'src/pages/Project/components/ProjectEdition/config/routing';
 import projectsListRouting from 'src/pages/Projects/config/routing';
 import profileRouting from 'src/pages/Profile/config/routing';
+import userProfileRouting from 'src/pages/Profile/components/UserProfile/config/routing';
 import editionProfileRouting from 'src/pages/Profile/components/ProfileEdition/config/routing';
 import profileFavoritesRouting from 'src/pages/Profile/components/ProfileFavorites/config/routing';
 import profileProjectsRouting from 'src/pages/Profile/components/ProfileProjects/config/routing';
@@ -20,10 +21,11 @@ import errorRouting from 'src/pages/404/config/routing';
 export const routes = [
   homeRouting,
   // projectRouting,
+  creationProjectRouting,
   projectsListRouting,
-  // creationProjectRouting,
   // editionProjectRouting,
   profileRouting,
+  userProfileRouting,
   profilesListRouting,
   editionProfileRouting,
   profileFavoritesRouting,

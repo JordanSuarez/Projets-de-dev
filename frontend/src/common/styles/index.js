@@ -6,6 +6,7 @@ const palette = {
   darkBlue: '#10375C',
   blue: '#127681',
   lightBlue: '#F4F6FF',
+  errorField: '#ec524b',
 };
 
 const font = {

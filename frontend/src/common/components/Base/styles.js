@@ -12,4 +12,5 @@ export default ({ palette }) => ({
     marginBottom: '0px !important',
     marginTop: '100px',
   },
+
 });
