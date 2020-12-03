@@ -89,7 +89,7 @@ module.exports = {
 			const password = req.body.password;
 
 			if (email == null ||  password == null) {
-				return res.status(400).json({ 'error': 'Merci de renseigner l\'email et le mot de passe'});
+				return res.status(400).json({ 'error': 'Merci de renseigner l\'email et le mot de passe | email : ' + email + ' password : ' + password});
 			}
 
 			asyncLib.waterfall([

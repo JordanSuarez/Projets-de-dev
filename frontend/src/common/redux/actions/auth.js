@@ -5,8 +5,10 @@ export const SUBMIT_LOGIN_SUCCESS = 'SUBMIT_LOGIN_SUCCESS';
 export const SUBMIT_LOGIN_ERROR = 'SUBMIT_LOGIN_ERROR';
 export const SUBMIT_LOGOUT_SUCCESS = 'SUBMIT_LOGOUT_SUCCESS';
 
-export const submitLogin = () => ({
+export const submitLogin = (email, password) => ({
   type: SUBMIT_LOGIN,
+  email,
+  password,
 });
 
 export const register = () => ({

@@ -18,28 +18,26 @@ import { setToken, removeToken } from 'src/common/authentication/authProvider';
 const authMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN: {
-      const { auth } = store.getState();
       axios.post(
-        'http://localhost:6000/api/users/login',
+        'http://localhost:3001/api/users/login',
+        {
+          email: action.email,
+          password: action.password,
+        },
         {
           header: {
             'Access-Control-Allow-Origin': '*',
           },
         },
         {
-          email: 'albanvincent.pro@gmail.com',
-          password: 'adidas',
-        }, {
           withCredentials: true,
         },
-
       )
         .then(({ data }) => {
           setToken(data.token);
-        //   store.dispatch(submitLoginSuccess(data.pseudo, data.logged));
         })
-        .catch(() => {
-        //   store.dispatch(submitLoginError());
+        .catch((e) => {
+          console.log(e.response);
         });
 
       next(action);
@@ -61,7 +59,15 @@ const authMiddleWare = (store) => (next) => (action) => {
     }
     case REGISTER: {
       // withCredentials send authentication informations in cookies
-      axios.post('http://localhost:6000/users/register', {})
+      axios.post('http://localhost:6000/users/register', 
+      {
+        email: action.email,
+        password: action.password,
+        username: action.username,
+      },
+      {
+        withCredentials: true,
+      },)
         .then(({ data }) => {
         //   store.dispatch(register(data.email, data.password, data.username));
         })

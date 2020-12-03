@@ -1,6 +1,14 @@
 @use 'reset';
 @use 'vars';
 
+* {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  -ms-user-drag: none;
+}
+
 body {
   font-family: sans-serif;
   background-color: vars.$light-blue ;

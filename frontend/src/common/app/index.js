@@ -9,9 +9,9 @@ import theme from 'src/common/styles';
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
     <Router routes={routes} />
-    {/* </Provider> */}
+    </Provider>
   </MuiThemeProvider>
 );
 
