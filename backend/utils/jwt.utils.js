@@ -13,5 +13,23 @@ const SIGN_SECRET = '5azdgPzefUB77719zdzajrvmpBtcfU42FbiozeARW72162';
 		{
 			expiresIn: '3h'
 		})
+	},
+
+	parseAuthorization: (authorization) => {
+		return (authorization != null) ? authorization.replace('Bearer ', '') : null;
+	},
+
+	getUserId: (authorization) => {
+		const token = module.exports.parseAuthorization(authorization);
+		if(token != null) {
+			try {
+				const jwtToken = jwt.verify(token, SIGN_SECRET);
+				if(jwtToken != null) {
+          UserId = jwtToken.userId;
+          return UserId
+				}
+			} catch(err) {}
+		}
+		return UserId = -1;
 	}
 } 

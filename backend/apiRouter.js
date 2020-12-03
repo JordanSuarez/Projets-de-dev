@@ -12,7 +12,10 @@ exports.router = (() => {
     apiRouter.route('/users/login/').post(userController.login);
     apiRouter.route('/projects/').get(projectController.index);
     apiRouter.route('/projects/:id').get(projectController.project);
-
+    apiRouter.route('/projects/new').post(projectController.new);
+    apiRouter.route('/projects/:id/edit').patch(projectController.edit);
+    apiRouter.route('/projects/tags/:tag').get(projectController.filter); // Ne fonctionne pas encore, en cours
+    apiRouter.route('/projects/:limit?/:offset?').get(projectController.limitOffset);
 
     return apiRouter;
 })();
