@@ -147,12 +147,11 @@ module.exports = {
 			models.User.findAll({
 				attributes: ['id', 'email', 'username'],
 				where: { id: userId },
-
 				include: {
 					model: models.Project, 
-					where: {userId: userId}
-			}
-
+					where: {userId: userId},
+					required: false
+				}
 			}).then((user) => {
 				if (user) {
 					res.status(201).json(user);
@@ -164,8 +163,11 @@ module.exports = {
 			});
 		},
 
-		disconnetUser: (req, res) => {
-			
+		getUsersList: (req, res) => {
+			models.Users.findAll({
+				attributes: ['id', 'username'],
+			})
+
 		}
 }
 
