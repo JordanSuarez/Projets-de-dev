@@ -12,7 +12,7 @@ app.use((request, response, next) => {
   response.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PATCH, PUT, DELETE');
   next();
 });
-
+  
 // Body Parser configuration
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
