@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
@@ -13,8 +12,9 @@ import {
   Button,
 
 } from '@material-ui/core';
-import { getRegisterRoute } from 'src/common/routing/routesResolver';
+import { getRegisterRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import Base from 'src/common/components/Base';
+import { func, string } from 'prop-types';
 
 const validate = (values) => {
   const errors = {};
@@ -27,8 +27,14 @@ const validate = (values) => {
   return errors;
 };
 
-const Login = ({ classes, handleLogin }) => {
+const Login = ({ classes, handleLogin, redirect }) => {
   const history = useHistory();
+
+  useEffect(() => {
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
 
   const handleClick = () => history.push(getRegisterRoute());
 
@@ -84,6 +90,8 @@ const Login = ({ classes, handleLogin }) => {
 
 Login.propTypes = {
   ...classesProps,
+  handleLogin: func.isRequired,
+  redirect: string.isRequired,
 };
 
 Login.defaultProps = {

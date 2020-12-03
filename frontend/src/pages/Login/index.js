@@ -8,16 +8,18 @@ import styles from './styles';
 
 const mapDispatchToProps = (dispatch) => ({
   handleLogin: ({ email, password }) => {
-    console.log(email, password);
-
     dispatch(submitLogin(email, password));
   },
+});
+
+const mapStateToProps = (state) => ({
+  redirect: state.auth.redirect,
 });
 
 export default compose(
   withStyles(styles),
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
   ),
 )(Login);
