@@ -6,7 +6,7 @@ import { string } from 'prop-types';
 const NavLink = ({
   label, route, activeClassName, className,
 }) => (
-  <Link to={route} activeClassName={activeClassName} className={className}>{label}</Link>
+  <Link to={route} activeClassName={activeClassName} exact className={className}>{label}</Link>
 );
 
 NavLink.propTypes = {

@@ -20,7 +20,7 @@ const authMiddleWare = (store) => (next) => (action) => {
     case SUBMIT_LOGIN: {
       const { auth } = store.getState();
       axios.post(
-        'http://localhost:4000/api/users/login',
+        'http://localhost:6000/api/users/login',
         {
           header: {
             'Access-Control-Allow-Origin': '*',
@@ -47,7 +47,7 @@ const authMiddleWare = (store) => (next) => (action) => {
     }
     case SUBMIT_LOGOUT: {
       // reset authentication cookie's when logout
-      axios.post('http://localhost:4000/api/users/logout', {})
+      axios.post('http://localhost:6000/api/users/logout', {})
         .then(({ data }) => {
           removeToken();
         //   store.dispatch(submitLogoutSuccess(data.logged));
@@ -61,7 +61,7 @@ const authMiddleWare = (store) => (next) => (action) => {
     }
     case REGISTER: {
       // withCredentials send authentication informations in cookies
-      axios.post('http://localhost:4000/users/register', {})
+      axios.post('http://localhost:6000/users/register', {})
         .then(({ data }) => {
         //   store.dispatch(register(data.email, data.password, data.username));
         })
