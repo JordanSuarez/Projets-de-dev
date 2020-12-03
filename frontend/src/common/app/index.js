@@ -10,7 +10,7 @@ import theme from 'src/common/styles';
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
-    <Router routes={routes} />
+      <Router routes={routes} />
     </Provider>
   </MuiThemeProvider>
 );
