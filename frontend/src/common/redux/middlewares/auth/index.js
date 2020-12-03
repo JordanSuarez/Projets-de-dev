@@ -45,7 +45,7 @@ const authMiddleWare = (store) => (next) => (action) => {
     }
     case SUBMIT_LOGOUT: {
       // reset authentication cookie's when logout
-      axios.post('http://localhost:6000/api/users/logout', {})
+      axios.post('http://localhost:3001/api/users/logout', {})
         .then(({ data }) => {
           removeToken();
         //   store.dispatch(submitLogoutSuccess(data.logged));
@@ -58,16 +58,22 @@ const authMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case REGISTER: {
+      console.log(action);
       // withCredentials send authentication informations in cookies
-      axios.post('http://localhost:6000/users/register', 
-      {
-        email: action.email,
-        password: action.password,
-        username: action.username,
-      },
-      {
-        withCredentials: true,
-      },)
+      axios.post('http://localhost:3001/api/users/register',
+        {
+          email: action.email,
+          password: action.password,
+          username: action.username,
+        },
+        {
+          header: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        },
+        {
+          withCredentials: true,
+        })
         .then(({ data }) => {
         //   store.dispatch(register(data.email, data.password, data.username));
         })

@@ -11,8 +11,11 @@ export const submitLogin = (email, password) => ({
   password,
 });
 
-export const register = () => ({
+export const submitRegister = (email, password, username) => ({
   type: REGISTER,
+  email,
+  password,
+  username,
 });
 
 export const submitLogout = () => ({
