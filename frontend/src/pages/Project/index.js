@@ -1,17 +1,25 @@
-import React from 'react';
 import { withStyles } from '@material-ui/core';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
+import { fetchProjectById } from 'src/common/redux/actions/project';
+import Project from './Project';
 import styles from './styles';
 
-// eslint-disable-next-line arrow-body-style
-const Project = () => {
-  return (
-    <div> Project </div>
-  );
-};
+const mapStateToProps = (state) => ({
+  project: state.project.project,
+});
 
-Project.propTypes = {
+const mapDispatchToProps = (dispatch) => ({
+  fetchProject: (id) => {
+    dispatch(fetchProjectById(id));
+  },
+});
 
-};
-
-export default withStyles(styles)(Project);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(Project);

@@ -20,7 +20,7 @@ import errorRouting from 'src/pages/404/config/routing';
 // eslint-disable-next-line import/prefer-default-export
 export const routes = [
   homeRouting,
-  // projectRouting,
+  projectRouting,
   creationProjectRouting,
   projectsListRouting,
   // editionProjectRouting,
