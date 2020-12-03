@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { submitLogin } from 'src/common/redux/actions/auth';
 import Login from './Login';
- 
 import styles from './styles';
 
 const mapDispatchToProps = (dispatch) => ({
