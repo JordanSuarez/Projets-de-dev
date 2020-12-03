@@ -15,7 +15,6 @@ const Footer = ({ classes }) => {
         className={classes.legalMention}
         name="mention-legales"
         onClick={handleHome}
-        exact
       >
         Mentions légales
       </span>

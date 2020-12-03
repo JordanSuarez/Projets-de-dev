@@ -2,6 +2,7 @@ import { any, arrayOf } from 'prop-types';
 import React from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import PrivateRoute from 'src/common/authentication/privateRoute';
 
 const Router = ({ routes }) => (
   <BrowserRouter>
@@ -9,13 +10,11 @@ const Router = ({ routes }) => (
       {routes.map(({
         exact = true, path, component, id, requireAuthentication,
       }) => (
-        // Si la route requière une authentification
+        // If needed user authentication for access to this Route, redirect to PrivateRoute
         requireAuthentication ? (
-        // Ici il faudra checker si on est connecté avant de rediriger,
-        // sinon utiliser <Redirect /> de react-router
-          <Route key={id} path={path} id={id} exact={exact} component={component} />
+          <PrivateRoute key={id} path={path} id={id} exact={exact} component={component} />
         ) : (
-          // Sinon, si on a pas besoin d'etre authentifier on redirige sur la route
+          // Else, redirect to the choosen Route
           <Route key={id} exact={exact} path={path} component={component} />
         )))}
     </Switch>
