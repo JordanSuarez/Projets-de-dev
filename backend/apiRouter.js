@@ -16,7 +16,7 @@ exports.router = (() => {
     apiRouter.route('/projects/:id').get(projectController.project);
     apiRouter.route('/projects/new').post(projectController.new);
     apiRouter.route('/projects/:id/edit').patch(projectController.edit);
-    apiRouter.route('/projects/tags/:tag').get(projectController.filter); // Ne fonctionne pas encore, en cours
+    apiRouter.route('/projects/tags/:tag1').get(projectController.filter);
     apiRouter.route('/projects/:limit?/:offset?').get(projectController.limitOffset);
 
     return apiRouter;

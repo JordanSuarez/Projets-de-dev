@@ -8,7 +8,9 @@ module.exports = {
   index: (req, res) => {
   
 
-    models.Project.findAll({})
+    models.Project.findAll({
+      include: {all:true} 
+    })
     .then((project) => {
         return res.status(200).json(project)
     })
@@ -19,10 +21,11 @@ module.exports = {
 
   filter: (req, res) => {
 
-    models.Project.findAll({
-      where : {tag_id : req.params.tag},
-
-    })
+    models.Tag.findAll({ 
+      where: {id: req.params.tag1},
+      include: { 
+        all: true,
+    }})
     .then((projectTags) => {
         return res.status(200).json(projectTags)
     })
@@ -34,7 +37,10 @@ module.exports = {
   project: (req, res) => {
 
     models.Project.findOne({
-      where : {id : req.params.id}
+      where : {id : req.params.id},
+      include: {
+        all: true,
+      }
     })
     .then((project) => {
         return res.status(200).json(project)
@@ -52,6 +58,7 @@ module.exports = {
     models.Project.findAll({
       limit : req.params.limit,
       offset : req.params.offset,
+   include: {all:true}
     })
     .then((project) => {
         return res.status(200).json(project)
