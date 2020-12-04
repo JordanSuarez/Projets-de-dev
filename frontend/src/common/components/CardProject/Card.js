@@ -17,14 +17,15 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // import './cardProject.scss';
 // import { mergeClasses } from '@material-ui/styles';
 import { classes as classesProps } from 'src/common/classes';
+import { func } from 'prop-types';
 import cardImage from './card-image.png';
 import avatar from './avatar.png';
 
 // eslint-disable-next-line arrow-body-style
-const CardProject = ({ classes }) => {
+const CardProject = ({ classes, onClickOnBodyCard }) => {
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea onClick={onClickOnBodyCard}>
         <CardMedia
           className={classes.image}
           image={cardImage}
@@ -51,6 +52,7 @@ const CardProject = ({ classes }) => {
 
 CardProject.propTypes = {
   ...classesProps,
+  onClickOnBodyCard: func.isRequired,
 };
 
 export default CardProject;

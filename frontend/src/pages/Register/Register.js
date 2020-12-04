@@ -2,8 +2,9 @@
 /* eslint-disable react/jsx-boolean-value */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { func } from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
+import { useHistory } from 'react-router-dom';
 import { Form } from 'react-final-form';
 import {
   TextField,
@@ -13,7 +14,7 @@ import {
   Button,
 
 } from '@material-ui/core';
-
+import { getLoginRoute } from 'src/common/routing/routesResolver';
 import Base from 'src/common/components/Base';
 
 const validate = (values) => {
@@ -66,13 +67,11 @@ const validate = (values) => {
   return errors;
 };
 
-const Register = ({ classes }) => {
-  const [formValues, setFormValues] = useState();
+const Register = ({ classes, handleRegister }) => {
+  const history = useHistory();
 
-  const onSubmit = (values) => {
-    console.log('submit');
-    setFormValues(values);
-  };
+  const handleClick = () => history.push(getLoginRoute());
+
   return (
     <Base>
       <div className={classes.container}>
@@ -80,7 +79,7 @@ const Register = ({ classes }) => {
           <h2 className={classes.formTitle}>Inscription</h2>
           <Form
             className={classes.form}
-            onSubmit={onSubmit}
+            onSubmit={handleRegister}
             initialValues=""
             validate={validate}
             render={({ handleSubmit, submitting }) => (
@@ -134,7 +133,7 @@ const Register = ({ classes }) => {
                   >
                     Submit
                   </Button>
-                  <p className={classes.login} onClick="#"> J'ai deja un compte !</p>
+                  <p className={classes.login} onClick={handleClick}> J'ai deja un compte !</p>
                 </Box>
               </form>
             )}
@@ -146,5 +145,6 @@ const Register = ({ classes }) => {
 };
 Register.propTypes = {
   ...classesProps,
+  handleRegister: func.isRequired,
 };
 export default Register;

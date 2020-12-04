@@ -1,6 +1,22 @@
 import { withStyles } from '@material-ui/core';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
+import { submitRegister } from 'src/common/redux/actions/auth';
 import Register from './Register';
 import styles from './styles';
 
-export default withStyles(styles)(Register);
+const mapDispatchToProps = (dispatch) => ({
+  handleRegister: ({ email, password, username }) => {
+    console.log(email, password, username);
+    dispatch(submitRegister(email, password, username));
+  },
+});
+
+export default compose(
+  withStyles(styles),
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
+)(Register);
