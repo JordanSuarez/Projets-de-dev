@@ -9,9 +9,9 @@ module.exports = {
   allProjects: (req, res) => {
     let limit = req.query.limit;
     let offset = req.query.offset;
-    let whereClause = null;
+    let tag1 = req.query.tag1;
 
-    if (req.params.tag1) {
+
       whereClause = {
         [Op.or]: [
           { tagId: req.query.tag1 },
@@ -22,12 +22,11 @@ module.exports = {
           { tag6Id: req.query.tag1 },
         ]
       };
-      }
 
     models.Project.findAll({
       limit: (limit ? parseInt(limit) : 999),
       offset: (offset ? parseInt(offset) : 0),
-      where: whereClause,
+      where: (tag1 ? whereClause : null),
       include: {
         all:true, 
         attributes: { exclude: ['password', 'isAdmin', 'createdAt', 'updatedAt', 'email'] 
