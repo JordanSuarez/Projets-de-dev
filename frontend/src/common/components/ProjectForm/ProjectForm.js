@@ -135,7 +135,6 @@ const Form = ({ classes }) => {
                   />
                 </div>
               ))}
-
             </Grid>
             <div>
               <Grid item xs={12} sm={12}>
@@ -215,7 +214,6 @@ const Form = ({ classes }) => {
                   )}
                 />
               </Grid>
-
             </div>
             <Grid item xs={12} sm={12} className={classes.editorContainer}>
               <ReactQuill
