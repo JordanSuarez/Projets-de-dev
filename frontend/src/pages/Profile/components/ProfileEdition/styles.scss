@@ -1,0 +1,10 @@
+@use 'src/common/styles/vars';
+
+input[type="file"] {
+  position: absolute;
+  opacity:0;
+  top: 15px;
+  left: 0px;
+  width: 200px;
+  height: 100%;
+}
