@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 import { getEditionProfileRoute, getCreationProjectRoute } from 'src/common/routing/routesResolver';
 import { useHistory } from 'react-router-dom';
@@ -44,10 +45,9 @@ const UserProfile = ({classes}) => {
           </div>
         </div>
         <div>
-        <h2 className={classes.subtitle}>  
+        <h2 className={classes.subtitle}>
           Liste des projet
         </h2>
-        
         </div>
       </div>
     </Base>
