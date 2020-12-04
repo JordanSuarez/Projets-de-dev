@@ -5,80 +5,10 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
-DROP TABLE IF EXISTS `Comments`;
-CREATE TABLE `Comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(255) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
-  `updatedAt` datetime(3) DEFAULT NULL ON UPDATE current_timestamp(3),
-  PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  CONSTRAINT `Comments_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
-DROP TABLE IF EXISTS `Projects`;
-CREATE TABLE `Projects` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `vote` int(11) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `github_link` varchar(255) DEFAULT NULL,
-  `project_link` varchar(255) DEFAULT NULL,
-  `userId` int(11) NOT NULL,
-  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
-  `updatedAt` datetime(3) DEFAULT NULL ON UPDATE current_timestamp(3),
-  PRIMARY KEY (`id`),
-  KEY `userId` (`userId`),
-  CONSTRAINT `Projects_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `Users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `Projects` (`id`, `title`, `description`, `vote`, `image`, `github_link`, `project_link`, `userId`, `createdAt`, `updatedAt`) VALUES
-(1,	'DeviensDev - le site pour découvrir les métiers du développement',	'Créé par des développeurs, DeviensDev vous ouvre les portes du développement web en mettant à votre disposition toutes les clés pour comprendre le métier de développeur, vous initier au code et vous orienter vers les formations adéquates.',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://deviens.dev',	'https://github.com/O-clock-Alumni/DeviensDev',	'https://deviens.dev/',	3,	'2020-12-02 04:17:19.000',	'2020-12-02 04:17:19.000'),
-(2,	'O\'Clock - Formation développeur web',	'Embarquez dans nos salles de classe virtuelles pour apprendre le métier de développeur, entouré de vos camarades de promotion et de vos formateurs. Un seul objectif : faire de vous un développeur web compétent, diplômé et recruté !',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://oclock.io',	NULL,	'https://oclock.io/',	3,	'2020-12-02 11:25:10.000',	NULL);
-
-DROP TABLE IF EXISTS `ProjectTags`;
-CREATE TABLE `ProjectTags` (
-  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
-  `updatedAt` datetime(3) DEFAULT NULL ON UPDATE current_timestamp(3),
-  `project_id` int(11) NOT NULL,
-  `tag_id` int(11) NOT NULL,
-  PRIMARY KEY (`project_id`,`tag_id`),
-  KEY `tag_id` (`tag_id`),
-  CONSTRAINT `ProjectTags_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `Projects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ProjectTags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `Tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-INSERT INTO `ProjectTags` (`createdAt`, `updatedAt`, `project_id`, `tag_id`) VALUES
-('2020-12-02 04:19:35.000',	'2020-12-02 04:51:14.000',	1,	1),
-('2020-12-02 04:20:08.000',	'2020-12-02 04:20:08.000',	1,	7),
-('2020-12-02 04:20:57.000',	'2020-12-02 04:20:57.000',	1,	47);
-
-DROP TABLE IF EXISTS `SequelizeMeta`;
-CREATE TABLE `SequelizeMeta` (
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`name`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-INSERT INTO `SequelizeMeta` (`name`) VALUES
-('20201130140844-create-user.js'),
-('20201130141005-create-project.js'),
-('20201130141119-create-tag.js'),
-('20201130141152-create-comment.js'),
-('20201201023214_project-tags.js');
-
-DROP TABLE IF EXISTS `Tags`;
-CREATE TABLE `Tags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
-  `updatedAt` datetime(3) DEFAULT NULL ON UPDATE current_timestamp(3),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `Projects` (`id`, `title`, `description`, `vote`, `image`, `github_link`, `project_link`, `userId`, `tag1`, `createdAt`, `updatedAt`) VALUES
+(1,	'DeviensDev - le site pour découvrir les métiers du développement',	'Créé par des développeurs, DeviensDev vous ouvre les portes du développement web en mettant à votre disposition toutes les clés pour comprendre le métier de développeur, vous initier au code et vous orienter vers les formations adéquates.',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://deviens.dev',	'https://github.com/O-clock-Alumni/DeviensDev',	'https://deviens.dev/',	3,	1,	'2020-12-02 04:17:19.000',	'2020-12-02 04:17:19.000'),
+(2,	'O\'Clock - Formation développeur web',	'Embarquez dans nos salles de classe virtuelles pour apprendre le métier de développeur, entouré de vos camarades de promotion et de vos formateurs. Un seul objectif : faire de vous un développeur web compétent, diplômé et recruté !',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://oclock.io',	NULL,	'https://oclock.io/',	3,	1,	'2020-12-02 11:25:10.000',	NULL);
 
 INSERT INTO `Tags` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
 (1,	'HTML/CSS',	NULL,	'2020-12-02 03:48:38.000',	'2020-12-02 03:48:38.000'),
@@ -130,23 +60,9 @@ INSERT INTO `Tags` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
 (47,	'Gatsby',	NULL,	'2020-12-02 04:20:22.000',	'2020-12-02 04:20:22.000'),
 (48,	'Strapi',	NULL,	'2020-12-02 04:20:28.000',	'2020-12-02 04:20:28.000');
 
-DROP TABLE IF EXISTS `Users`;
-CREATE TABLE `Users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `isAdmin` tinyint(1) DEFAULT 0,
-  `createdAt` datetime(3) NOT NULL DEFAULT current_timestamp(3),
-  `updatedAt` datetime(3) DEFAULT NULL ON UPDATE current_timestamp(3),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 INSERT INTO `Users` (`id`, `username`, `email`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
 (1,	'Almigra',	'almigra.dev@gmail.com',	'$2b$05$D9wHO2GSVMQrCVVXFylNYeuc1AiVxd7ySz5JSEwyeUcBStYd68gPu',	0,	'2020-12-01 09:44:37.000',	'2020-12-01 09:44:37.000'),
 (2,	'Alban',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01.000',	'2020-12-01 10:26:01.000'),
 (3,	'O\'Clock',	'hello@oclock.io',	'$2b$05$0uZEOS5VgnT7rvcCDos6XO9y1uQPzY4TzCewOqFRnpEF0L7odW/0i',	0,	'2020-12-02 03:13:20.000',	'2020-12-02 03:13:20.000');
 
--- 2020-12-02 12:52:15
+-- 2020-12-04 03:51:42

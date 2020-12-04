@@ -9,12 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
      static associate(models) {
-      models.Project.belongsTo(models.User, {
-        foreignKey: {
-          allowNull: false
-        }
-      })
+      models.Project.belongsTo(models.User)
+      models.Project.belongsTo(models.Tag)
+      models.Project.belongsTo(models.Tag, {as: 'Tag2'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag3'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag4'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag5'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag6'})
+
     }
   };
   Project.init({

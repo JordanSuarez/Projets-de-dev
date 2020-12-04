@@ -39,7 +39,7 @@ module.exports = {
           key: 'id',
         }
       },
-      tagId:{
+      tag1:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -47,46 +47,46 @@ module.exports = {
           key: 'id',
         }
       },
-      // tagId2: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: {
-      //     model: 'Tags',
-      //     key: 'id',
-      //   }
-      // },
-      // tagId3: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: {
-      //     model: 'Tags',
-      //     key: 'id',
-      //   }
-      // },
-      // tagId4: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: {
-      //     model: 'Tags',
-      //     key: 'id',
-      //   }
-      // },
-      // tagId5: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: {
-      //     model: 'Tags',
-      //     key: 'id',
-      //   }
-      // },
-      // tagId6: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: {
-      //     model: 'Tags',
-      //     key: 'id',
-      //   }
-      // },
+      tag2: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag3: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag4: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag5: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag6: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
       createdAt: {
         allowNull: false,
         type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)'
