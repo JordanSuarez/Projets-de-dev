@@ -9,17 +9,16 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      models.Project.belongsToMany(models.Tag, {
-        foreignKey: 'project_id',
-        as: 'tags',
-        through: 'ProjectTags',
-      });
-      models.Project.belongsTo(models.User, {
-        foreignKey: {
-          allowNull: false
-        }
-      })
+
+     static associate(models) {
+      models.Project.belongsTo(models.User)
+      models.Project.belongsTo(models.Tag)
+      models.Project.belongsTo(models.Tag, {as: 'Tag2'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag3'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag4'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag5'})
+      models.Project.belongsTo(models.Tag, {as: 'Tag6'})
+
     }
   };
   Project.init({
@@ -29,7 +28,6 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.STRING,
     github_link: DataTypes.STRING,
     project_link: DataTypes.STRING,
-    //userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Project',

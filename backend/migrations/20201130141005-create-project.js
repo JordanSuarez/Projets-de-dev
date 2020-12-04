@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       vote: {
@@ -26,7 +26,6 @@ module.exports = {
       },
       github_link: {
         type: Sequelize.STRING,
-        allowNull: true,
       },
       project_link: {
         type: Sequelize.STRING,
@@ -40,6 +39,54 @@ module.exports = {
           key: 'id',
         }
       },
+      tag1:{
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag2: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag3: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag4: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag5: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
+      tag6: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Tags',
+          key: 'id',
+        }
+      },
       createdAt: {
         allowNull: false,
         type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)'
@@ -47,8 +94,8 @@ module.exports = {
       updatedAt: {
         allowNull: true,
         type: 'DATETIME(3) DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(3)'
-      }
-    });
+      },
+    })
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Projects');
