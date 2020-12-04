@@ -11,7 +11,7 @@ module.exports = {
     let offset = req.query.offset;
     let whereClause = null;
 
-    if (req.params.tag1 != '') {
+    if (req.params.tag1) {
       whereClause = {
         [Op.or]: [
           { tagId: req.query.tag1 },
@@ -36,19 +36,6 @@ module.exports = {
     })
     .then((project) => {
         return res.status(200).json(project)
-    })
-    .catch((error) => {
-    return res.status(500).json(error)
-    })
-  },
-
-  filter: (req, res) => {
-
-    models.Project.findAll({ 
-
-})
-    .then((projectTags) => {
-        return res.status(200).json(projectTags)
     })
     .catch((error) => {
     return res.status(500).json(error)
