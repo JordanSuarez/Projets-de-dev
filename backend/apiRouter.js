@@ -12,6 +12,7 @@ exports.router = (() => {
     apiRouter.route('/users/register/').post(userController.register); // OK
     apiRouter.route('/users/login/').post(userController.login); // OK
     apiRouter.route('/users/me').get(userController.getUserProfile); // OK
+    apiRouter.route('/users/:id').get(userController.getUserById); // OK
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
     apiRouter.route('/projects/:id').get(projectController.project); // OK

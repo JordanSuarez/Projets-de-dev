@@ -176,5 +176,25 @@ module.exports = {
 				return res.status(500).json({ 'error': 'Impossible de récupérer les utilisateurs' });
 			});
 		},
+
+		getUserById: (req, res) => {
+			models.User.findOne({
+				attributes: ['id', 'username', 'userImage'],
+				where: {id: req.params.id},
+				include: {
+					model: models.Project, 
+					where: {userId: req.params.id},
+					required: false
+				}
+			}).then((user) => {
+				if (user) {
+					return res.status(201).json(user);
+				} else {
+					return res.status(404).json({ 'error': 'L\'utilisateur n\'a pas été trouvé'});
+				}
+			}).catch((err) => {
+				return res.status(500).json({ 'error': 'Impossible de rechercher un utilisateur'});
+			})
+		},
 }
 
