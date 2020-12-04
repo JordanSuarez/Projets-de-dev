@@ -1,31 +1,23 @@
 export default ({ palette }) => ({
+  container: {
+    margin: 'auto',
+    padding: '1rem',
+  },
   subtitle: {
     padding: '1em',
     fontSize: '1.5em',
     color: palette.darkBlue,
   },
-  form: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+  inputContainer: {
+    margin: '1rem',
   },
-  leftContainer: {
-    marginLeft: '1rem',
-    '& > *': {
-      marginTop: '1rem',
-    },
-  },
-  rightContainer: {
-    marginRight: '1rem',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around',
-    width: '45rem',
+  input: {
+    marginBottom: '1rem',
   },
   // Upload type
   imageContainer: {
     position: 'relative',
-    marginBottom: '1rem',
+    margin: '1rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'start',
@@ -84,13 +76,15 @@ export default ({ palette }) => ({
   autoComplete: {
     margin: '1rem',
   },
+  // Submit and Quit buttons
   buttonsWrapper: {
     display: 'flex',
     width: '100%',
     justifyContent: 'flex-end',
+    flexWrap: 'wrap',
   },
   submitButton: {
-    margin: '4rem 1.3rem 3rem 2rem',
+    margin: '1rem 1.3rem 1rem 2rem',
     color: palette.yellow,
     backgroundColor: palette.darkBlue,
     '&:hover': {
@@ -98,17 +92,24 @@ export default ({ palette }) => ({
     },
   },
   quitButton: {
-    margin: '4rem 1.3rem 3rem 2rem',
+    margin: '1rem 1.3rem 1rem 2rem',
     color: palette.darkBlue,
     '&:hover': {
       color: palette.blue,
       backgroundColor: palette.white,
     },
   },
+  // Quill editor
+  editorContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
   editor: {
     margin: '1rem',
     width: '100%',
+    height: 'fit-content',
   },
+  // Errors message
   errorEditor: {
     marginTop: '3rem',
     marginLeft: '2rem',
