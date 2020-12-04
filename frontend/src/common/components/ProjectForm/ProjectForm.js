@@ -1,13 +1,11 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 
 import { Form as FormRff } from 'react-final-form';
-// eslint-disable-next-line no-unused-vars
 import Editor from 'src/common/components/QuillEditor';
 import ReactQuill from 'react-quill';
 import { Autocomplete, TextField as Field } from 'mui-rff';
 import {
-  Checkbox, Button, TextField,
+  Checkbox, Button, TextField, Grid,
 } from '@material-ui/core';
 import { getHomeRoute } from 'src/common/routing/routesResolver';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -26,15 +24,17 @@ const Form = ({ classes }) => {
   const FORM_STATE = 'formState';
   const [formValues, setFormValues] = useState();
   const [errorFields, setErrorFields] = useState({});
+
   const getFormStateFromStorage = () => JSON.parse(localStorage.getItem(FORM_STATE));
+
   // Get values from local storage if exist, else get value from state
   const [formState, setFormState] = useState(
     getFormStateFromStorage() !== null
       ? getFormStateFromStorage()
       : initialsValues,
   );
-  const setFormStateToStorage = () => localStorage.setItem(FORM_STATE, JSON.stringify(formState));
 
+  const setFormStateToStorage = () => localStorage.setItem(FORM_STATE, JSON.stringify(formState));
   useEffect(() => {
     // Save to the localstorage form
     setFormStateToStorage();
@@ -42,7 +42,10 @@ const Form = ({ classes }) => {
 
   const onSubmit = (values) => {
     if (formState.tagsChecked.length === 0) {
-      return setErrorFields({ ...errorFields, tagsChecked: true });
+      return setErrorFields({ ...errorFields, tagsMinValue: true });
+    }
+    if (formState.tagsChecked.length > 5) {
+      return setErrorFields({ ...errorFields, tagsMaxValue: true });
     }
     if (formState.image === '') {
       return setErrorFields({ ...errorFields, image: true });
@@ -74,6 +77,7 @@ const Form = ({ classes }) => {
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
   const getFiles = (files) => {
+    setErrorFields({ ...errorFields, image: false });
     setFormState({ ...formState, image: files.base64, imageName: files.name });
   };
   const handleChangeQuillEditorValue = (value) => {
@@ -84,8 +88,6 @@ const Form = ({ classes }) => {
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-  //   const required = (value) => ();
-  // eslint-disable-next-line consistent-return
   const onBlurField = (event) => {
     if (event.target.name === 'title') {
       return event.target.value === ''
@@ -93,9 +95,12 @@ const Form = ({ classes }) => {
         : setErrorFields({ ...errorFields, [event.target.name]: false });
     }
     setErrorFields(
-      formState.tagsChecked.length === 0
-        ? { ...errorFields, tagsChecked: true }
-        : { ...errorFields, tagsChecked: false },
+      formState.tagsChecked.length < 1
+        ? { ...errorFields, tagsMinValue: true }
+        : { ...errorFields, tagsMinValue: false },
+      formState.tagsChecked.length > 5
+        ? { ...errorFields, tagsMaxValue: true }
+        : { ...errorFields, tagsMaxValue: false },
     );
   };
 
@@ -106,10 +111,8 @@ const Form = ({ classes }) => {
     return '';
   };
 
-  console.log(errorFields);
-
   return (
-    <div>
+    <Grid item xs={12} sm={12} md={8} l={7} xl={6} className={classes.container}>
       <h2 className={classes.subtitle}>
         Créer un projet
       </h2>
@@ -117,12 +120,12 @@ const Form = ({ classes }) => {
         onSubmit={onSubmit}
         autoComplete="on"
         render={({
-          handleSubmit,
+          handleSubmit, submitting,
         }) => (
-          <form onSubmit={handleSubmit} className={classes.form}>
-            <div className={classes.leftContainer}>
+          <form onSubmit={handleSubmit}>
+            <Grid item xs={12} sm={12} className={classes.inputContainer}>
               {fields.map(({ name, label, placeholder }) => (
-                <div key={name}>
+                <div key={name} className={classes.input}>
                   <Field
                     name={name}
                     variant="outlined"
@@ -138,8 +141,112 @@ const Form = ({ classes }) => {
                   />
                 </div>
               ))}
-              <div className={classes.imageContainer}>
-                <h3 className={classes.imageTitle}>Ajouter une image de présentation</h3>
+            </Grid>
+            <div>
+              <Grid item xs={12} sm={12}>
+                {errorFields.tagsMinValue
+                && (
+                <div className={classes.errorTags}>
+                  * Au moins une catégorie est requise
+                </div>
+                )}
+                {errorFields.tagsMaxValue
+                && (
+                <div className={classes.errorTags}>
+                  * 5 catégories maximum
+                </div>
+                )}
+                <Autocomplete
+                  className={classes.autoComplete}
+                  name="tagsChecked"
+                  multiple
+                  id="tagsChecked"
+                  options={top100Films}
+                  disableCloseOnSelect
+                  getOptionValue={(option) => option}
+                  getOptionLabel={(option) => option.title}
+                  value={formState.tagsChecked}
+                  onBlur={onBlurField}
+                  limitTags={2}
+                  size="small"
+                  onChange={(event, values) => {
+                    if (values.length < 1) {
+                      setErrorFields({ ...errorFields, tagsMinValue: true });
+                    }
+                    else {
+                      setErrorFields(
+                        values.length > 5
+                          ? { ...errorFields, tagsMaxValue: true, tagsMinValue: false }
+                          : { ...errorFields, tagsMaxValue: false },
+                      );
+                    }
+                    setFormState({ ...formState, tagsChecked: values });
+                  }}
+                  getOptionSelected={(option, value) => option.title === value.title}
+                  renderOption={(option, { selected }) => (
+                    <>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option.title}
+                    </>
+                  )}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Catégorie(s)"
+                      placeholder="Catégorie(s)"
+
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12} sm={12}>
+                <Autocomplete
+                  name="partnersSelected"
+                  className={classes.autoComplete}
+                  filterSelectedOptions
+                  multiple
+                  id="partnersSelected"
+                  options={top100Films}
+                  limitTags={2}
+                  size="small"
+                  getOptionValue={(option) => option}
+                  getOptionLabel={(option) => option.title}
+                  value={formState.partnersSelected}
+                  onChange={(event, values) => {
+                    setFormState({ ...formState, partnersSelected: values });
+                  }}
+                  getOptionSelected={(option, value) => option.title === value.title}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Collaborateur(s)"
+                      placeholder="Collaborateur(s)"
+                    />
+                  )}
+                />
+              </Grid>
+            </div>
+            <Grid item xs={12} sm={12} className={classes.editorContainer}>
+              <ReactQuill
+                theme="snow"
+                value={formState.description}
+                onChange={handleChangeQuillEditorValue}
+                placeholder="Décris ton projet..."
+                modules={modules}
+                formats={formats}
+                className={classes.editor}
+              />
+            </Grid>
+            <Grid item xs={12} className={classes.imageContainer}>
+              <h3 className={classes.imageTitle}>Ajouter une image de présentation</h3>
+              <div className={classes.editorContainer}>
                 <div className={classes.inputFile}>
                   <div className={classes.customUploadButton}>
                     <label from="nul" className={classes.newButtonUpload}>
@@ -160,105 +267,25 @@ const Form = ({ classes }) => {
                   {formState.image.length > 0 && <img src={formState.image} alt="illustration du projet" className={classes.imageInput} />}
                 </div>
               </div>
-            </div>
-            <div className={classes.rightContainer}>
-              <div>
-                {errorFields.tagsChecked
-                && (
-                <div className={classes.errorTagsChecked}>
-                  * Au moins une catégorie est requise
-                </div>
-                )}
-                <Autocomplete
-                  className={classes.autoComplete}
-                  name="tagsChecked"
-                  multiple
-                  id="tagsChecked"
-                  options={top100Films}
-                  disableCloseOnSelect
-                  getOptionValue={(option) => option}
-                  getOptionLabel={(option) => option.title}
-                  value={formState.tagsChecked}
-                  onBlur={onBlurField}
-                  onChange={(event, values) => {
-                    setErrorFields(
-                      values.length === 0
-                        ? { ...errorFields, tagsChecked: true }
-                        : { ...errorFields, tagsChecked: false },
-                    );
-                    setFormState({ ...formState, tagsChecked: values });
-                  }}
-                  getOptionSelected={(option, value) => option.title === value.title}
-                  renderOption={(option, { selected }) => (
-                    <>
-                      <Checkbox
-                        icon={icon}
-                        checkedIcon={checkedIcon}
-                        style={{ marginRight: 8 }}
-                        checked={selected}
-                      />
-                      {option.title}
-                    </>
-                  )}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="Catégorie(s) du projet"
-                      placeholder="Catégorie(s) du projet"
-                    />
-                  )}
-                />
-              </div>
 
-              <Autocomplete
-                name="partnersSelected"
-                className={classes.autoComplete}
-                filterSelectedOptions
-                multiple
-                id="partnersSelected"
-                options={top100Films}
-                getOptionValue={(option) => option}
-                getOptionLabel={(option) => option.title}
-                value={formState.partnersSelected}
-                onChange={(event, values) => {
-                  setFormState({ ...formState, partnersSelected: values });
-                }}
-                getOptionSelected={(option, value) => option.title === value.title}
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    label="Ajouter un ou plusieurs collaborateur(s)"
-                    placeholder="Ajouter un ou plusieurs collaborateur(s)"
-                  />
-                )}
-              />
-            </div>
-            <ReactQuill
-              theme="snow"
-              value={formState.description}
-              onChange={handleChangeQuillEditorValue}
-              placeholder="Décris ton projet..."
-              modules={modules}
-              formats={formats}
-              className={classes.editor}
-            />
-            {errorFields.length > 0
+            </Grid>
+            {(errorFields.title
+            || errorFields.tagsMaxValue
+            || errorFields.tagsMinValue
+            || errorFields.image)
                 && (
-                <div className={classes.errorForm}>
-                  * Au moins un champ requis n'est pas remplis
+                <div className={classes.errorFields}>
+                  * Au moins un champ requis est incorrect
                 </div>
                 )}
             <div className={classes.buttonsWrapper}>
               <Button type="button" variant="outlined" className={classes.quitButton} onClick={handleQuitForm}>Abandonner</Button>
-              <Button type="submit" variant="contained" className={classes.submitButton}>Soumettre</Button>
+              <Button type="submit" variant="contained" className={classes.submitButton} disabled={submitting}>Soumettre</Button>
             </div>
-            <pre>{JSON.stringify(formValues, 0, 2)}</pre>
           </form>
         )}
       />
-    </div>
+    </Grid>
   );
 };
 

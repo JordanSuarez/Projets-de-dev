@@ -11,7 +11,6 @@ import {
 import Base from 'src/common/components/Base';
 import avatar2 from './avatar.png';
 
-// eslint-disable-next-line arrow-body-style
 const UserProfile = ({classes}) => {
   const history = useHistory();
   const editProfile = () => history.push(getEditionProfileRoute());
