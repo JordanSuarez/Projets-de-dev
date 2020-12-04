@@ -4,7 +4,7 @@ import {
   REDIRECT_SUCCESS,
   SUBMIT_LOGIN_ERROR,
 } from 'src/common/redux/actions/auth';
-import { getToken, removeToken } from 'src/common/authentication/authProvider';
+import { getToken } from 'src/common/authentication/authProvider';
 
 const initialState = {
   isLogged: !!getToken(),
