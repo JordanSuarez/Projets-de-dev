@@ -115,8 +115,14 @@ export default ({ palette }) => ({
     marginLeft: '2rem',
     color: palette.errorField,
   },
-  errorTagsChecked: {
+  errorTags: {
     color: palette.errorField,
+    marginLeft: '1.5rem',
+  },
+  errorFields: {
+    color: palette.errorField,
+    textAlign: 'end',
+    marginRight: '2rem',
   },
   errorImage: {
     color: palette.errorField,

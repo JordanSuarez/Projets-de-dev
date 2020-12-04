@@ -42,7 +42,10 @@ const Form = ({ classes }) => {
 
   const onSubmit = (values) => {
     if (formState.tagsChecked.length === 0) {
-      return setErrorFields({ ...errorFields, tagsChecked: true });
+      return setErrorFields({ ...errorFields, tagsMinValue: true });
+    }
+    if (formState.tagsChecked.length > 5) {
+      return setErrorFields({ ...errorFields, tagsMaxValue: true });
     }
     if (formState.image === '') {
       return setErrorFields({ ...errorFields, image: true });
@@ -92,9 +95,12 @@ const Form = ({ classes }) => {
         : setErrorFields({ ...errorFields, [event.target.name]: false });
     }
     setErrorFields(
-      formState.tagsChecked.length === 0
-        ? { ...errorFields, tagsChecked: true }
-        : { ...errorFields, tagsChecked: false },
+      formState.tagsChecked.length < 1
+        ? { ...errorFields, tagsMinValue: true }
+        : { ...errorFields, tagsMinValue: false },
+      formState.tagsChecked.length > 5
+        ? { ...errorFields, tagsMaxValue: true }
+        : { ...errorFields, tagsMaxValue: false },
     );
   };
 
@@ -106,7 +112,7 @@ const Form = ({ classes }) => {
   };
 
   return (
-    <Grid container wrap="wrap" xs={12} sm={12} md={8} l={8} justify="center" className={classes.container}>
+    <Grid item xs={12} sm={12} md={8} l={7} xl={6} className={classes.container}>
       <h2 className={classes.subtitle}>
         Créer un projet
       </h2>
@@ -138,10 +144,16 @@ const Form = ({ classes }) => {
             </Grid>
             <div>
               <Grid item xs={12} sm={12}>
-                {errorFields.tagsChecked
+                {errorFields.tagsMinValue
                 && (
-                <div className={classes.errorTagsChecked}>
+                <div className={classes.errorTags}>
                   * Au moins une catégorie est requise
+                </div>
+                )}
+                {errorFields.tagsMaxValue
+                && (
+                <div className={classes.errorTags}>
+                  * 5 catégories maximum
                 </div>
                 )}
                 <Autocomplete
@@ -158,11 +170,16 @@ const Form = ({ classes }) => {
                   limitTags={2}
                   size="small"
                   onChange={(event, values) => {
-                    setErrorFields(
-                      values.length === 0
-                        ? { ...errorFields, tagsChecked: true }
-                        : { ...errorFields, tagsChecked: false },
-                    );
+                    if (values.length < 1) {
+                      setErrorFields({ ...errorFields, tagsMinValue: true });
+                    }
+                    else {
+                      setErrorFields(
+                        values.length > 5
+                          ? { ...errorFields, tagsMaxValue: true, tagsMinValue: false }
+                          : { ...errorFields, tagsMaxValue: false },
+                      );
+                    }
                     setFormState({ ...formState, tagsChecked: values });
                   }}
                   getOptionSelected={(option, value) => option.title === value.title}
@@ -183,11 +200,12 @@ const Form = ({ classes }) => {
                       variant="outlined"
                       label="Catégorie(s)"
                       placeholder="Catégorie(s)"
+
                     />
                   )}
                 />
               </Grid>
-              <Grid xs={12} sm={12}>
+              <Grid item xs={12} sm={12}>
                 <Autocomplete
                   name="partnersSelected"
                   className={classes.autoComplete}
@@ -251,17 +269,19 @@ const Form = ({ classes }) => {
               </div>
 
             </Grid>
-            {errorFields.length > 0
+            {(errorFields.title
+            || errorFields.tagsMaxValue
+            || errorFields.tagsMinValue
+            || errorFields.image)
                 && (
-                <div className={classes.errorForm}>
-                  * Au moins un champ requis n'est pas remplis
+                <div className={classes.errorFields}>
+                  * Au moins un champ requis est incorrect
                 </div>
                 )}
             <div className={classes.buttonsWrapper}>
               <Button type="button" variant="outlined" className={classes.quitButton} onClick={handleQuitForm}>Abandonner</Button>
               <Button type="submit" variant="contained" className={classes.submitButton} disabled={submitting}>Soumettre</Button>
             </div>
-            <pre>{JSON.stringify(formValues, 0, 2)}</pre>
           </form>
         )}
       />
