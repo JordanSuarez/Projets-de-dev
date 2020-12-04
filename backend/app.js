@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const apiRouter = require('./apiRouter').router;
 
 // Server instance
@@ -28,4 +27,4 @@ app.get('/', (req, res) => {
 
 app.use('/api/', apiRouter);
 
-app.listen(3003);
+app.listen(3001);
