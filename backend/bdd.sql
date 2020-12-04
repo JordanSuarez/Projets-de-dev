@@ -10,12 +10,6 @@ INSERT INTO `Projects` (`id`, `title`, `description`, `vote`, `image`, `github_l
 (1,	'DeviensDev - le site pour découvrir les métiers du développement',	'Créé par des développeurs, DeviensDev vous ouvre les portes du développement web en mettant à votre disposition toutes les clés pour comprendre le métier de développeur, vous initier au code et vous orienter vers les formations adéquates.',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://deviens.dev',	'https://github.com/O-clock-Alumni/DeviensDev',	'https://deviens.dev/',	3,	1,	7,	47,	NULL,	NULL,	NULL,	'2020-12-02 04:17:19.000',	'2020-12-04 07:35:26.000'),
 (2,	'O\'Clock - Formation développeur web',	'Embarquez dans nos salles de classe virtuelles pour apprendre le métier de développeur, entouré de vos camarades de promotion et de vos formateurs. Un seul objectif : faire de vous un développeur web compétent, diplômé et recruté !',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://oclock.io',	NULL,	'https://oclock.io/',	3,	1,	2,	3,	7,	30,	26,	'2020-12-02 11:25:10.000',	'2020-12-04 07:36:52.000');
 
-INSERT INTO `SequelizeMeta` (`name`) VALUES
-('20201130140844-create-user.js'),
-('20201130141003-create-tag.js'),
-('20201130141005-create-project.js'),
-('20201130141152-create-comment.js');
-
 INSERT INTO `Tags` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
 (1,	'HTML/CSS',	NULL,	'2020-12-02 03:48:38.000',	'2020-12-02 03:48:38.000'),
 (2,	'Javascript',	NULL,	'2020-12-02 03:49:15.000',	'2020-12-02 03:49:15.000'),

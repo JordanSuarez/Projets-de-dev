@@ -39,7 +39,7 @@ module.exports = {
           key: 'id',
         }
       },
-      tag1:{
+      tagId:{
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -47,7 +47,7 @@ module.exports = {
           key: 'id',
         }
       },
-      tag2: {
+      tag2Id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
@@ -55,7 +55,7 @@ module.exports = {
           key: 'id',
         }
       },
-      tag3: {
+      tag3Id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
@@ -63,7 +63,7 @@ module.exports = {
           key: 'id',
         }
       },
-      tag4: {
+      tag4Id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
@@ -71,7 +71,7 @@ module.exports = {
           key: 'id',
         }
       },
-      tag5: {
+      tag5Id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
@@ -79,7 +79,7 @@ module.exports = {
           key: 'id',
         }
       },
-      tag6: {
+      tag6Id: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
