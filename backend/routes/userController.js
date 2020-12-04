@@ -144,9 +144,14 @@ module.exports = {
 				return res.status(400).json({ 'error': 'Le token est invalide'});
 			}
 
-			models.User.findOne({
+			models.User.findAll({
 				attributes: ['id', 'email', 'username'],
-				where: { id: userId }
+				where: { id: userId },
+				include: {
+					model: models.Project, 
+					where: {userId: userId},
+					required: false
+				}
 			}).then((user) => {
 				if (user) {
 					res.status(201).json(user);
@@ -156,6 +161,15 @@ module.exports = {
 			}).catch((err) => {
 				res.status(500).json({ 'error': 'impossible de chercher l\'utilisateur' });
 			});
+		},
+
+		getUsersList: (req, res) => {
+			models.Users.findAll({
+				attributes: ['id', 'username', 'userImage', 'tags'],
+				
+
+			})
+
 		}
 }
 

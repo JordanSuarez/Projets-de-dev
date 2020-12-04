@@ -1,3 +1,4 @@
+const { Op, where } = require("sequelize");
 const models   = require('../models');
 const jwtUtils = require('../utils/jwt.utils');
 const asyncLib = require('async');
@@ -5,26 +6,35 @@ const asyncLib = require('async');
 
 module.exports = {
 
-  index: (req, res) => {
-  
+  allProjects: (req, res) => {
+    let limit = req.query.limit;
+    let offset = req.query.offset;
+    let tag1 = req.query.tag1;
 
-    models.Project.findAll({})
-    .then((project) => {
-        return res.status(200).json(project)
-    })
-    .catch((error) => {
-    return res.status(500).json(error)
-    })
-  },
 
-  filter: (req, res) => {
+      whereClause = {
+        [Op.or]: [
+          { tagId: req.query.tag1 },
+          { tag2Id: req.query.tag1 },
+          { tag3Id: req.query.tag1 },
+          { tag4Id: req.query.tag1 },
+          { tag5Id: req.query.tag1 },
+          { tag6Id: req.query.tag1 },
+        ]
+      };
 
     models.Project.findAll({
-      where : {tag_id : req.params.tag},
-
+      limit: (limit ? parseInt(limit) : 999),
+      offset: (offset ? parseInt(offset) : 0),
+      where: (tag1 ? whereClause : null),
+      include: {
+        all:true, 
+        attributes: { exclude: ['password', 'isAdmin', 'createdAt', 'updatedAt', 'email'] 
+      },
+      },
     })
-    .then((projectTags) => {
-        return res.status(200).json(projectTags)
+    .then((project) => {
+        return res.status(200).json(project)
     })
     .catch((error) => {
     return res.status(500).json(error)
@@ -34,30 +44,18 @@ module.exports = {
   project: (req, res) => {
 
     models.Project.findOne({
-      where : {id : req.params.id}
+      where : {id : req.params.id},
+      include: {
+        all: true,
+        attributes: { exclude: ['password', 'isAdmin', 'createdAt', 'updatedAt', 'email'] 
+      },
+      }
     })
     .then((project) => {
         return res.status(200).json(project)
     })
     .catch((error) => {
     return res.status(500).json('ERROR')
-    })
-  },
-
-    limitOffset : (req, res) => {
-    
-    req.params.limit = parseInt(req.params.limit);
-    req.params.offset = parseInt(req.params.offset);
-
-    models.Project.findAll({
-      limit : req.params.limit,
-      offset : req.params.offset,
-    })
-    .then((project) => {
-        return res.status(200).json(project)
-    })
-    .catch((error) => {
-    return res.status(500).json(error)
     })
   },
 
@@ -69,6 +67,12 @@ module.exports = {
     const image	 = req.body.image;
     const github_link	 = req.body.github_link;
     const project_link	 = req.body.project_link;
+    const tagId	 = req.body.tag1;
+    const tag2Id	 = req.body.tag2;
+    const tag3Id	 = req.body.tag3;
+    const tag4Id	 = req.body.tag4;
+    const tag5Id	 = req.body.tag5;
+    const tag6Id	 = req.body.tag6;
 
     const headerAuth = req.headers['authorization'];
     const userId = jwtUtils.getUserId(headerAuth);
@@ -77,8 +81,8 @@ module.exports = {
       return res.status(400).json({ 'error': 'Le token est invalide'});
     } 
 
-    if (description == null || title == null || image == null) {
-      return res.status(500).json({'error':'Titre, description et images requis'});
+    if (description == null || title == null || image == null || tagId == null) {
+      return res.status(500).json({'error':'Titre, description, image et au moins 1 tag requis'});
     }
 
   
@@ -91,6 +95,12 @@ module.exports = {
             github_link: github_link,
             project_link: project_link,
             UserId: UserId,
+            tagId: tagId,
+            tag2Id: tag2Id,
+            tag3Id: tag3Id,
+            tag4Id: tag4Id,
+            tag5Id: tag5Id,
+            tag6Id: tag6Id,
           })
           .then ((newProject) => {
             done(newProject);
@@ -101,11 +111,17 @@ module.exports = {
               'github_link': github_link,
               'project_link': project_link,
               'UserId': UserId,
+              'Tag1': tagId,
+              'Tag2': tag2Id,
+              'Tag3': tag3Id,
+              'Tag4': tag4Id,
+              'Tag5': tag5Id,
+              'Tag6': tag6Id,
               'status': 'Projet ajouté avec succès'
             })
           })
           .catch((err) => {
-            return res.status(500).json({'error': 'Erreur lors de l\'ajout du nouveau projet' + err});
+            return res.status(500).json({'error': 'Erreur lors de l\'ajout du nouveau projet: ' + err});
           });
         }
       ])
@@ -118,6 +134,12 @@ module.exports = {
     const image	 = req.body.image;
     const github_link	 = req.body.github_link;
     const project_link	 = req.body.project_link;
+    const tagId	 = req.body.tag1;
+    const tag2Id	 = req.body.tag2;
+    const tag3Id	 = req.body.tag3;
+    const tag4Id	 = req.body.tag4;
+    const tag5Id	 = req.body.tag5;
+    const tag6Id	 = req.body.tag6;
 
     const headerAuth = req.headers['authorization'];
     const userId = jwtUtils.getUserId(headerAuth);
@@ -130,27 +152,30 @@ module.exports = {
     asyncLib.waterfall([
       (done) => {
         models.Project.findOne({
-          attributes: ['id', 'title', 'description', 'image', 'github_link', 'project_link', 'userId' ],
           where: { id: id, userId: userId }
         })
         .then((projectEdit) => {
           projectEdit.update({
-            title: (title ? title : projectEdit.title)
+            title: (title ? title : projectEdit.title),
+            description: (description ? description : projectEdit.description),
+            image: (image ? image : projectEdit.description),
+            github_link: (github_link ? github_link : projectEdit.github_link),
+            project_link: (project_link ? project_link : projectEdit.project_link),
+            TagId: (tagId ? tagId : projectEdit.TagId),
+            Tag2Id: (tag2Id ? tag2Id : null),
+            Tag3Id: (tag3Id ? tag3Id : null),
+            Tag4Id: (tag4Id ? tag4Id : null),
+            Tag5Id: (tag5Id ? tag5Id : null),
+            Tag6Id: (tag6Id ? tag6Id : null),
           })
           .then((editProject) => {
             done(editProject)
             return res.status(201).json({
-              'title':title,
-              'description':description,
-              'image':image,
-              'github_link': github_link,
-              'project_link': project_link,
-              'UserId': UserId,
-              'status': 'Projet modifié avec succès'
+              projectEdit
             })
           })
           .catch(function(err) {
-          return res.status(500).json({ 'error': 'Accès non autorisé' });
+          return res.status(500).json({ 'error': 'Erreur dans les données saisis' });
         });
         })
         .catch(function(err) {
