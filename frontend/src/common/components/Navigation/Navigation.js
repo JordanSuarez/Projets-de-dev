@@ -11,19 +11,18 @@ import {
   getAboutRoute,
   getProjectsListRoute,
   getProfilesListRoute,
-  getProfileRoute,
+  getUserProfileRoute,
   getContactRoute,
   getHomeRoute,
   getRegisterRoute,
 } from 'src/common/routing/routesResolver';
 import { classes as classesProps } from 'src/common/classes';
+import { bool, func, number } from 'prop-types';
 import NavLink from './NavLink';
 
-const Navigation = ({ classes }) => {
+const Navigation = ({ classes, isLogged }) => {
   const history = useHistory();
   const [mainAnchorEl, setMainAnchorEl] = useState(null);
-  // TODO plug redux instead of state
-  const [isLogged, setIsLogged] = useState(true);
   const openMainMenu = Boolean(mainAnchorEl);
 
   // Close burger menu
@@ -52,8 +51,7 @@ const Navigation = ({ classes }) => {
   const handleLogin = () => history.push(getLoginRoute());
   const handleHome = () => history.push(getAboutRoute());
   const handleRegister = () => history.push(getRegisterRoute());
-  // TODO give user profile id with props (redux)
-  const handleProfilePage = () => history.push(getProfileRoute(1));
+  const handleProfilePage = () => history.push(getUserProfileRoute());
 
   return (
     <AppBar position="sticky" color="inherit" className={classes.navigation}>
@@ -173,6 +171,8 @@ const Navigation = ({ classes }) => {
 
 Navigation.propTypes = {
   ...classesProps,
+  isLogged: bool.isRequired,
+  handleLogout: func.isRequired,
 };
 
 export default Navigation;

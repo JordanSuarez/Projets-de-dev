@@ -1,9 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const apiRouter = require('./apiRouter').router;
 
 // Server instance
 const app = express();
+app.use(cors());
+
+// Body Parser configuration
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*');
@@ -13,9 +19,6 @@ app.use((request, response, next) => {
   next();
 });
 
-// Body Parser configuration
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.setHeader('Content-Type', 'text/html');

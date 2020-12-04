@@ -1,17 +1,25 @@
 import { withStyles } from '@material-ui/core';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
+import { submitLogout } from 'src/common/redux/actions/auth';
 import Navigation from './Navigation';
 import styles from './styles';
-// const mapStateToProps = (state) => ({
-// //   title: state.home.title,
-// });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   handleClick: () => {
-//     // dispatch(fetchData());
-//   },
-// });
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+});
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+const mapDispatchToProps = (dispatch) => ({
+  handleLogout: () => {
+    dispatch(submitLogout());
+  },
+});
 
-export default withStyles(styles)(Navigation);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(Navigation);

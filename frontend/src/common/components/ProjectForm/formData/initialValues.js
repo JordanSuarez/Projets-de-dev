@@ -22,10 +22,6 @@ export default {
       title: 'The Shawshank Redemption',
       year: 1994,
     },
-    {
-      title: 'The Lord of the Rings: The Return of the King',
-      year: 2003,
-    },
   ],
 
 };

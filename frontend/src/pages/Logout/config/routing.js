@@ -5,5 +5,5 @@ export default {
   id: 'logoutPage',
   path: LOGOUT,
   component: Logout,
-  requireAuthentication: true,
+  requireAuthentication: false,
 }
