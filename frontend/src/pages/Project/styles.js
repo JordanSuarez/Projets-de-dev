@@ -1,5 +1,5 @@
 export default ({ palette }) => ({
-  body: {
+  projectContainer: {
     padding: '2rem',
   },
   subtitle: {
@@ -11,6 +11,7 @@ export default ({ palette }) => ({
   tagsContainer: {
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap',
     margin: '1rem',
   },
   tag: {
@@ -22,8 +23,12 @@ export default ({ palette }) => ({
     borderRadius: '0.4rem',
     boxShadow: '1px 2px 3px 1px rgba(0,0,0,.35)',
   },
+  imageContainer: {
+    padding: '1rem',
+    margin: 'auto',
+  },
   image: {
-    width: '92%',
+    width: '-webkit-fill-available',
     borderRadius: '1rem',
     margin: '0.2rem auto',
     display: 'flex',
@@ -89,7 +94,26 @@ export default ({ palette }) => ({
     boxShadow: ' 1px 2px 3px 1px rgba(0,0,0,.35)',
   },
   description: {
-    margin: '0 1.5rem',
+    margin: '2rem auto',
+    padding: '1rem',
     color: palette.darkBlue,
+    whiteSpace: 'pre-wrap',
+  },
+  quillEditor: {
+    color: palette.darkBlue,
+    '& .ql-editor': {
+      backgroundColor: palette.lightBlue,
+      border: 'none',
+    },
+    '& p': {
+      display: 'content',
+    },
+    '& img': {
+      display: 'flex',
+      flexWrap: 'wrap',
+      margin: 'auto',
+      width: '-webkit-fill-available',
+      maxWidth: 'fit-content',
+    },
   },
 });
