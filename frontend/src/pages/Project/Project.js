@@ -8,7 +8,7 @@ import { classes as classesProps } from 'src/common/classes';
 import githubLogo from 'src/common/assets/images/logo-github.png';
 import profileLogo from 'src/common/assets/images/avatar.png';
 import { get } from 'lodash';
-import { getProfileRoute } from 'src/common/routing/routesResolver';
+import { getProfileRoute, getEditionProjectRoute } from 'src/common/routing/routesResolver';
 import ReactQuill from 'react-quill';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -40,6 +40,11 @@ const Project = ({ classes, fetchProject, project }) => {
   // TODO get tags with array form instead of multiple object
   return (
     <Base>
+      <button onClick={
+      () => history.push(getEditionProjectRoute(project.id))
+    }
+      >TEST
+      </button>
       <div className={classes.projectContainer}>
         <h2 className={classes.subtitle}>{project.title}</h2>
         <div className={classes.tagsContainer}>

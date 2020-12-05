@@ -1,17 +1,17 @@
-import React from 'react';
 import { withStyles } from '@material-ui/core';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
+import ProjectEdition from './ProjectEdition';
 import styles from './styles';
 
-// eslint-disable-next-line arrow-body-style
-const ProjectEdition = () => {
-  return (
-    <div> ProjectEdition </div>
-  );
-};
+const mapStateToProps = (state) => ({
+  project: state.project.project,
+});
 
-ProjectEdition.propTypes = {
-
-};
-
-export default withStyles(styles)(ProjectEdition);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+  ),
+)(ProjectEdition);

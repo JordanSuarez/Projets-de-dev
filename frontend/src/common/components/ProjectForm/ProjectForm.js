@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { string } from 'prop-types';
 import { Form as FormRff } from 'react-final-form';
 import Editor from 'src/common/components/QuillEditor';
 import ReactQuill from 'react-quill';
@@ -14,58 +15,29 @@ import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
 import { useHistory } from 'react-router-dom';
 import { modules, formats } from 'src/common/components/QuillEditor/EditorToolbar';
-import top100Films from './formData/fakeData';
-import './styles.scss';
+import { tags, profiles } from './formData/fakeData';
 import fields from './formData/fields';
-import initialsValues from './formData/initialValues';
+import './styles.scss';
 
-const Form = ({ classes }) => {
+const Form = ({
+  classes, title, initialValues, handleSubmitProject,
+}) => {
   const history = useHistory();
-  const FORM_STATE = 'formState';
-  const [formValues, setFormValues] = useState();
   const [errorFields, setErrorFields] = useState({});
-
-  const getFormStateFromStorage = () => JSON.parse(localStorage.getItem(FORM_STATE));
-
-  // Get values from local storage if exist, else get value from state
-  const [formState, setFormState] = useState(
-    getFormStateFromStorage() !== null
-      ? getFormStateFromStorage()
-      : initialsValues,
-  );
-
-  const setFormStateToStorage = () => localStorage.setItem(FORM_STATE, JSON.stringify(formState));
-  useEffect(() => {
-    // Save to the localstorage form
-    setFormStateToStorage();
-  }, [formState]);
+  const [formState, setFormState] = useState(initialValues);
 
   const onSubmit = (values) => {
-    if (formState.tagsChecked.length === 0) {
+    if (formState.tags.length === 0) {
       return setErrorFields({ ...errorFields, tagsMinValue: true });
     }
-    if (formState.tagsChecked.length > 5) {
+    if (formState.tags.length > 5) {
       return setErrorFields({ ...errorFields, tagsMaxValue: true });
     }
     if (formState.image === '') {
       return setErrorFields({ ...errorFields, image: true });
     }
 
-    // TODO set values redux instead of react state
-    setFormValues({
-      ...values,
-      title: formState.title,
-      githubLink: formState.githubLink,
-      projectLink: formState.projectLink,
-      description: formState.description,
-      imageUpload: formState.image,
-      imageUploadName: formState.imageName,
-      tagsChecked: formState.tagsChecked,
-      partnersSelected: formState.partnersSelected,
-    });
-
-    // TODO remove formState from localstorage on axios request
-    return localStorage.removeItem(FORM_STATE);
+    return handleSubmitProject({ ...formState, ...values });
   };
 
   // Controlled Inputs
@@ -94,11 +66,11 @@ const Form = ({ classes }) => {
         ? setErrorFields({ ...errorFields, [event.target.name]: true })
         : setErrorFields({ ...errorFields, [event.target.name]: false });
     }
-    setErrorFields(
-      formState.tagsChecked.length < 1
+    return setErrorFields(
+      formState.tags.length < 1
         ? { ...errorFields, tagsMinValue: true }
         : { ...errorFields, tagsMinValue: false },
-      formState.tagsChecked.length > 5
+      formState.tags.length > 5
         ? { ...errorFields, tagsMaxValue: true }
         : { ...errorFields, tagsMaxValue: false },
     );
@@ -113,9 +85,7 @@ const Form = ({ classes }) => {
 
   return (
     <Grid item xs={12} sm={12} md={8} l={7} xl={6} className={classes.container}>
-      <h2 className={classes.subtitle}>
-        Créer un projet
-      </h2>
+      <h2 className={classes.subtitle}>{title}</h2>
       <FormRff
         onSubmit={onSubmit}
         autoComplete="on"
@@ -158,14 +128,14 @@ const Form = ({ classes }) => {
                 )}
                 <Autocomplete
                   className={classes.autoComplete}
-                  name="tagsChecked"
+                  name="tags"
                   multiple
-                  id="tagsChecked"
-                  options={top100Films}
+                  id="tags"
+                  options={tags}
                   disableCloseOnSelect
                   getOptionValue={(option) => option}
-                  getOptionLabel={(option) => option.title}
-                  value={formState.tagsChecked}
+                  getOptionLabel={(option) => option.name}
+                  value={formState.tags}
                   onBlur={onBlurField}
                   limitTags={2}
                   size="small"
@@ -180,9 +150,9 @@ const Form = ({ classes }) => {
                           : { ...errorFields, tagsMaxValue: false },
                       );
                     }
-                    setFormState({ ...formState, tagsChecked: values });
+                    setFormState({ ...formState, tags: values });
                   }}
-                  getOptionSelected={(option, value) => option.title === value.title}
+                  getOptionSelected={(option, value) => option.name === value.name}
                   renderOption={(option, { selected }) => (
                     <>
                       <Checkbox
@@ -191,7 +161,7 @@ const Form = ({ classes }) => {
                         style={{ marginRight: 8 }}
                         checked={selected}
                       />
-                      {option.title}
+                      {option.name}
                     </>
                   )}
                   renderInput={(params) => (
@@ -207,21 +177,21 @@ const Form = ({ classes }) => {
               </Grid>
               <Grid item xs={12} sm={12}>
                 <Autocomplete
-                  name="partnersSelected"
+                  name="partners"
                   className={classes.autoComplete}
                   filterSelectedOptions
                   multiple
-                  id="partnersSelected"
-                  options={top100Films}
+                  id="partners"
+                  options={profiles}
                   limitTags={2}
                   size="small"
                   getOptionValue={(option) => option}
-                  getOptionLabel={(option) => option.title}
-                  value={formState.partnersSelected}
+                  getOptionLabel={(option) => option.name}
+                  value={formState.partners}
                   onChange={(event, values) => {
-                    setFormState({ ...formState, partnersSelected: values });
+                    setFormState({ ...formState, partners: values });
                   }}
-                  getOptionSelected={(option, value) => option.title === value.title}
+                  getOptionSelected={(option, value) => option.name === value.name}
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -291,6 +261,7 @@ const Form = ({ classes }) => {
 
 Form.propTypes = {
   ...classesProps,
+  title: string.isRequired,
 };
 
 export default Form;
