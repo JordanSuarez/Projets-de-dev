@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { string } from 'prop-types';
+import { func, string } from 'prop-types';
+import { useParams, useHistory } from 'react-router-dom';
 import { Form as FormRff } from 'react-final-form';
 import Editor from 'src/common/components/QuillEditor';
 import ReactQuill from 'react-quill';
@@ -13,7 +14,6 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
-import { useHistory } from 'react-router-dom';
 import { modules, formats } from 'src/common/components/QuillEditor/EditorToolbar';
 import { tags, profiles } from './formData/fakeData';
 import fields from './formData/fields';
@@ -23,6 +23,7 @@ const Form = ({
   classes, title, initialValues, handleSubmitProject,
 }) => {
   const history = useHistory();
+  const { id } = useParams();
   const [errorFields, setErrorFields] = useState({});
   const [formState, setFormState] = useState(initialValues);
 
@@ -37,7 +38,8 @@ const Form = ({
       return setErrorFields({ ...errorFields, image: true });
     }
 
-    return handleSubmitProject({ ...formState, ...values });
+    // return form values and project id from useParams
+    return handleSubmitProject({ ...formState, ...values }, id);
   };
 
   // Controlled Inputs
@@ -262,6 +264,7 @@ const Form = ({
 Form.propTypes = {
   ...classesProps,
   title: string.isRequired,
+  handleSubmitProject: func.isRequired,
 };
 
 export default Form;
