@@ -1,7 +1,7 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { getProfileInfo } from 'src/common/redux/actions/profileEdit';
+import { getProfileInfo } from 'src/common/redux/actions/profile';
 
 import ProfileEdition from './ProfileEdition';
 import styles from './styles';

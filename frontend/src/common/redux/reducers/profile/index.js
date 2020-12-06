@@ -1,6 +1,6 @@
 import {
 
-} from 'src/common/redux/actions/profileEdit';
+} from 'src/common/redux/actions/profile';
 
 const initialState = {
   email: '',
@@ -10,10 +10,10 @@ const initialState = {
   isLogged: false,
 };
 
-const profileEdit = (state = initialState, action = {}) => {
+const profile = (state = initialState, action = {}) => {
   switch (action.type) {
     default: return { ...state };
   }
 };
 
-export default profileEdit;
+export default profile;

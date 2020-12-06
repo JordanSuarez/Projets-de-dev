@@ -1,7 +1,7 @@
 import {
   GET_PROFILE_INFO,
   SET_PROFILE_INFO,
-} from 'src/common/redux/actions/profileEdit';
+} from 'src/common/redux/actions/profile';
 import axios from 'axios';
 
 const profile = (store) => (next) => (action) => {
