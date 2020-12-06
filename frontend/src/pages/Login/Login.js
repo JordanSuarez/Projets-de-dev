@@ -88,7 +88,7 @@ Login.propTypes = {
   handleLogin: func.isRequired,
   redirect: string.isRequired,
   initialValues: objectOf({
-    userEmail: string.isRequired,
+    email: string.isRequired,
   }).isRequired,
 };
 
