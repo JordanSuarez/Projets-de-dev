@@ -1,17 +1,6 @@
 import { get } from 'lodash';
 
-export const initialValues = {
-  title: '',
-  githubLink: '',
-  projectLink: '',
-  description: '',
-  image: '',
-  imageName: 'Aucun fichier choisi',
-  tags: [],
-  partners: [],
-};
-
-export const formatSubmitValues = (formValues) => ({
+export default (formValues) => ({
   title: formValues.title,
   github_Link: formValues.github_Link,
   project_link: formValues.project_link,

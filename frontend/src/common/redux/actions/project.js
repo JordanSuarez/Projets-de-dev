@@ -22,12 +22,7 @@ export const handleCreateProject = (formProjectValues) => {
   });
 };
 
-export const handleEditProject = (formProjectValues, projectId) => {
-  console.log(formProjectValues, projectId);
-
-  return ({
-    type: HANDLE_EDIT_PROJECT,
-    formProjectValues,
-    projectId,
-  });
-};
+export const handleEditProject = (formProjectValues) => ({
+  type: HANDLE_EDIT_PROJECT,
+  formProjectValues,
+});
