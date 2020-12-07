@@ -15,7 +15,6 @@ const Profiles = ({
     getProfiles();
   }, []);
   const arrayProfiles = Object.values(profiles);
-  console.log(result);
 
   return (
     <Base>

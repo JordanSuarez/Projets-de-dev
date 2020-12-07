@@ -30,7 +30,6 @@ const CardProfile = ({
   const showProfile = (id) => {
     history.push(getProfileRoute(id));
   };
-  console.log(id);
   // TODO follow
   return (
     <Card className={classes.card}>
