@@ -1,7 +1,7 @@
 const express = require('express');
 const userController = require('./routes/userController');
 const projectController = require('./routes/projectController');
-
+const tagController = require('./routes/tagController');
 
 // Router
 exports.router = (() => {
@@ -18,6 +18,8 @@ exports.router = (() => {
     apiRouter.route('/projects/:id').get(projectController.project); // OK
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
+    // Tags routes
+    apiRouter.route('/tags').get(tagController.getTagList);
 
     return apiRouter;
 })();
