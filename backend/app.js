@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+const port = process.env.PORT; 
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -27,4 +30,4 @@ app.get('/', (req, res) => {
 
 app.use('/api/', apiRouter);
 
-app.listen(3001);
+app.listen(port);
