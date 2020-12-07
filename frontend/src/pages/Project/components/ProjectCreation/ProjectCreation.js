@@ -4,11 +4,12 @@ import ProjectForm from 'src/common/components/ProjectForm';
 import Base from 'src/common/components/Base';
 import { func } from 'prop-types';
 import formatSubmitValues from 'src/pages/Project/helpers/formatSubmitProjectValues';
-import { initialValues } from './formData';
+import initialValues from './formData/initialValues';
 
 const ProjectCreation = ({ handleCreateProject }) => {
   // Format values with good structure before send it to the api
   const handleFormatProjectValues = (formValues) => {
+    console.log(formValues);
     handleCreateProject(formatSubmitValues(formValues));
   };
 
