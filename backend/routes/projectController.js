@@ -120,7 +120,7 @@ module.exports = {
     const userId = jwtUtils.getUserId(headerAuth);
 
     if (userId < 0){
-      return res.status(400).json({ 'error': /*'Le token est invalide'*/ err});
+      return res.status(400).json({ 'error': 'Le token est invalide' });
     }
 
     if (description == null || title == null || image == null || tagId == null) {

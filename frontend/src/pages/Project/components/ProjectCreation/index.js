@@ -6,6 +6,10 @@ import { handleCreateProject } from 'src/common/redux/actions/project';
 import ProjectCreation from './ProjectCreation';
 import styles from './styles';
 
+const mapStateToProps = (state) => ({
+  redirect: state.auth.redirect,
+});
+
 const mapsDispatchToProps = (dispatch) => ({
   handleCreateProject: (formProjectValues) => (
     dispatch(handleCreateProject(formProjectValues))
@@ -15,7 +19,7 @@ const mapsDispatchToProps = (dispatch) => ({
 export default compose(
   withStyles(styles),
   connect(
-    null,
+    mapStateToProps,
     mapsDispatchToProps,
   ),
 )(ProjectCreation);

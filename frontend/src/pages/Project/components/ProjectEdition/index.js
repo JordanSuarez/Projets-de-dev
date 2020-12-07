@@ -8,12 +8,11 @@ import styles from './styles';
 
 const mapStateToProps = (state) => ({
   project: state.project.project,
+  redirect: state.auth.redirect,
 });
 
 const mapsDispatchToProps = (dispatch) => ({
   handleEditProject: (formProjectValues) => {
-    console.log(formProjectValues);
-
     dispatch(handleEditProject(formProjectValues));
   },
 });
