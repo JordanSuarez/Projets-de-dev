@@ -1,17 +1,25 @@
-import React from 'react';
 import { withStyles } from '@material-ui/core';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
+import { handleEditProject } from 'src/common/redux/actions/project';
+import ProjectEdition from './ProjectEdition';
 import styles from './styles';
 
-// eslint-disable-next-line arrow-body-style
-const ProjectEdition = () => {
-  return (
-    <div> ProjectEdition </div>
-  );
-};
+const mapStateToProps = (state) => ({
+  project: state.project.project,
+});
 
-ProjectEdition.propTypes = {
+const mapsDispatchToProps = (dispatch) => ({
+  handleEditProject: (formProjectValues, projectId) => (
+    dispatch(handleEditProject(formProjectValues, projectId))
+  ),
+});
 
-};
-
-export default withStyles(styles)(ProjectEdition);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapsDispatchToProps,
+  ),
+)(ProjectEdition);

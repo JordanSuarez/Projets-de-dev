@@ -67,8 +67,15 @@ const validate = (values) => {
   return errors;
 };
 
-const Register = ({ classes, handleRegister }) => {
+const Register = ({ classes, handleRegister, redirect }) => {
   const history = useHistory();
+
+  // Redirect after register success
+  useEffect(() => {
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
 
   const handleClick = () => history.push(getLoginRoute());
 

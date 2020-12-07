@@ -23,7 +23,7 @@ export const routes = [
   creationProjectRouting,
   projectRouting,
   projectsListRouting,
-  // editionProjectRouting,
+  editionProjectRouting,
   profileRouting,
   userProfileRouting,
   profilesListRouting,

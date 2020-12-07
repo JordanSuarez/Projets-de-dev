@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   redirect: state.auth.redirect,
+  initialValues: {
+    email: state.auth.userEmail,
+  },
 });
 
 export default compose(

@@ -3,12 +3,14 @@ import {
   SUBMIT_LOGOUT_SUCCESS,
   REDIRECT_SUCCESS,
   SUBMIT_LOGIN_ERROR,
+  SUBMIT_REGISTER_SUCCESS,
 } from 'src/common/redux/actions/auth';
 import { getToken } from 'src/common/authentication/authProvider';
 
 const initialState = {
   isLogged: !!getToken(),
   userId: '',
+  userEmail: '',
   token: getToken() || '',
   redirect: '',
 };
@@ -20,6 +22,7 @@ const auth = (state = initialState, action = {}) => {
         ...state,
         isLogged: true,
         userId: action.userId,
+        userEmail: '',
         token: getToken(),
         redirect: '',
       };
@@ -33,7 +36,14 @@ const auth = (state = initialState, action = {}) => {
         ...state,
         isLogged: false,
         userId: '',
+        userEmail: '',
         token: '',
+        redirect: '',
+      };
+    case SUBMIT_REGISTER_SUCCESS:
+      return {
+        ...state,
+        userEmail: action.userEmail,
         redirect: '',
       };
     case REDIRECT_SUCCESS:

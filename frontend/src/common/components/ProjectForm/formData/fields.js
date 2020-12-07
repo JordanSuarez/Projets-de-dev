@@ -5,12 +5,12 @@ export default [
     placeholder: 'Titre de mon projet',
   },
   {
-    name: 'githubLink',
+    name: 'github_link',
     label: 'Lien Github du projet',
     placeholder: 'Lien Github du projet',
   },
   {
-    name: 'projectLink',
+    name: 'project_link',
     label: 'Lien du projet en ligne',
     placeholder: 'Lien du projet en ligne',
   },

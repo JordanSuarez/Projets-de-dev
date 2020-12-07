@@ -1,20 +1,13 @@
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
-import {
-  TextField,
-} from 'mui-rff';
-import {
-  Box,
-  Button,
-
-} from '@material-ui/core';
-import { getRegisterRoute, getHomeRoute } from 'src/common/routing/routesResolver';
+import { TextField } from 'mui-rff';
+import { Box, Button } from '@material-ui/core';
+import { getRegisterRoute } from 'src/common/routing/routesResolver';
 import Base from 'src/common/components/Base';
-import { func, string } from 'prop-types';
+import { func, objectOf, string } from 'prop-types';
 
 const validate = (values) => {
   const errors = {};
@@ -27,7 +20,9 @@ const validate = (values) => {
   return errors;
 };
 
-const Login = ({ classes, handleLogin, redirect }) => {
+const Login = ({
+  classes, handleLogin, redirect, initialValues,
+}) => {
   const history = useHistory();
 
   useEffect(() => {
@@ -46,7 +41,7 @@ const Login = ({ classes, handleLogin, redirect }) => {
           <Form
             className={classes.form}
             onSubmit={handleLogin}
-            initialValues=""
+            initialValues={initialValues}
             validate={validate}
             render={({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} noValidate>
@@ -56,7 +51,7 @@ const Login = ({ classes, handleLogin, redirect }) => {
                   label="Email"
                   name="email"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -64,7 +59,7 @@ const Login = ({ classes, handleLogin, redirect }) => {
                   label="Password"
                   name="password"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <Box className={classes.containerButton}>
                   <Button
@@ -92,6 +87,9 @@ Login.propTypes = {
   ...classesProps,
   handleLogin: func.isRequired,
   redirect: string.isRequired,
+  initialValues: objectOf({
+    email: string.isRequired,
+  }).isRequired,
 };
 
 Login.defaultProps = {

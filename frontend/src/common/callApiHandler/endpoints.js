@@ -38,22 +38,16 @@ const endpoints = {
   [USERS]: {
     [POST]: {
       [LOGIN]: `${USERS}/${LOGIN}`,
-    },
-    [POST]: {
       [LOGOUT]: `${USERS}/${LOGOUT}`,
-    },
-    [POST]: {
       [REGISTER]: `${USERS}/${REGISTER}`,
     },
     [GET]: {
       [ALL]: `${USERS}`,
       [ONE]: (meta) => `${USERS}/${meta}`,
+      [PRIVATE_PROFILE]: `${USERS}/me`,
     },
     [DELETE]: {
       [ONE]: (meta) => `${USERS}/${meta}/${DELETE}`,
-    },
-    [GET]: {
-      [PRIVATE_PROFILE]: `${USERS}/me`,
     },
     [PATCH]: {
       [PRIVATE_PROFILE]: `${USERS}/myprofile/${EDIT}`,

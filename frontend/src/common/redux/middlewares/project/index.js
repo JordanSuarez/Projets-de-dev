@@ -1,9 +1,11 @@
 import {
-  FETCH_PROJECT_BY_ID, showProjectById,
+  FETCH_PROJECT_BY_ID, HANDLE_EDIT_PROJECT, HANDLE_CREATE_PROJECT, showProjectById,
 } from 'src/common/redux/actions/project';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
-import { PROJECTS, GET, ONE } from 'src/common/callApiHandler/constants';
+import {
+  PROJECTS, GET, POST, PATCH, ONE,
+} from 'src/common/callApiHandler/constants';
 
 const projectMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
@@ -16,6 +18,36 @@ const projectMiddleWare = (store) => (next) => (action) => {
           store.dispatch(showProjectById(data));
         })
         .catch(() => {});
+
+      next(action);
+      break;
+    }
+    case HANDLE_CREATE_PROJECT: {
+      const url = getEndpoint(PROJECTS, POST, ONE);
+
+      callApi(url, POST, action.formProjectValues)
+        .then(({ data }) => {
+          console.log(data);
+          store.dispatch(showProjectById(data));
+        })
+        .catch((e) => {
+          console.log(e.request);
+        });
+
+      next(action);
+      break;
+    }
+    case HANDLE_EDIT_PROJECT: {
+      const url = getEndpoint(PROJECTS, PATCH, ONE, action.projectId);
+
+      callApi(url, PATCH, action.formProjectValues)
+        .then(({ data }) => {
+          console.log(data);
+          store.dispatch(showProjectById(data));
+        })
+        .catch((e) => {
+          console.log(e.request);
+        });
 
       next(action);
       break;
