@@ -5,6 +5,11 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+SET NAMES utf8mb4;
+
+INSERT INTO `Comments` (`id`, `content`, `userId`, `projectId`, `createdAt`, `updatedAt`) VALUES
+(1,	'Très bon projet j\'adore',	2,	1,	'2020-12-07 06:38:07.000',	NULL),
+(2,	'🤩🤩🤩🤩🤩🤩🤩',	1,	1,	'2020-12-07 06:41:25.000',	NULL);
 
 INSERT INTO `Projects` (`id`, `title`, `description`, `vote`, `image`, `github_link`, `project_link`, `userId`, `tagId`, `tag2Id`, `tag3Id`, `tag4Id`, `tag5Id`, `tag6Id`, `createdAt`, `updatedAt`) VALUES
 (1,	'DeviensDev - le site pour découvrir les métiers du développement',	'Créé par des développeurs, DeviensDev vous ouvre les portes du développement web en mettant à votre disposition toutes les clés pour comprendre le métier de développeur, vous initier au code et vous orienter vers les formations adéquates.',	NULL,	'https://api.apiflash.com/v1/urltoimage?access_key=7f1be3118d9a403fa34838ac18c9d9b1&url=https://deviens.dev',	'https://github.com/O-clock-Alumni/DeviensDev',	'https://deviens.dev/',	3,	1,	7,	47,	NULL,	NULL,	NULL,	'2020-12-02 04:17:19.000',	'2020-12-04 07:35:26.000'),
@@ -60,9 +65,9 @@ INSERT INTO `Tags` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
 (47,	'Gatsby',	NULL,	'2020-12-02 04:20:22.000',	'2020-12-02 04:20:22.000'),
 (48,	'Strapi',	NULL,	'2020-12-02 04:20:28.000',	'2020-12-02 04:20:28.000');
 
-INSERT INTO `Users` (`id`, `username`, `userImage`, `email`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
-(1,	'Almigra',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'almigra.dev@gmail.com',	'$2b$05$D9wHO2GSVMQrCVVXFylNYeuc1AiVxd7ySz5JSEwyeUcBStYd68gPu',	0,	'2020-12-01 09:44:37.000',	'2020-12-01 09:44:37.000'),
-(2,	'Alban',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01.000',	'2020-12-01 10:26:01.000'),
-(3,	'O\'Clock',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'hello@oclock.io',	'$2b$05$0uZEOS5VgnT7rvcCDos6XO9y1uQPzY4TzCewOqFRnpEF0L7odW/0i',	0,	'2020-12-02 03:13:20.000',	'2020-12-02 03:13:20.000');
+INSERT INTO `Users` (`id`, `username`, `bio`, `userImage`, `email`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
+(1,	'Almigra',	'Almigra Dev ',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'almigra.dev@gmail.com',	'$2b$05$D9wHO2GSVMQrCVVXFylNYeuc1AiVxd7ySz5JSEwyeUcBStYd68gPu',	0,	'2020-12-01 09:44:37.000',	'2020-12-07 09:14:31.000'),
+(2,	'Alban',	'Alban le Grand',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01.000',	'2020-12-07 09:14:53.000'),
+(3,	'O\'Clock',	'O\'Clock l\'horloge magique',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'hello@oclock.io',	'$2b$05$0uZEOS5VgnT7rvcCDos6XO9y1uQPzY4TzCewOqFRnpEF0L7odW/0i',	0,	'2020-12-02 03:13:20.000',	'2020-12-07 09:15:03.000');
 
--- 2020-12-04 06:37:34
+-- 2020-12-07 08:15:19

@@ -29,7 +29,7 @@ module.exports = {
       where: (tag1 ? whereClause : null),
       include: {
         all:true, 
-        attributes: { exclude: ['password', 'isAdmin', 'createdAt', 'updatedAt', 'email'] 
+        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'] 
       },
       },
     })
@@ -46,10 +46,10 @@ module.exports = {
     models.Project.findOne({
       where : {id : req.params.id},
       include: {
-        all: true,
-        attributes: { exclude: ['password', 'isAdmin', 'createdAt', 'updatedAt', 'email'] 
+        all:true, 
+        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'],
       },
-      }
+      },
     })
     .then((project) => {
         return res.status(200).json(project)
