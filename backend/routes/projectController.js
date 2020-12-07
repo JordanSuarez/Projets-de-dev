@@ -52,7 +52,27 @@ module.exports = {
       },
     })
     .then((project) => {
-        return res.status(200).json(project)
+        console.log(project);
+        const formatProject = {
+          id: project.id,
+          title: project.title,
+          description: project.description,
+          github_link: project.github_link,
+          project_link: project.project_link,
+          image: project.image,
+          vote: project.vote,
+          tags: [
+            project.Tag,
+            project.Tag2,
+            project.Tag3,
+            project.Tag4,
+            project.Tag5,
+            project.Tag6,
+          ],
+          user: project.User,
+          comments: project.Comments
+        };
+        return res.status(200).json(formatProject)
     })
     .catch((error) => {
     return res.status(500).json(error)
@@ -95,7 +115,7 @@ module.exports = {
             github_link: github_link,
             project_link: project_link,
             UserId: userId,
-            TagId:1,
+            TagId:tagId,
             Tag2Id: tag2Id,
             Tag3Id: tag3Id,
             Tag4Id: tag4Id,
