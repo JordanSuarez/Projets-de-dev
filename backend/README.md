@@ -12,9 +12,9 @@ Run migrations `sequelize db:migrate`
 
 Run the app in development mode : `npm start`
 
-## API Routes 
+## API Routes 🗺🚠
 
-### Projects
+### Projects 👨‍🚀👩‍⚖️🧳 🌂 ☂️ 🧵 🧶 👓 🕶 🥽 🥼 👔 👕 👖 🧣 🧤 🧥 🧦 👗 👘 👚 👛 👜 👝 🎒 👞 👟 🥾 🥿 👠 👡👢 👑 👒 🎩 🎓 🧢 ⛑💄 💍 💼
 
 http://localhost:3001/api/projects/:id - Find a project with ID, including user data, tags and comments (GET)
 
@@ -25,7 +25,7 @@ http://localhost:3001/api/projects/new - Add a new project (POST)
 http://localhost:3001/api/projects/:id/edit - Edit an existing project, must include its ID (PATCH)
 
 
-### Users
+### Users 👩🏻‍💻👨🏻‍💻👮🏻‍♀️ 👮🏻 👮🏻‍♂️ 👷🏻‍♀️ 👷🏻 👷🏻‍♂️💂🏻‍♀️ 💂🏻 💂🏻‍♂️ 🕵🏻‍♀️ 🕵🏻 🕵🏻‍♂️👨🏻‍🔧 👩🏻‍🔬👨🏻‍🔬👩🏻‍🎨👨🏻‍🎨
 
 http://localhost:3001/api//users/register/ - Register (POST)
 
