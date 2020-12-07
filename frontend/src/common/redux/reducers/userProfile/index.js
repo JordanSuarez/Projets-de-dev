@@ -18,7 +18,6 @@ const initialState = {
 const userProfile = (state = initialState, action = {}) => {
   switch (action.type) {
     case SAVE_USER_PROFILE: {
-      console.log(action.userProfile);
       return {
         ...state,
         userProfile: action.userProfile,

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Card,
   CardActionArea,
@@ -8,43 +9,64 @@ import {
   Typography,
   Avatar,
 } from '@material-ui/core';
+import { classes as classesProps } from 'src/common/classes';
+import { useHistory } from 'react-router-dom';
+import { getProjectRoute, getProfileRoute } from 'src/common/routing/routesResolver';
+
 // icone coeur border
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // icone coeur plein
-// eslint-disable-next-line no-unused-vars
-import FavoriteIcon from '@material-ui/icons/Favorite';
 
+import FavoriteIcon from '@material-ui/icons/Favorite';
 // import './cardProject.scss';
 // import { mergeClasses } from '@material-ui/styles';
-// eslint-disable-next-line import/no-unresolved
-import { classes as classesProps } from 'src/common/classes';
-import { func } from 'prop-types';
-import cardImage from './card-image.png';
-import avatar from './avatar.png';
 
 // eslint-disable-next-line arrow-body-style
-const CardProject = ({ classes, onClickOnBodyCard }) => {
+const CardProject = ({
+  id,
+  classes,
+  title,
+  image,
+  description,
+  user,
+  tags,
+}) => {
+  const history = useHistory();
+  const handleDisplayProject = (id) => {
+    history.push(getProjectRoute(id));
+  };
+  const handleDisplayProfile = (id) => {
+    history.push(getProfileRoute(id));
+  };
   return (
     <Card className={classes.card}>
-      <CardActionArea onClick={onClickOnBodyCard}>
+      <CardActionArea onClick={() => handleDisplayProject(id)}>
         <CardMedia
           className={classes.image}
-          image={cardImage}
+          image={image}
           title="image website"
         />
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">
-            Super projet de site
+            {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
+            {description}
+          </Typography>
+          <Typography className={classes.tags} variant="body2" color="textSecondary" component="p">
+            {tags.map((tag) => {
+              if (tag !== null) {
+                return (
+                  <span key={tag.id} className={classes.tag}>{tag.name}</span>
+                );
+              }
+            })}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.link}>
         <FavoriteBorderIcon className={classes.like} />
-        <Avatar className="card__link__avatar" alt="Pikachu" src={avatar} />
+        <Avatar className="card__link__avatar" alt="Pikachu" src={user.userImage} onClick={() => handleDisplayProfile(user.id)} />
       </CardActions>
     </Card>
 
@@ -53,7 +75,12 @@ const CardProject = ({ classes, onClickOnBodyCard }) => {
 
 CardProject.propTypes = {
   ...classesProps,
-  onClickOnBodyCard: func.isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
 };
 
 export default CardProject;

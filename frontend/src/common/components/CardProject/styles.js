@@ -29,4 +29,16 @@ export default ({ palette }) => ({
   avatar: {
     margin: '0.5em',
   },
+  tags: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
+  tag: {
+    borderRadius: '8px',
+    margin: '1em 10px 0 10px',
+    backgroundColor: palette.yellow,
+    padding: '0.5em',
+    color: palette.darkBlue,
+  },
 });

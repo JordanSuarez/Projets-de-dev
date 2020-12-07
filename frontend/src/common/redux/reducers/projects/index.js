@@ -11,7 +11,6 @@ const initialState = {
 const projects = (state = initialState, action = {}) => {
   switch (action.type) {
     case SAVE_PROJECTS: {
-      console.log(action.projects);
       return {
         ...state,
         projects: action.projects,

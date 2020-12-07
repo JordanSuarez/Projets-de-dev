@@ -23,15 +23,7 @@ const Home = ({ classes }) => {
         <h2 className={classes.subtitle}> Derniers projets publiés</h2>
         <div className={classes.latestProject}>
           {/* TODO Get and give cardId to handleDisplayProject */}
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(1)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(2)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(2)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(1)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(1)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(1)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(1)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(1)} />
-          <CardProject onClickOnBodyCard={() => handleDisplayProject(1)} />
+          <p>0_o Modifications en cours o_0 </p>
         </div>
         <Pagination className={classes.pagination} count={10} size="small" />
       </div>

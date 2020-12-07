@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
+import Pagination from '@material-ui/lab/Pagination';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
 
@@ -15,17 +16,20 @@ const Projects = ({
     getProjects();
   }, []);
   const arrayProjects = Object.values(projects);
-  console.log(arrayProjects);
-  console.log(projects);
   return (
     <Base>
       {loading && <div>Chargement en cours...</div>}
       {!loading && (
-        <div>
-          {arrayProjects.map((project) => (
-            <CardProject {...project} key={project.id} />
-          ))}
-        </div>
+        <>
+        <div className={classes.container}>
+          <div className={classes.listCard}>
+            {arrayProjects.map((project) => (
+              <CardProject {...project} key={project.id} />
+            ))}
+          </div>
+  <Pagination className={classes.pagination} count={10} size="small" />
+          </div>
+        </>
       )}
     </Base>
   );
