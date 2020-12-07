@@ -7,8 +7,7 @@ import Base from 'src/common/components/Base';
 import { classes as classesProps } from 'src/common/classes';
 import githubLogo from 'src/common/assets/images/logo-github.png';
 import profileLogo from 'src/common/assets/images/avatar.png';
-import { get } from 'lodash';
-import { getProfileRoute, getEditionProjectRoute } from 'src/common/routing/routesResolver';
+import { getProfileRoute } from 'src/common/routing/routesResolver';
 import ReactQuill from 'react-quill';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -36,14 +35,11 @@ const Project = ({
   }, []);
 
   const handleClickProfile = () => {
-    history.push(getProfileRoute(project.UserId));
+    history.push(getProfileRoute(project.user.id));
   };
 
   return (
     <Base>
-      <button onClick={() => history.push(getEditionProjectRoute(project.id))}>
-        TEST
-      </button>
       {loading && <div>Chargement en cours...</div>}
       {!loading && (
         <div className={classes.projectContainer}>
@@ -60,8 +56,12 @@ const Project = ({
           <Grid item xs={12} sm={12} md={9} className={classes.imageContainer}>
             <Grid item xs={12} sm={12} md={9} className={classes.linksGrid}>
               <div onClick={handleClickProfile} className={classes.profile}>
-                <Avatar alt={get(project, 'User.username')} src={get(project, 'User.userImage') || profileLogo} className={classes.profileLogo} />
-                {get(project, 'User.username')}
+                <Avatar
+                  alt={project.user.username}
+                  src={project.user.userImage || profileLogo}
+                  className={classes.profileLogo}
+                />
+                {project.user.username}
               </div>
               {(project.github_link || project.project_link)
             && (
@@ -102,7 +102,7 @@ const Project = ({
             </div>
             )}
             </Grid>
-            <img className={classes.image} src={get(project, 'image')} alt="project-header" />
+            <img className={classes.image} src={project.image} alt="project-header" />
           </Grid>
           <Grid item xs={12} sm={12} md={9} className={classes.description}>
             <h3 className={classes.subtitle}>Description</h3>
