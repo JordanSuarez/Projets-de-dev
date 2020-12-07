@@ -14,7 +14,7 @@ const Profiles = ({
   useEffect(() => {
     getProfiles();
   }, []);
-  const result = Object.values(profiles);
+  const arrayProfiles = Object.values(profiles);
   console.log(result);
 
   return (
@@ -22,7 +22,7 @@ const Profiles = ({
       {loading && <div>Chargement en cours...</div>}
       {!loading && (
       <div className={classes.listCard}>
-        {result.map((profile) => (
+        {arrayProfiles.map((profile) => (
           <CardProfile {...profile} key={profile.id} />
         ))}
       </div>
