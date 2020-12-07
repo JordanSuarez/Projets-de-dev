@@ -11,6 +11,7 @@ const initialState = {
 const profiles = (state = initialState, action = {}) => {
   switch (action.type) {
     case SAVE_PROFILES: {
+      console.log(action.profiles);
       return {
         ...state,
         profiles: action.profiles,

@@ -22,6 +22,7 @@ const ProfileEdition = ({
   getProfile,
   loading,
   userProfile,
+  handleUpdate,
 }) => {
   useEffect(() => {
     getProfile();
@@ -78,7 +79,7 @@ const ProfileEdition = ({
     return errors;
   };
 
-  const handleUpdateProfile = () => console.log('handleupdate');
+  const handleUpdateProfile = () => handleUpdate();
 
   // eslint-disable-next-line no-unused-vars
   const getFiles = () => {
@@ -196,6 +197,7 @@ const ProfileEdition = ({
 ProfileEdition.propTypes = {
   ...classesProps,
   getProfile: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired,
   userProfile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
 };

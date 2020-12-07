@@ -166,6 +166,7 @@ module.exports = {
 		getUsersList: (req, res) => {
 			models.User.findAll({
 				attributes: ['id', 'username', 'userImage'],
+				raw: false,
 			}).then((user) => {
 				if (user) {
 					return res.status(201).json(user);

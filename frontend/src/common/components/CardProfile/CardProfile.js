@@ -21,26 +21,24 @@ import avatar2 from './avatar.png';
 
 const CardProfile = ({
   classes,
-  profile,
+  id,
+  username,
+  userImage,
 }) => {
   const history = useHistory();
 
   const showProfile = (id) => {
     history.push(getProfileRoute(id));
   };
+  console.log(id);
   // TODO follow
   return (
     <Card className={classes.card}>
       <CardActionArea className={classes.cardArea}>
-        {!profile.userImage && (
-          <Avatar alt="avatar" src={avatar2} className={classes.large} />
-        )}
-        {profile.userImage && (
-          <Avatar alt="avatar" src={profile.userImage} className={classes.large} />
-        )}
+        <Avatar alt="avatar" src={userImage} className={classes.large} />
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">
-            {profile.username}
+            {username}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -57,7 +55,7 @@ const CardProfile = ({
 
 CardProfile.propTypes = {
   ...classesProps,
-  profile: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default CardProfile;

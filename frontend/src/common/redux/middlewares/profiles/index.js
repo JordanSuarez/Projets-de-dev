@@ -11,6 +11,14 @@ const profiles = (store) => (next) => (action) => {
       axios.get(
         'http://localhost:3001/api/users',
         {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*',
+            'Content-Type': 'application/json, charset=utf-8',
+            Accept: 'application/json',
+          },
+        },
+        {
           withCredentials: true,
         },
       )

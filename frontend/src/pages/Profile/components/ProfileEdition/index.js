@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 // eslint-disable-next-line import/no-unresolved
-import { getProfileInfos } from 'src/common/redux/actions/userProfile';
+import { getProfileInfos, updateProfile } from 'src/common/redux/actions/userProfile';
 
 import ProfileEdition from './ProfileEdition';
 import styles from './styles';
@@ -16,6 +16,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getProfile: () => {
     dispatch(getProfileInfos());
+  },
+  handleUpdate: () => {
+    dispatch(updateProfile());
   },
 });
 

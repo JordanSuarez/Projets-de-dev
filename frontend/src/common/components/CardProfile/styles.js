@@ -1,7 +1,7 @@
 export default ({ palette }) => ({
   card: {
     width: '260px',
-    margin: '50px 1em',
+    margin: '100px 1em',
     borderRadius: '16px',
     position: 'relative',
     boxSizing: 'content-box',
