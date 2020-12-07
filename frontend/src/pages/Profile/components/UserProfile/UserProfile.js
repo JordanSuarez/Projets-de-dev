@@ -36,12 +36,9 @@ const UserProfile = ({
         <h2 className={classes.subtitle}> Mon profil </h2>
         <div className={classes.column}>
           <div className={classes.rowCenter}>
-          {!userProfile.userImage && (
-            <Avatar alt="avatar" src={avatar2} className={classes.large} />
-          )}
-          {userProfile.userImage && (
-            <Avatar alt="avatar" src={`data:image/jpeg;base64,${userProfile.userImage}`} className={classes.large} />
-          )}
+
+            <Avatar alt="avatar" src={userProfile.userImage} className={classes.large} />
+
             <h3 className={classes.username}>{userProfile.username}</h3>
           </div>
           <div className={classes.rowCenter}>

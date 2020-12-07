@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { getProfilesInfos } from 'src/common/redux/actions/profiles';
 
 import Profiles from './Profiles';
-// eslint-disable-next-line import/extensions
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
@@ -15,7 +14,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProfile: () => {
+  getProfiles: () => {
     dispatch(getProfilesInfos());
   },
 });

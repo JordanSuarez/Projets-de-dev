@@ -1,19 +1,42 @@
-import React from 'react';
-
-// eslint-disable-next-line import/no-unresolved
+/* eslint-disable import/no-unresolved */
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { classes as classesProps } from 'src/common/classes';
 import Base from 'src/common/components/Base';
+import CardProfile from 'src/common/components/CardProfile';
 
-// eslint-disable-next-line arrow-body-style
-const Profiles = () => {
+const Profiles = ({
+  classes,
+  getProfiles,
+  profiles,
+  loading,
+}) => {
+  useEffect(() => {
+    getProfiles();
+  }, []);
+  const result = Object.values(profiles);
+  console.log(result);
+
   return (
     <Base>
-      <div> Profiles </div>
+      {loading && <div>Chargement en cours...</div>}
+      {!loading && (
+      <div className={classes.listCard}>
+        {result.map((profile) => (
+          <CardProfile {...profile} key={profile.id} />
+        ))}
+      </div>
+      )}
     </Base>
   );
 };
 
 Profiles.propTypes = {
-
+  ...classesProps,
+  getProfiles: PropTypes.func.isRequired,
+  profiles: PropTypes.shape({
+  }).isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default Profiles;

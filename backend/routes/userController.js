@@ -145,7 +145,7 @@ module.exports = {
 			}
 
 			models.User.findAll({
-				attributes: ['id', 'email', 'username'],
+				attributes: ['id', 'email', 'username', 'userImage'],
 				where: { id: userId },
 				include: {
 					model: models.Project, 
@@ -166,6 +166,7 @@ module.exports = {
 		getUsersList: (req, res) => {
 			models.User.findAll({
 				attributes: ['id', 'username', 'userImage'],
+				raw: false,
 			}).then((user) => {
 				if (user) {
 					return res.status(201).json(user);

@@ -1,15 +1,15 @@
 /* eslint-disable import/no-unresolved */
 import {
-  GET_PROFILE,
-  UPDATE_PROFILE,
-  saveProfile,
-  DELETE_PROFILE,
+  GET_USER_PROFILE,
+  UPDATE_USER_PROFILE,
+  saveUserProfile,
+  DELETE_USER_PROFILE,
 } from 'src/common/redux/actions/userProfile';
 import axios from 'axios';
 
 const userProfile = (store) => (next) => (action) => {
   switch (action.type) {
-    case GET_PROFILE: {
+    case GET_USER_PROFILE: {
       const state = store.getState();
       axios.get(
         'http://localhost:3001/api/users/me',
@@ -28,7 +28,7 @@ const userProfile = (store) => (next) => (action) => {
       )
         .then((response) => {
           console.log(response.data);
-          store.dispatch(saveProfile(response.data));
+          store.dispatch(saveUserProfile(response.data));
         })
         .catch((error) => {
           console.log(error);
@@ -37,17 +37,18 @@ const userProfile = (store) => (next) => (action) => {
       next(action);
       break;
     }
-    case UPDATE_PROFILE: {
+    case UPDATE_USER_PROFILE: {
+      const state = store.getState();
       axios.patch('/api/users/:id/edit',
         {
           params: {
-            id: store.state.userId,
+            id: state.id,
           },
         },
         {
           header: {
             'Access-Control-Allow-Origin': '*',
-            Authorization: `Bearer ${store.state.token}`,
+            Authorization: `Bearer ${state.auth.token}`,
           },
         },
         {
@@ -63,7 +64,7 @@ const userProfile = (store) => (next) => (action) => {
       next(action);
       break;
     }
-    case DELETE_PROFILE: {
+    case DELETE_USER_PROFILE: {
       axios.patch('/api/users/:id/edit',
         {
           params: {
