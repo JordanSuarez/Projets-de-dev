@@ -145,7 +145,7 @@ module.exports = {
 			}
 
 			models.User.findAll({
-				attributes: ['id', 'email', 'username', 'userImage'],
+				attributes: ['id', 'email', 'username', 'userImage', 'bio'],
 				where: { id: userId },
 				include: {
 					model: models.Project, 
@@ -166,7 +166,6 @@ module.exports = {
 		getUsersList: (req, res) => {
 			models.User.findAll({
 				attributes: ['id', 'username', 'userImage'],
-				raw: false,
 			}).then((user) => {
 				if (user) {
 					return res.status(201).json(user);
@@ -180,7 +179,7 @@ module.exports = {
 
 		getUserById: (req, res) => {
 			models.User.findOne({
-				attributes: ['id', 'username', 'userImage'],
+				attributes: ['id', 'username', 'userImage', 'bio'],
 				where: {id: req.params.id},
 				include: {
 					model: models.Project, 
