@@ -20,6 +20,14 @@ module.exports = {
           key: 'id',
         }
       },
+      projectId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Projects',
+          key: 'id',
+        }
+      },
       createdAt: {
         allowNull: false,
         type: 'DATETIME(3) DEFAULT CURRENT_TIMESTAMP(3)'
