@@ -34,7 +34,30 @@ module.exports = {
       },
     })
     .then((project) => {
-        return res.status(200).json(project)
+      const formatProject = [];
+        for (let element=0; element < project.length; element++) {
+          const newFormat = {
+            id: project[element].id,
+            title: project[element].title,
+            description: project[element].description,
+            github_link: project[element].github_link,
+            project_link: project[element].project_link,
+            image: project[element].image,
+            vote: project[element].vote,
+            tags: [
+              project[element].Tag,
+              project[element].Tag2,
+              project[element].Tag3,
+              project[element].Tag4,
+              project[element].Tag5,
+              project[element].Tag6,
+            ],
+            user: project[element].User,
+            comments: project[element].Comments
+          };
+          formatProject.push(newFormat)
+        }
+        return res.status(200).json(formatProject)
     })
     .catch((error) => {
     return res.status(500).json(error)
@@ -52,7 +75,6 @@ module.exports = {
       },
     })
     .then((project) => {
-        console.log(project);
         const formatProject = {
           id: project.id,
           title: project.title,
