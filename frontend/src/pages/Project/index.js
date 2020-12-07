@@ -8,6 +8,7 @@ import styles from './styles';
 
 const mapStateToProps = (state) => ({
   project: state.project.project,
+  loading: state.project.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

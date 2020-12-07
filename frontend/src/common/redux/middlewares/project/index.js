@@ -1,11 +1,12 @@
 import {
-  FETCH_PROJECT_BY_ID, HANDLE_EDIT_PROJECT, HANDLE_CREATE_PROJECT, showProjectById,
+  FETCH_PROJECT_BY_ID, HANDLE_EDIT_PROJECT, HANDLE_CREATE_PROJECT, showProjectById, redirectSuccess,
 } from 'src/common/redux/actions/project';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
   PROJECTS, GET, POST, PATCH, ONE,
 } from 'src/common/callApiHandler/constants';
+import { getUserProfileRoute } from 'src/common/routing/routesResolver';
 
 const projectMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,7 +15,6 @@ const projectMiddleWare = (store) => (next) => (action) => {
 
       callApi(url, GET)
         .then(({ data }) => {
-          console.log(data);
           store.dispatch(showProjectById(data));
         })
         .catch(() => {});
@@ -26,9 +26,8 @@ const projectMiddleWare = (store) => (next) => (action) => {
       const url = getEndpoint(PROJECTS, POST, ONE);
 
       callApi(url, POST, action.formProjectValues)
-        .then(({ data }) => {
-          console.log(data);
-          store.dispatch(showProjectById(data));
+        .then(() => {
+          store.dispatch(redirectSuccess(getUserProfileRoute()));
         })
         .catch((e) => {
           console.log(e.request);
@@ -42,9 +41,8 @@ const projectMiddleWare = (store) => (next) => (action) => {
       const url = getEndpoint(PROJECTS, PATCH, ONE, projectId);
 
       callApi(url, PATCH, action.formProjectValues)
-        .then(({ data }) => {
-          console.log(data);
-          store.dispatch(showProjectById(data));
+        .then(() => {
+          store.dispatch(redirectSuccess(getUserProfileRoute()));
         })
         .catch((e) => {
           console.log(e.request);
