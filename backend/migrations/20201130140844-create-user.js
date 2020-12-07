@@ -18,9 +18,9 @@ module.exports = {
         allowNull: true,
       },
       userImage: {
-        type: Sequelize.TEXT,
-        defaultValue: 'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',
-        allowNull: false,
+        type: Sequelize.TEXT('long'),
+        // defaultValue: 'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',
+        allowNull: true,
       },
       email: {
         type: Sequelize.STRING,

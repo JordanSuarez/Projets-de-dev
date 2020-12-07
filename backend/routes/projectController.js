@@ -55,7 +55,7 @@ module.exports = {
         return res.status(200).json(project)
     })
     .catch((error) => {
-    return res.status(500).json('ERROR')
+    return res.status(500).json(error)
     })
   },
 
@@ -77,12 +77,12 @@ module.exports = {
     const headerAuth = req.headers['authorization'];
     const userId = jwtUtils.getUserId(headerAuth);
 
-    if (UserId < 0){
-      return res.status(400).json({ 'error': 'Le token est invalide'});
-    } 
+    if (userId < 0){
+      return res.status(400).json({ 'error': /*'Le token est invalide'*/ err});
+    }
 
     if (description == null || title == null || image == null || tagId == null) {
-      return res.status(500).json({'error':'Titre, description, image et au moins 1 tag requis'});
+      return res.status(500).json({'error': 'Titre, description, image et au moins 1 tag requis'});
     }
 
   
@@ -94,23 +94,23 @@ module.exports = {
             image:image,
             github_link: github_link,
             project_link: project_link,
-            UserId: UserId,
-            tagId: tagId,
-            tag2Id: tag2Id,
-            tag3Id: tag3Id,
-            tag4Id: tag4Id,
-            tag5Id: tag5Id,
-            tag6Id: tag6Id,
+            UserId: userId,
+            TagId:1,
+            Tag2Id: tag2Id,
+            Tag3Id: tag3Id,
+            Tag4Id: tag4Id,
+            Tag5Id: tag5Id,
+            Tag6Id: tag6Id,
           })
           .then ((newProject) => {
-            done(newProject);
+            //done(newProject);
             return res.status(201).json({
-              'title':title,
-              'description':description,
-              'image':image,
+              'title': title,
+              'description': description,
+              'image': image,
               'github_link': github_link,
               'project_link': project_link,
-              'UserId': UserId,
+              'userId': userId,
               'Tag1': tagId,
               'Tag2': tag2Id,
               'Tag3': tag3Id,
@@ -118,6 +118,8 @@ module.exports = {
               'Tag5': tag5Id,
               'Tag6': tag6Id,
               'status': 'Projet ajouté avec succès'
+            }).catch((err) => {
+              return res.status(500).json({'error': 'Erreur lors de l\'ajout du nouveau projet 2: ' + err});
             })
           })
           .catch((err) => {
@@ -175,11 +177,11 @@ module.exports = {
             })
           })
           .catch(function(err) {
-          return res.status(500).json({ 'error': 'Erreur dans les données saisis' });
+          return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
         });
         })
         .catch(function(err) {
-          return res.status(500).json({ 'error': 'Accès non autorisé' });
+          return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
         });
         
       },

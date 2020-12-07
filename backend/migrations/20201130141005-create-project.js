@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.TEXT,
+        type: Sequelize.TEXT('long'),
         allowNull: false,
       },
       vote: {
@@ -21,7 +21,7 @@ module.exports = {
         allowNull: true,
       },
       image: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT('long'),
         allowNull: true,
       },
       github_link: {
@@ -39,9 +39,10 @@ module.exports = {
           key: 'id',
         }
       },
-      tagId:{
+      tagId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 2,
         references: {
           model: 'Tags',
           key: 'id',

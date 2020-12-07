@@ -26,11 +26,11 @@ module.exports = {
 			}
 
 			if (!EMAIL_REGEX.test(email)) {
-				return res.status(400).json({'error': 'L\'email saisie est invalide'})
+				return res.status(400).json({'error': /*'L\'email saisie est invalide'*/ err})
 			}
 
 			if (!PASSWORD_REGEX.test(password)) {
-				return res.status(400).json({'error': 'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'})
+				return res.status(400).json({'error': /*'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'*/ err})
 			}			
 			
 			asyncLib.waterfall([
@@ -44,7 +44,7 @@ module.exports = {
 						done(null, userFound);
 					})
 					.catch((err) => {
-						return res.status(500).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
+						return res.status(500).json({ 'error': /*'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'*/ err});
 					});
 				},
 
@@ -54,7 +54,7 @@ module.exports = {
 							done(null, userFound, bcryptedPassword);
 						});
 					} else {
-						return res.status(409).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
+						return res.status(409).json({ 'error': /*'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'*/ err});
 					}
 				},
 
@@ -69,7 +69,7 @@ module.exports = {
 						done(newUser);
 					})
 					.catch((err) => {
-						return res.status(500).json({'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
+						return res.status(500).json({'error': err});
 					});
 				}
 			], (newUser) => {
@@ -78,7 +78,7 @@ module.exports = {
 					'userId': newUser.id
 				});
 			} else {
-				return res.status(500).json({'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'});
+				return res.status(500).json({'error': err});
 			}
 			});
 		},
@@ -89,7 +89,7 @@ module.exports = {
 			const password = req.body.password;
 
 			if (email == null ||  password == null) {
-				return res.status(400).json({ 'error': 'Merci de renseigner l\'email et le mot de passe | email : ' + email + ' password : ' + password});
+				return res.status(400).json({ 'error': /* 'Merci de renseigner l\'email et le mot de passe | email : ' + email + ' password : ' + password */ err});
 			}
 
 			asyncLib.waterfall([
@@ -102,7 +102,7 @@ module.exports = {
 						done(null, userFound);
 					})
 					.catch((err) => {
-						return res.status(500).json({'error': 'La combinaison d\'email et mot de passe est invalide'});
+						return res.status(500).json({'error': /*'La combinaison d\'email et mot de passe est invalide'*/ err});
 					});
 				},
 
@@ -112,7 +112,7 @@ module.exports = {
 							done(null, userFound, resBycrypt);	
 						});
 					} else {
-						return res.status(404).json({ 'error': 'La combinaison d\'email et mot de passe est invalide'});
+						return res.status(404).json({ 'error': /*'La combinaison d\'email et mot de passe est invalide'*/ err});
 					}
 				},
 
@@ -120,7 +120,7 @@ module.exports = {
 					if(resBycrypt) {
 						done(userFound);
 					} else {
-						return res.status(403).json({ 'error': 'La combinaison d\'email et mot de passe est invalide' });
+						return res.status(403).json({ 'error': /*'La combinaison d\'email et mot de passe est invalide'*/ err });
 					}
 				}
 
@@ -131,7 +131,7 @@ module.exports = {
 						'token': jwtUtils.generateTokenForUser(userFound)
 					});
 				} else {
-					return res.status(500).json({'error': 'Impossible de vérifier l\'utilisateur'});
+					return res.status(500).json({'error': /*'Impossible de vérifier l\'utilisateur'*/ err});
 				}
 			});
 		},
@@ -141,11 +141,11 @@ module.exports = {
 			const userId = jwtUtils.getUserId(headerAuth);
 
 			if (userId < 0){
-				return res.status(400).json({ 'error': 'Le token est invalide'});
+				return res.status(400).json({ 'error': /*'Le token est invalide'*/ err});
 			}
 
 			models.User.findAll({
-				attributes: ['id', 'email', 'username'],
+				attributes: ['id', 'email', 'username', 'userImage'],
 				where: { id: userId },
 				include: {
 					model: models.Project, 
@@ -156,10 +156,10 @@ module.exports = {
 				if (user) {
 					res.status(201).json(user);
 				} else {
-					res.status(404).json({ 'error': 'L\'utilisateur n\'a pas été trouvé' });
+					res.status(404).json({ 'error': /*'L\'utilisateur n\'a pas été trouvé'*/ err });
 				}
 			}).catch((err) => {
-				res.status(500).json({ 'error': 'impossible de chercher l\'utilisateur' });
+				res.status(500).json({ 'error': /*'impossible de chercher l\'utilisateur'*/ err });
 			});
 		},
 
@@ -170,10 +170,10 @@ module.exports = {
 				if (user) {
 					return res.status(201).json(user);
 				} else {
-					return res.status(404).json({ 'error': 'Aucun utilisateur n\'a pu être trouvé' });
+					return res.status(404).json({ 'error': /*'Aucun utilisateur n\'a pu être trouvé'*/ err });
 				}
 			}).catch((err) => {
-				return res.status(500).json({ 'error': 'Impossible de récupérer les utilisateurs' });
+				return res.status(500).json({ 'error': /*'Impossible de récupérer les utilisateurs'*/ err });
 			});
 		},
 
@@ -190,10 +190,10 @@ module.exports = {
 				if (user) {
 					return res.status(201).json(user);
 				} else {
-					return res.status(404).json({ 'error': 'L\'utilisateur n\'a pas été trouvé'});
+					return res.status(404).json({ 'error': /*'L\'utilisateur n\'a pas été trouvé'*/ err});
 				}
 			}).catch((err) => {
-				return res.status(500).json({ 'error': 'Impossible de rechercher un utilisateur'});
+				return res.status(500).json({ 'error': /*'Impossible de rechercher un utilisateur'*/ err});
 			})
 		},
 }
