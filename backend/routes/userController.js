@@ -26,11 +26,11 @@ module.exports = {
 			}
 
 			if (!EMAIL_REGEX.test(email)) {
-				return res.status(400).json({'error': /*'L\'email saisie est invalide'*/ err})
+				return res.status(400).json({'error': 'L\'email saisie est invalide' + err})
 			}
 
 			if (!PASSWORD_REGEX.test(password)) {
-				return res.status(400).json({'error': /*'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'*/ err})
+				return res.status(400).json({'error': 'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique' + err})
 			}			
 			
 			asyncLib.waterfall([
@@ -44,7 +44,7 @@ module.exports = {
 						done(null, userFound);
 					})
 					.catch((err) => {
-						return res.status(500).json({ 'error': /*'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'*/ err});
+						return res.status(500).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' + err});
 					});
 				},
 
@@ -54,7 +54,7 @@ module.exports = {
 							done(null, userFound, bcryptedPassword);
 						});
 					} else {
-						return res.status(409).json({ 'error': /*'Le nom d\'utilisateur et/ou l\'email est déjà utilisé'*/ err});
+						return res.status(409).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' + err});
 					}
 				},
 
