@@ -38,7 +38,8 @@ const projectMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case HANDLE_EDIT_PROJECT: {
-      const url = getEndpoint(PROJECTS, PATCH, ONE, action.projectId);
+      const projectId = store.getState().project.project.id;
+      const url = getEndpoint(PROJECTS, PATCH, ONE, projectId);
 
       callApi(url, PATCH, action.formProjectValues)
         .then(({ data }) => {

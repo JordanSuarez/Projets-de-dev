@@ -11,9 +11,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-  handleEditProject: (formProjectValues, projectId) => (
-    dispatch(handleEditProject(formProjectValues, projectId))
-  ),
+  handleEditProject: (formProjectValues) => {
+    console.log(formProjectValues);
+
+    dispatch(handleEditProject(formProjectValues));
+  },
 });
 
 export default compose(
