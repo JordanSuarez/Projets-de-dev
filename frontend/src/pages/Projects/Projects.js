@@ -21,14 +21,14 @@ const Projects = ({
       {loading && <div>Chargement en cours...</div>}
       {!loading && (
         <>
-        <div className={classes.container}>
+          <div className={classes.container}>
           <div className={classes.listCard}>
             {arrayProjects.map((project) => (
               <CardProject {...project} key={project.id} />
             ))}
           </div>
-  <Pagination className={classes.pagination} count={10} size="small" />
-          </div>
+          <Pagination className={classes.pagination} count={10} size="small" />
+        </div>
         </>
       )}
     </Base>

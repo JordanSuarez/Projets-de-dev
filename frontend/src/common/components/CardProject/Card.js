@@ -40,7 +40,7 @@ const CardProject = ({
   };
   return (
     <Card className={classes.card}>
-      <CardActionArea onClick={() => handleDisplayProject(id)}>
+      <CardActionArea className={classes.cardActionArea} onClick={() => handleDisplayProject(id)}>
         <CardMedia
           className={classes.image}
           image={image}
@@ -50,7 +50,7 @@ const CardProject = ({
           <Typography className={classes.title} component="h3">
             {title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography className={classes.description} variant="body2" color="textSecondary" component="p">
             {description}
           </Typography>
           <Typography className={classes.tags} variant="body2" color="textSecondary" component="p">

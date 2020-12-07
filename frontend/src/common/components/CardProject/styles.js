@@ -3,6 +3,9 @@ export default ({ palette }) => ({
     maxWidth: '260px',
     margin: '1em',
     borderRadius: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   image: {
     height: '200px',

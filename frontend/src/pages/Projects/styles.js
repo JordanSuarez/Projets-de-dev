@@ -4,12 +4,14 @@ export default ({ palette }) => ({
     maxWidth: '1200px',
     margin: '0 auto',
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
   },
   listCard: {
     display: 'flex',
+    flexWrap: 'wrap',
   },
   pagination: {
     width: '255px',
