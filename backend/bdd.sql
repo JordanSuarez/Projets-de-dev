@@ -65,9 +65,9 @@ INSERT INTO `Tags` (`id`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
 (47,	'Gatsby',	NULL,	'2020-12-02 04:20:22.000',	'2020-12-02 04:20:22.000'),
 (48,	'Strapi',	NULL,	'2020-12-02 04:20:28.000',	'2020-12-02 04:20:28.000');
 
-INSERT INTO `Users` (`id`, `username`, `userImage`, `email`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
-(1,	'Almigra',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'almigra.dev@gmail.com',	'$2b$05$D9wHO2GSVMQrCVVXFylNYeuc1AiVxd7ySz5JSEwyeUcBStYd68gPu',	0,	'2020-12-01 09:44:37.000',	'2020-12-01 09:44:37.000'),
-(2,	'Alban',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01.000',	'2020-12-01 10:26:01.000'),
-(3,	'O\'Clock',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'hello@oclock.io',	'$2b$05$0uZEOS5VgnT7rvcCDos6XO9y1uQPzY4TzCewOqFRnpEF0L7odW/0i',	0,	'2020-12-02 03:13:20.000',	'2020-12-02 03:13:20.000');
+INSERT INTO `Users` (`id`, `username`, `bio`, `userImage`, `email`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
+(1,	'Almigra',	'Almigra Dev ',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'almigra.dev@gmail.com',	'$2b$05$D9wHO2GSVMQrCVVXFylNYeuc1AiVxd7ySz5JSEwyeUcBStYd68gPu',	0,	'2020-12-01 09:44:37.000',	'2020-12-07 09:14:31.000'),
+(2,	'Alban',	'Alban le Grand',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'albanvincent.pro@gmail.com',	'$2b$05$5Xl4vJ2NGPe6kdzgdXp2hulx2YaDagXkPrjTLs.FPbltJebnPUUJe',	0,	'2020-12-01 10:26:01.000',	'2020-12-07 09:14:53.000'),
+(3,	'O\'Clock',	'O\'Clock l\'horloge magique',	'https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg',	'hello@oclock.io',	'$2b$05$0uZEOS5VgnT7rvcCDos6XO9y1uQPzY4TzCewOqFRnpEF0L7odW/0i',	0,	'2020-12-02 03:13:20.000',	'2020-12-07 09:15:03.000');
 
--- 2020-12-07 05:46:39
+-- 2020-12-07 08:15:19
