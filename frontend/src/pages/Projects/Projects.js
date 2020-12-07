@@ -16,7 +16,6 @@ const Projects = ({
   }, []);
   const arrayProjects = Object.values(projects);
   console.log(arrayProjects);
-  console.log(projects);
   return (
     <Base>
       {loading && <div>Chargement en cours...</div>}
