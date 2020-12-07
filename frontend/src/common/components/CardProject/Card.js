@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
 import { useHistory } from 'react-router-dom';
-import { getProjectRoute } from 'src/common/routing/routesResolver';
+import { getProjectRoute, getProfileRoute } from 'src/common/routing/routesResolver';
 
 // icone coeur border
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
@@ -21,7 +21,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 // import './cardProject.scss';
 // import { mergeClasses } from '@material-ui/styles';
 
-
 // eslint-disable-next-line arrow-body-style
 const CardProject = ({
   id,
@@ -30,10 +29,14 @@ const CardProject = ({
   image,
   description,
   user,
+  tags,
 }) => {
   const history = useHistory();
   const handleDisplayProject = (id) => {
     history.push(getProjectRoute(id));
+  };
+  const handleDisplayProfile = (id) => {
+    history.push(getProfileRoute(id));
   };
   return (
     <Card className={classes.card}>
@@ -48,13 +51,22 @@ const CardProject = ({
             {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {description}
+            {description}
+          </Typography>
+          <Typography className={classes.tags} variant="body2" color="textSecondary" component="p">
+            {tags.map((tag) => {
+              if (tag !== null) {
+                return (
+                  <span key={tag.id} className={classes.tag}>{tag.name}</span>
+                );
+              }
+            })}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.link}>
         <FavoriteBorderIcon className={classes.like} />
-        <Avatar className="card__link__avatar" alt="Pikachu" src={user.userImage} />
+        <Avatar className="card__link__avatar" alt="Pikachu" src={user.userImage} onClick={() => handleDisplayProfile(user.id)} />
       </CardActions>
     </Card>
 
@@ -68,6 +80,7 @@ CardProject.propTypes = {
   image: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
+  tags: PropTypes.array.isRequired,
 };
 
 export default CardProject;
