@@ -1,13 +1,13 @@
-export const GET_PROFILE_INFO = 'GET_PROFILE_INFO';
-export const SET_PROFILE_INFO = 'SET_PROFILE_INFO';
+export const GET_PROFILE = 'GET_PROFILE';
+export const SAVE_PROFILE = 'SAVE_PROFILE';
 
-export const getProfileInfo = () => ({
-  type: GET_PROFILE_INFO,
+// Récupération d'un profil ayant un id précis
+export const getProfileInfos = () => ({
+  type: GET_PROFILE,
 });
 
-export const setProfileInfo = (email, password, username) => ({
-  type: SET_PROFILE_INFO,
-  email,
-  password,
-  username,
+// Sauvegarde d'un profil ayant un id précis
+export const saveProfile = (data) => ({
+  type: SAVE_PROFILE,
+  profile: { ...data[0] },
 });

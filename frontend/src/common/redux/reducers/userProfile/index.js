@@ -1,27 +1,29 @@
 import {
   SAVE_PROFILE,
 // eslint-disable-next-line import/no-unresolved
-} from 'src/common/redux/actions/profile';
+} from 'src/common/redux/actions/userProfile';
 
 const initialState = {
-  profile: {
+  userProfile: {
     id: '',
+    email: '',
     username: '',
     userImage: '',
     Projects: [],
   },
+  isLogged: false,
   loading: true,
 };
 
-const profile = (state = initialState, action = {}) => {
+const userProfile = (state = initialState, action = {}) => {
   switch (action.type) {
     case SAVE_PROFILE: {
-      if (action.profile.userImage === null || !action.profile.userImage) {
-        action.profile.userImage = '';
+      if (action.userProfile.userImage === null || !action.userProfile.userImage) {
+        action.userProfile.userImage = '';
       }
       return {
         ...state,
-        profile: action.profile,
+        userProfile: action.userProfile,
         loading: false,
       };
     }
@@ -29,4 +31,4 @@ const profile = (state = initialState, action = {}) => {
   }
 };
 
-export default profile;
+export default userProfile;

@@ -16,6 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 
 // import './cardProject.scss';
 // import { mergeClasses } from '@material-ui/styles';
+// eslint-disable-next-line import/no-unresolved
 import { classes as classesProps } from 'src/common/classes';
 import { func } from 'prop-types';
 import cardImage from './card-image.png';
