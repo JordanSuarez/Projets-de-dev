@@ -1,6 +1,6 @@
 export default ({ palette }) => ({
-  body: {
-    padding: '2rem',
+  projectContainer: {
+    padding: '1rem',
   },
   subtitle: {
     padding: '1em',
@@ -11,6 +11,7 @@ export default ({ palette }) => ({
   tagsContainer: {
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap',
     margin: '1rem',
   },
   tag: {
@@ -22,35 +23,17 @@ export default ({ palette }) => ({
     borderRadius: '0.4rem',
     boxShadow: '1px 2px 3px 1px rgba(0,0,0,.35)',
   },
-  image: {
-    width: '92%',
-    borderRadius: '1rem',
-    margin: '0.2rem auto',
-    display: 'flex',
-    justifyContent: 'center',
-    boxShadow: '1px 2px 3px 1px rgba(0,0,0,.35)',
-  },
-  linkContainer: {
-    color: palette.darkBlue,
-    display: 'flex',
-    justifyContent: 'space-between',
-    margin: '0rem',
-    padding: '1.5rem 3rem 0 3rem',
-  },
-
-  linkGrid: {
-    display: 'flex',
-    alignSelf: 'center',
-  },
   link: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '0.6rem',
     '& a': {
-      marginBottom: '1.2rem',
+      display: 'flex',
+      alignItems: 'center',
       color: palette.darkBlue,
       '&:hover': {
         color: palette.blue,
+      },
+      '& img': {
+        width: '1.5rem',
+        marginRight: '0.5rem',
       },
     },
   },
@@ -63,9 +46,11 @@ export default ({ palette }) => ({
       transform: 'scale(1.1)',
     },
   },
-  profileGrid: {
+  linksGrid: {
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
+    margin: '2rem auto 0 auto',
+    padding: 'O 2rem',
   },
   profile: {
     display: 'flex',
@@ -75,12 +60,12 @@ export default ({ palette }) => ({
     color: palette.darkBlue,
     '&:hover': {
       color: palette.blue,
+      cursor: 'pointer',
     },
-
   },
   profileLogo: {
-    width: '5rem',
-    height: '5rem',
+    width: '3rem',
+    height: '3rem',
     marginBottom: '0.5rem',
     '&:hover': {
       transition: 'all .2s ease-in-out',
@@ -88,8 +73,46 @@ export default ({ palette }) => ({
     },
     boxShadow: ' 1px 2px 3px 1px rgba(0,0,0,.35)',
   },
+  iconButton: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    '& button': {
+      color: palette.darkBlue,
+      '&:hover': {
+        color: palette.blue,
+      },
+    },
+  },
+  imageContainer: {
+    margin: 'auto',
+  },
+  image: {
+    width: '-webkit-fill-available',
+    maxWidth: 'inherit',
+    borderRadius: '1rem',
+    margin: '0.2rem auto',
+    display: 'flex',
+    justifyContent: 'center',
+    boxShadow: '1px 2px 3px 1px rgba(0,0,0,.35)',
+  },
   description: {
-    margin: '0 1.5rem',
+    margin: 'auto',
+  },
+  quillEditor: {
     color: palette.darkBlue,
+    '& .ql-editor': {
+      backgroundColor: palette.lightBlue,
+      border: 'none',
+    },
+    '& p': {
+      display: 'content',
+    },
+    '& img': {
+      display: 'flex',
+      flexWrap: 'wrap',
+      margin: 'auto',
+      width: '-webkit-fill-available',
+      maxWidth: 'fit-content',
+    },
   },
 });

@@ -66,6 +66,7 @@
     "final-form-arrays": "^3.0.2",
     "final-form-material-ui": "0.3.0",
     "js-cookie": "^2.2.1",
+    "lodash": "^4.17.20",
     "mui-rff": "^2.5.6",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
