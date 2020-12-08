@@ -21,7 +21,6 @@ const Projects = ({
   const limit = 12;
 
   useEffect(() => {
-    console.log('modif');
     getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
   }, [currentOffset]);
 

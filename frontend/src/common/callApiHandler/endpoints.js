@@ -25,7 +25,6 @@ const endpoints = {
     [GET]: {
       [ALL]: `${PROJECTS}`,
       [TWELVE]: (meta, offset) => `${PROJECTS}/${meta}${offset}`,
-      [LATEST]: `${PROJECTS}/${LATEST}`,
       [ONE]: (meta) => `${PROJECTS}/${meta}`,
     },
     [POST]: {

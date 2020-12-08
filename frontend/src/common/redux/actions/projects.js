@@ -16,7 +16,7 @@ export const saveProjects = (data) => ({
   projects: { ...data },
 });
 
-// Sauvegarde de tout les projets
+// Sauvegarde le nombre de projets (pour la pagination)
 export const saveProjectsNumber = (data) => ({
   type: SAVE_PROJECTS_NUMBER,
   projects: { ...data },

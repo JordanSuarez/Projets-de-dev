@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getProjects: () => {
-    dispatch(getLatestProjects());
+    dispatch(getLatestProjects('?limit=12', '&offset=1'));
   },
 });
 

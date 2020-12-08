@@ -1,22 +1,24 @@
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
-import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
   GET_LATEST_PROJECTS,
-  saveLatestProjects,
+  saveLastestProjects,
 } from 'src/common/redux/actions/home';
-import { PROJECTS, GET, LATEST } from 'src/common/callApiHandler/urlHandler';
+import { callApi } from 'src/common/callApiHandler/urlHandler';
+import {
+  PROJECTS, GET, TWELVE,
+} from 'src/common/callApiHandler/constants';
 
 const homeMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_LATEST_PROJECTS: {
-      const url = getEndpoint(PROJECTS, GET, LATEST);
+      const url = getEndpoint(PROJECTS, GET, TWELVE, action.projectLimit, action.projectOffset);
 
       callApi(url, GET)
-        .then(() => {
-          store.dispatch(saveLatestProjects());
+        .then((response) => {
+          store.dispatch(saveLastestProjects(response.data));
         })
-        .catch((e) => {
-          console.log(e.request);
+        .catch((response) => {
+          console.log(response);
         });
 
       next(action);

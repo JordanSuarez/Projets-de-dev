@@ -5,6 +5,7 @@ import {
 } from 'src/common/redux/actions/projects';
 
 const initialState = {
+  projectsNumber: 1,
   projects: {},
   loading: true,
 };

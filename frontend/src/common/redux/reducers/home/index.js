@@ -1,7 +1,7 @@
 import {
   SAVE_LATEST_PROJECTS,
 // eslint-disable-next-line import/no-unresolved
-} from 'src/common/redux/actions/projects';
+} from 'src/common/redux/actions/home';
 
 const initialState = {
   projects: {},

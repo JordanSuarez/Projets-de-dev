@@ -21,7 +21,6 @@ const profiles = (store) => (next) => (action) => {
       ];
       Promise.all(promises)
         .then((response) => {
-          console.log(response[0].data, 'reponse pour card');
           store.dispatch(saveProjects(response[0].data));
           store.dispatch(saveProjectsNumber(response[1].data));
         })
