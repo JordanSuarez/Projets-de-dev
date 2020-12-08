@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 import {
   Avatar,
 } from '@material-ui/core';
-
 import Base from 'src/common/components/Base';
+import CardProject from 'src/common/components/CardProject';
 import avatar2 from './avatar.png';
 
 const Profile = ({
@@ -42,13 +42,24 @@ const Profile = ({
               Liste des projet
             </h2>
             <div>
-              {profile.Projects.length === 0 && (
+              {profile.projects.length === 0 && (
                 <p> Cet utilisateur n'as pas encore de projet</p>
               )}
-              {profile.Projects.length !== 0 && (
-                // TODO charger les cardProject
-                <p>Il a des projets, TODO </p>
-              )}
+              {profile.projects.length > 0
+                && profile.projects.map(({
+                  id: projectId, title, description, tags, image,
+                }) => (
+                  <CardProject
+                    key={projectId}
+                    projectId={projectId}
+                    title={title}
+                    tags={tags}
+                    description={description}
+                    userId={profile.id}
+                    userImage={profile.userImage}
+                    image={image}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -64,7 +75,7 @@ Profile.propTypes = {
     id: PropTypes.number,
     username: PropTypes.string.isRequired,
     userImage: PropTypes.string,
-    Projects: PropTypes.arrayOf(PropTypes.any).isRequired,
+    projects: PropTypes.arrayOf(PropTypes.any).isRequired,
   }),
   loading: PropTypes.bool.isRequired,
 };
