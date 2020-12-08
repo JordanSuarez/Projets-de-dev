@@ -4,6 +4,7 @@ export default () => ({
     margin: '1em auto',
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap',
   },
 
 });
