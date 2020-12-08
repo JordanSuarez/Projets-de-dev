@@ -237,7 +237,7 @@ module.exports = {
 			
 
 			if (userId < 0){
-				return res.status(400).json({ 'error': /*'Le token est invalide'*/ err});
+				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
 			asyncLib.waterfall([
@@ -263,6 +263,28 @@ module.exports = {
 			]);
 
 
+		},
+
+		deleteUser: (req, res) => {
+
+			const headerAuth = req.headers['authorization'];
+			const userId = jwtUtils.getUserId(headerAuth);
+
+			if (userId > 0) {
+				
+				models.User.destroy({
+					where: {id: req.params.id }
+				}).then(() => {
+					return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
+				}).catch((err) => {
+					return res.status(400).json({'error' : 'la requête n\'a pas pu aboutir' + err});
+				})
+				
+			} else {
+				return res.status(401).json({'error': 'vous n\'avez pas l\'autorisation de supprimer un utilisateur' });
+			}
+			
+			
 		},
 
 
