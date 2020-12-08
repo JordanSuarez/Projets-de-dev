@@ -13,6 +13,7 @@ import {
   NEW,
   ONE,
   ALL,
+  TWELVE,
   LATEST,
   PRIVATE_PROFILE,
 } from './constants';
@@ -22,7 +23,8 @@ const endpoints = {
   // Projects routes
   [PROJECTS]: {
     [GET]: {
-      [ALL]: (meta, offset) => `${PROJECTS}/${meta}${offset}`,
+      [ALL]: `${PROJECTS}`,
+      [TWELVE]: (meta, offset) => `${PROJECTS}/${meta}${offset}`,
       [LATEST]: `${PROJECTS}/${LATEST}`,
       [ONE]: (meta) => `${PROJECTS}/${meta}`,
     },

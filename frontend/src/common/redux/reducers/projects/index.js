@@ -1,5 +1,6 @@
 import {
   SAVE_PROJECTS,
+  SAVE_PROJECTS_NUMBER,
 // eslint-disable-next-line import/no-unresolved
 } from 'src/common/redux/actions/projects';
 
@@ -14,6 +15,14 @@ const projects = (state = initialState, action = {}) => {
       return {
         ...state,
         projects: action.projects,
+        loading: false,
+      };
+    }
+    case SAVE_PROJECTS_NUMBER: {
+      const number = Object.keys(action.projects).length;
+      return {
+        ...state,
+        projectsNumber: number,
         loading: false,
       };
     }

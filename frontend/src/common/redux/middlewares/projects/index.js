@@ -1,22 +1,29 @@
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
-  PROJECTS, GET, ALL,
+  PROJECTS, GET, ALL, TWELVE,
 } from 'src/common/callApiHandler/constants';
 import {
   GET_PROJECTS,
   saveProjects,
+  saveProjectsNumber,
 } from 'src/common/redux/actions/projects';
 import axios from 'axios';
 
 const profiles = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_PROJECTS: {
-      const url = getEndpoint(PROJECTS, GET, ALL, action.projectLimit, action.projectOffset);
-      callApi(url, GET)
+      const url = getEndpoint(PROJECTS, GET, TWELVE, action.projectLimit, action.projectOffset);
+      const url2 = getEndpoint(PROJECTS, GET, ALL);
+      const promises = [
+        callApi(url, GET),
+        callApi(url2, GET),
+      ];
+      Promise.all(promises)
         .then((response) => {
-          console.log(response, action.projectOffset);
-          store.dispatch(saveProjects(response.data));
+          console.log(response[0].data, 'reponse pour card');
+          store.dispatch(saveProjects(response[0].data));
+          store.dispatch(saveProjectsNumber(response[1].data));
         })
         .catch((error) => {
           console.log(error);

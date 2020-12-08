@@ -21,8 +21,8 @@ import errorRouting from 'src/pages/404/config/routing';
 export const routes = [
   homeRouting,
   creationProjectRouting,
-  projectRouting,
   projectsListRouting,
+  projectRouting,
   editionProjectRouting,
   profileRouting,
   userProfileRouting,

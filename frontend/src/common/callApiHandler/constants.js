@@ -11,6 +11,7 @@ export const PROJECTS = 'projects';
 
 // Resources type
 export const ALL = 'all';
+export const TWELVE = 'twelve';
 export const ONE = 'one';
 export const NEW = 'new';
 export const EDIT = 'edit';
