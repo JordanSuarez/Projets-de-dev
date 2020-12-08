@@ -27,11 +27,11 @@ module.exports = {
       limit: (limit ? parseInt(limit) : 999),
       offset: (offset ? parseInt(offset) : 0),
       where: (tag1 ? whereClause : null),
-      include: {
-        all:true, 
-        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'] 
-      },
-      },
+      include: [
+        {model: models.Tag, all:true},
+        {model: models.User, attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'],}},
+        {model: models.Comment, attributes: { exclude: ['ProjectId','UserId']}, include: {model: models.User, attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'],}}}
+      ]
     })
     .then((project) => {
       const formatProject = [];
@@ -68,11 +68,12 @@ module.exports = {
 
     models.Project.findOne({
       where : {id : req.params.id},
-      include: {
-        all:true, 
-        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'],
-      },
-      },
+      include: [
+        {model: models.Tag, all:true},
+        {model: models.User, attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'],}},
+        {model: models.Comment, attributes: { exclude: ['ProjectId','UserId']}, include: {model: models.User, attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'],}}}
+      ]
+      
     })
     .then((project) => {
         const formatProject = {
