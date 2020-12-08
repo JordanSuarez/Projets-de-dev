@@ -39,82 +39,79 @@ const Project = ({
   };
 
   return (
-    <Base>
-      {loading && <div>Chargement en cours...</div>}
-      {!loading && (
-        <div className={classes.projectContainer}>
-          <h2 className={classes.subtitle}>{project.title}</h2>
-          <div className={classes.tagsContainer}>
-            {project.tags.map((tag) => {
-              if (tag !== null) {
-                return (
-                  <div key={tag.id} className={classes.tag}>{tag.name}</div>
-                );
-              }
-            })}
-          </div>
-          <Grid item xs={12} sm={12} md={9} className={classes.imageContainer}>
-            <Grid item xs={12} sm={12} md={9} className={classes.linksGrid}>
-              <div onClick={handleClickProfile} className={classes.profile}>
-                <Avatar
-                  alt={project.user.username}
-                  src={project.user.userImage || profileLogo}
-                  className={classes.profileLogo}
-                />
-                {project.user.username}
-              </div>
-              {(project.github_link || project.project_link)
-            && (
-            <div className={classes.iconButton}>
-              <IconButton
-                aria-label="more"
-                aria-controls="long-menu"
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <MoreHorizIcon className={classes.menuIcon} />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-              >
-                {project.github_link
+    <Base loading={loading}>
+      <div className={classes.projectContainer}>
+        <h2 className={classes.subtitle}>{project.title}</h2>
+        <div className={classes.tagsContainer}>
+          {project.tags.map((tag) => {
+            if (tag !== null) {
+              return (
+                <div key={tag.id} className={classes.tag}>{tag.name}</div>
+              );
+            }
+          })}
+        </div>
+        <Grid item xs={12} sm={12} md={9} className={classes.imageContainer}>
+          <Grid item xs={12} sm={12} md={9} className={classes.linksGrid}>
+            <div onClick={handleClickProfile} className={classes.profile}>
+              <Avatar
+                alt={project.user.username}
+                src={project.user.userImage || profileLogo}
+                className={classes.profileLogo}
+              />
+              {project.user.username}
+            </div>
+            {(project.github_link || project.project_link)
+          && (
+          <div className={classes.iconButton}>
+            <IconButton
+              aria-label="more"
+              aria-controls="long-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
+            >
+              <MoreHorizIcon className={classes.menuIcon} />
+            </IconButton>
+            <Menu
+              id="long-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={open}
+              onClose={handleClose}
+            >
+              {project.github_link
+              && (
+              <MenuItem onClick={handleClose} className={classes.link}>
+                <a href={project.github_link} className={classes.githubLink}>
+                  <img src={githubLogo} alt="project-header" />
+                  Github
+                </a>
+              </MenuItem>
+              )}
+              {project.project_link
                 && (
                 <MenuItem onClick={handleClose} className={classes.link}>
-                  <a href={project.github_link} className={classes.githubLink}>
-                    <img src={githubLogo} alt="project-header" />
-                    Github
+                  <a href={project.project_link}>
+                    Projet en ligne
                   </a>
                 </MenuItem>
                 )}
-                {project.project_link
-                  && (
-                  <MenuItem onClick={handleClose} className={classes.link}>
-                    <a href={project.project_link}>
-                      Projet en ligne
-                    </a>
-                  </MenuItem>
-                  )}
-              </Menu>
-            </div>
-            )}
-            </Grid>
-            <img className={classes.image} src={project.image} alt="project-header" />
+            </Menu>
+          </div>
+          )}
           </Grid>
-          <Grid item xs={12} sm={12} md={9} className={classes.description}>
-            <h3 className={classes.subtitle}>Description</h3>
-            <ReactQuill
-              value={project.description}
-              readOnly
-              theme="bubble"
-              className={classes.quillEditor}
-            />
-          </Grid>
-        </div>
-      )}
+          <img className={classes.image} src={project.image} alt="project-header" />
+        </Grid>
+        <Grid item xs={12} sm={12} md={9} className={classes.description}>
+          <h3 className={classes.subtitle}>Description</h3>
+          <ReactQuill
+            value={project.description}
+            readOnly
+            theme="bubble"
+            className={classes.quillEditor}
+          />
+        </Grid>
+      </div>
     </Base>
   );
 };

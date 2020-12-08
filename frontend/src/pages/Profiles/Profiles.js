@@ -17,15 +17,12 @@ const Profiles = ({
   const arrayProfiles = Object.values(profiles);
 
   return (
-    <Base>
-      {loading && <div>Chargement en cours...</div>}
-      {!loading && (
+    <Base loading={loading}>
       <div className={classes.listCard}>
         {arrayProfiles.map((profile) => (
           <CardProfile {...profile} key={profile.id} />
         ))}
       </div>
-      )}
     </Base>
   );
 };

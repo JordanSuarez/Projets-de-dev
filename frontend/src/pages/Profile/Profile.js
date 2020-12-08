@@ -1,7 +1,8 @@
-/* eslint-disable import/no-unresolved */
 import React, { useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
+import { useParams } from 'react-router-dom';
 import {
   Avatar,
 } from '@material-ui/core';
@@ -15,14 +16,14 @@ const Profile = ({
   loading,
   profile,
 }) => {
+  const { id } = useParams();
+
   useEffect(() => {
-    getProfile();
+    getProfile(id);
   }, []);
 
   return (
-    <Base>
-      {loading && <div>Chargement en cours...</div>}
-      {!loading && (
+    <Base loading={loading}>
       <>
         <div className={classes.container}>
           <div className={classes.column}>
@@ -52,7 +53,6 @@ const Profile = ({
           </div>
         </div>
       </>
-      )}
     </Base>
   );
 };
@@ -60,8 +60,20 @@ const Profile = ({
 Profile.propTypes = {
   ...classesProps,
   getProfile: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired,
+  profile: PropTypes.shape({
+    id: PropTypes.number,
+    username: PropTypes.string.isRequired,
+    userImage: PropTypes.string,
+    Projects: PropTypes.arrayOf(PropTypes.any).isRequired,
+  }),
   loading: PropTypes.bool.isRequired,
+};
+
+Profile.defaultProps = {
+  profile: PropTypes.shape({
+    id: null,
+    userImage: '',
+  }),
 };
 
 export default Profile;

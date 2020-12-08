@@ -27,11 +27,8 @@ const UserProfile = ({
   const editProfile = () => history.push(getEditionProfileRoute());
   const newProject = () => history.push(getCreationProjectRoute());
   return (
-    <Base>
-      {loading && <div>Chargement en cours...</div>}
-      {!loading && (
+    <Base loading={loading}>
       <>
-
       <div className={classes.container}>
         <h2 className={classes.subtitle}> Mon profil </h2>
         <div className={classes.column}>
@@ -76,7 +73,6 @@ const UserProfile = ({
         </div>
       </div>
       </>
-      )}
     </Base>
   );
 };

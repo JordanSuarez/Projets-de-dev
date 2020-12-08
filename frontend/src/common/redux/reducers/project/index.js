@@ -3,7 +3,18 @@ import {
 } from 'src/common/redux/actions/project';
 
 const initialState = {
-  project: {},
+  project: {
+    id: null,
+    title: '',
+    description: '',
+    image: '',
+    tags: [],
+    user: {
+      id: null,
+      username: '',
+      userImage: '',
+    },
+  },
   loading: true,
   redirect: '',
 };
