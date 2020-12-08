@@ -14,8 +14,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProjects: () => {
-    dispatch(getProjectsInfos());
+  getProjects: (projectLimit, projectOffset) => {
+    dispatch(getProjectsInfos(projectLimit, projectOffset));
   },
 });
 

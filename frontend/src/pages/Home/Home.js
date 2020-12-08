@@ -1,5 +1,5 @@
-import React from 'react';
-import Pagination from '@material-ui/lab/Pagination';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 
 import Base from 'src/common/components/Base';
@@ -11,9 +11,17 @@ import { getProjectRoute } from 'src/common/routing/routesResolver';
 import headerImage from './header-image.png';
 
 // eslint-disable-next-line arrow-body-style
-const Home = ({ classes, loading }) => {
+const Home = ({
+  classes,
+  getProjects,
+  projects,
+  loading,
+}) => {
+  useEffect(() => {
+    getProjects();
+  }, []);
+  const arrayProjects = Object.values(projects);
   const history = useHistory();
-
   const handleDisplayProject = (id) => {
     history.push(getProjectRoute(id));
   };
@@ -23,10 +31,14 @@ const Home = ({ classes, loading }) => {
       <div className={classes.home}>
         <h2 className={classes.subtitle}> Derniers projets publiés</h2>
         <div className={classes.latestProject}>
-          {/* TODO Get and give cardId to handleDisplayProject */}
-          <p>0_o Modifications en cours o_0 </p>
+          <div className={classes.container}>
+            <div className={classes.listCard}>
+              {arrayProjects.map((project) => (
+                <CardProject {...project} key={project.id} />
+              ))}
+            </div>
+          </div>
         </div>
-        <Pagination className={classes.pagination} count={10} size="small" />
       </div>
     </Base>
   );
@@ -35,6 +47,9 @@ const Home = ({ classes, loading }) => {
 Home.propTypes = {
   ...classesProps,
   loading: bool.isRequired,
+  getProjects: PropTypes.func.isRequired,
+  projects: PropTypes.shape({
+  }).isRequired,
 };
 
 export default Home;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import Pagination from '@material-ui/lab/Pagination';
@@ -12,9 +12,17 @@ const Projects = ({
   projects,
   loading,
 }) => {
+  const [offset, setOffset] = useState(0);
+  const limit = 12;
   useEffect(() => {
-    getProjects();
-  }, []);
+    console.log('modif');
+    getProjects(`?limit=${limit}`, `&offset=${offset}`);
+  }, [offset]);
+
+  console.log(offset);
+  const changePage = (event, value) => {
+    setOffset((value * 12) - 12);
+  };
   const arrayProjects = Object.values(projects);
   return (
     <Base loading={loading}>
@@ -25,7 +33,7 @@ const Projects = ({
               <CardProject {...project} key={project.id} />
             ))}
           </div>
-          <Pagination className={classes.pagination} count={10} size="small" />
+          <Pagination className={classes.pagination} count={10} size="small" onChange={changePage}/>
         </div>
       </>
     </Base>

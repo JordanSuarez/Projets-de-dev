@@ -30,4 +30,4 @@ app.get('/', (req, res) => {
 
 app.use('/api/', apiRouter);
 
-app.listen(port);
+app.listen(3001);

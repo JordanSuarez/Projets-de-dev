@@ -27,6 +27,9 @@ module.exports = {
       limit: (limit ? parseInt(limit) : 999),
       offset: (offset ? parseInt(offset) : 0),
       where: (tag1 ? whereClause : null),
+      order: [
+        ['createdAt', 'DESC'],
+      ],
       include: {
         all:true, 
         attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'] 

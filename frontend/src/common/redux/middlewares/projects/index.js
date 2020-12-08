@@ -1,4 +1,8 @@
-/* eslint-disable import/no-unresolved */
+import { getEndpoint } from 'src/common/callApiHandler/endpoints';
+import { callApi } from 'src/common/callApiHandler/urlHandler';
+import {
+  PROJECTS, GET, ALL,
+} from 'src/common/callApiHandler/constants';
 import {
   GET_PROJECTS,
   saveProjects,
@@ -8,22 +12,10 @@ import axios from 'axios';
 const profiles = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_PROJECTS: {
-      axios.get(
-        'http://localhost:3001/api/projects',
-        {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*',
-            'Content-Type': 'application/json, charset=utf-8',
-            Accept: 'application/json',
-          },
-        },
-        {
-          withCredentials: true,
-        },
-      )
+      const url = getEndpoint(PROJECTS, GET, ALL, action.projectLimit, action.projectOffset);
+      callApi(url, GET)
         .then((response) => {
-          console.log(response.data);
+          console.log(response, action.projectOffset);
           store.dispatch(saveProjects(response.data));
         })
         .catch((error) => {
