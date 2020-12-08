@@ -12,6 +12,7 @@ exports.router = (() => {
     apiRouter.route('/users/register/').post(userController.register); // OK
     apiRouter.route('/users/login/').post(userController.login); // OK
     apiRouter.route('/users/me').get(userController.getUserProfile); // OK
+    apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
@@ -19,7 +20,7 @@ exports.router = (() => {
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
     // Tags routes
-    apiRouter.route('/tags').get(tagController.getTagList);
+    apiRouter.route('/tags').get(tagController.getTagList); // OK
 
     return apiRouter;
 })();
