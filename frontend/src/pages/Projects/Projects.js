@@ -28,14 +28,26 @@ const Projects = ({
     setOffset((value * 12) - 12);
     history.push(getProjectsListRoute(value));
   };
+
   const arrayProjects = Object.values(projects);
   return (
     <Base loading={loading}>
       <>
         <div className={classes.container}>
           <div className={classes.listCard}>
-            {arrayProjects.map((project) => (
-              <CardProject {...project} key={project.id} />
+            {arrayProjects.map(({
+              id: projectId, title, description, tags, user, image,
+            }) => (
+              <CardProject
+                key={projectId}
+                projectId={projectId}
+                title={title}
+                tags={tags}
+                description={description}
+                userId={user.id}
+                userImage={user.userImage}
+                image={image}
+              />
             ))}
           </div>
           <Pagination className={classes.pagination} page={parseInt(offset, 10)} count={Math.ceil(projectsNumber / limit)} size="small" onChange={changePage} />

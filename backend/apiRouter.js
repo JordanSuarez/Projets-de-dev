@@ -2,6 +2,8 @@ const express = require('express');
 const userController = require('./routes/userController');
 const projectController = require('./routes/projectController');
 const tagController = require('./routes/tagController');
+const commentController = require('./routes/commentController');
+
 
 // Router
 exports.router = (() => {
@@ -21,6 +23,9 @@ exports.router = (() => {
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
+    // Comments routes
+    apiRouter.route('/comments/add').post(commentController.new); // OK
+
 
     return apiRouter;
 })();
