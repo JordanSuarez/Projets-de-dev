@@ -1,4 +1,4 @@
-export default ({ theme, breakpoints, palette }) => ({
+export default ({ breakpoints, palette }) => ({
   card: {
     width: '260px',
     [breakpoints.up('sm')]: {
