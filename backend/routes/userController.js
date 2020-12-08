@@ -179,9 +179,10 @@ module.exports = {
 
 		getUserById: (req, res) => {
 			models.User.findOne({
-				attributes: ['id', 'username', 'userImage', 'bio'],
+				attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'],},
+				where: {id: req.params.id},
 				include: [
-					{model: models.Project, include: {model: models.Tag, all:true}, where: {userId: req.params.id}, },
+					{model: models.Project, include: {model: models.Tag, all:true}, where: {userId: req.params.id}, required: false},
 				]
 			}).then((user) => {
 				if (user) {
@@ -203,6 +204,7 @@ module.exports = {
 								user.Projects[element].Tag5,
 								user.Projects[element].Tag6,
 							],
+							user: user.Projects[element].User,
 						};
 						formatProject.push(newFormat);
 					}
