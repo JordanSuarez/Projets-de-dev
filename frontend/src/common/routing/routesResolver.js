@@ -1,7 +1,7 @@
 import { generatePath } from 'react-router-dom';
 
 export const HOME = '/';
-export const PROJECTS = '/projects';
+export const PROJECTS = '/projects/page=:offset';
 export const PROJECT = '/projects/:id';
 export const PROJECT_NEW = '/projects/new';
 export const PROJECT_EDIT = '/projects/:id/edit';
@@ -21,7 +21,7 @@ export const ERROR = '/404';
 
 export const getHomeRoute = () => generatePath(HOME);
 
-export const getProjectsListRoute = () => generatePath(PROJECTS);
+export const getProjectsListRoute = (offset) => generatePath(PROJECTS, { offset });
 export const getProjectRoute = (id) => generatePath(PROJECT, { id });
 export const getCreationProjectRoute = () => generatePath(PROJECT_NEW);
 export const getEditionProjectRoute = (id) => generatePath(PROJECT_EDIT, { id });

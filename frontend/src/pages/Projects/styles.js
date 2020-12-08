@@ -12,6 +12,8 @@ export default ({ palette }) => ({
   listCard: {
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+
   },
   pagination: {
     width: '255px',

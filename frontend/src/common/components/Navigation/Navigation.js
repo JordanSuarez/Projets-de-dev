@@ -33,7 +33,7 @@ const Navigation = ({ classes, isLogged }) => {
       name: 'Accueil', route: getHomeRoute(),
     },
     {
-      name: 'Tous les projets', route: getProjectsListRoute(),
+      name: 'Tous les projets', route: getProjectsListRoute(1),
     },
     {
       name: 'Tous les profils', route: getProfilesListRoute(),

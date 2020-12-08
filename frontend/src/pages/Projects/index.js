@@ -10,12 +10,13 @@ import styles from './styles';
 const mapStateToProps = (state) => ({
   redirect: state.auth.redirect,
   projects: state.projects.projects,
+  projectsNumber: state.projects.projectsNumber,
   loading: state.projects.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProjects: () => {
-    dispatch(getProjectsInfos());
+  getProjects: (projectLimit, projectOffset) => {
+    dispatch(getProjectsInfos(projectLimit, projectOffset));
   },
 });
 

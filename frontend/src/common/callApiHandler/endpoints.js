@@ -13,6 +13,8 @@ import {
   NEW,
   ONE,
   ALL,
+  TWELVE,
+  LATEST,
   PRIVATE_PROFILE,
 } from './constants';
 import { apiUrl } from './urlHandler';
@@ -22,6 +24,7 @@ const endpoints = {
   [PROJECTS]: {
     [GET]: {
       [ALL]: `${PROJECTS}`,
+      [TWELVE]: (meta, offset) => `${PROJECTS}/${meta}${offset}`,
       [ONE]: (meta) => `${PROJECTS}/${meta}`,
     },
     [POST]: {
@@ -62,10 +65,12 @@ const endpoints = {
 
 // get api endpoint from endoints{} list
 // eslint-disable-next-line import/prefer-default-export
-export const getEndpoint = (resource, method, type, meta) => {
+export const getEndpoint = (resource, method, type, meta, offset) => {
   try {
     const endpoint = endpoints[resource][method][type];
-
+    if (offset && meta) {
+      return (`/${endpoint(meta, offset)}`);
+    }
     return meta ? `/${endpoint(meta)}` : `/${endpoint}`;
   }
   catch (error) {
