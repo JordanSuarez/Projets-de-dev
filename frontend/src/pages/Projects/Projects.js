@@ -17,11 +17,9 @@ const Projects = ({
   }, []);
   const arrayProjects = Object.values(projects);
   return (
-    <Base>
-      {loading && <div>Chargement en cours...</div>}
-      {!loading && (
-        <>
-          <div className={classes.container}>
+    <Base loading={loading}>
+      <>
+        <div className={classes.container}>
           <div className={classes.listCard}>
             {arrayProjects.map((project) => (
               <CardProject {...project} key={project.id} />
@@ -29,8 +27,7 @@ const Projects = ({
           </div>
           <Pagination className={classes.pagination} count={10} size="small" />
         </div>
-        </>
-      )}
+      </>
     </Base>
   );
 };

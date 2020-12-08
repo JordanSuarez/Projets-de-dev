@@ -88,108 +88,105 @@ const ProfileEdition = ({
   };
 
   return (
-    <Base>
-      {loading && <div>Chargement en cours...</div>}
-      {!loading && (
-        <>
-          <div className={classes.container}>
-            <Box borderRadius={16} className={classes.content} boxShadow={2}>
-              <h2 className={classes.formTitle}>Modification du profil</h2>
-              <Form
-                className={classes.form}
-                onSubmit={handleUpdateProfile}
-                initialValues={{
-                  username: userProfile.username,
-                  email: userProfile.email,
-                }}
-                validate={validate}
-                render={({ handleSubmit, submitting }) => (
-                  <form onSubmit={handleSubmit} noValidate>
-                    <TextField
-                      className={classes.textfield}
-                      type="string"
-                      label="Nom d'utilisateur"
-                      name="username"
-                      margin="none"
-                    >
-                      coucou
-                    </TextField>
-                    <TextField
-                      className={classes.textfield}
-                      type="email"
-                      label="Email"
-                      name="email"
-                      margin="none"
-                    />
-                    <div className={classes.imageContainer}>
-                      <h3 className={classes.imageTitle}>Image de profil:</h3>
-                      <div className={classes.inputFile}>
-                        <div className={classes.customUploadButton}>
-                          <label from="nul" className={classes.newButtonUpload}>
-                            Choisir un fichier
-                          </label>
-                          <p className={classes.fileName}> TODO FILE NAME </p>
-                          <FileBase64
-                            hidden
-                          />
-                        </div>
+    <Base loading={loading}>
+      <>
+        <div className={classes.container}>
+          <Box borderRadius={16} className={classes.content} boxShadow={2}>
+            <h2 className={classes.formTitle}>Modification du profil</h2>
+            <Form
+              className={classes.form}
+              onSubmit={handleUpdateProfile}
+              initialValues={{
+                username: userProfile.username,
+                email: userProfile.email,
+              }}
+              validate={validate}
+              render={({ handleSubmit, submitting }) => (
+                <form onSubmit={handleSubmit} noValidate>
+                  <TextField
+                    className={classes.textfield}
+                    type="string"
+                    label="Nom d'utilisateur"
+                    name="username"
+                    margin="none"
+                  >
+                    coucou
+                  </TextField>
+                  <TextField
+                    className={classes.textfield}
+                    type="email"
+                    label="Email"
+                    name="email"
+                    margin="none"
+                  />
+                  <div className={classes.imageContainer}>
+                    <h3 className={classes.imageTitle}>Image de profil:</h3>
+                    <div className={classes.inputFile}>
+                      <div className={classes.customUploadButton}>
+                        <label from="nul" className={classes.newButtonUpload}>
+                          Choisir un fichier
+                        </label>
+                        <p className={classes.fileName}> TODO FILE NAME </p>
+                        <FileBase64
+                          hidden
+                        />
                       </div>
                     </div>
-                    <div>
-                      <Button
-                        className={classes.annuler}
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                          onChangePassword(!changePassword);
-                        }}
-                      >
-                        Je souhaite changer mon mot de passe
-                      </Button>
-                    </div>
-                    {changePassword && (
-                      <>
-                        <TextField
-                          className={classes.textfield}
-                          type="password"
-                          label="Mot de passe"
-                          name="password"
-                          margin="none"
-                        />
-                        <TextField
-                          className={classes.textfield}
-                          type="password"
-                          label="Confirmation mot de passe"
-                          name="passwordConfirmation"
-                          margin="none"
-                        />
-                      </>
-                    )}
-                    <Box className={classes.containerButton}>
-                      <Button
-                        className={classes.annuler}
-                        variant="contained"
-                        type=""
+                  </div>
+                  <div>
+                    <Button
+                      className={classes.annuler}
+                      variant="contained"
+                      type="button"
+                      onClick={() => {
+                        onChangePassword(!changePassword);
+                      }}
+                    >
+                      Je souhaite changer mon mot de passe
+                    </Button>
+                  </div>
+                  {changePassword && (
+                    <>
+                      <TextField
+                        className={classes.textfield}
+                        type="password"
+                        label="Mot de passe"
+                        name="password"
+                        margin="none"
+                      />
+                      <TextField
+                        className={classes.textfield}
+                        type="password"
+                        label="Confirmation mot de passe"
+                        name="passwordConfirmation"
+                        margin="none"
+                      />
+                    </>
+                  )}
+                  <Box className={classes.containerButton}>
+                    <Button
+                      className={classes.annuler}
+                      variant="contained"
+                      type=""
 
-                      >
-                        Annuler
-                      </Button>
-                      <Button
-                        className={classes.submit}
-                        variant="contained"
-                        type="submit"
-                        disabled={submitting}
-                      >
-                        Submit
-                      </Button>
-                    </Box>
-                  </form>
-                )}
-              />
-            </Box>
-          </div>
-        </>
-      )}
+                    >
+                      Annuler
+                    </Button>
+                    <Button
+                      className={classes.submit}
+                      variant="contained"
+                      type="submit"
+                      disabled={submitting}
+                    >
+                      Submit
+                    </Button>
+                  </Box>
+                </form>
+              )}
+            />
+          </Box>
+        </div>
+      </>
     </Base>
   );
 };

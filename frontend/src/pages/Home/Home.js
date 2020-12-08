@@ -5,19 +5,20 @@ import { classes as classesProps } from 'src/common/classes';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
 
+import { bool } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { getProjectRoute } from 'src/common/routing/routesResolver';
 import headerImage from './header-image.png';
 
 // eslint-disable-next-line arrow-body-style
-const Home = ({ classes }) => {
+const Home = ({ classes, loading }) => {
   const history = useHistory();
 
   const handleDisplayProject = (id) => {
     history.push(getProjectRoute(id));
   };
   return (
-    <Base>
+    <Base loading={loading}>
       <img className={classes.image} src={headerImage} alt="header" />
       <div className={classes.home}>
         <h2 className={classes.subtitle}> Derniers projets publiés</h2>
@@ -33,6 +34,7 @@ const Home = ({ classes }) => {
 
 Home.propTypes = {
   ...classesProps,
+  loading: bool.isRequired,
 };
 
 export default Home;

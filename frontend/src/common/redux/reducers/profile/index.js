@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   profile: {
-    id: '',
+    id: null,
     username: '',
     userImage: '',
     Projects: [],
