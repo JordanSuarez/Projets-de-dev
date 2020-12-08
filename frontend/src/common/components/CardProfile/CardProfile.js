@@ -34,7 +34,12 @@ const CardProfile = ({
   return (
     <Card className={classes.card}>
       <CardActionArea className={classes.cardArea}>
-        <Avatar alt="avatar" src={userImage} className={classes.large} />
+        {(userImage === null || !userImage || userImage === '') && (
+          <Avatar alt="avatar" src="https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg" className={classes.large} />
+        )}
+        {userImage && (
+          <Avatar alt="avatar" src={userImage} className={classes.large} />
+        )}
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">
             {username}

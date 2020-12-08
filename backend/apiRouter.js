@@ -1,7 +1,7 @@
 const express = require('express');
 const userController = require('./routes/userController');
 const projectController = require('./routes/projectController');
-
+const tagController = require('./routes/tagController');
 
 // Router
 exports.router = (() => {
@@ -12,12 +12,15 @@ exports.router = (() => {
     apiRouter.route('/users/register/').post(userController.register); // OK
     apiRouter.route('/users/login/').post(userController.login); // OK
     apiRouter.route('/users/me').get(userController.getUserProfile); // OK
+    apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
     apiRouter.route('/projects/:id').get(projectController.project); // OK
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
+    // Tags routes
+    apiRouter.route('/tags').get(tagController.getTagList); // OK
 
     return apiRouter;
 })();

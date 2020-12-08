@@ -1,15 +1,18 @@
 export default ({ palette }) => ({
   card: {
-    maxWidth: '260px',
+    width: '260px',
     margin: '1em',
     borderRadius: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   image: {
     height: '200px',
   },
   text: {
     textAlign: 'center',
-    marginBottom: '2em;',
+    marginBottom: '1em;',
     backgroundColor: palette.white,
   },
   title: {
@@ -33,12 +36,14 @@ export default ({ palette }) => ({
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
+    marginTop: '0.7em',
   },
   tag: {
     borderRadius: '8px',
-    margin: '1em 10px 0 10px',
+    margin: '1em 5px 0 0',
     backgroundColor: palette.yellow,
     padding: '0.5em',
     color: palette.darkBlue,
+    fontSize: '0.85em',
   },
 });
