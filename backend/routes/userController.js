@@ -269,8 +269,10 @@ module.exports = {
 
 			const headerAuth = req.headers['authorization'];
 			const userId = jwtUtils.getUserId(headerAuth);
+			const isAdmin = jwtUtils.getIsAdminUser(headerAuth);
+			
 
-			if (userId > 0) {
+			if (userId > 0 && isAdmin == true) {
 				
 				models.User.destroy({
 					where: {id: req.params.id }
