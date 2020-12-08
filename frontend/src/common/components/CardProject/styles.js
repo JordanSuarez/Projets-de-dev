@@ -56,4 +56,18 @@ export default ({ palette }) => ({
     color: palette.darkBlue,
     fontSize: '0.85em',
   },
+  description: {
+    textAlign: 'start',
+    textOverflow: 'ellipsis',
+    wordWrap: 'break-word',
+    overflow: 'hidden',
+    maxHeight: '6.6em',
+    lineHeight: '1.8em',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '3',
+    '-webkit-box-orient': 'vertical',
+    // '& p': {
+    //   overflowWrap: 'break-word',
+    // },
+  },
 });

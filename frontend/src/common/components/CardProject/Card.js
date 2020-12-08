@@ -17,6 +17,7 @@ import { getProjectRoute, getProfileRoute } from 'src/common/routing/routesResol
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // icone coeur plein
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DOMPurify from 'dompurify';
 import avatar from './avatar.png';
 
 // eslint-disable-next-line arrow-body-style
@@ -43,6 +44,9 @@ const CardProject = ({
     // TODO like project and change to FavoriteIcon
   };
 
+  const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'br', 'p'] };
+  const cleanDescription = DOMPurify.sanitize(description, configSanitize);
+
   return (
     <Card className={classes.card}>
       <CardActionArea
@@ -58,9 +62,7 @@ const CardProject = ({
           <Typography className={classes.title} component="h3">
             {title}
           </Typography>
-          <Typography className={classes.description} variant="body2" color="textSecondary" component="p">
-            {description}
-          </Typography>
+          <Typography className={classes.description} variant="body2" color="textSecondary" component="div" dangerouslySetInnerHTML={{ __html: cleanDescription }} />
           <Typography className={classes.tags} variant="body2" color="textSecondary" component="p">
             {tags.map((tag) => {
               if (tag !== null) {
