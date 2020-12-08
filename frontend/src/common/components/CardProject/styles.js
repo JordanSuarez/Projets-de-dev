@@ -18,6 +18,8 @@ export default ({ palette }) => ({
   title: {
     fontSize: '1.5em',
     paddingBottom: '0.5em',
+    color: palette.darkBlue,
+
   },
   link: {
     display: 'flex',
@@ -57,6 +59,7 @@ export default ({ palette }) => ({
     fontSize: '0.85em',
   },
   description: {
+    color: palette.darkBlue,
     textAlign: 'start',
     textOverflow: 'ellipsis',
     wordWrap: 'break-word',

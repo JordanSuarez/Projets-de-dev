@@ -14,6 +14,7 @@ export default ({ palette }) => ({
   formTitle: {
     fontSize: '1.3em',
     padding: '0.5em 0',
+    color: palette.darkBlue,
   },
 
   textfield: {
@@ -29,11 +30,20 @@ export default ({ palette }) => ({
   inscription: {
     textAlign: 'right',
     color: palette.darkBlue,
+    '& span': {
+      '&:hover': {
+        cursor: 'pointer',
+        color: palette.blue,
+      },
+    },
   },
 
   submit: {
     backgroundColor: palette.darkBlue,
     color: palette.yellow,
     margin: '2em 0 2em auto',
+    '&:hover': {
+      backgroundColor: palette.blue,
+    },
   },
 });

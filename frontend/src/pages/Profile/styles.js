@@ -23,6 +23,7 @@ export default ({ palette }) => ({
   username: {
     fontSize: '1.2em',
     margin: '1em 0',
+    color: palette.darkBlue,
   },
   large: {
     width: '150px',
