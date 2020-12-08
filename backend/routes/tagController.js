@@ -7,11 +7,6 @@ module.exports = {
     models.Tag.findAll({
       attributes: ['id', 'name', 'image'],
     }).then((tagList) => {
-      // const tagArray = {
-      //   id: tagList.id,
-      //   name: tagList.name,
-      //   image: tagList.image,
-      // };
       const tagArray = Object.values(tagList);
       return res.status(201).json(tagArray);
     }).catch((err) => {
