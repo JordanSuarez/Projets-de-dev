@@ -18,10 +18,11 @@ export default ({ palette }) => ({
     color: palette.darkBlue,
   },
 
-  latestProject: {
+  listCard: {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
+
   },
 
   pagination: {
