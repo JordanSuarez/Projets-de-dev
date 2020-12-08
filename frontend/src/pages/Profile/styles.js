@@ -11,6 +11,11 @@ export default ({ palette }) => ({
     alignItems: 'center',
     flexDirection: 'column',
   },
+  subtitle: {
+    padding: '1em 0',
+    fontSize: '1.5em',
+    color: palette.darkBlue,
+  },
   column: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -29,5 +34,11 @@ export default ({ palette }) => ({
     color: palette.yellow,
     margin: '1em',
     width: '200px',
+  },
+  cardContainer: {
+    marginTop: '2rem',
+    justifyContent: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
   },
 });

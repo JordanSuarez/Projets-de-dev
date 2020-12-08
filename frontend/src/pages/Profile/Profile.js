@@ -41,7 +41,7 @@ const Profile = ({
             <h2 className={classes.subtitle}>
               Liste des projet
             </h2>
-            <div>
+            <div className={classes.cardContainer}>
               {profile.projects.length === 0 && (
                 <p> Cet utilisateur n'as pas encore de projet</p>
               )}

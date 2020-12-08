@@ -10,10 +10,11 @@ const profile = (store) => (next) => (action) => {
 
       callApi(url, GET)
         .then(({ data }) => {
+          console.log(data);
           store.dispatch(saveProfile(data));
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
         });
 
       next(action);
