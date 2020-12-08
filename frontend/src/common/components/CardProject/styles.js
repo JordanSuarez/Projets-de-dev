@@ -28,9 +28,19 @@ export default ({ palette }) => ({
   like: {
     margin: '0.50em',
     color: palette.white,
+    '&:hover': {
+      cursor: 'pointer',
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+    },
   },
   avatar: {
     margin: '0.5em',
+    '&:hover': {
+      cursor: 'pointer',
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+    },
   },
   tags: {
     display: 'flex',

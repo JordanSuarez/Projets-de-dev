@@ -1,4 +1,5 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 import {
   Card,
@@ -12,35 +13,42 @@ import {
 import { classes as classesProps } from 'src/common/classes';
 import { useHistory } from 'react-router-dom';
 import { getProjectRoute, getProfileRoute } from 'src/common/routing/routesResolver';
-
 // icone coeur border
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // icone coeur plein
-
 import FavoriteIcon from '@material-ui/icons/Favorite';
-// import './cardProject.scss';
-// import { mergeClasses } from '@material-ui/styles';
+import avatar from './avatar.png';
 
 // eslint-disable-next-line arrow-body-style
 const CardProject = ({
-  id,
+  projectId,
   classes,
   title,
   image,
   description,
-  user,
+  userImage,
+  userId,
   tags,
 }) => {
   const history = useHistory();
+
   const handleDisplayProject = (id) => {
     history.push(getProjectRoute(id));
   };
-  const handleDisplayProfile = (id) => {
-    history.push(getProfileRoute(id));
+  const handleDisplayProfile = () => {
+    history.push(getProfileRoute(userId));
   };
+
+  const handleLikeProject = () => {
+    // TODO like project and change to FavoriteIcon
+  };
+
   return (
     <Card className={classes.card}>
-      <CardActionArea className={classes.cardActionArea} onClick={() => handleDisplayProject(id)}>
+      <CardActionArea
+        className={classes.cardActionArea}
+        onClick={() => handleDisplayProject(projectId)}
+      >
         <CardMedia
           className={classes.image}
           image={image}
@@ -65,8 +73,8 @@ const CardProject = ({
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.link}>
-        <FavoriteBorderIcon className={classes.like} />
-        <Avatar className="card__link__avatar" alt="Pikachu" src={user.userImage} onClick={() => handleDisplayProfile(user.id)} />
+        <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />
+        <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
       </CardActions>
     </Card>
 
@@ -75,12 +83,28 @@ const CardProject = ({
 
 CardProject.propTypes = {
   ...classesProps,
-  id: PropTypes.number.isRequired,
+  projectId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
-  tags: PropTypes.array.isRequired,
+  userImage: PropTypes.string,
+  userId: PropTypes.number.isRequired,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
+  ),
+};
+
+CardProject.defaultProps = {
+  userImage: avatar,
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: null,
+      name: '',
+    }),
+  ),
 };
 
 export default CardProject;

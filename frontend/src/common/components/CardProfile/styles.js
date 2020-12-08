@@ -37,8 +37,12 @@ export default ({ palette }) => ({
     color: palette.white,
     padding: '0 1em',
   },
+  linkProfile: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
   follow: {
     fontSize: '30px',
   },
-
 });

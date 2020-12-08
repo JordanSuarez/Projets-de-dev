@@ -21,25 +21,15 @@ import avatar2 from './avatar.png';
 
 const CardProfile = ({
   classes,
-  id,
   username,
   userImage,
+  onClick,
 }) => {
-  const history = useHistory();
-
-  const showProfile = (id) => {
-    history.push(getProfileRoute(id));
-  };
   // TODO follow
   return (
     <Card className={classes.card}>
-      <CardActionArea className={classes.cardArea}>
-        {(userImage === null || !userImage || userImage === '') && (
-          <Avatar alt="avatar" src="https://pm1.narvii.com/6761/d63cf8f1a27519a70c9e5b86c45a5b2bb1fe8f85v2_hq.jpg" className={classes.large} />
-        )}
-        {userImage && (
-          <Avatar alt="avatar" src={userImage} className={classes.large} />
-        )}
+      <CardActionArea className={classes.cardArea} onClick={onClick}>
+        <Avatar alt="avatar" src={userImage || avatar2} className={classes.large} />
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">
             {username}
@@ -48,18 +38,23 @@ const CardProfile = ({
       </CardActionArea>
       <CardActions className={classes.link}>
         <GradeIcon className={classes.follow} />
-        <span className={classes.linkProfile} onClick={() => showProfile(profile.id)}>
+        <span className={classes.linkProfile} onClick={onClick}>
           Voir son profil
         </span>
       </CardActions>
     </Card>
-
   );
 };
 
 CardProfile.propTypes = {
   ...classesProps,
-  id: PropTypes.number.isRequired,
+  username: PropTypes.string.isRequired,
+  userImage: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+};
+
+CardProfile.defaultProps = {
+  userImage: avatar2,
 };
 
 export default CardProfile;

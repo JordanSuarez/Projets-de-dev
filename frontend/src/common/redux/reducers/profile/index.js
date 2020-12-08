@@ -8,7 +8,7 @@ const initialState = {
     id: null,
     username: '',
     userImage: '',
-    Projects: [],
+    projects: [],
   },
   loading: true,
 };
