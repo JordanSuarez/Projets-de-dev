@@ -1,6 +1,9 @@
-export default ({ palette }) => ({
+export default ({ breakpoints, palette }) => ({
   card: {
     width: '260px',
+    [breakpoints.up('sm')]: {
+      width: '340px',
+    },
     margin: '1em',
     borderRadius: '16px',
     display: 'flex',

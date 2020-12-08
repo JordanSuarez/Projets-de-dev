@@ -21,10 +21,6 @@ const Home = ({
     getProjects();
   }, []);
   const arrayProjects = Object.values(projects);
-  const history = useHistory();
-  const handleDisplayProject = (id) => {
-    history.push(getProjectRoute(id));
-  };
   return (
     <Base loading={loading}>
       <img className={classes.image} src={headerImage} alt="header" />
@@ -34,7 +30,16 @@ const Home = ({
           <div className={classes.container}>
             <div className={classes.listCard}>
               {arrayProjects.map((project) => (
-                <CardProject {...project} key={project.id} />
+                <CardProject
+                  key={project.id}
+                  projectId={project.id}
+                  title={project.title}
+                  tags={project.tags}
+                  description={project.description}
+                  userId={project.user.id}
+                  userImage={project.user.userImage}
+                  image={project.image}
+                />
               ))}
             </div>
           </div>
