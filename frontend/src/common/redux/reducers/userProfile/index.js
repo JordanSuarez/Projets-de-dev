@@ -1,6 +1,6 @@
 import {
   SAVE_USER_PROFILE,
-// eslint-disable-next-line import/no-unresolved
+  REDIRECT_SUCCESS,
 } from 'src/common/redux/actions/userProfile';
 
 const initialState = {
@@ -24,6 +24,11 @@ const userProfile = (state = initialState, action = {}) => {
         loading: false,
       };
     }
+    case REDIRECT_SUCCESS:
+      return {
+        ...state,
+        redirect: action.redirect,
+      };
     default: return { ...state };
   }
 };

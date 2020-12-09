@@ -6,6 +6,7 @@ import {
   submitLogoutSuccess,
   submitRegisterSuccess,
   SUBMIT_REGISTER,
+  submitLoginError,
 } from 'src/common/redux/actions/auth';
 import { setToken, removeToken } from 'src/common/authentication/authProvider';
 import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
@@ -30,7 +31,9 @@ const authMiddleWare = (store) => (next) => (action) => {
           store.dispatch(redirectSuccess(getHomeRoute()));
           store.dispatch(submitLoginSuccess(data.userId));
         })
-        .catch(() => {});
+        .catch(() => {
+          store.dispatch(submitLoginError());
+        });
       next(action);
       break;
     }

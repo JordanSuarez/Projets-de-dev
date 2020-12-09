@@ -3,25 +3,17 @@ import {
   GET_PROFILES,
   saveProfiles,
 } from 'src/common/redux/actions/profiles';
-import axios from 'axios';
+import { GET, USERS, ALL } from 'src/common/callApiHandler/constants';
+import { getEndpoint } from 'src/common/callApiHandler/endpoints';
+import { callApi } from 'src/common/callApiHandler/urlHandler';
+
 
 const profiles = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_PROFILES: {
-      axios.get(
-        'http://localhost:3001/api/users',
-        {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*',
-            'Content-Type': 'application/json, charset=utf-8',
-            Accept: 'application/json',
-          },
-        },
-        {
-          withCredentials: true,
-        },
-      )
+      const url = getEndpoint(USERS, GET, ALL);
+
+      callApi(url, GET)
         .then((response) => {
           store.dispatch(saveProfiles(response.data));
         })

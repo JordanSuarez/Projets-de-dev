@@ -4,8 +4,10 @@ import {
   REDIRECT_SUCCESS,
   SUBMIT_LOGIN_ERROR,
   SUBMIT_REGISTER_SUCCESS,
+  CHANGE_HAS_ERROR,
 } from 'src/common/redux/actions/auth';
 import { getToken } from 'src/common/authentication/authProvider';
+
 
 const initialState = {
   isLogged: !!getToken(),
@@ -13,6 +15,7 @@ const initialState = {
   userEmail: '',
   token: getToken() || '',
   redirect: '',
+  hasError: false,
 };
 
 const auth = (state = initialState, action = {}) => {
@@ -25,6 +28,7 @@ const auth = (state = initialState, action = {}) => {
         userEmail: '',
         token: getToken(),
         redirect: '',
+        hasError: false,
       };
     case SUBMIT_LOGIN_ERROR:
       return {
@@ -39,17 +43,24 @@ const auth = (state = initialState, action = {}) => {
         userEmail: '',
         token: '',
         redirect: '',
+        hasError: false,
       };
     case SUBMIT_REGISTER_SUCCESS:
       return {
         ...state,
         userEmail: action.userEmail,
         redirect: '',
+        hasError: false,
       };
     case REDIRECT_SUCCESS:
       return {
         ...state,
         redirect: action.redirect,
+      };
+    case CHANGE_HAS_ERROR:
+      return {
+        ...state,
+        hasError: false,
       };
     default:
       return { ...state };

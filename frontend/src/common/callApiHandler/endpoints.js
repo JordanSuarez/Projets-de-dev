@@ -53,7 +53,7 @@ const endpoints = {
       [ONE]: (meta) => `${USERS}/${meta}/${DELETE}`,
     },
     [PATCH]: {
-      [PRIVATE_PROFILE]: `${USERS}/myprofile/${EDIT}`,
+      [PRIVATE_PROFILE]: `${USERS}/me/${EDIT}`,
     },
   },
   [CONTACT]: {

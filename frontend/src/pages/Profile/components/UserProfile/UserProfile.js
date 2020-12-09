@@ -24,7 +24,6 @@ const UserProfile = ({
   const history = useHistory();
   const editProfile = () => history.push(getEditionProfileRoute());
   const newProject = () => history.push(getCreationProjectRoute());
-
   return (
     <Base loading={loading}>
       <>
