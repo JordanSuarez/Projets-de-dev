@@ -173,7 +173,7 @@ module.exports = {
           });
         }
       ])
-},
+  },
 
   edit: (req, res) => {
     const id = req.params.id;
@@ -232,5 +232,25 @@ module.exports = {
         
       },
     ]);
-  }
+  },
+
+  deleteMyProject: (req, res) => {
+
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
+    
+    if (userId < 0){
+      return res.status(400).json({ 'error': 'Le token est invalide' });
+    }
+
+    models.Project.destroy({
+      where: {id: req.params.id, userId: userId}
+    }).then(() => {
+      return res.status(200).json({ message: 'Votre projet a bien été supprimé' });
+    }).catch(() => {
+      return res.status(400).json({ 'error': 'La requête n\'a pas pu aboutir' });
+    })
+
+  },
+
 }

@@ -17,17 +17,20 @@ exports.router = (() => {
     apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/me/delete').get(userController.deleteMe);
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
-    apiRouter.route('/users/:id/delete').get(userController.deleteUser); // OK
+    
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
     apiRouter.route('/projects/:id').get(projectController.project); // OK
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
+    apiRouter.route('/projects/:id/delete-my-project').get(projectController.deleteMyProject); 
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
     // Comments routes
     apiRouter.route('/comments/add').post(commentController.new); // OK
 
+    // Admin routes
+    apiRouter.route('/users/:id/delete').get(userController.deleteUser); // OK
 
     return apiRouter;
 })();
