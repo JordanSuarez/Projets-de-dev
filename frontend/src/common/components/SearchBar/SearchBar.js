@@ -1,33 +1,42 @@
 import React from 'react';
 
-import { func, string } from 'prop-types';
+import { array, func, string } from 'prop-types';
 import { TextField } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 import { classes as classesProps } from 'src/common/classes';
 
 const SearchBar = ({
-  onChange, value, classes, onSubmit,
+  onInputChange, classes, items, helperText, label,
 }) => (
-  <form onSubmit={onSubmit}>
-    <TextField
-      label="Rechercher..."
-      placeholder="Rechercher..."
-      name="searchBar"
-      variant="outlined"
-      value={value}
-      onChange={onChange}
-    />
-  </form>
+  <Autocomplete
+    className={classes.searchBar}
+    freeSolo
+    clearOnEscape
+    options={items.map((option) => option.title || option.username)}
+    onInputChange={onInputChange}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        label={label}
+        margin="normal"
+        variant="outlined"
+        helperText={helperText}
+      />
+    )}
+  />
 );
 
 SearchBar.propTypes = {
-  onChange: func.isRequired,
+  onInputChange: func.isRequired,
   onSubmit: func.isRequired,
-  value: string,
+  label: string.isRequired,
+  items: array.isRequired,
+  helperText: string,
   ...classesProps,
 };
 
 SearchBar.defaultProps = {
-  value: '',
+  helperText: '',
 };
 
 export default SearchBar;

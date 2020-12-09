@@ -1,9 +1,12 @@
-export default ({ palette }) => ({
+export default ({ palette, breakpoints }) => ({
   headerContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    '& form': {
-      margin: '1rem',
+    flexWrap: 'wrap',
+    [breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
   },
   container: {

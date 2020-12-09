@@ -9,7 +9,7 @@ export const getProfileInfos = () => ({
 
 export const saveUserProfile = (data) => ({
   type: SAVE_USER_PROFILE,
-  userProfile: { ...data[0] },
+  userProfile: { ...data },
 });
 
 export const updateProfile = (data) => ({

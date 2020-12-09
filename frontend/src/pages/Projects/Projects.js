@@ -7,7 +7,7 @@ import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
 import { useParams, useHistory } from 'react-router-dom';
 import { getProjectsListRoute } from 'src/common/routing/routesResolver';
-import SearchBar from 'src/common/components/SearchBar/SearchBar';
+import SearchBar from 'src/common/components/SearchBar';
 import { isEmpty } from 'lodash';
 
 // eslint-disable-next-line arrow-body-style
@@ -21,22 +21,24 @@ const Projects = ({
   const { offset } = useParams();
   const history = useHistory();
   const [currentOffset, setOffset] = useState((offset * 12) - 12);
-  const [inputValue, setInputValue] = useState('');
-  const limit = 12;
   const arrayProjects = Object.values(projects);
   const [searchResults, setSearchResults] = useState(arrayProjects);
+  const [inputValue, setInputValue] = useState('');
 
-  useEffect(() => {
-    getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
-  }, [currentOffset]);
-
+  // Pagination
+  const limit = 12;
   const changePage = (event, value) => {
     setOffset((value * 12) - 12);
     history.push(getProjectsListRoute(value));
   };
 
-  const handleChange = (event) => {
-    const { value } = event.target;
+  useEffect(() => {
+    getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
+  }, [currentOffset]);
+
+  // SearchBar
+  const helperText = 'Aucun résultat ne correspond à la recherche';
+  const handleChange = (event, value) => {
     setInputValue(value);
     if (!isEmpty(value)) {
       setSearchResults(
@@ -55,21 +57,16 @@ const Projects = ({
     }
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setInputValue('');
-    setSearchResults([]);
-  };
-
   return (
     <Base loading={loading}>
       <div className={classes.headerContainer}>
         <h2 className={classes.subtitle}>Liste des Projets</h2>
         <SearchBar
-          value={inputValue}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          className={classes.test}
+          className={classes.searchBar}
+          onInputChange={(event, value) => handleChange(event, value)}
+          items={arrayProjects}
+          label="Recherchez un projet..."
+          helperText={isEmpty(searchResults) && !isEmpty(inputValue) ? helperText : ''}
         />
       </div>
       <div className={classes.container}>

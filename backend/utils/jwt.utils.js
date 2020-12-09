@@ -19,14 +19,27 @@ const SIGN_SECRET = '5azdgPzefUB77719zdzajrvmpBtcfU42FbiozeARW72162';
 		return (authorization != null) ? authorization.replace('Bearer ', '') : null;
 	},
 
+	getIsAdminUser: (authorization) => {
+		const token = module.exports.parseAuthorization(authorization);
+		if(token != null) {
+			try {
+				const jwtToken = jwt.verify(token, SIGN_SECRET);
+				if(jwtToken != null) {
+					isAdminUser = jwtToken.isAdmin;
+          return isAdminUser
+				}
+			} catch(err) {}
+		}
+		},
+
 	getUserId: (authorization) => {
 		const token = module.exports.parseAuthorization(authorization);
 		if(token != null) {
 			try {
 				const jwtToken = jwt.verify(token, SIGN_SECRET);
 				if(jwtToken != null) {
-          UserId = jwtToken.userId;
-          return UserId
+					UserId = jwtToken.userId;
+          return UserId 
 				}
 			} catch(err) {}
 		}
