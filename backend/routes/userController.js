@@ -231,7 +231,6 @@ module.exports = {
 								user.Projects[element].Tag5,
 								user.Projects[element].Tag6,
 							],
-							user: user.Projects[element].User,
 						};
 						formatProject.push(newFormat);
 					}
