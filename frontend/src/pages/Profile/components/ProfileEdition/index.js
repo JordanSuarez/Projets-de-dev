@@ -17,8 +17,8 @@ const mapDispatchToProps = (dispatch) => ({
   getProfile: () => {
     dispatch(getProfileInfos());
   },
-  handleUpdate: () => {
-    dispatch(updateProfile());
+  handleUpdate: (event) => {
+    dispatch(updateProfile(event));
   },
 });
 

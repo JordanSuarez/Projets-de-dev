@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
+import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
 import {
@@ -23,6 +24,7 @@ const ProfileEdition = ({
   loading,
   userProfile,
   handleUpdate,
+  redirect,
 }) => {
   useEffect(() => {
     getProfile();
@@ -79,7 +81,16 @@ const ProfileEdition = ({
     return errors;
   };
 
-  const handleUpdateProfile = () => handleUpdate();
+  const handleUpdateProfile = (event) => {
+    handleUpdate(event);
+  };
+  const history = useHistory();
+
+  useEffect(() => {
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
 
   // eslint-disable-next-line no-unused-vars
   const getFiles = () => {
@@ -197,6 +208,7 @@ ProfileEdition.propTypes = {
   handleUpdate: PropTypes.func.isRequired,
   userProfile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+  redirect: PropTypes.string.isRequired,
 };
 
 export default ProfileEdition;
