@@ -31,6 +31,7 @@ exports.router = (() => {
 
     // Admin routes
     apiRouter.route('/users/:id/delete').get(userController.deleteUser); // OK
+    apiRouter.route('/projects/:id/delete').get(projectController.deleteProject); //OK
 
     return apiRouter;
 })();
