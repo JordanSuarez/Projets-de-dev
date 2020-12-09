@@ -17,17 +17,10 @@ module.exports = {
       const email = req.body.email;
 	  	const password = req.body.password;
 			
-
-			if(username == null) {
-				return res.status(400).json({'error': 'username ne sont pas renseignés'});
-			}
-			if(password == null) {
-				return res.status(400).json({'error': 'mdp sont pas renseignés'});
+			if(email == null || username == null || password == null) {
+				return res.status(400).json({'error': 'Tous les champs requis ne sont pas renseignés'});
 			}
 
-			if(email == null ) {
-				return res.status(400).json({'error': 'email sont pas renseignés'});
-			}
 			if (username.length >= 13 || username.length <=4) {
 				return res.status(400).json({'error': 'Le nom d\'utilisateur est invalide, la longueur doit être comprise entre 5 et 12 caractères'});
 			}
