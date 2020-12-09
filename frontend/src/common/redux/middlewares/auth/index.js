@@ -8,6 +8,7 @@ import {
   SUBMIT_REGISTER,
   submitLoginError,
 } from 'src/common/redux/actions/auth';
+import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import { setToken, removeToken } from 'src/common/authentication/authProvider';
 import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
@@ -28,6 +29,7 @@ const authMiddleWare = (store) => (next) => (action) => {
       callApi(url, POST, credentials)
         .then(({ data }) => {
           setToken(data.token);
+          store.dispatch(showSnackbar('test', 'tetete', 'success'));
           store.dispatch(redirectSuccess(getHomeRoute()));
           store.dispatch(submitLoginSuccess(data.userId));
         })

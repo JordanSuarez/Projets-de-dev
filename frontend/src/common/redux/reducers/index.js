@@ -6,8 +6,10 @@ import projectReducer from './project';
 import projectsReducer from './projects';
 import profileReducer from './profile';
 import profilesReducer from './profiles';
+import snackbarReducer from './snackbar';
 
 const rootReducer = combineReducers({
+  snackbar: snackbarReducer,
   home: homeReducer,
   auth: authReducer,
   project: projectReducer,
