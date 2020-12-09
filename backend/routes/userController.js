@@ -141,19 +141,47 @@ module.exports = {
 			const userId = jwtUtils.getUserId(headerAuth);
 
 			if (userId < 0){
-				return res.status(400).json({ 'error': /*'Le token est invalide'*/ err});
+				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
-			models.User.findAll({
-				attributes: ['id', 'email', 'username', 'userImage', 'bio'],
+			models.User.findOne({
+				attributes: { all: true },
 				where: { id: userId },
-				include: {
-					model: models.Project, 
-					where: {userId: userId},
-					required: false
-				}
+				include: [
+					{model: models.Project, include: {model: models.Tag, all:true}, where: {userId: userId}, required: false},
+				]
 			}).then((user) => {
 				if (user) {
+					const formatProject = [];
+					for (element=0; element < user.Projects.length; element++) {
+						const newFormat = {
+							id: user.Projects[element].id,
+							title: user.Projects[element].title,
+							description: user.Projects[element].description,
+							github_link: user.Projects[element].github_link,
+							project_link: user.Projects[element].project_link,
+							image: user.Projects[element].image,
+							vote: user.Projects[element].vote,
+							tags: [
+								user.Projects[element].Tag,
+								user.Projects[element].Tag2,
+								user.Projects[element].Tag3,
+								user.Projects[element].Tag4,
+								user.Projects[element].Tag5,
+								user.Projects[element].Tag6,
+							],
+							user: user.Projects[element].User,
+						};
+						formatProject.push(newFormat);
+					}
+					const formatUser = {
+						id: user.id,
+						username: user.username,
+						email: user.email,
+						userImage: user.userImage,
+						bio: user.bio,
+						projects: formatProject, 
+					}
 					res.status(201).json(user);
 				} else {
 					res.status(404).json({ 'error': /*'L\'utilisateur n\'a pas été trouvé'*/ err });
