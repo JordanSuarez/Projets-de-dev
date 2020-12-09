@@ -2,7 +2,7 @@ export default ({ breakpoints, palette }) => ({
   card: {
     width: '260px',
     [breakpoints.up('sm')]: {
-      width: '340px',
+      width: '300px',
     },
     margin: '1em',
     borderRadius: '16px',
