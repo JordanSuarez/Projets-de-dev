@@ -1,35 +1,27 @@
 import React from 'react';
 
 import { func, string } from 'prop-types';
-import { IconButton, TextField } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import { TextField } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
 
 const SearchBar = ({
-  handleChange, value, classes, onSubmit,
+  onChange, value, classes, onSubmit,
 }) => (
-  <form onSubmit={onSubmit} className={classes.form}>
+  <form onSubmit={onSubmit}>
     <TextField
       label="Rechercher..."
       placeholder="Rechercher..."
       name="searchBar"
       variant="outlined"
-      className={classes.input}
       value={value}
-      onChange={handleChange}
-      InputProps={{
-        endAdornment: (
-          <IconButton type="submit" className={classes.iconButton} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        ),
-      }}
+      onChange={onChange}
     />
   </form>
 );
 
 SearchBar.propTypes = {
-  handleChange: func.isRequired,
+  onChange: func.isRequired,
+  onSubmit: func.isRequired,
   value: string,
   ...classesProps,
 };
