@@ -21,6 +21,8 @@ export default ({ breakpoints, palette }) => ({
   title: {
     fontSize: '1.5em',
     paddingBottom: '0.5em',
+    color: palette.darkBlue,
+
   },
   link: {
     display: 'flex',
@@ -58,5 +60,20 @@ export default ({ breakpoints, palette }) => ({
     padding: '0.5em',
     color: palette.darkBlue,
     fontSize: '0.85em',
+  },
+  description: {
+    color: palette.darkBlue,
+    textAlign: 'start',
+    textOverflow: 'ellipsis',
+    wordWrap: 'break-word',
+    overflow: 'hidden',
+    maxHeight: '6.6em',
+    lineHeight: '1.8em',
+    display: '-webkit-box',
+    '-webkit-line-clamp': '3',
+    '-webkit-box-orient': 'vertical',
+    // '& p': {
+    //   overflowWrap: 'break-word',
+    // },
   },
 });

@@ -71,7 +71,7 @@ const Login = ({
                     Submit
                   </Button>
                   <p className={classes.inscription} onClick={handleClick}>
-                    Pas de compte ? Je veux m'inscrires
+                    Pas de compte ? <span>Je veux m'inscrire</span>
                   </p>
                 </Box>
               </form>
