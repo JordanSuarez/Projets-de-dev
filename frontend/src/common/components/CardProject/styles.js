@@ -39,6 +39,34 @@ export default ({ breakpoints, palette }) => ({
       transform: 'scale(1.1)',
     },
   },
+  editIcon: {
+    margin: '0.50em',
+    color: palette.darkBlue,
+    backgroundColor: palette.white,
+    '&:hover': {
+      cursor: 'pointer',
+      color: palette.darkBlue,
+      backgroundColor: palette.white,
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+    },
+  },
+  deleteIcon: {
+    margin: '0.50em',
+    color: palette.darkBlue,
+    backgroundColor: palette.white,
+    '&:hover': {
+      cursor: 'pointer',
+      color: palette.darkBlue,
+      backgroundColor: palette.white,
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+      '& span': {
+        color: palette.errorField,
+      },
+    },
+  },
+
   avatar: {
     margin: '0.5em',
     '&:hover': {

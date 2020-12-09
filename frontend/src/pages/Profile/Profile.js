@@ -3,11 +3,10 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import { useParams } from 'react-router-dom';
-import {
-  Avatar,
-} from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
+import { isEmpty } from 'lodash';
 import avatar2 from './avatar.png';
 
 const Profile = ({
@@ -39,13 +38,13 @@ const Profile = ({
           </div>
           <div>
             <h2 className={classes.subtitle}>
-              Liste des projet
+              Liste des projets
             </h2>
             <div className={classes.cardContainer}>
-              {profile.projects.length === 0 && (
-                <p> Cet utilisateur n'as pas encore de projet</p>
+              {isEmpty(profile.projects) && (
+                <p>Cet utilisateur n'a pas encore de projet</p>
               )}
-              {profile.projects.length > 0
+              {!isEmpty(profile.projects)
                 && profile.projects.map(({
                   id: projectId, title, description, tags, image,
                 }) => (

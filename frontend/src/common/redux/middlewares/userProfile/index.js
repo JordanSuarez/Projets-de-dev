@@ -4,7 +4,15 @@ import {
   UPDATE_USER_PROFILE,
   saveUserProfile,
   DELETE_USER_PROFILE,
+  DELETE_USER_PROJECT,
+  redirectSuccess,
 } from 'src/common/redux/actions/userProfile';
+import { getEndpoint } from 'src/common/callApiHandler/endpoints';
+import { callApi } from 'src/common/callApiHandler/urlHandler';
+import {
+  PROJECTS, DELETE, ONE,
+} from 'src/common/callApiHandler/constants';
+import { getUserProfileRoute } from 'src/common/routing/routesResolver';
 import axios from 'axios';
 
 const userProfile = (store) => (next) => (action) => {
@@ -86,6 +94,20 @@ const userProfile = (store) => (next) => (action) => {
         .catch((error) => {
           console.log(error);
         });
+      next(action);
+      break;
+    }
+    case DELETE_USER_PROJECT: {
+      const url = getEndpoint(PROJECTS, DELETE, ONE, action.id);
+
+      callApi(url, DELETE)
+        .then(() => {
+          //TODO send confirmation to user
+        })
+        .catch((e) => {
+          console.log(e.request);
+        });
+
       next(action);
       break;
     }
