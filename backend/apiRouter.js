@@ -16,6 +16,7 @@ exports.router = (() => {
     apiRouter.route('/users/me').get(userController.getUserProfile); // OK
     apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
+    apiRouter.route('/users/:id/delete').get(userController.deleteUser);
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
     apiRouter.route('/projects/:id').get(projectController.project); // OK
