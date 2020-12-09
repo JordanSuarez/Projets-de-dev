@@ -26,6 +26,7 @@ const UserProfile = ({
   const history = useHistory();
   const editProfile = () => history.push(getEditionProfileRoute());
   const newProject = () => history.push(getCreationProjectRoute());
+  //console.log(userProfile.Projects.length);
   return (
     <Base loading={loading}>
       <>
@@ -62,6 +63,7 @@ const UserProfile = ({
           Liste des projet
         </h2>
         <div>
+        console.log({userProfile});
         {userProfile.Projects.length === 0 && (
             <p> Je n'ai pas encore de projet</p>
         )}
