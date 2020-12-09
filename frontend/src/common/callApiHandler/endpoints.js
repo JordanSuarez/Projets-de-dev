@@ -34,7 +34,7 @@ const endpoints = {
       [ONE]: (meta) => `${PROJECTS}/${meta}/${EDIT}`,
     },
     [DELETE]: {
-      [ONE]: (meta) => `${PROJECTS}/${meta}/${DELETE}`,
+      [ONE]: (meta) => `${PROJECTS}/${meta}/${DELETE}-my-project`,
     },
   },
   // User routes

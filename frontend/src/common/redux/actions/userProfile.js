@@ -2,7 +2,9 @@ export const GET_USER_PROFILE = 'GET_USER_PROFILE';
 export const SAVE_USER_PROFILE = 'SAVE_USER_PROFILE';
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
 export const DELETE_USER_PROFILE = 'DELETE_USER_PROFILE';
+export const DELETE_USER_PROJECT = 'DELETE_USER_PROJECT';
 export const REDIRECT_SUCCESS = 'REDIRECT_SUCCESS';
+
 
 export const getProfileInfos = () => ({
   type: GET_USER_PROFILE,
@@ -21,6 +23,11 @@ export const updateProfile = (data) => ({
 export const deleteProfile = (data) => ({
   type: DELETE_USER_PROFILE,
   data,
+});
+
+export const deleteProject = (id) => ({
+  type: DELETE_USER_PROJECT,
+  id,
 });
 
 export const redirectSuccess = (redirect) => ({

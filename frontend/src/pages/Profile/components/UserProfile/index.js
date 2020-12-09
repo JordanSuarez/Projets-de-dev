@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 // eslint-disable-next-line import/no-unresolved
-import { getProfileInfos } from 'src/common/redux/actions/userProfile';
+import { getProfileInfos, deleteProject } from 'src/common/redux/actions/userProfile';
 
 import UserProfile from './UserProfile';
 // eslint-disable-next-line import/extensions
@@ -17,6 +17,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getProfile: () => {
     dispatch(getProfileInfos());
+  },
+  handleDeleteProject: (projectId) => {
+    dispatch(deleteProject(projectId));
   },
 });
 

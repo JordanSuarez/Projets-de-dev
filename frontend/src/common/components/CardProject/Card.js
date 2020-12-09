@@ -12,12 +12,15 @@ import {
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
 import { useHistory } from 'react-router-dom';
-import { getProjectRoute, getProfileRoute } from 'src/common/routing/routesResolver';
+import { getProjectRoute, getProfileRoute, getEditionProjectRoute } from 'src/common/routing/routesResolver';
 // icone coeur border
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // icone coeur plein
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DOMPurify from 'dompurify';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from 'src/common/components/IconButton';
 import avatar from './avatar.png';
 
 // eslint-disable-next-line arrow-body-style
@@ -30,12 +33,19 @@ const CardProject = ({
   userImage,
   userId,
   tags,
+  projectOwnerOptions,
+  handleDeleteProject,
 }) => {
   const history = useHistory();
 
-  const handleDisplayProject = (id) => {
-    history.push(getProjectRoute(id));
+  const handleDisplayProject = () => {
+    history.push(getProjectRoute(projectId));
   };
+
+  const handleDisplayProjectEdit = () => {
+    history.push(getEditionProjectRoute(projectId));
+  };
+
   const handleDisplayProfile = () => {
     history.push(getProfileRoute(userId));
   };
@@ -51,7 +61,7 @@ const CardProject = ({
     <Card className={classes.card}>
       <CardActionArea
         className={classes.cardActionArea}
-        onClick={() => handleDisplayProject(projectId)}
+        onClick={handleDisplayProject}
       >
         <CardMedia
           className={classes.image}
@@ -75,8 +85,21 @@ const CardProject = ({
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.link}>
-        <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />
-        <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
+        {!projectOwnerOptions ? (
+          <>
+            <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />
+            <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
+          </>
+        ) : (
+          <>
+            <IconButton title="Supprimer" onClick={() => handleDeleteProject(projectId)} className={classes.deleteIcon}>
+              <DeleteIcon />
+            </IconButton>
+            <IconButton title="Modifier" onClick={() => handleDisplayProjectEdit(projectId)} className={classes.editIcon}>
+              <EditIcon />
+            </IconButton>
+          </>
+        )}
       </CardActions>
     </Card>
 
@@ -85,6 +108,8 @@ const CardProject = ({
 
 CardProject.propTypes = {
   ...classesProps,
+  handleDeleteProject: PropTypes.func,
+  projectOwnerOptions: PropTypes.bool,
   projectId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -101,6 +126,8 @@ CardProject.propTypes = {
 
 CardProject.defaultProps = {
   userImage: avatar,
+  handleDeleteProject: Function.prototype,
+  projectOwnerOptions: false,
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: null,

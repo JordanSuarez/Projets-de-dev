@@ -39,4 +39,10 @@ export default ({ palette }) => ({
       backgroundColor: palette.blue,
     },
   },
+  cardContainer: {
+    marginTop: '2rem',
+    justifyContent: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
 });

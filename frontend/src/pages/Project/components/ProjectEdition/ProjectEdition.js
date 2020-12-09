@@ -15,6 +15,8 @@ const ProjectEdition = ({ project, handleEditProject, redirect }) => {
     handleEditProject(formatSubmitValues(formValues));
   };
 
+  // TODO brancher project edition sur redux
+
   useEffect(() => {
     if (redirect.length > 0) {
       history.push(redirect);
