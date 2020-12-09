@@ -10,27 +10,14 @@ import { GET, USERS, PATCH, PRIVATE_PROFILE } from 'src/common/callApiHandler/co
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import { getUserProfileRoute } from 'src/common/routing/routesResolver';
-import axios from 'axios';
 
 const userProfile = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_USER_PROFILE: {
       const state = store.getState();
-      axios.get(
-        'http://localhost:3001/api/users/me',
-        {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': '*',
-            'Content-Type': 'application/json, charset=utf-8',
-            Accept: 'application/json',
-            Authorization: `Bearer ${state.auth.token}`,
-          },
-        },
-        {
-          withCredentials: true,
-        },
-      )
+      const url = getEndpoint(USERS, GET, PRIVATE_PROFILE);
+
+      callApi(url, GET)
         .then((response) => {
           store.dispatch(saveUserProfile(response.data));
         })
@@ -43,8 +30,7 @@ const userProfile = (store) => (next) => (action) => {
     }
     case UPDATE_USER_PROFILE: {
       const url = getEndpoint(USERS, PATCH, PRIVATE_PROFILE);
-
-      callApi(url, PATCH)
+      callApi(url, PATCH, action.data)
         .then(() => {
           // TODO alert avec confirmation + redirection page profil
           store.dispatch(redirectSuccess(getUserProfileRoute()));
