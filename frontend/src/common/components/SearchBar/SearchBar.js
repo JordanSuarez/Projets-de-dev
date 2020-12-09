@@ -1,41 +1,42 @@
 import React from 'react';
 
-import { func, string } from 'prop-types';
-import { IconButton, TextField } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import { array, func, string } from 'prop-types';
+import { TextField } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 import { classes as classesProps } from 'src/common/classes';
 
 const SearchBar = ({
-  handleChange, value, classes, onSubmit,
+  onInputChange, classes, items, helperText, label,
 }) => (
-  <form onSubmit={onSubmit} className={classes.form}>
-    <TextField
-      label="Rechercher..."
-      placeholder="Rechercher..."
-      name="searchBar"
-      variant="outlined"
-      className={classes.input}
-      value={value}
-      onChange={handleChange}
-      InputProps={{
-        endAdornment: (
-          <IconButton type="submit" className={classes.iconButton} aria-label="search">
-            <SearchIcon />
-          </IconButton>
-        ),
-      }}
-    />
-  </form>
+  <Autocomplete
+    className={classes.searchBar}
+    freeSolo
+    clearOnEscape
+    options={items.map((option) => option.title || option.username)}
+    onInputChange={onInputChange}
+    renderInput={(params) => (
+      <TextField
+        {...params}
+        label={label}
+        margin="normal"
+        variant="outlined"
+        helperText={helperText}
+      />
+    )}
+  />
 );
 
 SearchBar.propTypes = {
-  handleChange: func.isRequired,
-  value: string,
+  onInputChange: func.isRequired,
+  onSubmit: func.isRequired,
+  label: string.isRequired,
+  items: array.isRequired,
+  helperText: string,
   ...classesProps,
 };
 
 SearchBar.defaultProps = {
-  value: '',
+  helperText: '',
 };
 
 export default SearchBar;

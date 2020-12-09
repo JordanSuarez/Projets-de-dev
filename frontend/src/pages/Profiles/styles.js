@@ -1,4 +1,14 @@
-export default ({ palette }) => ({
+export default ({ palette, breakpoints }) => ({
+  headerContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    [breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  },
   subtitle: {
     padding: '1em',
     fontSize: '1.5em',

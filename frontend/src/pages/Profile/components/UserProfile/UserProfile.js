@@ -26,6 +26,7 @@ const UserProfile = ({
   const history = useHistory();
   const editProfile = () => history.push(getEditionProfileRoute());
   const newProject = () => history.push(getCreationProjectRoute());
+
   return (
     <Base loading={loading}>
       <>
@@ -62,10 +63,10 @@ const UserProfile = ({
           Liste des projet
         </h2>
         <div>
-        {userProfile.Projects.length === 0 && (
+        {userProfile.projects.length === 0 && (
             <p> Je n'ai pas encore de projet</p>
         )}
-          {userProfile.Projects.length !== 0 && (
+          {userProfile.projects.length !== 0 && (
             // TODO charger les cardProject
             <p>J'ai des projets TODO</p>
           )}
