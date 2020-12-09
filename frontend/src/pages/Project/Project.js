@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import Comment from 'src/common/components/Comment';
 
 const Project = ({
   classes, fetchProject, project, loading,
@@ -111,6 +112,9 @@ const Project = ({
             className={classes.quillEditor}
           />
         </Grid>
+
+        <Comment />
+
       </div>
     </Base>
   );
