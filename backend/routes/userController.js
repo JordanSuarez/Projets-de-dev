@@ -170,6 +170,7 @@ module.exports = {
 								user.Projects[element].Tag5,
 								user.Projects[element].Tag6,
 							],
+							user: user.Projects[element].User,
 						};
 						formatProject.push(newFormat);
 					}
@@ -181,7 +182,7 @@ module.exports = {
 						bio: user.bio,
 						projects: formatProject, 
 					}
-					res.status(201).json(formatUser);
+					res.status(201).json(user);
 				} else {
 					res.status(404).json({ 'error': /*'L\'utilisateur n\'a pas été trouvé'*/ err });
 				}
@@ -231,6 +232,7 @@ module.exports = {
 								user.Projects[element].Tag5,
 								user.Projects[element].Tag6,
 							],
+							user: user.Projects[element].User,
 						};
 						formatProject.push(newFormat);
 					}
