@@ -317,7 +317,24 @@ module.exports = {
 			
 		},
 
-		
+		deleteMe: (req,res) => {
+
+			const headerAuth = req.headers['authorization'];
+			const userId = jwtUtils.getUserId(headerAuth);
+
+			if (userId < 0){
+				return res.status(400).json({ 'error': 'Le token est invalide' });
+			}
+
+			models.User.destroy({
+				where: { id: userId }
+			}).then(() => {
+				return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
+			}).catch(() => {
+				return res.status(400).json({'error' : 'la requête n\'a pas pu aboutir' + err});
+			})
+
+		},
 
 
 }
