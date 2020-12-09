@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
@@ -21,17 +21,25 @@ const validate = (values) => {
 };
 
 const Login = ({
-  classes, handleLogin, redirect, initialValues,
+  classes, handleLogin, redirect, initialValues, hasError, changeHasError,
 }) => {
-  const history = useHistory();
+  const [errorMessage, setErrorMessage] = useState(null);
 
+  const history = useHistory();
   useEffect(() => {
     if (redirect.length > 0) {
       history.push(redirect);
     }
   }, [redirect]);
 
+  useEffect(() => {
+    if (hasError) {
+      setErrorMessage('mdp ou email invalide');
+      changeHasError(false);
+    }
+  }, [hasError]);
   const handleClick = () => history.push(getRegisterRoute());
+  const removeMessage = () => setErrorMessage('');
 
   return (
     <Base>
@@ -45,12 +53,15 @@ const Login = ({
             validate={validate}
             render={({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} noValidate>
+                {errorMessage && <p>Identifiants ou mot de passe invalide</p>}
+
                 <TextField
                   className={classes.textfield}
                   type="email"
                   label="Email"
                   name="email"
                   margin="none"
+                  onClick={removeMessage}
                   required
                 />
                 <TextField
@@ -59,6 +70,7 @@ const Login = ({
                   label="Password"
                   name="password"
                   margin="none"
+                  onClick={removeMessage}
                   required
                 />
                 <Box className={classes.containerButton}>
@@ -85,8 +97,10 @@ const Login = ({
 
 Login.propTypes = {
   ...classesProps,
+  changeHasError: func.isRequired,
   handleLogin: func.isRequired,
   redirect: string.isRequired,
+  hasError: PropTypes.bool.isRequired,
   initialValues: objectOf({
     email: string.isRequired,
   }).isRequired,
