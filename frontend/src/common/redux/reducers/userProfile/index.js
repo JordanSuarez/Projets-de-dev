@@ -9,7 +9,7 @@ const initialState = {
     email: '',
     username: '',
     userImage: '',
-    Projects: [],
+    projects: [],
   },
   isLogged: false,
   loading: true,
