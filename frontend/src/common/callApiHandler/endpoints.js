@@ -15,6 +15,7 @@ import {
   ALL,
   TWELVE,
   LATEST,
+  TAGS,
   PRIVATE_PROFILE,
 } from './constants';
 import { apiUrl } from './urlHandler';
@@ -59,6 +60,11 @@ const endpoints = {
   [CONTACT]: {
     [POST]: {
       [CONTACT]: `${CONTACT}`,
+    },
+  },
+  [TAGS]: {
+    [GET]: {
+      [ALL]: `${TAGS}`,
     },
   },
 };

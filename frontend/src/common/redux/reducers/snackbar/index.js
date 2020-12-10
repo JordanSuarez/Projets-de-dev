@@ -25,7 +25,7 @@ const snackbar = (state = initialState, action = {}) => {
         isOpen: false,
         content: '',
         title: '',
-        severity: '',
+        severity: 'info',
       };
 
     default:

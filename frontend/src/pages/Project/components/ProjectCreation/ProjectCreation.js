@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 
-import ProjectForm from 'src/common/components/ProjectForm';
-import Base from 'src/common/components/Base';
 import { func, string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import ProjectForm from 'src/common/components/ProjectForm';
 import formatSubmitValues from 'src/pages/Project/helpers/formatSubmitProjectValues';
+import Base from 'src/common/components/Base';
 import initialValues from './formData/initialValues';
 
-const ProjectCreation = ({ handleCreateProject, redirect }) => {
+const ProjectCreation = ({
+  handleCreateProject, redirect,
+}) => {
   const history = useHistory();
 
   // Format values with good structure before send it to the api

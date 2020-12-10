@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { func, string } from 'prop-types';
+import {
+  arrayOf, func, number, shape, string,
+} from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
 import { Form as FormRff } from 'react-final-form';
 import Editor from 'src/common/components/QuillEditor';
@@ -15,17 +17,21 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
 import { modules, formats } from 'src/common/components/QuillEditor/EditorToolbar';
-import { tags, profiles } from './formData/fakeData';
+import { profiles } from './formData/fakeData';
 import fields from './formData/fields';
 import './styles.scss';
 
 const Form = ({
-  classes, title, initialValues, handleSubmitProject,
+  classes, title, initialValues, handleSubmitProject, tags, fetchTags,
 }) => {
   const history = useHistory();
   const { id } = useParams();
   const [errorFields, setErrorFields] = useState({});
   const [formState, setFormState] = useState(initialValues);
+
+  useEffect(() => {
+    fetchTags();
+  }, []);
 
   const onSubmit = (values) => {
     if (formState.tags.length === 0) {
@@ -265,6 +271,14 @@ Form.propTypes = {
   ...classesProps,
   title: string.isRequired,
   handleSubmitProject: func.isRequired,
+  fetchTags: func.isRequired,
+  tags: arrayOf(
+    shape({
+      id: number.isRequired,
+      name: string.isRequired,
+      image: string,
+    }).isRequired,
+  ).isRequired,
 };
 
 export default Form;
