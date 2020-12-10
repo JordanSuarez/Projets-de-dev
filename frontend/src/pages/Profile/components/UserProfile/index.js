@@ -1,11 +1,10 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-// eslint-disable-next-line import/no-unresolved
-import { getProfileInfos, deleteProject } from 'src/common/redux/actions/userProfile';
 
+import { getProfileInfos } from 'src/common/redux/actions/userProfile';
+import { handleDeleteProject } from 'src/common/redux/actions/project';
 import UserProfile from './UserProfile';
-// eslint-disable-next-line import/extensions
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
@@ -19,7 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getProfileInfos());
   },
   handleDeleteProject: (projectId) => {
-    dispatch(deleteProject(projectId));
+    dispatch(handleDeleteProject(projectId));
   },
 });
 

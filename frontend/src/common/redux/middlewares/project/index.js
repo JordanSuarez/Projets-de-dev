@@ -1,24 +1,39 @@
 import {
-  FETCH_PROJECT_BY_ID, HANDLE_EDIT_PROJECT, HANDLE_CREATE_PROJECT, showProjectById,
+  FETCH_PROJECT_BY_ID,
+  HANDLE_EDIT_PROJECT,
+  HANDLE_CREATE_PROJECT,
+  showProjectById,
+  HANDLE_DELETE_PROJECT,
 } from 'src/common/redux/actions/project';
+import {
+  getProfileInfos,
+} from 'src/common/redux/actions/userProfile';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import {
-  PROJECTS, GET, POST, PATCH, ONE,
+  PROJECTS, GET, POST, PATCH, ONE, DELETE, TAGS, ALL,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute } from 'src/common/routing/routesResolver';
+import { get } from 'lodash';
 
 const projectMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_PROJECT_BY_ID: {
-      const url = getEndpoint(PROJECTS, GET, ONE, action.projectId);
+      const urlProject = getEndpoint(PROJECTS, GET, ONE, action.projectId);
+      const urlTags = getEndpoint(TAGS, GET, ALL);
 
-      callApi(url, GET)
-        .then(({ data }) => {
-          store.dispatch(showProjectById(data));
-        })
+      const promises = [
+        callApi(urlProject, GET),
+        callApi(urlTags, GET),
+      ];
+
+      Promise.all(promises).then((response) => {
+        const project = get(response[0], 'data');
+        const tags = get(response[1], 'data');
+        store.dispatch(showProjectById(project, tags));
+      })
         .catch(() => {});
 
       next(action);
@@ -58,6 +73,22 @@ const projectMiddleWare = (store) => (next) => (action) => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
+        });
+
+      next(action);
+      break;
+    }
+    case HANDLE_DELETE_PROJECT: {
+      const url = getEndpoint(PROJECTS, DELETE, ONE, action.id);
+
+      callApi(url, DELETE)
+        .then(() => {
+          store.dispatch(getProfileInfos());
+          store.dispatch(showSnackbar('', 'Votre projet à bien été supprimé', 'success'));
+        })
+        .catch((e) => {
+          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
+          console.log(e.request);
         });
 
       next(action);

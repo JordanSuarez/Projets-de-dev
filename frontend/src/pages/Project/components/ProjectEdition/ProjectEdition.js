@@ -2,39 +2,45 @@ import React, { useEffect } from 'react';
 
 import ProjectForm from 'src/common/components/ProjectForm';
 import Base from 'src/common/components/Base';
-import { func, object, string } from 'prop-types';
+import {
+  bool, func, object, string,
+} from 'prop-types';
 import formatSubmitValues from 'src/pages/Project/helpers/formatSubmitProjectValues';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import formatInitialValues from './formData/formatInitialValues';
 
-const ProjectEdition = ({ project, handleEditProject, redirect }) => {
+const ProjectEdition = ({
+  project, handleEditProject, redirect, fetchProjectById, loading,
+}) => {
   const history = useHistory();
+  const { id } = useParams();
 
   // Format values with good structure before send it to the api
   const handleFormatProjectValues = (formValues) => {
     handleEditProject(formatSubmitValues(formValues));
   };
 
-  // TODO brancher project edition sur redux
-
   useEffect(() => {
+    fetchProjectById(id);
+
     if (redirect.length > 0) {
       history.push(redirect);
     }
   }, [redirect]);
 
   return (
-    <Base>
+    <Base loading={loading}>
       <ProjectForm title="Modifier un projet" initialValues={formatInitialValues(project)} handleSubmitProject={handleFormatProjectValues} />
     </Base>
   );
 };
 
-// TODO add props validation
 ProjectEdition.propTypes = {
   handleEditProject: func.isRequired,
+  fetchProjectById: func.isRequired,
   project: object.isRequired,
   redirect: string.isRequired,
+  loading: bool.isRequired,
 };
 
 export default ProjectEdition;

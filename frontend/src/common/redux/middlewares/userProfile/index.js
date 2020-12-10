@@ -3,15 +3,13 @@ import {
   UPDATE_USER_PROFILE,
   saveUserProfile,
   DELETE_USER_PROFILE,
-  DELETE_USER_PROJECT,
-  getProfileInfos,
 } from 'src/common/redux/actions/userProfile';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import { removeToken } from 'src/common/authentication/authProvider';
 import {
-  PROJECTS, DELETE, ONE, GET, USERS, PATCH, PRIVATE_PROFILE,
+  GET, USERS, PATCH, PRIVATE_PROFILE,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
@@ -76,22 +74,6 @@ const userProfile = (store) => (next) => (action) => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
-        });
-
-      next(action);
-      break;
-    }
-    case DELETE_USER_PROJECT: {
-      const url = getEndpoint(PROJECTS, DELETE, ONE, action.id);
-
-      callApi(url, DELETE)
-        .then(() => {
-          store.dispatch(getProfileInfos());
-          store.dispatch(showSnackbar('', 'Votre projet à bien été supprimé', 'success'));
-        })
-        .catch((e) => {
-          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
-          console.log(e.request);
         });
 
       next(action);
