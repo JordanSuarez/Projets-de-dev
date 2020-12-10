@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
+import { TextField } from 'mui-rff';
 import {
-  TextField,
   Avatar,
   Box,
   Button,
@@ -13,26 +13,30 @@ import { classes as classesProps } from 'src/common/classes';
 const Comments = ({
   classes,
   comments,
+  handleComment,
+  idProject,
 }) => {
-  const submitForm = () => {
-    console.log('comment send');
-  };
   const validate = (values) => {
+    console.log('validate');
     const errors = {};
-    if (!values.message) {
-      errors.email = 'Ce champ est requis';
+    if (!values.content) {
+      errors.message = 'Ce champ est requis';
     }
     return errors;
   };
 
+  const onComment = (values) => {
+    handleComment({ content: values.content, projectId: idProject });
+  };
+
   return (
-    <div>
+    <div className={classes.commentSection}>
 
       <div className={classes.containerForm}>
         <h4 className={classes.formTitle}> Ajouter un commentaire </h4>
         <Form
           className={classes.form}
-          onSubmit={submitForm}
+          onSubmit={onComment}
           validate={validate}
           render={({ handleSubmit, submitting }) => (
             <form onSubmit={handleSubmit} noValidate>
@@ -41,7 +45,7 @@ const Comments = ({
                 className={classes.textfield}
                 type="text"
                 label="Message"
-                name="message"
+                name="content"
                 multiline
                 rows={4}
                 variant="outlined"
@@ -65,7 +69,7 @@ const Comments = ({
       <div className={classes.commentList}>
         {comments.length > 0 && (
           comments.map((comment) => (
-            <div key={comment.id}>
+            <div className={classes.comment} key={comment.id}>
               <div className={classes.infosUser}>
                 <Avatar className={classes.avatar} alt="Remy Sharp" src={comment.User.userImage} />
                 <div className={classes.infos}>
@@ -94,7 +98,9 @@ const Comments = ({
 
 Comments.propTypes = {
   ...classesProps,
-  comments: PropTypes.array,
+  comments: PropTypes.array.isRequired,
+  handleComment: PropTypes.func.isRequired,
+  idProject: PropTypes.number.isRequired,
 };
 
 Comments.defaultProps = {

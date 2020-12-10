@@ -113,7 +113,7 @@ console.log(project.comments);
           />
         </Grid>
 
-        <Comments comments={project.comments} />
+        <Comments comments={project.comments} idProject={project.id} />
 
       </div>
     </Base>

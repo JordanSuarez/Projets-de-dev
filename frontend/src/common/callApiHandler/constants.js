@@ -18,6 +18,7 @@ export const EDIT = 'edit';
 export const LOGIN = 'login';
 export const LOGOUT = 'logout';
 export const CONTACT = 'contact';
+export const COMMENT = 'comments';
 export const REGISTER = 'register';
 export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';
 export const LATEST = 'latest';

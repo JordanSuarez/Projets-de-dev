@@ -3,9 +3,9 @@ export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 // Ajout d'un commentaire
-export const addComment = () => ({
+export const addComment = (content) => ({
   type: ADD_COMMENT,
-
+  content,
 });
 
 // Edition d'un commentaire

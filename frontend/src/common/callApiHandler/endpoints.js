@@ -5,6 +5,7 @@ import {
   DELETE,
   USERS,
   PROJECTS,
+  COMMENT,
   CONTACT,
   LOGIN,
   LOGOUT,
@@ -54,6 +55,17 @@ const endpoints = {
     },
     [PATCH]: {
       [PRIVATE_PROFILE]: `${USERS}/me/${EDIT}`,
+    },
+  },
+  [COMMENT]: {
+    [POST]: {
+      [ONE]: `${COMMENT}/add`,
+    },
+    [PATCH]: {
+      [ONE]: `${COMMENT}/${EDIT}`,
+    },
+    [DELETE]: {
+      [ONE]: (meta) => `${COMMENT}/${meta}/${DELETE}`,
     },
   },
   [CONTACT]: {

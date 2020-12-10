@@ -23,12 +23,17 @@ export default ({ breakpoints, palette }) => ({
   },
 
   commentList: {
+
+  },
+
+  comment: {
     margin: '0.5em auto',
     maxWidth: '1200px',
     backgroundColor: 'white',
     padding: ' 1em',
     borderRadius: '8px',
   },
+
   infosUser: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -53,7 +58,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   username: {
-    fontWeight: '800',
+    fontWeight: '600',
     fontSize: '1.3em',
     margin: '0.5em',
   },
