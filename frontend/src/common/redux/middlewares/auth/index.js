@@ -34,6 +34,7 @@ const authMiddleWare = (store) => (next) => (action) => {
           store.dispatch(showSnackbar('', 'Hello!', 'success'));
         })
         .catch(() => {
+          store.dispatch(showSnackbar('Oups!', 'Mot de passe ou email incorrect', 'error'));
           store.dispatch(submitLoginError());
         })
         .finally(() => {
@@ -51,13 +52,16 @@ const authMiddleWare = (store) => (next) => (action) => {
           removeToken();
           store.dispatch(redirect(getHomeRoute()));
           store.dispatch(submitLogoutSuccess());
+          store.dispatch(showSnackbar('', 'A bientôt!', 'info'));
         })
         .catch(() => {
-          // TODO REMOVE THIS WHEN LOGOUT WORKS
+          // TODO REMOVE THIS WHEN LOGOUT WORKS 
           // TODO REMOVE THIS WHEN LOGOUT WORKS
           removeToken();
           store.dispatch(redirect(getHomeRoute()));
+          // store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
           store.dispatch(submitLogoutSuccess());
+          store.dispatch(showSnackbar('', 'A bientôt!', 'info'));
           // TODO REMOVE THIS WHEN LOGOUT WORKS
           // TODO REMOVE THIS WHEN LOGOUT WORKS
         })
@@ -80,8 +84,11 @@ const authMiddleWare = (store) => (next) => (action) => {
         .then(() => {
           store.dispatch(redirect(getLoginRoute()));
           store.dispatch(submitRegisterSuccess(action.email));
+          store.dispatch(showSnackbar('', 'Votre compte à bien été créé', 'success'));
         })
-        .catch(() => {})
+        .catch(() => {
+          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
+        })
         .finally(() => {
           store.dispatch(redirectSuccess());
         });
