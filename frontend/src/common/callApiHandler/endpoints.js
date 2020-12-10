@@ -17,6 +17,7 @@ import {
   LATEST,
   TAGS,
   PRIVATE_PROFILE,
+  ME,
 } from './constants';
 import { apiUrl } from './urlHandler';
 
@@ -48,13 +49,13 @@ const endpoints = {
     [GET]: {
       [ALL]: `${USERS}`,
       [ONE]: (meta) => `${USERS}/${meta}`,
-      [PRIVATE_PROFILE]: `${USERS}/me`,
+      [PRIVATE_PROFILE]: `${USERS}/${ME}`,
     },
     [DELETE]: {
-      [ONE]: (meta) => `${USERS}/${meta}/${DELETE}`,
+      [PRIVATE_PROFILE]: `${USERS}/${ME}/${DELETE}`,
     },
     [PATCH]: {
-      [PRIVATE_PROFILE]: `${USERS}/me/${EDIT}`,
+      [PRIVATE_PROFILE]: `${USERS}/${ME}/${EDIT}`,
     },
   },
   [CONTACT]: {

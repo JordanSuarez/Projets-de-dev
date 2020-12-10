@@ -2,24 +2,24 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
-import { submitLogout } from 'src/common/redux/actions/auth';
+import { submitLogoutSuccess } from 'src/common/redux/actions/auth';
+import { showSnackbar } from 'src/common/redux/actions/snackbar';
+import { removeToken } from 'src/common/authentication/authProvider';
 import Logout from './Logout';
 import styles from './styles';
 
 const mapDispatchToProps = (dispatch) => ({
   handleLogout: () => {
-    dispatch(submitLogout());
+    removeToken();
+    dispatch(submitLogoutSuccess());
+    dispatch(showSnackbar('', 'A bientôt!', 'info'));
   },
-});
-
-const mapStateToProps = (state) => ({
-  redirect: state.redirection.redirect,
 });
 
 export default compose(
   withStyles(styles),
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
   ),
 )(Logout);

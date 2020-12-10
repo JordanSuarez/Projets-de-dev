@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
-import { getProfileInfos } from 'src/common/redux/actions/userProfile';
+import { getProfileInfos, handleDeleteUserProfile } from 'src/common/redux/actions/userProfile';
 import { handleDeleteProject } from 'src/common/redux/actions/project';
 import UserProfile from './UserProfile';
 import styles from './styles';
@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleDeleteProject: (projectId) => {
     dispatch(handleDeleteProject(projectId));
+  },
+  handleDeleteUserProfile: () => {
+    dispatch(handleDeleteUserProfile());
   },
 });
 

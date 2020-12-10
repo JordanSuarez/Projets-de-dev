@@ -17,7 +17,7 @@ const axiosInstance = axios.create({
     // 'Access-Control-Allow-Headers': '*',
     // 'Content-Type': 'application/json, charset=utf-8',
     // Accept: 'application/json',
-    Authorization: `Bearer ${getToken()}`,
+    Authorization: `Bearer ${getToken()}` || null,
   },
 });
 

@@ -11,7 +11,6 @@ const initialState = {
   isLogged: !!getToken(),
   userId: '',
   userEmail: '',
-  token: getToken() || '',
   hasError: false,
 };
 
@@ -23,7 +22,6 @@ const auth = (state = initialState, action = {}) => {
         isLogged: true,
         userId: action.userId,
         userEmail: '',
-        token: action.token,
         hasError: false,
       };
     case SUBMIT_LOGIN_ERROR:
@@ -33,12 +31,8 @@ const auth = (state = initialState, action = {}) => {
       };
     case SUBMIT_LOGOUT_SUCCESS:
       return {
-        ...state,
+        ...initialState,
         isLogged: false,
-        userId: '',
-        userEmail: '',
-        token: '',
-        hasError: false,
       };
     case SUBMIT_REGISTER_SUCCESS:
       return {
