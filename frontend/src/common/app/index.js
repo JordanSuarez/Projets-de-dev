@@ -6,10 +6,12 @@ import Router from 'src/common/routing/router';
 import { routes } from 'src/common/routing/routes';
 import store from 'src/common/redux/store';
 import theme from 'src/common/styles';
+import Snackbar from 'src/common/components/Snackbar';
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
+      <Snackbar />
       <Router routes={routes} />
     </Provider>
   </MuiThemeProvider>

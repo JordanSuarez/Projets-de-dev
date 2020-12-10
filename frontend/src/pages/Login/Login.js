@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { func, objectOf, string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
@@ -7,7 +7,6 @@ import { TextField } from 'mui-rff';
 import { Box, Button } from '@material-ui/core';
 import { getRegisterRoute } from 'src/common/routing/routesResolver';
 import Base from 'src/common/components/Base';
-import { func, objectOf, string } from 'prop-types';
 
 const validate = (values) => {
   const errors = {};
@@ -26,6 +25,7 @@ const Login = ({
   const [errorMessage, setErrorMessage] = useState(null);
 
   const history = useHistory();
+
   useEffect(() => {
     if (redirect.length > 0) {
       history.push(redirect);

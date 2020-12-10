@@ -15,7 +15,7 @@ exports.router = (() => {
     apiRouter.route('/users/login/').post(userController.login); // OK
     apiRouter.route('/users/me').get(userController.getUserProfile); // OK
     apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
-    apiRouter.route('/users/me/delete').get(userController.deleteMe);
+    apiRouter.route('/users/me/delete').delete(userController.deleteMe); //OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
     
     // Projects routes
@@ -23,7 +23,7 @@ exports.router = (() => {
     apiRouter.route('/projects/:id').get(projectController.project); // OK
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
-    apiRouter.route('/projects/:id/delete-my-project').get(projectController.deleteMyProject); 
+    apiRouter.route('/projects/:id/delete-my-project').delete(projectController.deleteMyProject); 
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
     // Comments routes
@@ -31,8 +31,8 @@ exports.router = (() => {
     apiRouter.route('/comments/:id/edit').patch(commentController.edit); // OK
 
     // Admin routes
-    apiRouter.route('/users/:id/delete').get(userController.deleteUser); // OK
-    apiRouter.route('/projects/:id/delete').get(projectController.deleteProject); //OK
+    apiRouter.route('/users/:id/delete').delete(userController.deleteUser); // OK
+    apiRouter.route('/projects/:id/delete').delete(projectController.deleteProject); //OK
 
     return apiRouter;
 })();

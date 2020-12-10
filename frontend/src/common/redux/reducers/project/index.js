@@ -1,5 +1,5 @@
 import {
-  SHOW_PROJECT_BY_ID, REDIRECT_SUCCESS,
+  SHOW_PROJECT_BY_ID,
 } from 'src/common/redux/actions/project';
 
 const initialState = {
@@ -16,7 +16,6 @@ const initialState = {
     },
   },
   loading: true,
-  redirect: '',
 };
 
 const project = (state = initialState, action = {}) => {
@@ -26,11 +25,6 @@ const project = (state = initialState, action = {}) => {
         ...state,
         project: action.project,
         loading: false,
-      };
-    case REDIRECT_SUCCESS:
-      return {
-        ...state,
-        redirect: action.redirect,
       };
     default:
       return { ...state };

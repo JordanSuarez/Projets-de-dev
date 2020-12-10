@@ -7,7 +7,7 @@ import Profile from './Profile';
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
-  redirect: state.auth.redirect,
+  redirect: state.redirection.redirect,
   profile: state.profile.profile,
   loading: state.profile.loading,
 });

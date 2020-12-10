@@ -8,7 +8,7 @@ import styles from './styles';
 
 const mapStateToProps = (state) => ({
   project: state.project.project,
-  redirect: state.auth.redirect,
+  redirect: state.redirection.redirect,
 });
 
 const mapsDispatchToProps = (dispatch) => ({
