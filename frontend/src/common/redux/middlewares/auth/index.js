@@ -31,7 +31,7 @@ const authMiddleWare = (store) => (next) => (action) => {
           setToken(data.token);
           store.dispatch(redirect(getHomeRoute()));
           store.dispatch(submitLoginSuccess(data.userId, data.token));
-          store.dispatch(showSnackbar('', 'Hello!', 'success'));
+          store.dispatch(showSnackbar('', `Hello!${data.username}`, 'success'));
         })
         .catch(() => {
           store.dispatch(showSnackbar('Oups!', 'Mot de passe ou email incorrect', 'error'));
