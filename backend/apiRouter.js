@@ -29,7 +29,6 @@ exports.router = (() => {
     // Comments routes
     apiRouter.route('/comments/add').post(commentController.new); // OK
     apiRouter.route('/comments/:id/edit').patch(commentController.edit); // OK
-    
 
     // Admin routes
     apiRouter.route('/users/:id/delete').get(userController.deleteUser); // OK

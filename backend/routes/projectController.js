@@ -264,7 +264,7 @@ module.exports = {
       models.Project.destroy({
         where: {id: req.params.id }
       }).then(() => {
-        return res.status(200).json({ message: 'Le projet a bien été supprimé' });
+        return res.status(200).json({ 'message': 'Le projet a bien été supprimé' });
       }).catch((err) => {
         return res.status(400).json({'error' : 'La requête n\'a pas pu aboutir' + err});
       })
