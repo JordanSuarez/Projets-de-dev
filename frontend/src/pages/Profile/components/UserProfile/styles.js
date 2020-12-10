@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-export default ({ palette }) => ({
+export default ({ palette, breakpoints }) => ({
   container: {
     maxWidth: '1400px',
     margin: '1em auto',
@@ -11,14 +11,20 @@ export default ({ palette }) => ({
     color: palette.darkBlue,
   },
   rowCenter: {
-    padding: '1em',
+    padding: '1rem',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+    [breakpoints.down(600)]: {
+      margin: 'auto',
+      padding: '0',
+      width: '-webkit-fill-available',
+    },
   },
   column: {
     display: 'flex',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   username: {
     fontSize: '1.2em',

@@ -1,15 +1,15 @@
 export const GET_USER_PROFILE = 'GET_USER_PROFILE';
 export const SAVE_USER_PROFILE = 'SAVE_USER_PROFILE';
 export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE';
-export const DELETE_USER_PROFILE = 'DELETE_USER_PROFILE';
+export const HANDLE_DELETE_USER_PROFILE = 'HANDLE_DELETE_USER_PROFILE';
 
 export const getProfileInfos = () => ({
   type: GET_USER_PROFILE,
 });
 
-export const saveUserProfile = (data) => ({
+export const saveUserProfile = (userProfile) => ({
   type: SAVE_USER_PROFILE,
-  userProfile: { ...data },
+  userProfile,
 });
 
 export const updateProfile = (data) => ({
@@ -17,7 +17,6 @@ export const updateProfile = (data) => ({
   data,
 });
 
-export const deleteProfile = (data) => ({
-  type: DELETE_USER_PROFILE,
-  data,
+export const handleDeleteUserProfile = () => ({
+  type: HANDLE_DELETE_USER_PROFILE,
 });

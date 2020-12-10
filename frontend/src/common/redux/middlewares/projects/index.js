@@ -8,7 +8,6 @@ import {
   saveProjects,
   saveProjectsNumber,
 } from 'src/common/redux/actions/projects';
-import axios from 'axios';
 
 const profiles = (store) => (next) => (action) => {
   switch (action.type) {

@@ -1,6 +1,5 @@
 export const SUBMIT_REGISTER = 'SUBMIT_REGISTER';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
-export const SUBMIT_LOGOUT = 'SUBMIT_LOGOUT';
 export const SUBMIT_LOGIN_SUCCESS = 'SUBMIT_LOGIN_SUCCESS';
 export const SUBMIT_LOGIN_ERROR = 'SUBMIT_LOGIN_ERROR';
 export const SUBMIT_LOGOUT_SUCCESS = 'SUBMIT_LOGOUT_SUCCESS';
@@ -20,14 +19,9 @@ export const submitRegister = (email, password, username) => ({
   username,
 });
 
-export const submitLogout = () => ({
-  type: SUBMIT_LOGOUT,
-});
-
-export const submitLoginSuccess = (userId, token) => ({
+export const submitLoginSuccess = (userId) => ({
   type: SUBMIT_LOGIN_SUCCESS,
   userId,
-  token,
 });
 
 export const submitLoginError = () => ({
@@ -42,11 +36,6 @@ export const submitRegisterSuccess = (userEmail) => ({
   type: SUBMIT_REGISTER_SUCCESS,
   userEmail,
 });
-
-// export const redirectSuccess = (redirect) => ({
-//   type: REDIRECT_SUCCESS,
-//   redirect,
-// });
 
 export const changeHasErrorValue = (value) => ({
   type: CHANGE_HAS_ERROR,

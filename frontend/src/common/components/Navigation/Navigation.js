@@ -172,7 +172,6 @@ const Navigation = ({ classes, isLogged }) => {
 Navigation.propTypes = {
   ...classesProps,
   isLogged: bool.isRequired,
-  handleLogout: func.isRequired,
 };
 
 export default Navigation;

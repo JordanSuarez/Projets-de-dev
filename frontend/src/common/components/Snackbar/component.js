@@ -14,32 +14,30 @@ const Snackbar = ({
   };
 
   return (
-    <div className={classes.root}>
-      <Grid item xs={12} sm={8} md={5}>
-        <MUISnackbar
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={isOpen}
-          autoHideDuration={5000}
-          onClose={handleClose}
-          className={classes.snackbar}
-        >
-          <Alert
-            severity={severity}
-            action={(
-              <IconButton aria-label="close" color="inherit" onClick={handleClose}>
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
+    <Grid item xs={12} sm={12} md={5} className={classes.root}>
+      <MUISnackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        open={isOpen}
+        autoHideDuration={5000}
+        onClose={handleClose}
+        className={classes.snackbar}
+      >
+        <Alert
+          severity={severity}
+          action={(
+            <IconButton aria-label="close" color="inherit" onClick={handleClose}>
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
             )}
-          >
-            <AlertTitle>{title}</AlertTitle>
-            {content}
-          </Alert>
-        </MUISnackbar>
-      </Grid>
-    </div>
+        >
+          <AlertTitle>{title}</AlertTitle>
+          {content}
+        </Alert>
+      </MUISnackbar>
+    </Grid>
   );
 };
 
