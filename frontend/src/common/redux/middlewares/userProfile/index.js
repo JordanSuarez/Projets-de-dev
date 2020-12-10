@@ -4,14 +4,16 @@ import {
   saveUserProfile,
   DELETE_USER_PROFILE,
   DELETE_USER_PROJECT,
+  getProfileInfos,
 } from 'src/common/redux/actions/userProfile';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
+import { removeToken } from 'src/common/authentication/authProvider';
 import {
   PROJECTS, DELETE, ONE, GET, USERS, PATCH, PRIVATE_PROFILE,
 } from 'src/common/callApiHandler/constants';
-import { getUserProfileRoute } from 'src/common/routing/routesResolver';
+import { getUserProfileRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import axios from 'axios';
 
@@ -35,11 +37,11 @@ const userProfile = (store) => (next) => (action) => {
       const url = getEndpoint(USERS, PATCH, PRIVATE_PROFILE);
       callApi(url, PATCH, action.data)
         .then(() => {
-          // TODO alert avec confirmation
           store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(showSnackbar('', 'Ton profil à bien été modifié!', 'success'));
         })
         .catch((error) => {
+          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
           console.log(error);
         })
         .finally(() => {
@@ -65,12 +67,17 @@ const userProfile = (store) => (next) => (action) => {
           withCredentials: true,
         })
         .then(() => {
-          // TODO alert avec confirmation de la suppression + déconnexion + redirection home
-          console.log('suppresion ok');
+          removeToken();
+          store.dispatch(redirect(getHomeRoute()));
+          store.dispatch(showSnackbar('', 'Votre compte à bien été supprimé', 'success'));
         })
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
+
       next(action);
       break;
     }
@@ -79,9 +86,11 @@ const userProfile = (store) => (next) => (action) => {
 
       callApi(url, DELETE)
         .then(() => {
-          // TODO send confirmation to user
+          store.dispatch(getProfileInfos());
+          store.dispatch(showSnackbar('', 'Votre projet à bien été supprimé', 'success'));
         })
         .catch((e) => {
+          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
           console.log(e.request);
         });
 

@@ -4,6 +4,7 @@ import {
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
+import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import {
   PROJECTS, GET, POST, PATCH, ONE,
 } from 'src/common/callApiHandler/constants';
@@ -29,8 +30,10 @@ const projectMiddleWare = (store) => (next) => (action) => {
       callApi(url, POST, action.formProjectValues)
         .then(() => {
           store.dispatch(redirect(getUserProfileRoute()));
+          store.dispatch(showSnackbar('', 'Votre projet à bien été soumis', 'success'));
         })
         .catch((e) => {
+          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
           console.log(e.request);
         })
         .finally(() => {
@@ -47,8 +50,10 @@ const projectMiddleWare = (store) => (next) => (action) => {
       callApi(url, PATCH, action.formProjectValues)
         .then(() => {
           store.dispatch(redirect(getUserProfileRoute()));
+          store.dispatch(showSnackbar('', 'Votre projet à bien été soumis', 'success'));
         })
         .catch((e) => {
+          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
           console.log(e.request);
         })
         .finally(() => {
