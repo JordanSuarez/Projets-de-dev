@@ -9,6 +9,7 @@ import profile from 'src/common/redux/middlewares/profile';
 import profiles from 'src/common/redux/middlewares/profiles';
 import project from 'src/common/redux/middlewares/project';
 import projects from 'src/common/redux/middlewares/projects';
+import comments from 'src/common/redux/middlewares/comments';
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
@@ -19,6 +20,7 @@ const enhancers = composeWithDevTools(
     profiles,
     project,
     projects,
+    comments,
   ),
 );
 

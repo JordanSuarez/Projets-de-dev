@@ -10,8 +10,9 @@ import {
 import { classes as classesProps } from 'src/common/classes';
 
 // eslint-disable-next-line arrow-body-style
-const Comment = ({
+const Comments = ({
   classes,
+  comments,
 }) => {
   const submitForm = () => {
     console.log('comment send');
@@ -23,9 +24,10 @@ const Comment = ({
     }
     return errors;
   };
-  
+
   return (
     <div>
+
       <div className={classes.containerForm}>
         <h4 className={classes.formTitle}> Ajouter un commentaire </h4>
         <Form
@@ -56,38 +58,41 @@ const Comment = ({
                 </Button>
               </Box>
             </form>
-            )}
-          />
+          )}
+        />
       </div>
-      <div className={classes.commentList}>
-        <div className={classes.infosUser}>
-          <Avatar className={classes.avatar} alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          <div className={classes.infos}>
-            <h4 className={classes.username}>Chuck Norris</h4>
-            <p className={classes.date}>Le 20 octobre 2020 a 5h45</p>
-          </div>
-        </div>
-        <p className={classes.commentText}>
-          Carlos Ray Norris, dit Chuck Norris, est un acteur américain né le 10 mars 1940 à Ryan.
-          D'abord connu pour sa maîtrise des arts martiaux,
-          il devient dans les années 1970 une vedette du cinéma d' action.
-        </p>
 
-        
+      <div className={classes.commentList}>
+        {comments.map((comment) => (
+          <div key={comment.id}>
+            <div className={classes.infosUser}>
+              <Avatar className={classes.avatar} alt="Remy Sharp" src={comment.User.userImage} />
+              <div className={classes.infos}>
+                <h4 className={classes.username}>{comment.User.username}</h4>
+                <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
+
+              </div>
+            </div>
+            <p className={classes.commentText}>
+              {comment.content}
+            </p>
+          </div>
+        ))}
       </div>
+
     </div>
 
 
   );
 };
 
-Comment.propTypes = {
+Comments.propTypes = {
   ...classesProps,
+  comments: PropTypes.array
+};
+
+Comments.defaultProps = {
 
 };
 
-Comment.defaultProps = {
-
-};
-
-export default Comment;
+export default Comments;

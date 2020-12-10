@@ -15,6 +15,7 @@ const projectMiddleWare = (store) => (next) => (action) => {
 
       callApi(url, GET)
         .then(({ data }) => {
+          console.log(data);
           store.dispatch(showProjectById(data));
         })
         .catch(() => {});
