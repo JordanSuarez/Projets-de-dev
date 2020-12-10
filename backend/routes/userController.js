@@ -89,7 +89,7 @@ module.exports = {
 			const password = req.body.password;
 
 			if (email == null ||  password == null) {
-				return res.status(400).json({ 'error': /* 'Merci de renseigner l\'email et le mot de passe | email : ' + email + ' password : ' + password */ err});
+				return res.status(400).json({ 'error': /* 'Merci de renseigner l\'email et le mot de passe | email : ' + email + ' password : ' + password */ 'error'});
 			}
 
 			asyncLib.waterfall([
@@ -112,7 +112,7 @@ module.exports = {
 							done(null, userFound, resBycrypt);	
 						});
 					} else {
-						return res.status(404).json({ 'error': /*'La combinaison d\'email et mot de passe est invalide'*/ err});
+						return res.status(404).json({ 'error': /*'La combinaison d\'email et mot de passe est invalide'*/ 'error'});
 					}
 				},
 
@@ -120,7 +120,7 @@ module.exports = {
 					if(resBycrypt) {
 						done(userFound);
 					} else {
-						return res.status(403).json({ 'error': /*'La combinaison d\'email et mot de passe est invalide'*/ err });
+						return res.status(403).json({ 'error': /*'La combinaison d\'email et mot de passe est invalide'*/ 'error'});
 					}
 				}
 
@@ -131,7 +131,7 @@ module.exports = {
 						'token': jwtUtils.generateTokenForUser(userFound)
 					});
 				} else {
-					return res.status(500).json({'error': /*'Impossible de vérifier l\'utilisateur'*/ err});
+					return res.status(500).json({'error': /*'Impossible de vérifier l\'utilisateur'*/ 'error'});
 				}
 			});
 		},
