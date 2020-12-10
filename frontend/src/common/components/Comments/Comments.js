@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
-import { TextField } from 'mui-rff';
+import { } from 'mui-rff';
 import {
   Avatar,
   Box,
   Button,
+  TextField,
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
 
 // eslint-disable-next-line arrow-body-style
 const Comments = ({
@@ -16,54 +19,67 @@ const Comments = ({
   handleComment,
   idProject,
 }) => {
-  const validate = (values) => {
-    console.log('validate');
-    const errors = {};
-    if (!values.content) {
-      errors.message = 'Ce champ est requis';
-    }
-    return errors;
-  };
+  const [emojiPickerState, SetEmojiPicker] = useState(false);
+  const [message, SetMessage] = useState('');
 
-  const onComment = (values) => {
-    handleComment({ content: values.content, projectId: idProject });
+  const onComment = (e) => {
+    console.log(message);
+    e.preventDefault();
+    handleComment({ content: message, projectId: idProject });
   };
+  
+  let emojiPicker;
+  if (emojiPickerState) {
+    emojiPicker = (
+      <Picker
+        title="Pick your emoji…"
+        emoji="point_up"
+        onSelect={(emoji) => SetMessage(message + emoji.native)}
+      />
+    );
+  }
+
+  function triggerPicker(event) {
+    event.preventDefault();
+    SetEmojiPicker(!emojiPickerState);
+  }
 
   return (
     <div className={classes.commentSection}>
 
       <div className={classes.containerForm}>
         <h4 className={classes.formTitle}> Ajouter un commentaire </h4>
-        <Form
-          className={classes.form}
-          onSubmit={onComment}
-          validate={validate}
-          render={({ handleSubmit, submitting }) => (
-            <form onSubmit={handleSubmit} noValidate>
+        <form className="form" onSubmit={onComment}>
+          <TextField
+            className={classes.textfield}
+            type="text"
+            label="Message"
+            name="content"
+            multiline
+            rows={4}
+            variant="outlined"
+            value={message}
+            onChange={event => SetMessage(event.target.value)}
+            required
+          />
+          {emojiPicker}
+          <Button
+            className={classes.picker}
+            onClick={triggerPicker}
+          >
+            😁
+          </Button>
 
-              <TextField
-                className={classes.textfield}
-                type="text"
-                label="Message"
-                name="content"
-                multiline
-                rows={4}
-                variant="outlined"
-                required
-              />
-              <Box className={classes.containerButton}>
-                <Button
-                  className={classes.submit}
-                  variant="contained"
-                  type="submit"
-                  disabled={submitting}
-                >
-                  Envoyer
-                </Button>
-              </Box>
-            </form>
-          )}
-        />
+          <Box className={classes.containerButton}>
+            <Button
+              className={classes.submit}
+              variant="contained"
+              type="submit"
+            >
+              Envoyer
+            </Button>
+          </Box>
+        </form>
       </div>
 
       <div className={classes.commentList}>
