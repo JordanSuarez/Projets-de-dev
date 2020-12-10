@@ -46,7 +46,7 @@ const Comments = ({
                 rows={4}
                 variant="outlined"
                 required
-                />
+              />
               <Box className={classes.containerButton}>
                 <Button
                   className={classes.submit}
@@ -63,32 +63,38 @@ const Comments = ({
       </div>
 
       <div className={classes.commentList}>
-        {comments.map((comment) => (
-          <div key={comment.id}>
-            <div className={classes.infosUser}>
-              <Avatar className={classes.avatar} alt="Remy Sharp" src={comment.User.userImage} />
-              <div className={classes.infos}>
-                <h4 className={classes.username}>{comment.User.username}</h4>
-                <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
-
+        {comments.length > 0 && (
+          comments.map((comment) => (
+            <div key={comment.id}>
+              <div className={classes.infosUser}>
+                <Avatar className={classes.avatar} alt="Remy Sharp" src={comment.User.userImage} />
+                <div className={classes.infos}>
+                  <h4 className={classes.username}>{comment.User.username}</h4>
+                  <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
+                </div>
               </div>
+              <p className={classes.commentText}>
+                {comment.content}
+              </p>
             </div>
-            <p className={classes.commentText}>
-              {comment.content}
-            </p>
-          </div>
-        ))}
+          ))
+        )}
+        {comments.length === 0 && (
+          <p className={classes.noComment}>
+            Il n'y a pas encore de commentaires pour ce projet
+          </p>
+        )}
+
       </div>
 
     </div>
-
 
   );
 };
 
 Comments.propTypes = {
   ...classesProps,
-  comments: PropTypes.array
+  comments: PropTypes.array,
 };
 
 Comments.defaultProps = {
