@@ -4,6 +4,8 @@ import {
   HANDLE_CREATE_PROJECT,
   showProjectById,
   HANDLE_DELETE_PROJECT,
+  FETCH_PROJECT_TAGS,
+  showProjectTags,
 } from 'src/common/redux/actions/project';
 import {
   getProfileInfos,
@@ -34,6 +36,18 @@ const projectMiddleWare = (store) => (next) => (action) => {
         const tags = get(response[1], 'data');
         store.dispatch(showProjectById(project, tags));
       })
+        .catch(() => {});
+
+      next(action);
+      break;
+    }
+    case FETCH_PROJECT_TAGS: {
+      const url = getEndpoint(TAGS, GET, ALL);
+
+      callApi(url, GET)
+        .then(({ data }) => {
+          store.dispatch(showProjectTags(data));
+        })
         .catch(() => {});
 
       next(action);

@@ -4,6 +4,7 @@ export const HANDLE_CREATE_PROJECT = 'HANDLE_CREATE_PROJECT';
 export const HANDLE_EDIT_PROJECT = 'HANDLE_EDIT_PROJECT';
 export const HANDLE_DELETE_PROJECT = 'HANDLE_DELETE_PROJECT';
 export const FETCH_PROJECT_TAGS = 'FETCH_PROJECT_TAGS';
+export const SHOW_PROJECT_TAGS = 'SHOW_PROJECT_TAGS';
 
 export const fetchProjectById = (projectId) => ({
   type: FETCH_PROJECT_BY_ID,
@@ -33,4 +34,9 @@ export const handleDeleteProject = (id) => ({
 
 export const fetchProjectTags = () => ({
   type: FETCH_PROJECT_TAGS,
+});
+
+export const showProjectTags = (tags) => ({
+  type: SHOW_PROJECT_TAGS,
+  tags,
 });

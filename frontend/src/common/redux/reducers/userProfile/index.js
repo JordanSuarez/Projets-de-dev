@@ -14,7 +14,6 @@ const initialState = {
 };
 
 const userProfile = (state = initialState, action = {}) => {
-  console.log('reducer user profile', action.userProfile);
   switch (action.type) {
     case SAVE_USER_PROFILE: {
       return {

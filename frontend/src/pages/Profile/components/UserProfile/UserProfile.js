@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PropTypes, { string } from 'prop-types';
 import { getEditionProfileRoute, getCreationProjectRoute } from 'src/common/routing/routesResolver';
@@ -8,7 +8,9 @@ import { Avatar, Button } from '@material-ui/core';
 import CardProject from 'src/common/components/CardProject';
 import Base from 'src/common/components/Base';
 import { isEmpty } from 'lodash';
+import AlertDialog from 'src/common/components/AlertDialog';
 import avatar2 from './avatar.png';
+import { alertUserProfile, alertUserProject } from './alertTextProvider';
 
 const UserProfile = ({
   classes,
@@ -23,32 +25,80 @@ const UserProfile = ({
 
   useEffect(() => {
     getProfile();
-
     if (redirect.length > 0) {
       history.push(redirect);
     }
   }, [redirect]);
 
-  const deleteProfile = () => handleDeleteUserProfile();
+  // The AlertDialog context for each case where it will be called
+  const [context, setContext] = useState({
+    alertId: null,
+    title: '',
+    content: '',
+    isOpen: false,
+  });
+
+  // Destructuring context to use these key
+  const {
+    alertId, title, content, isOpen,
+  } = context;
+
+  // Called from delete buttons, and set context where it was called
+  // Get the projectId from handleDeleteProject method's CardProject
+  const deleteItem = (item, projectId = null) => {
+    setContext({
+      alertId: item.id,
+      title: item.title,
+      content: item.content,
+      isOpen: true,
+      projectId,
+    });
+  };
+
   const editProfile = () => history.push(getEditionProfileRoute());
   const newProject = () => history.push(getCreationProjectRoute());
 
+  // Returns the proper method depending on context
+  const handleAgreeAlertDialog = () => {
+    switch (alertId) {
+      case alertUserProfile.id: {
+        setContext({ ...context, isOpen: false });
+        return handleDeleteUserProfile();
+      }
+      case alertUserProject.id: {
+        setContext({ ...context, isOpen: false });
+        return handleDeleteProject(context.projectId);
+      }
+      default: return null;
+    }
+  };
+
+  // Loop on buttons array to not repeat the button component
   const buttons = [
     {
-      id: 1, func: deleteProfile, label: 'Supprimer mon compte',
+      id: 1, method: () => deleteItem(alertUserProfile), label: 'Supprimer mon compte',
     },
     {
-      id: 2, func: editProfile, label: 'Modifier mon compte',
+      id: 2, method: editProfile, label: 'Modifier mon compte',
     },
     {
-      id: 3, func: newProject, label: 'Ajouter un projet',
+      id: 3, method: newProject, label: 'Ajouter un projet',
     },
   ];
-  console.log('userprofile page', localStorage.getItem('token'));
+
   return (
     <Base loading={loading}>
       <>
         <div className={classes.container}>
+          <AlertDialog
+            open={isOpen}
+            title={title}
+            content={content}
+            agreeLabelButton="Accepter"
+            disagreeLabelButton="Refuser"
+            onAgree={handleAgreeAlertDialog}
+            onCancel={() => setContext({ ...context, isOpen: false })}
+          />
           <h2 className={classes.subtitle}> Mon profil </h2>
           <div className={classes.column}>
             <div className={classes.rowCenter}>
@@ -56,15 +106,15 @@ const UserProfile = ({
               <h3 className={classes.username}>{userProfile.username}</h3>
             </div>
             <div className={classes.rowCenter}>
-              {buttons.map((button) => (
+              {buttons.map(({ id, label, method }) => (
                 <Button
-                  key={button.id}
-                  className={classes.button}
+                  key={id}
+                  className={id === 1 ? classes.deleteButton : classes.button}
                   variant="contained"
                   type="button"
-                  onClick={button.func}
+                  onClick={method}
                 >
-                  {button.label}
+                  {label}
                 </Button>
               ))}
             </div>
@@ -79,19 +129,19 @@ const UserProfile = ({
               )}
               {!isEmpty(userProfile.projects)
                 && userProfile.projects.map(({
-                  id: projectId, title, description, tags, image,
+                  id: projectId, title: projectTitle, description, tags, image,
                 }) => (
                   <CardProject
                     key={projectId}
                     projectId={projectId}
-                    title={title}
+                    title={projectTitle}
                     tags={tags}
                     description={description}
                     userId={userProfile.id}
                     userImage={userProfile.userImage}
                     image={image}
                     projectOwnerOptions
-                    handleDeleteProject={handleDeleteProject}
+                    handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
                   />
                 ))}
             </div>

@@ -45,6 +45,16 @@ export default ({ palette, breakpoints }) => ({
       backgroundColor: palette.blue,
     },
   },
+  deleteButton: {
+    backgroundColor: palette.darkBlue,
+    color: palette.yellow,
+    margin: '1em',
+    width: '200px',
+    '&:hover': {
+      color: palette.white,
+      backgroundColor: palette.errorField,
+    },
+  },
   cardContainer: {
     marginTop: '2rem',
     justifyContent: 'center',

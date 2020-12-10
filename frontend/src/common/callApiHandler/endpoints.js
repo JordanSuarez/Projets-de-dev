@@ -43,7 +43,6 @@ const endpoints = {
   [USERS]: {
     [POST]: {
       [LOGIN]: `${USERS}/${LOGIN}`,
-      [LOGOUT]: `${USERS}/${LOGOUT}`,
       [REGISTER]: `${USERS}/${REGISTER}`,
     },
     [GET]: {
