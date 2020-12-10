@@ -9,7 +9,7 @@ import { Autocomplete, TextField as Field } from 'mui-rff';
 import {
   Checkbox, Button, TextField, Grid,
 } from '@material-ui/core';
-import { getHomeRoute } from 'src/common/routing/routesResolver';
+import { getUserProfileRoute } from 'src/common/routing/routesResolver';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { classes as classesProps } from 'src/common/classes';
@@ -44,7 +44,7 @@ const Form = ({
 
   // Controlled Inputs
   const handleQuitForm = () => {
-    history.push(getHomeRoute());
+    history.push(getUserProfileRoute());
   };
   const handleChange = (event) => {
     setErrorFields({ ...errorFields, [event.target.name]: false });

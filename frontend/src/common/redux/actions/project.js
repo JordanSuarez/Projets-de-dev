@@ -24,7 +24,7 @@ export const handleEditProject = (formProjectValues) => ({
   formProjectValues,
 });
 
-export const redirectSuccess = (redirect) => ({
-  type: REDIRECT_SUCCESS,
-  redirect,
-});
+// export const redirectSuccess = (redirect) => ({
+//   type: REDIRECT_SUCCESS,
+//   redirect,
+// });

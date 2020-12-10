@@ -7,7 +7,7 @@ import ProjectCreation from './ProjectCreation';
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
-  redirect: state.auth.redirect,
+  redirect: state.redirection.redirect,
 });
 
 const mapsDispatchToProps = (dispatch) => ({

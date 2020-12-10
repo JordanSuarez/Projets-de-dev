@@ -1,25 +1,23 @@
-/* eslint-disable import/no-unresolved */
 import {
   GET_USER_PROFILE,
   UPDATE_USER_PROFILE,
   saveUserProfile,
   DELETE_USER_PROFILE,
   DELETE_USER_PROJECT,
-  redirectSuccess,
 } from 'src/common/redux/actions/userProfile';
+import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
-  PROJECTS, DELETE, ONE, GET, USERS, PATCH, PRIVATE_PROFILE
+  PROJECTS, DELETE, ONE, GET, USERS, PATCH, PRIVATE_PROFILE,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute } from 'src/common/routing/routesResolver';
+import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import axios from 'axios';
-
 
 const userProfile = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_USER_PROFILE: {
-      const state = store.getState();
       const url = getEndpoint(USERS, GET, PRIVATE_PROFILE);
 
       callApi(url, GET)
@@ -37,11 +35,15 @@ const userProfile = (store) => (next) => (action) => {
       const url = getEndpoint(USERS, PATCH, PRIVATE_PROFILE);
       callApi(url, PATCH, action.data)
         .then(() => {
-          // TODO alert avec confirmation + redirection page profil
-          store.dispatch(redirectSuccess(getUserProfileRoute()));
+          // TODO alert avec confirmation
+          store.dispatch(redirect(getUserProfileRoute()));
+          store.dispatch(showSnackbar('', 'Ton profil à bien été modifié!', 'success'));
         })
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
       next(action);
       break;
@@ -77,7 +79,7 @@ const userProfile = (store) => (next) => (action) => {
 
       callApi(url, DELETE)
         .then(() => {
-          //TODO send confirmation to user
+          // TODO send confirmation to user
         })
         .catch((e) => {
           console.log(e.request);

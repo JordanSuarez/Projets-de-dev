@@ -47,9 +47,13 @@ Snackbar.propTypes = {
   content: string.isRequired,
   hideSnackbar: func.isRequired,
   isOpen: bool.isRequired,
-  severity: string.isRequired,
+  severity: string,
   title: string.isRequired,
   ...classesProps,
+};
+
+Snackbar.defaultProps = {
+  severity: 'info',
 };
 
 export default Snackbar;

@@ -1,6 +1,7 @@
 import {
-  FETCH_PROJECT_BY_ID, HANDLE_EDIT_PROJECT, HANDLE_CREATE_PROJECT, showProjectById, redirectSuccess,
+  FETCH_PROJECT_BY_ID, HANDLE_EDIT_PROJECT, HANDLE_CREATE_PROJECT, showProjectById,
 } from 'src/common/redux/actions/project';
+import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
@@ -27,10 +28,13 @@ const projectMiddleWare = (store) => (next) => (action) => {
 
       callApi(url, POST, action.formProjectValues)
         .then(() => {
-          store.dispatch(redirectSuccess(getUserProfileRoute()));
+          store.dispatch(redirect(getUserProfileRoute()));
         })
         .catch((e) => {
           console.log(e.request);
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
 
       next(action);
@@ -42,10 +46,13 @@ const projectMiddleWare = (store) => (next) => (action) => {
 
       callApi(url, PATCH, action.formProjectValues)
         .then(() => {
-          store.dispatch(redirectSuccess(getUserProfileRoute()));
+          store.dispatch(redirect(getUserProfileRoute()));
         })
         .catch((e) => {
           console.log(e.request);
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
 
       next(action);

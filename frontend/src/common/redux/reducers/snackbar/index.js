@@ -6,7 +6,7 @@ const initialState = {
   isOpen: false,
   content: '',
   title: '',
-  severity: '',
+  severity: 'info',
 };
 
 const snackbar = (state = initialState, action = {}) => {

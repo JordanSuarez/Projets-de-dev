@@ -2,12 +2,12 @@ import {
   SUBMIT_LOGIN,
   SUBMIT_LOGOUT,
   submitLoginSuccess,
-  redirectSuccess,
   submitLogoutSuccess,
   submitRegisterSuccess,
   SUBMIT_REGISTER,
   submitLoginError,
 } from 'src/common/redux/actions/auth';
+import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import { setToken, removeToken } from 'src/common/authentication/authProvider';
 import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
@@ -29,12 +29,15 @@ const authMiddleWare = (store) => (next) => (action) => {
       callApi(url, POST, credentials)
         .then(({ data }) => {
           setToken(data.token);
-          store.dispatch(showSnackbar('test', 'tetete', 'success'));
-          store.dispatch(redirectSuccess(getHomeRoute()));
-          store.dispatch(submitLoginSuccess(data.userId));
+          store.dispatch(redirect(getHomeRoute()));
+          store.dispatch(submitLoginSuccess(data.userId, data.token));
+          store.dispatch(showSnackbar('', 'Hello!', 'success'));
         })
         .catch(() => {
           store.dispatch(submitLoginError());
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
       next(action);
       break;
@@ -46,17 +49,20 @@ const authMiddleWare = (store) => (next) => (action) => {
         .then(() => {
           // reset authentication cookie's when logout
           removeToken();
-          store.dispatch(redirectSuccess(getHomeRoute()));
+          store.dispatch(redirect(getHomeRoute()));
           store.dispatch(submitLogoutSuccess());
         })
         .catch(() => {
           // TODO REMOVE THIS WHEN LOGOUT WORKS
           // TODO REMOVE THIS WHEN LOGOUT WORKS
           removeToken();
-          store.dispatch(redirectSuccess(getHomeRoute()));
+          store.dispatch(redirect(getHomeRoute()));
           store.dispatch(submitLogoutSuccess());
           // TODO REMOVE THIS WHEN LOGOUT WORKS
           // TODO REMOVE THIS WHEN LOGOUT WORKS
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
 
       next(action);
@@ -72,10 +78,13 @@ const authMiddleWare = (store) => (next) => (action) => {
 
       callApi(url, POST, credentials)
         .then(() => {
-          store.dispatch(redirectSuccess(getLoginRoute()));
+          store.dispatch(redirect(getLoginRoute()));
           store.dispatch(submitRegisterSuccess(action.email));
         })
-        .catch(() => {});
+        .catch(() => {})
+        .finally(() => {
+          store.dispatch(redirectSuccess());
+        });
 
       next(action);
       break;
