@@ -18,16 +18,16 @@ const Comments = ({
   comments,
   handleComment,
   idProject,
+  isLogged,
+  userId,
 }) => {
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const [message, SetMessage] = useState('');
-
   const onComment = (e) => {
-    console.log(message);
     e.preventDefault();
     handleComment({ content: message, projectId: idProject });
   };
-  
+
   let emojiPicker;
   if (emojiPickerState) {
     emojiPicker = (
@@ -52,36 +52,42 @@ const Comments = ({
 
       <div className={classes.containerForm}>
         <h4 className={classes.formTitle}> Ajouter un commentaire </h4>
-        <form className="form" onSubmit={onComment}>
-          <TextField
-            className={classes.textfield}
-            type="text"
-            label="Message"
-            name="content"
-            multiline
-            rows={4}
-            value={message}
-            onChange={event => SetMessage(event.target.value)}
-            required
-          />
-          {emojiPicker}
-          <Button
-            className={classes.picker}
-            onClick={triggerPicker}
-          >
-            😍
-          </Button>
+        {isLogged
+          ? (
+            <form className="form" onSubmit={onComment}>
+              <TextField
+                className={classes.textfield}
+                type="text"
+                label="Message"
+                name="content"
+                multiline
+                rows={4}
+                value={message}
+                onChange={(event) => SetMessage(event.target.value)}
+                required
+              />
+              {emojiPicker}
+              <Button
+                className={classes.picker}
+                onClick={triggerPicker}
+              >
+                😍
+              </Button>
 
-          <Box className={classes.containerButton}>
-            <Button
-              className={classes.submit}
-              variant="contained"
-              type="submit"
-            >
-              Envoyer
-            </Button>
-          </Box>
-        </form>
+              <Box className={classes.containerButton}>
+                <Button
+                  className={classes.submit}
+                  variant="contained"
+                  type="submit"
+                >
+                  Envoyer
+                </Button>
+              </Box>
+            </form>
+          )
+          : (
+            <p> Merci de vous connecter pour poster un commentaire</p>
+          )}
       </div>
 
       <div className={classes.commentList}>
@@ -93,6 +99,9 @@ const Comments = ({
                 <div className={classes.infos}>
                   <h4 className={classes.username}>{comment.User.username}</h4>
                   <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
+                  {userId === comment.User.id && (
+                    <p>Editer</p>
+                  )}
                 </div>
               </div>
               <p className={classes.commentText}>
@@ -119,6 +128,8 @@ Comments.propTypes = {
   comments: PropTypes.array.isRequired,
   handleComment: PropTypes.func.isRequired,
   idProject: PropTypes.number.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 Comments.defaultProps = {
