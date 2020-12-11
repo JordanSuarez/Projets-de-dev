@@ -5,11 +5,11 @@ import {
   SUBMIT_REGISTER_SUCCESS,
   CHANGE_HAS_ERROR,
 } from 'src/common/redux/actions/auth';
-import { getToken } from 'src/common/authentication/authProvider';
+import { getToken, getUserId } from 'src/common/authentication/authProvider';
 
 const initialState = {
   isLogged: !!getToken(),
-  userId: '',
+  userId: parseInt(getUserId(), 10) || null,
   userEmail: '',
   hasError: false,
 };
