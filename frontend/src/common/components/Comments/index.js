@@ -6,9 +6,9 @@ import { addComment } from 'src/common/redux/actions/comments';
 import Comments from './Comments';
 import styles from './styles';
 
-
 const mapStateToProps = (state) => ({
-
+  isLogged: state.auth.isLogged,
+  userId: state.auth.userId,
 });
 
 const mapsDispatchToProps = (dispatch) => ({
