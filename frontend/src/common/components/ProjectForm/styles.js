@@ -75,6 +75,10 @@ export default ({ palette }) => ({
   },
   autoComplete: {
     margin: '1rem',
+    '& .MuiChip-root': {
+      color: palette.darkBlue,
+      backgroundColor: palette.yellow,
+    },
   },
   // Submit and Quit buttons
   buttonsWrapper: {
@@ -134,4 +138,5 @@ export default ({ palette }) => ({
     color: palette.errorField,
     margin: '0.5em',
   },
+  
 });

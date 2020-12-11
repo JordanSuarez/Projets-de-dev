@@ -58,15 +58,14 @@ const CardProject = ({
 
   return (
     <Card className={classes.card}>
-      <CardActionArea
-        className={classes.cardActionArea}
-        onClick={handleDisplayProject}
-      >
+      <div>
         <CardMedia
           className={classes.image}
           image={image}
           title="image website"
         />
+      </div>
+      <div className={classes.contentCard}>
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">
             {title}
@@ -82,24 +81,26 @@ const CardProject = ({
             })}
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions className={classes.link}>
-        {!projectOwnerOptions ? (
-          <>
-            <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />
-            <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
-          </>
-        ) : (
-          <>
-            <IconButton title="Supprimer" onClick={() => handleDeleteProject(projectId)} className={classes.deleteIcon}>
-              <DeleteIcon />
-            </IconButton>
-            <IconButton title="Modifier" onClick={() => handleDisplayProjectEdit(projectId)} className={classes.editIcon}>
-              <EditIcon />
-            </IconButton>
-          </>
-        )}
-      </CardActions>
+        <div className={classes.test}>
+          <CardActions className={classes.link}>
+            {!projectOwnerOptions ? (
+              <>
+                <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />
+                <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
+              </>
+            ) : (
+              <>
+                <IconButton title="Supprimer" onClick={() => handleDeleteProject(projectId)} className={classes.deleteIcon}>
+                  <DeleteIcon />
+                </IconButton>
+                <IconButton title="Modifier" onClick={() => handleDisplayProjectEdit(projectId)} className={classes.editIcon}>
+                  <EditIcon />
+                </IconButton>
+              </>
+            )}
+          </CardActions>
+        </div>
+      </div>
     </Card>
 
   );

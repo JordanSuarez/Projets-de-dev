@@ -1,7 +1,11 @@
-export default () => ({
+export default ({palette}) => ({
   searchBar: {
-    marginRight: '1rem',
-    marginLeft: '1rem',
     width: '15rem',
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: palette.darkBlue,
+    },
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: palette.darkBlue,
+    },
   },
 });

@@ -1,28 +1,47 @@
 export default ({ breakpoints, palette }) => ({
   card: {
-    width: '260px',
+    width: '240px',
+    transition: 'all .2s ease-in-out',
     [breakpoints.up('sm')]: {
       width: '300px',
     },
     margin: '1em',
-    borderRadius: '16px',
+    borderRadius: '32px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    '&:hover': {
+      transition: '.2s ease-in-out',
+      transform: 'scale(1.1)',
+      cursor: 'pointer',
+    },
+  },
+
+  image: {
+    height: '200px',
+  },
+
+  contentCard: {
+    height: '100% !important',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-  image: {
-    height: '200px',
-  },
+
   text: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    height: '100%',
     textAlign: 'center',
-    marginBottom: '1em;',
     backgroundColor: palette.white,
   },
+
   title: {
     fontSize: '1.5em',
     paddingBottom: '0.5em',
     color: palette.darkBlue,
-
+    wordBreak: 'break-all',
   },
   link: {
     display: 'flex',
@@ -33,6 +52,7 @@ export default ({ breakpoints, palette }) => ({
   like: {
     margin: '0.50em',
     color: palette.white,
+    transition: 'all .2s ease-in-out',
     '&:hover': {
       cursor: 'pointer',
       transition: 'all .2s ease-in-out',
@@ -43,6 +63,7 @@ export default ({ breakpoints, palette }) => ({
     margin: '0.50em',
     color: palette.darkBlue,
     backgroundColor: palette.white,
+    transition: 'all .2s ease-in-out',
     '&:hover': {
       cursor: 'pointer',
       color: palette.darkBlue,
@@ -55,6 +76,7 @@ export default ({ breakpoints, palette }) => ({
     margin: '0.50em',
     color: palette.darkBlue,
     backgroundColor: palette.white,
+    transition: 'all .2s ease-in-out',
     '&:hover': {
       cursor: 'pointer',
       color: palette.darkBlue,
@@ -69,6 +91,7 @@ export default ({ breakpoints, palette }) => ({
 
   avatar: {
     margin: '0.5em',
+    transition: 'all .2s ease-in-out',
     '&:hover': {
       cursor: 'pointer',
       transition: 'all .2s ease-in-out',
@@ -78,13 +101,22 @@ export default ({ breakpoints, palette }) => ({
   tags: {
     display: 'flex',
     justifyContent: 'center',
-    flexWrap: 'wrap',
+    flexWrap: ' wrap-reverse',
     marginTop: '0.7em',
+    '& :nth-child(1n)': {
+      color: palette.blue,
+    },
+    '& :nth-child(2n)': {
+      color: palette.yellow,
+    },
+    '& :nth-child(3n)': {
+      color: palette.green,
+    },
   },
   tag: {
     borderRadius: '8px',
     margin: '1em 5px 0 0',
-    backgroundColor: palette.yellow,
+    backgroundColor: palette.darkBlue,
     padding: '0.5em',
     color: palette.darkBlue,
     fontSize: '0.85em',

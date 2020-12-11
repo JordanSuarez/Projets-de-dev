@@ -6,6 +6,11 @@ export default ({ palette }) => ({
     position: 'relative',
     boxSizing: 'content-box',
     overflow: 'visible',
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+    },
   },
 
   large: {

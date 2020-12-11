@@ -13,12 +13,24 @@ export default ({ palette }) => ({
     justifyContent: 'center',
     flexWrap: 'wrap',
     margin: '1rem',
+    '& :nth-child(1n)': {
+      color: palette.blue,
+    },
+    '& :nth-child(2n)': {
+      color: palette.yellow,
+    },
+    '& :nth-child(3n)': {
+      color: palette.green,
+    },
+    '& :nth-child(4n)': {
+      color: palette.darkBlue,
+    },
   },
   tag: {
     width: 'fit-content',
     margin: '0.5rem',
     color: palette.darkBlue,
-    backgroundColor: palette.yellow,
+    backgroundColor: palette.white,
     padding: '0.5rem',
     borderRadius: '0.4rem',
     boxShadow: '1px 2px 3px 1px rgba(0,0,0,.35)',
@@ -111,8 +123,7 @@ export default ({ palette }) => ({
       display: 'flex',
       flexWrap: 'wrap',
       margin: 'auto',
-      width: '50%',
-      maxWidth: 'fit-content',
+      maxWidth: '30%',
     },
     '& iframe': {
       margin: 'auto',

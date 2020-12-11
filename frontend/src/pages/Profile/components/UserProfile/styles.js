@@ -3,10 +3,10 @@ export default ({ palette, breakpoints }) => ({
   container: {
     maxWidth: '1400px',
     margin: '1em auto',
-    padding: '1em 3em',
+    padding: '1em 0',
   },
   subtitle: {
-    padding: '1em 0',
+    padding: '1em',
     fontSize: '1.5em',
     color: palette.darkBlue,
   },
@@ -38,16 +38,17 @@ export default ({ palette, breakpoints }) => ({
   },
   button: {
     backgroundColor: palette.darkBlue,
-    color: palette.yellow,
+    color: palette.white,
     margin: '1em',
     width: '200px',
     '&:hover': {
-      backgroundColor: palette.blue,
+      color: palette.blue,
+      backgroundColor: palette.darkBlue,
     },
   },
   deleteButton: {
     backgroundColor: palette.darkBlue,
-    color: palette.yellow,
+    color: palette.white,
     margin: '1em',
     width: '200px',
     '&:hover': {
@@ -60,5 +61,8 @@ export default ({ palette, breakpoints }) => ({
     justifyContent: 'center',
     display: 'flex',
     flexWrap: 'wrap',
+    '& .MuiPaper-root:nth-child(1n)': {
+      backgroundColor: palette.darkBlue,
+    },
   },
 });

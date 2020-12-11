@@ -30,6 +30,9 @@ input[type="file"] {
     color: vars.$yellow;
     margin:1em 10px 1em 10px;
     width: 115px;
+    & :hover {
+      cursor: pointer,
+    }
 }
 ​
 .fileName{

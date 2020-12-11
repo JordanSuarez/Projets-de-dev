@@ -41,5 +41,17 @@ export default ({ palette }) => ({
     justifyContent: 'center',
     display: 'flex',
     flexWrap: 'wrap',
+    '& .MuiPaper-root:nth-child(4n+1)': {
+      backgroundColor: palette.darkBlue,
+    },
+    '& .MuiPaper-root:nth-child(4n+2)': {
+      backgroundColor: palette.yellow,
+    },
+    '& .MuiPaper-root:nth-child(4n+3)': {
+      backgroundColor: palette.errorField,
+    },
+    '& .MuiPaper-root:nth-child(4n+4)': {
+      backgroundColor: palette.green,
+    },
   },
 });
