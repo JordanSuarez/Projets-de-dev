@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
-import { } from 'mui-rff';
+import EditIcon from '@material-ui/icons/Edit';
 import {
   Avatar,
   Box,
   Button,
+  IconButton,
   TextField,
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
@@ -82,42 +83,44 @@ const Comments = ({
     <div className={classes.commentSection}>
 
       <div className={classes.containerForm}>
-        <h4 className={classes.formTitle}> Ajouter un commentaire </h4>
         {isLogged
           ? (
-            <form className="form" onSubmit={onComment}>
-              <TextField
-                className={classes.textfield}
-                type="text"
-                label="Message"
-                name="content"
-                multiline
-                rows={4}
-                value={message}
-                onChange={(event) => SetMessage(event.target.value)}
-                required
-              />
-              {emojiPicker}
-              <Button
-                className={classes.picker}
-                onClick={triggerPicker}
-              >
-                😍
-              </Button>
-
-              <Box className={classes.containerButton}>
+            <>
+              <h4 className={classes.formTitle}> Ajouter un commentaire: </h4>
+              <form className="form" onSubmit={onComment}>
+                <TextField
+                  className={classes.textfield}
+                  type="text"
+                  label="Message"
+                  name="content"
+                  multiline
+                  rows={4}
+                  value={message}
+                  onChange={(event) => SetMessage(event.target.value)}
+                  required
+                />
+                {emojiPicker}
                 <Button
-                  className={classes.submit}
-                  variant="contained"
-                  type="submit"
+                  className={classes.picker}
+                  onClick={triggerPicker}
                 >
-                  Envoyer
+                  😍
                 </Button>
-              </Box>
-            </form>
+
+                <Box className={classes.containerButton}>
+                  <Button
+                    className={classes.submit}
+                    variant="contained"
+                    type="submit"
+                  >
+                    Envoyer
+                  </Button>
+                </Box>
+              </form>
+            </>
           )
           : (
-            <p> Merci de vous connecter pour poster un commentaire</p>
+            <p className={classes.noLogged}> Merci de vous connecter pour poster un commentaire</p>
           )}
       </div>
 
@@ -125,62 +128,69 @@ const Comments = ({
         {comments.length > 0 && (
           comments.map((comment) => (
             <div className={classes.comment} key={comment.id}>
-              <div className={classes.infosUser}>
+              <div className={classes.infos}>
                 <Avatar className={classes.avatar} alt="Remy Sharp" src={comment.User.userImage} />
-                <div className={classes.infos}>
-                  <h4 className={classes.username}>{comment.User.username}</h4>
-                  <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
-                  {userId === comment.User.id && (
-                    <>
-                      <Button
-                        className={classes.annuler}
+                <div className={classes.headerComment}>
+                  <div className={classes.usernameContent}>
+                    <h4 className={classes.username}>{comment.User.username}</h4>
+                  </div>
+                  <div className={classes.rightHeader}>
+                    <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
+                    {userId === comment.User.id && (
+                      <IconButton
+                        className={classes.editButton}
                         variant="contained"
                         type="button"
                         onClick={() => {
                           onWantUpdate(!wantUpdate);
                         }}
                       >
-                        Editer
-                      </Button>
-                      {wantUpdate && (
-
-                      <form className="form" onSubmit={onCommentUpdate}>
-                        <TextField
-                          className={classes.textfield}
-                          type="text"
-                          label="Message"
-                          name="content"
-                          multiline
-                          rows={4}
-                          value={messageUpdate}
-                          onChange={(event) => SetMessageUpdate(event.target.value)}
-                          required
-                        />
-                        {emojiPickerUpdate}
-                        <Button
-                          className={classes.pickerUpdate}
-                          onClick={triggerPickerUpdate}
-                        >
-                          😍
-                        </Button>
-
-                        <Box className={classes.containerButton}>
-                          <Button
-                            className={classes.submit}
-                            variant="contained"
-                            type="submit"
-                          >
-                            Envoyer
-                          </Button>
-                        </Box>
-                      </form>
-                      )}
-                    </>
-                  )}
+                        <EditIcon />
+                      </IconButton>
+                    )}
+                  </div>
                 </div>
               </div>
+
+              {userId === comment.User.id && (
+                <div className={classes.containerFormUpdate}>
+                  {wantUpdate && (
+                  <form className="formEdit" onSubmit={onCommentUpdate}>
+                    <TextField
+                      className={classes.textfieldUpdate}
+                      type="text"
+                      label="Message"
+                      name="content"
+                      multiline
+                      rows={4}
+                      value={messageUpdate}
+                      onChange={(event) => SetMessageUpdate(event.target.value)}
+                      required
+                    />
+                    {emojiPickerUpdate}
+                    <Button
+                      className={classes.pickerUpdate}
+                      onClick={triggerPickerUpdate}
+                    >
+                      😍
+                    </Button>
+
+                    <Box className={classes.containerButton}>
+                      <Button
+                        className={classes.submit}
+                        variant="contained"
+                        type="submit"
+                      >
+                        Envoyer
+                      </Button>
+                    </Box>
+                  </form>
+                  )}
+                </div>
+              )}
+
               <p className={classes.commentText}>
-                {wantUpdate && (<p> Ancien message:</p>)}
+                {wantUpdate && (<p className={classes.oldComment}> Ancien message:</p>)}
                 {comment.content}
               </p>
             </div>
