@@ -8,7 +8,7 @@ import Base from 'src/common/components/Base';
 import initialValues from './formData/initialValues';
 
 const ProjectCreation = ({
-  handleCreateProject, redirect,
+  handleCreateProject, redirect, fetchTags,
 }) => {
   const history = useHistory();
 
@@ -21,6 +21,7 @@ const ProjectCreation = ({
     if (redirect.length > 0) {
       history.push(redirect);
     }
+    fetchTags();
   }, [redirect]);
 
   return (
@@ -32,6 +33,7 @@ const ProjectCreation = ({
 
 ProjectCreation.propTypes = {
   handleCreateProject: func.isRequired,
+  fetchTags: func.isRequired,
   redirect: string.isRequired,
 };
 

@@ -35,15 +35,12 @@ const Profiles = ({
     if (!isEmpty(value)) {
       setSearchResults(
         arrayProfiles.filter(
-          (profile) => {
-            console.log(profile.username);
-            return (
-              Object.keys(profile).some(
-                () => (
-                  profile.username.toLowerCase().includes(value.toLowerCase())),
-              )
-            );
-          },
+          (profile) => (
+            Object.keys(profile).some(
+              () => (
+                profile.username.toLowerCase().includes(value.toLowerCase())),
+            )
+          ),
         ),
       );
     }

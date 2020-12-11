@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import {
   arrayOf, func, number, shape, string,
@@ -22,16 +22,12 @@ import fields from './formData/fields';
 import './styles.scss';
 
 const Form = ({
-  classes, title, initialValues, handleSubmitProject, tags, fetchTags,
+  classes, title, initialValues, handleSubmitProject, tags,
 }) => {
   const history = useHistory();
   const { id } = useParams();
   const [errorFields, setErrorFields] = useState({});
   const [formState, setFormState] = useState(initialValues);
-
-  useEffect(() => {
-    fetchTags();
-  }, []);
 
   const onSubmit = (values) => {
     if (formState.tags.length === 0) {
@@ -145,7 +141,7 @@ const Form = ({
                   getOptionLabel={(option) => option.name}
                   value={formState.tags}
                   onBlur={onBlurField}
-                  limitTags={2}
+                  // limitTags={2}
                   size="small"
                   onChange={(event, values) => {
                     if (values.length < 1) {
@@ -191,7 +187,7 @@ const Form = ({
                   multiple
                   id="partners"
                   options={profiles}
-                  limitTags={2}
+                  // limitTags={2}
                   size="small"
                   getOptionValue={(option) => option}
                   getOptionLabel={(option) => option.name}
@@ -271,7 +267,6 @@ Form.propTypes = {
   ...classesProps,
   title: string.isRequired,
   handleSubmitProject: func.isRequired,
-  fetchTags: func.isRequired,
   tags: arrayOf(
     shape({
       id: number.isRequired,

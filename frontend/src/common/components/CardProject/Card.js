@@ -23,7 +23,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import IconButton from 'src/common/components/IconButton';
 import avatar from './avatar.png';
 
-// eslint-disable-next-line arrow-body-style
 const CardProject = ({
   projectId,
   classes,

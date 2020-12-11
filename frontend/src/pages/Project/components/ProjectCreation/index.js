@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
-import { handleCreateProject } from 'src/common/redux/actions/project';
+import { handleCreateProject, fetchProjectTags } from 'src/common/redux/actions/project';
 import ProjectCreation from './ProjectCreation';
 import styles from './styles';
 
@@ -13,6 +13,9 @@ const mapStateToProps = (state) => ({
 const mapsDispatchToProps = (dispatch) => ({
   handleCreateProject: (formProjectValues) => (
     dispatch(handleCreateProject(formProjectValues))
+  ),
+  fetchTags: () => (
+    dispatch(fetchProjectTags())
   ),
 });
 

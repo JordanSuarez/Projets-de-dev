@@ -1,5 +1,5 @@
 import {
-  SHOW_PROJECT_BY_ID, FETCH_PROJECT_BY_ID,
+  SHOW_PROJECT_BY_ID, FETCH_PROJECT_BY_ID, SHOW_PROJECT_TAGS,
 } from 'src/common/redux/actions/project';
 
 const initialState = {
@@ -21,6 +21,11 @@ const initialState = {
 
 const project = (state = initialState, action = {}) => {
   switch (action.type) {
+    case FETCH_PROJECT_BY_ID:
+      return {
+        ...state,
+        ...initialState,
+      };
     case SHOW_PROJECT_BY_ID:
       return {
         ...state,
@@ -28,10 +33,10 @@ const project = (state = initialState, action = {}) => {
         tags: action.tags,
         loading: false,
       };
-    case FETCH_PROJECT_BY_ID:
+    case SHOW_PROJECT_TAGS:
       return {
         ...state,
-        ...initialState,
+        tags: action.tags,
       };
     default:
       return { ...state };
