@@ -7,6 +7,8 @@ import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
   COMMENT, POST, ONE, PATCH,
 } from 'src/common/callApiHandler/constants';
+import { getProjectRoute } from 'src/common/routing/routesResolver';
+import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 
 const commentsMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -15,27 +17,31 @@ const commentsMiddleware = (store) => (next) => (action) => {
 
       callApi(url, POST, action.content)
         .then((response) => {
-          // action.content.projectId <<< projectId
-          console.log('todo Redirect');
+          store.dispatch(redirect(getProjectRoute(action.content.projectId)));
         })
         .catch((response) => {
           console.log(response);
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
 
       next(action);
       break;
     }
     case EDIT_COMMENT: {
-      // TODO
-      const url = getEndpoint(COMMENT, PATCH, ONE);
+      console.log(action.id);
+      const url = getEndpoint(COMMENT, PATCH, ONE, action.id);
 
-      callApi(url, PATCH, action.content)
+      callApi(url, PATCH, action.comments)
         .then((response) => {
-          // action.content.projectId <<< projectId
-          console.log('todo Redirect');
+          store.dispatch(redirect(getProjectRoute(action.comments.projectId)));
         })
         .catch((response) => {
           console.log(response);
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
 
       next(action);
