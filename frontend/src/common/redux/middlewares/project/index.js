@@ -12,13 +12,15 @@ import {
 } from 'src/common/redux/actions/userProfile';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
-import { callApi } from 'src/common/callApiHandler/urlHandler';
+import { callApi, apiUrl } from 'src/common/callApiHandler/urlHandler';
+import { getToken } from 'src/common/authentication/authProvider';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import {
   PROJECTS, GET, POST, PATCH, ONE, DELETE, TAGS, ALL,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute } from 'src/common/routing/routesResolver';
 import { get } from 'lodash';
+import axios from 'axios';
 
 const projectMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
@@ -93,9 +95,12 @@ const projectMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case HANDLE_DELETE_PROJECT: {
-      const url = getEndpoint(PROJECTS, DELETE, ONE, action.id);
-
-      callApi(url, DELETE)
+      axios.delete(`${apiUrl}/${PROJECTS}/${action.id}/${DELETE}-my-project`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}` || null,
+          },
+        })
         .then(() => {
           store.dispatch(getProfileInfos());
           store.dispatch(showSnackbar('', 'Votre projet à bien été supprimé', 'success'));
