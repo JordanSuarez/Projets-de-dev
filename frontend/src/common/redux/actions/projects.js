@@ -1,7 +1,6 @@
-export const GET_PROJECTS = 'GET_PROJECTS';
-export const SAVE_PROJECTS = 'SAVE_PROJECTS';
-export const GET_PROJECTS_NUMBER = 'GET_PROJECTS_NUMBER';
-export const SAVE_PROJECTS_NUMBER = 'SAVE_PROJECTS_NUMBER';
+export const GET_PROJECTS = 'GET_PROJECTS_CURRENT_PAGE';
+export const SAVE_PROJECTS_CURRENT_PAGE = 'SAVE_PROJECTS_CURRENT_PAGE';
+export const SAVE_ALL_PROJECTS = 'SAVE_ALL_PROJECTS';
 
 // Récuperation de tout les projets
 export const getProjectsInfos = (projectLimit, projectOffset) => ({
@@ -11,13 +10,13 @@ export const getProjectsInfos = (projectLimit, projectOffset) => ({
 });
 
 // Sauvegarde de tout les projets
-export const saveProjects = (data) => ({
-  type: SAVE_PROJECTS,
+export const saveProjectsCurrentPage = (data) => ({
+  type: SAVE_PROJECTS_CURRENT_PAGE,
   projects: { ...data },
 });
 
 // Sauvegarde le nombre de projets (pour la pagination)
-export const saveProjectsNumber = (data) => ({
-  type: SAVE_PROJECTS_NUMBER,
+export const saveAllProjects = (data) => ({
+  type: SAVE_ALL_PROJECTS,
   projects: { ...data },
 });
