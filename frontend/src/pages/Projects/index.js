@@ -9,7 +9,8 @@ import styles from './styles';
 
 const mapStateToProps = (state) => ({
   redirect: state.redirection.redirect,
-  projects: state.projects.projects,
+  projectsCurrentPage: state.projects.projectsCurrentPage,
+  allProjects: state.projects.allProjects,
   projectsNumber: state.projects.projectsNumber,
   loading: state.projects.loading,
 });

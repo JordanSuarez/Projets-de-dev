@@ -14,27 +14,31 @@ import { isEmpty } from 'lodash';
 const Projects = ({
   classes,
   getProjects,
-  projects,
+  projectsCurrentPage,
   projectsNumber,
+  allProjects,
   loading,
 }) => {
   const { offset } = useParams();
   const history = useHistory();
   const [currentOffset, setOffset] = useState((offset * 12) - 12);
-  const arrayProjects = Object.values(projects);
-  const [searchResults, setSearchResults] = useState(arrayProjects);
+  const arrayProjectsCurrentPage = Object.values(projectsCurrentPage);
+  const arrayAllProjects = Object.values(allProjects);
+  const [searchResults, setSearchResults] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
   // Pagination
   const limit = 12;
   const changePage = (event, value) => {
     setOffset((value * 12) - 12);
+    setSearchResults([]);
+    getProjects(`?limit=${limit}`, `&offset=${(value * 12) - 12}`);
     history.push(getProjectsListRoute(value));
   };
 
   useEffect(() => {
     getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
-  }, [currentOffset]);
+  }, []);
 
   // SearchBar
   const helperText = 'Aucun résultat ne correspond à la recherche';
@@ -42,7 +46,7 @@ const Projects = ({
     setInputValue(value);
     if (!isEmpty(value)) {
       setSearchResults(
-        arrayProjects.filter(
+        arrayAllProjects.filter(
           (project) => (
             Object.keys(project).some(
               () => (
@@ -53,7 +57,7 @@ const Projects = ({
       );
     }
     else {
-      setSearchResults(arrayProjects);
+      setSearchResults(arrayAllProjects);
     }
   };
 
@@ -64,7 +68,7 @@ const Projects = ({
         <SearchBar
           className={classes.searchBar}
           onInputChange={(event, value) => handleChange(event, value)}
-          items={arrayProjects}
+          items={arrayAllProjects}
           label="Recherchez un projet..."
           helperText={isEmpty(searchResults) && !isEmpty(inputValue) ? helperText : ''}
         />
@@ -87,7 +91,7 @@ const Projects = ({
             />
           ))}
           {searchResults.length === 0
-          && arrayProjects.map(({
+          && arrayProjectsCurrentPage.map(({
             id: projectId, title, description, tags, user, image,
           }) => (
             <CardProject

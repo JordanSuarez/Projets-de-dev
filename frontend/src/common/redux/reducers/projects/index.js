@@ -1,29 +1,38 @@
 import {
-  SAVE_PROJECTS,
-  SAVE_PROJECTS_NUMBER,
+  SAVE_ALL_PROJECTS,
+  SAVE_PROJECTS_CURRENT_PAGE,
+  GET_PROJECTS,
 // eslint-disable-next-line import/no-unresolved
 } from 'src/common/redux/actions/projects';
 
 const initialState = {
   projectsNumber: 1,
-  projects: {},
+  projectsCurrentPage: {},
+  allProjects: {},
   loading: true,
 };
 
 const projects = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SAVE_PROJECTS: {
+    case GET_PROJECTS: {
+      return {
+        ...initialState,
+        loading: true,
+      };
+    }
+    case SAVE_PROJECTS_CURRENT_PAGE: {
       return {
         ...state,
-        projects: action.projects,
+        projectsCurrentPage: action.projects,
         loading: false,
       };
     }
-    case SAVE_PROJECTS_NUMBER: {
+    case SAVE_ALL_PROJECTS: {
       const number = Object.keys(action.projects).length;
       return {
         ...state,
         projectsNumber: number,
+        allProjects: action.projects,
         loading: false,
       };
     }
