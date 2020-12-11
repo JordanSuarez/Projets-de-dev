@@ -1,5 +1,7 @@
 export default ({ breakpoints, palette }) => ({
   containerForm: {
+    margin: '0.5em auto',
+    maxWidth: '1200px',
     position: 'relative',
     backgroundColor: 'white',
   },
