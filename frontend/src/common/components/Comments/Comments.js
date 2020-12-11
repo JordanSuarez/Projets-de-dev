@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'react-final-form';
+import { useHistory } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {
   Avatar,
   Box,
@@ -13,7 +14,7 @@ import { classes as classesProps } from 'src/common/classes';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import './style.scss';
-// eslint-disable-next-line arrow-body-style
+
 const Comments = ({
   classes,
   comments,
@@ -22,17 +23,20 @@ const Comments = ({
   idProject,
   isLogged,
   userId,
+  redirect,
 }) => {
+  /* ----------------- reload ------------------- */
+  const history = useHistory();
+  useEffect(() => {
+    if (redirect.length > 0) {
+      window.location.reload();
+      history.push(redirect);
+    }
+  }, [redirect]);
+
+  /* ----------------- create ------------------- */
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const [message, SetMessage] = useState('');
-
-  const [messageUpdate, SetMessageUpdate] = useState('');
-  const [emojiPickerUpdateState, SetEmojiPickerUpdate] = useState(false);
-  const [wantUpdate, onWantUpdate] = useState(false);
-  useEffect(() => {
-  }, [wantUpdate]);
-
-  // create
   const onComment = (e) => {
     e.preventDefault();
     handleComment({ content: message, projectId: idProject });
@@ -51,16 +55,28 @@ const Comments = ({
       />
     );
   }
-  function triggerPicker(event) {
+  const triggerPicker = (event) => {
     event.preventDefault();
     SetEmojiPicker(!emojiPickerState);
-  }
-
-  // update
-  const onCommentUpdate = (e) => {
-    e.preventDefault();
-    handleCommentUpdate({ content: message, projectId: idProject });
   };
+
+  /* ----------------- update ------------------- */
+  const [commentWantUpdate, onCommentWantUpdate] = useState('');
+  const [messageUpdate, SetMessageUpdate] = useState('');
+  const [emojiPickerUpdateState, SetEmojiPickerUpdate] = useState(false);
+
+  useEffect(() => {
+  }, [commentWantUpdate]);
+
+  const onClickEdit = (comment) => {
+    onCommentWantUpdate(comment.id);
+    SetMessageUpdate(comment.content);
+  };
+
+  const onCommentUpdate = (comment) => {
+    handleCommentUpdate({ content: messageUpdate, projectId: idProject }, comment.id);
+  };
+
   let emojiPickerUpdate;
   if (emojiPickerUpdateState) {
     emojiPickerUpdate = (
@@ -74,14 +90,20 @@ const Comments = ({
       />
     );
   }
-  function triggerPickerUpdate(event) {
+
+  const triggerPickerUpdate = (event) => {
     event.preventDefault();
     SetEmojiPickerUpdate(!emojiPickerUpdateState);
-  }
+  };
+
+  /* ----------------- delete ------------------- */
+  const onClickDelete = (comment) => {
+    console.log('TODO');
+    // handleCommentDelete(comment.id);
+  };
 
   return (
     <div className={classes.commentSection}>
-
       <div className={classes.containerForm}>
         {isLogged
           ? (
@@ -129,7 +151,11 @@ const Comments = ({
           comments.map((comment) => (
             <div className={classes.comment} key={comment.id}>
               <div className={classes.infos}>
-                <Avatar className={classes.avatar} alt="Remy Sharp" src={comment.User.userImage} />
+                <Avatar
+                  className={classes.avatar}
+                  alt={classes.username}
+                  src={comment.User.userImage}
+                />
                 <div className={classes.headerComment}>
                   <div className={classes.usernameContent}>
                     <h4 className={classes.username}>{comment.User.username}</h4>
@@ -137,16 +163,28 @@ const Comments = ({
                   <div className={classes.rightHeader}>
                     <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
                     {userId === comment.User.id && (
-                      <IconButton
-                        className={classes.editButton}
-                        variant="contained"
-                        type="button"
-                        onClick={() => {
-                          onWantUpdate(!wantUpdate);
-                        }}
-                      >
-                        <EditIcon />
-                      </IconButton>
+                      <div>
+                        <IconButton
+                          className={classes.editButton}
+                          variant="contained"
+                          type="button"
+                          onClick={() => {
+                            onClickEdit(comment);
+                          }}
+                        >
+                          <EditIcon />
+                        </IconButton>
+                        <IconButton
+                          className={classes.editButton}
+                          variant="contained"
+                          type="button"
+                          onClick={() => {
+                            onClickDelete(comment);
+                          }}
+                        >
+                          <DeleteForeverIcon />
+                        </IconButton>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -154,8 +192,14 @@ const Comments = ({
 
               {userId === comment.User.id && (
                 <div className={classes.containerFormUpdate}>
-                  {wantUpdate && (
-                  <form className="formEdit" onSubmit={onCommentUpdate}>
+                  {commentWantUpdate === comment.id && (
+                  <form
+                    className="formEdit"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      onCommentUpdate(comment);
+                    }}
+                  >
                     <TextField
                       className={classes.textfieldUpdate}
                       type="text"
@@ -190,7 +234,6 @@ const Comments = ({
               )}
 
               <p className={classes.commentText}>
-                {wantUpdate && (<p className={classes.oldComment}> Ancien message:</p>)}
                 {comment.content}
               </p>
             </div>
@@ -217,6 +260,7 @@ Comments.propTypes = {
   idProject: PropTypes.number.isRequired,
   isLogged: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
+  redirect: PropTypes.string.isRequired,
 };
 
 Comments.defaultProps = {

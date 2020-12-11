@@ -63,7 +63,7 @@ const endpoints = {
       [ONE]: `${COMMENT}/add`,
     },
     [PATCH]: {
-      [ONE]: `${COMMENT}/${EDIT}`,
+      [ONE]: (meta) => `${COMMENT}/${meta}/${EDIT}`,
     },
     [DELETE]: {
       [ONE]: (meta) => `${COMMENT}/${meta}/${DELETE}`,
