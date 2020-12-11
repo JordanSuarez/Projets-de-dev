@@ -108,6 +108,12 @@ export default ({ palette }) => ({
     margin: '1rem',
     width: '100%',
     height: 'fit-content',
+    '& img': {
+      width: '50%',
+    },
+    '& iframe': {
+      margin: 'auto',
+    },
   },
   // Errors message
   errorEditor: {

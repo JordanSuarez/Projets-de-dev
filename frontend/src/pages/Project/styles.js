@@ -111,8 +111,11 @@ export default ({ palette }) => ({
       display: 'flex',
       flexWrap: 'wrap',
       margin: 'auto',
-      width: '-webkit-fill-available',
+      width: '50%',
       maxWidth: 'fit-content',
+    },
+    '& iframe': {
+      margin: 'auto',
     },
   },
 });
