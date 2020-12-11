@@ -7,10 +7,10 @@ import {
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { submitLogoutSuccess } from 'src/common/redux/actions/auth';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
-import { callApi } from 'src/common/callApiHandler/urlHandler';
-import { removeToken } from 'src/common/authentication/authProvider';
+import { callApi, apiUrl } from 'src/common/callApiHandler/urlHandler';
+import { removeToken, getToken } from 'src/common/authentication/authProvider';
 import {
-  USERS, PATCH, PRIVATE_PROFILE, DELETE,
+  USERS, PATCH, PRIVATE_PROFILE, DELETE, ME,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
@@ -19,10 +19,10 @@ import axios from 'axios';
 const userProfile = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_USER_PROFILE: {
-      axios.get('http://localhost:3001/api/users/me',
+      axios.get(`${apiUrl}/${USERS}/${ME}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}` || null,
+            Authorization: `Bearer ${getToken()}` || null,
           },
         })
         .then(({ data }) => {
@@ -53,8 +53,12 @@ const userProfile = (store) => (next) => (action) => {
       break;
     }
     case HANDLE_DELETE_USER_PROFILE: {
-      const url = getEndpoint(USERS, DELETE, PRIVATE_PROFILE);
-      callApi(url, DELETE)
+      axios.delete(`${apiUrl}/${USERS}/${ME}/${DELETE}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}` || null,
+          },
+        })
         .then(() => {
           removeToken();
           store.dispatch(submitLogoutSuccess());

@@ -17,7 +17,7 @@ import {
   getRegisterRoute,
 } from 'src/common/routing/routesResolver';
 import { classes as classesProps } from 'src/common/classes';
-import { bool, func, number } from 'prop-types';
+import { bool } from 'prop-types';
 import NavLink from './NavLink';
 
 const Navigation = ({ classes, isLogged }) => {
@@ -49,7 +49,7 @@ const Navigation = ({ classes, isLogged }) => {
   // Routes
   const handleLogout = () => history.push(getLogoutRoute());
   const handleLogin = () => history.push(getLoginRoute());
-  const handleHome = () => history.push(getAboutRoute());
+  const handleHome = () => history.push(getHomeRoute());
   const handleRegister = () => history.push(getRegisterRoute());
   const handleProfilePage = () => history.push(getUserProfileRoute());
 
