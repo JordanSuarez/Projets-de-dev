@@ -25,6 +25,7 @@ const Projects = ({
   const arrayProjectsCurrentPage = Object.values(projectsCurrentPage);
   const arrayAllProjects = Object.values(allProjects);
   const [searchResults, setSearchResults] = useState([]);
+  const [hidePagination, setHidePagination] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
   // Pagination
@@ -43,6 +44,7 @@ const Projects = ({
   // SearchBar
   const helperText = 'Aucun résultat ne correspond à la recherche';
   const handleChange = (event, value) => {
+    setHidePagination(true);
     setInputValue(value);
     if (!isEmpty(value)) {
       setSearchResults(
@@ -57,6 +59,7 @@ const Projects = ({
       );
     }
     else {
+      setHidePagination(false);
       setSearchResults(arrayAllProjects);
     }
   };
@@ -106,7 +109,8 @@ const Projects = ({
             />
           ))}
         </div>
-        <Pagination className={classes.pagination} page={parseInt(offset, 10)} count={Math.ceil(projectsNumber / limit)} size="small" onChange={changePage} />
+        {!hidePagination
+        && <Pagination className={classes.pagination} page={parseInt(offset, 10)} count={Math.ceil(projectsNumber / limit)} size="small" onChange={changePage} />}
       </div>
     </Base>
   );
@@ -115,7 +119,8 @@ const Projects = ({
 Projects.propTypes = {
   ...classesProps,
   getProjects: PropTypes.func.isRequired,
-  projects: PropTypes.object.isRequired,
+  projectsCurrentPage: PropTypes.object.isRequired,
+  allProjects: PropTypes.object.isRequired,
   projectsNumber: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
 };
