@@ -1,5 +1,6 @@
 export default ({ breakpoints, palette }) => ({
   containerForm: {
+    position: 'relative',
     backgroundColor: 'white',
   },
 
@@ -9,21 +10,27 @@ export default ({ breakpoints, palette }) => ({
 
   textfield: {
     width: 'calc(100% - 3em)',
-    margin: '0.5em 1.5em 1em 1.5em',
+    margin: '0.5em 1.5em 0 1.5em',
   },
 
   containerButton: {
     display: 'flex',
     justifyContent: 'flex-end',
-    margin: ' 0 1.5em',
+    margin: '1em 1.5em 0 1.5em',
   },
 
   submit: {
     marginBottom: '1.5em',
   },
 
-  commentList: {
+  containerPicker: {
+    width: '100px !important',
+  },
 
+  picker: {
+    position: 'absolute',
+    right: '0.5em',
+    top: '60px',
   },
 
   comment: {

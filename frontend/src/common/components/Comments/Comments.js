@@ -11,7 +11,7 @@ import {
 import { classes as classesProps } from 'src/common/classes';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
-
+import './style.scss';
 // eslint-disable-next-line arrow-body-style
 const Comments = ({
   classes,
@@ -32,9 +32,12 @@ const Comments = ({
   if (emojiPickerState) {
     emojiPicker = (
       <Picker
-        title="Pick your emoji…"
-        emoji="point_up"
+        className={classes.containerPicker}
+        title=" "
         onSelect={(emoji) => SetMessage(message + emoji.native)}
+        i18n={{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }}
+        showPreview={false}
+        showSkinTones={false}
       />
     );
   }
@@ -57,7 +60,6 @@ const Comments = ({
             name="content"
             multiline
             rows={4}
-            variant="outlined"
             value={message}
             onChange={event => SetMessage(event.target.value)}
             required
@@ -67,7 +69,7 @@ const Comments = ({
             className={classes.picker}
             onClick={triggerPicker}
           >
-            😁
+            😍
           </Button>
 
           <Box className={classes.containerButton}>
