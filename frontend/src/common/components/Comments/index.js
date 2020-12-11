@@ -16,6 +16,9 @@ const mapsDispatchToProps = (dispatch) => ({
     console.log(values);
     dispatch(addComment(values));
   },
+  handleCommentUpdate: (values) => {
+    console.log(values);
+  },
 });
 
 export default compose(

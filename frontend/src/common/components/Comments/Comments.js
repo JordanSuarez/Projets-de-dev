@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
 import { } from 'mui-rff';
@@ -17,12 +17,21 @@ const Comments = ({
   classes,
   comments,
   handleComment,
+  handleCommentUpdate,
   idProject,
   isLogged,
   userId,
 }) => {
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const [message, SetMessage] = useState('');
+
+  const [messageUpdate, SetMessageUpdate] = useState('');
+  const [emojiPickerUpdateState, SetEmojiPickerUpdate] = useState(false);
+  const [wantUpdate, onWantUpdate] = useState(false);
+  useEffect(() => {
+  }, [wantUpdate]);
+
+  // create
   const onComment = (e) => {
     e.preventDefault();
     handleComment({ content: message, projectId: idProject });
@@ -41,10 +50,32 @@ const Comments = ({
       />
     );
   }
-
   function triggerPicker(event) {
     event.preventDefault();
     SetEmojiPicker(!emojiPickerState);
+  }
+
+  // update
+  const onCommentUpdate = (e) => {
+    e.preventDefault();
+    handleCommentUpdate({ content: message, projectId: idProject });
+  };
+  let emojiPickerUpdate;
+  if (emojiPickerUpdateState) {
+    emojiPickerUpdate = (
+      <Picker
+        className={classes.containerPicker}
+        title=" "
+        onSelect={(emoji) => SetMessageUpdate(messageUpdate + emoji.native)}
+        i18n={{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }}
+        showPreview={false}
+        showSkinTones={false}
+      />
+    );
+  }
+  function triggerPickerUpdate(event) {
+    event.preventDefault();
+    SetEmojiPickerUpdate(!emojiPickerUpdateState);
   }
 
   return (
@@ -100,11 +131,57 @@ const Comments = ({
                   <h4 className={classes.username}>{comment.User.username}</h4>
                   <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
                   {userId === comment.User.id && (
-                    <p>Editer</p>
+                    <>
+                      <Button
+                        className={classes.annuler}
+                        variant="contained"
+                        type="button"
+                        onClick={() => {
+                          onWantUpdate(!wantUpdate);
+                        }}
+                      >
+                        Editer
+                      </Button>
+                      {wantUpdate && (
+
+                      <form className="form" onSubmit={onCommentUpdate}>
+                        <TextField
+                          className={classes.textfield}
+                          type="text"
+                          label="Message"
+                          name="content"
+                          multiline
+                          rows={4}
+                          value={messageUpdate}
+                          onChange={(event) => SetMessageUpdate(event.target.value)}
+                          required
+                        />
+                        {emojiPickerUpdate}
+                        <Button
+                          className={classes.pickerUpdate}
+                          onClick={triggerPickerUpdate}
+                        >
+                          😍
+                        </Button>
+
+                        <Box className={classes.containerButton}>
+                          <Button
+                            className={classes.submit}
+                            variant="contained"
+                            type="submit"
+                          >
+                            Envoyer
+                          </Button>
+                        </Box>
+                      </form>
+                      )}
+                      
+                    </>
                   )}
                 </div>
               </div>
               <p className={classes.commentText}>
+                {wantUpdate && (<p> Ancien message:</p>)}
                 {comment.content}
               </p>
             </div>
@@ -127,6 +204,7 @@ Comments.propTypes = {
   ...classesProps,
   comments: PropTypes.array.isRequired,
   handleComment: PropTypes.func.isRequired,
+  handleCommentUpdate: PropTypes.func.isRequired,
   idProject: PropTypes.number.isRequired,
   isLogged: PropTypes.bool.isRequired,
   userId: PropTypes.number.isRequired,
