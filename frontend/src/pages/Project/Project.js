@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import Comments from 'src/common/components/Comments';
 
 const Project = ({
   classes, fetchProject, project, loading,
@@ -37,7 +38,7 @@ const Project = ({
   const handleClickProfile = () => {
     history.push(getProfileRoute(project.user.id));
   };
-
+console.log(project.comments);
   return (
     <Base loading={loading}>
       <div className={classes.projectContainer}>
@@ -111,6 +112,9 @@ const Project = ({
             className={classes.quillEditor}
           />
         </Grid>
+
+        <Comments comments={project.comments} idProject={project.id} />
+
       </div>
     </Base>
   );
