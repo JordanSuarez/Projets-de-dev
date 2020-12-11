@@ -1,6 +1,8 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
+
+import { getUserProfileRoute } from 'src/common/routing/routesResolver';
 import PropTypes from 'prop-types';
 import { Form } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
@@ -179,7 +181,7 @@ const ProfileEdition = ({
                       className={classes.annuler}
                       variant="contained"
                       type=""
-
+                      onClick={() => history.push(getUserProfileRoute())}
                     >
                       Annuler
                     </Button>

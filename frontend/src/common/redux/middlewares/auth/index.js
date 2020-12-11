@@ -1,19 +1,19 @@
 import {
   SUBMIT_LOGIN,
-  SUBMIT_LOGOUT,
   submitLoginSuccess,
-  redirectSuccess,
-  submitLogoutSuccess,
   submitRegisterSuccess,
   SUBMIT_REGISTER,
   submitLoginError,
 } from 'src/common/redux/actions/auth';
-import { setToken, removeToken } from 'src/common/authentication/authProvider';
+import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
+import { getProfileInfos } from 'src/common/redux/actions/userProfile';
+import { showSnackbar } from 'src/common/redux/actions/snackbar';
+import { setToken } from 'src/common/authentication/authProvider';
 import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
-  USERS, POST, LOGIN, LOGOUT, REGISTER,
+  USERS, POST, LOGIN, REGISTER,
 } from 'src/common/callApiHandler/constants';
 
 const authMiddleWare = (store) => (next) => (action) => {
@@ -24,39 +24,21 @@ const authMiddleWare = (store) => (next) => (action) => {
         email: action.email,
         password: action.password,
       };
-
       callApi(url, POST, credentials)
         .then(({ data }) => {
           setToken(data.token);
-          store.dispatch(redirectSuccess(getHomeRoute()));
+          store.dispatch(redirect(getHomeRoute()));
           store.dispatch(submitLoginSuccess(data.userId));
+          store.dispatch(showSnackbar('', `Hello! ${data.username}`, 'success'));
         })
         .catch(() => {
+          store.dispatch(showSnackbar('Oups!', 'Mot de passe ou email incorrect', 'error'));
           store.dispatch(submitLoginError());
-        });
-      next(action);
-      break;
-    }
-    case SUBMIT_LOGOUT: {
-      const url = getEndpoint(USERS, POST, LOGOUT);
-
-      callApi(url, POST)
-        .then(() => {
-          // reset authentication cookie's when logout
-          removeToken();
-          store.dispatch(redirectSuccess(getHomeRoute()));
-          store.dispatch(submitLogoutSuccess());
         })
-        .catch(() => {
-          // TODO REMOVE THIS WHEN LOGOUT WORKS
-          // TODO REMOVE THIS WHEN LOGOUT WORKS
-          removeToken();
-          store.dispatch(redirectSuccess(getHomeRoute()));
-          store.dispatch(submitLogoutSuccess());
-          // TODO REMOVE THIS WHEN LOGOUT WORKS
-          // TODO REMOVE THIS WHEN LOGOUT WORKS
+        .finally(() => {
+          store.dispatch(getProfileInfos());
+          store.dispatch(redirectSuccess());
         });
-
       next(action);
       break;
     }
@@ -70,10 +52,16 @@ const authMiddleWare = (store) => (next) => (action) => {
 
       callApi(url, POST, credentials)
         .then(() => {
-          store.dispatch(redirectSuccess(getLoginRoute()));
+          store.dispatch(redirect(getLoginRoute()));
           store.dispatch(submitRegisterSuccess(action.email));
+          store.dispatch(showSnackbar('', 'Votre compte à bien été créé', 'success'));
         })
-        .catch(() => {});
+        .catch(() => {
+          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
+        });
 
       next(action);
       break;

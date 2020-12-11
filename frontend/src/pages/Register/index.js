@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  redirect: state.auth.redirect,
+  redirect: state.redirection.redirect,
 });
 
 export default compose(

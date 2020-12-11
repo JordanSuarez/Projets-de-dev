@@ -7,8 +7,12 @@ import projectsReducer from './projects';
 import commentsReducer from './comments';
 import profileReducer from './profile';
 import profilesReducer from './profiles';
+import snackbarReducer from './snackbar';
+import redirectionReducer from './redirection';
 
 const rootReducer = combineReducers({
+  redirection: redirectionReducer,
+  snackbar: snackbarReducer,
   home: homeReducer,
   auth: authReducer,
   project: projectReducer,

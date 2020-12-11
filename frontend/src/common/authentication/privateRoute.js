@@ -8,7 +8,6 @@ import { isAuthenticated } from './authProvider';
 function PrivateRoute({
   component, path, exact, id,
 }) {
-  //
   return isAuthenticated() ? (
     <Route key={id} id={id} exact={exact} path={path} component={component} />
   ) : (
@@ -23,7 +22,6 @@ PrivateRoute.propTypes = {
   exact: bool.isRequired,
   id: string.isRequired,
   component: object.isRequired,
-
 };
 
 export default PrivateRoute;

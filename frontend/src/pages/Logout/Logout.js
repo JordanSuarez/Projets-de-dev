@@ -1,15 +1,16 @@
-import { func, string } from 'prop-types';
 import { useEffect } from 'react';
 
+import { func, string } from 'prop-types';
+import { getHomeRoute } from 'src/common/routing/routesResolver';
 import { useHistory } from 'react-router-dom';
 
-const Logout = ({ handleLogout, redirect }) => {
+const Logout = ({ handleLogout }) => {
   const history = useHistory();
 
   useEffect(() => {
     handleLogout();
-    history.push(redirect);
-  }, [redirect]);
+    history.push(getHomeRoute());
+  }, []);
 
   return null;
 };

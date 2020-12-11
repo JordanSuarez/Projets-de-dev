@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { getEditionProfileRoute, getCreationProjectRoute } from 'src/common/routing/routesResolver';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
@@ -16,14 +16,35 @@ const UserProfile = ({
   loading,
   userProfile,
   handleDeleteProject,
+  handleDeleteUserProfile,
+  redirect,
 }) => {
+  const history = useHistory();
+
   useEffect(() => {
     getProfile();
-  }, []);
 
-  const history = useHistory();
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
+
+  const deleteProfile = () => handleDeleteUserProfile();
   const editProfile = () => history.push(getEditionProfileRoute());
   const newProject = () => history.push(getCreationProjectRoute());
+
+  const buttons = [
+    {
+      id: 1, func: deleteProfile, label: 'Supprimer mon compte',
+    },
+    {
+      id: 2, func: editProfile, label: 'Modifier mon compte',
+    },
+    {
+      id: 3, func: newProject, label: 'Ajouter un projet',
+    },
+  ];
+  console.log('userprofile page', localStorage.getItem('token'));
   return (
     <Base loading={loading}>
       <>
@@ -35,22 +56,17 @@ const UserProfile = ({
               <h3 className={classes.username}>{userProfile.username}</h3>
             </div>
             <div className={classes.rowCenter}>
-              <Button
-                className={classes.button}
-                variant="contained"
-                type="button"
-                onClick={editProfile}
-              >
-                Editer
-              </Button>
-              <Button
-                className={classes.button}
-                variant="contained"
-                type="button"
-                onClick={newProject}
-              >
-                Ajouter un projet
-              </Button>
+              {buttons.map((button) => (
+                <Button
+                  key={button.id}
+                  className={classes.button}
+                  variant="contained"
+                  type="button"
+                  onClick={button.func}
+                >
+                  {button.label}
+                </Button>
+              ))}
             </div>
           </div>
           <div>
@@ -90,8 +106,10 @@ UserProfile.propTypes = {
   ...classesProps,
   getProfile: PropTypes.func.isRequired,
   handleDeleteProject: PropTypes.func.isRequired,
+  handleDeleteUserProfile: PropTypes.func.isRequired,
   userProfile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
+  redirect: string.isRequired,
 };
 
 export default UserProfile;

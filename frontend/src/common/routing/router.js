@@ -14,7 +14,7 @@ const Router = ({ routes }) => (
         requireAuthentication ? (
           <PrivateRoute key={id} path={path} id={id} exact={exact} component={component} />
         ) : (
-          // Else, redirect to the choosen Route
+          // Else, redirect to the chosen Route
           <Route key={id} exact={exact} path={path} component={component} />
         )))}
     </Switch>

@@ -34,20 +34,54 @@ module.exports = {
             return res.status(201).json({
               'status': 'Commentaire ajouté avec succès'
             }).catch((err) => {
-              return res.status(500).json({'error': 'Erreur lors de l\'ajout du nouveau projet 2: ' + err});
+              return res.status(500).json({'error': err});
             })
           })
           .catch((err) => {
-            return res.status(500).json({'error': 'Erreur lors de l\'ajout du nouveau projet: ' + err});
+            return res.status(500).json({'error':  err});
           });
         }
       ])
 },
 
+edit: (req, res) => {
+
+  const headerAuth = req.headers['authorization'];
+  const userId = jwtUtils.getUserId(headerAuth);
+
+  if (userId < 0){
+    return res.status(400).json({ 'error': 'Le token est invalide' });
+  }
+
+  const id = req.params.id;
+  const content = req.body.content;
+  const projectId	 = req.body.projectId;
 
 
-
-
-
-
+    asyncLib.waterfall([
+      (done) => {
+        models.Comment.findOne({
+          where: { id: id, userId: userId, projectId: projectId }
+        })
+        .then((commentEdit) => {
+          commentEdit.update({
+            content: (content ? content : commentEdit.content),
+          })
+          .then((editComment) => {
+            done(editComment)
+            return res.status(201).json({
+              editComment
+            })
+          })
+          .catch(function(err) {
+          return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+        });
+        })
+        .catch(function(err) {
+          return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
+        });
+        
+      },
+    ]);
+  }
 }

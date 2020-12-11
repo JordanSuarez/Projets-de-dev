@@ -1,15 +1,14 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-// eslint-disable-next-line import/no-unresolved
-import { getProfileInfos, deleteProject } from 'src/common/redux/actions/userProfile';
 
+import { getProfileInfos, handleDeleteUserProfile } from 'src/common/redux/actions/userProfile';
+import { handleDeleteProject } from 'src/common/redux/actions/project';
 import UserProfile from './UserProfile';
-// eslint-disable-next-line import/extensions
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
-  redirect: state.auth.redirect,
+  redirect: state.redirection.redirect,
   userProfile: state.userProfile.userProfile,
   loading: state.userProfile.loading,
 });
@@ -19,7 +18,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(getProfileInfos());
   },
   handleDeleteProject: (projectId) => {
-    dispatch(deleteProject(projectId));
+    dispatch(handleDeleteProject(projectId));
+  },
+  handleDeleteUserProfile: () => {
+    dispatch(handleDeleteUserProfile());
   },
 });
 

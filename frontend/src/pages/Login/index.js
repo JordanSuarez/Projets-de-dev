@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
-import { submitLogin, changeHasErrorValue} from 'src/common/redux/actions/auth';
+import { submitLogin, changeHasErrorValue } from 'src/common/redux/actions/auth';
 import Login from './Login';
 import styles from './styles';
 
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  redirect: state.auth.redirect,
+  redirect: state.redirection.redirect,
   hasError: state.auth.hasError,
   initialValues: {
     email: state.auth.userEmail,
