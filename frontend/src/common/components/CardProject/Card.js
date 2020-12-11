@@ -60,13 +60,14 @@ const CardProject = ({
     <Card className={classes.card}>
       <div>
         <CardMedia
+          onClick={handleDisplayProject}
           className={classes.image}
           image={image}
           title="image website"
         />
       </div>
       <div className={classes.contentCard}>
-        <CardContent className={classes.text}>
+        <CardContent className={classes.text} onClick={handleDisplayProject}>
           <Typography className={classes.title} component="h3">
             {title}
           </Typography>
