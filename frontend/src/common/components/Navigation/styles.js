@@ -53,6 +53,7 @@ export default ({ palette }) => ({
   },
   itemLinkActive: {
     color: palette.blue,
+    fontWeight: 'bold',
   },
   button: {
     backgroundColor: palette.darkBlue,

@@ -38,7 +38,7 @@ const Project = ({
   const handleClickProfile = () => {
     history.push(getProfileRoute(project.user.id));
   };
-console.log(project.comments);
+
   return (
     <Base loading={loading}>
       <div className={classes.projectContainer}>
@@ -62,7 +62,7 @@ console.log(project.comments);
               />
               {project.user.username}
             </div>
-            {(project.github_link || project.project_link)
+            {(project.githubLink || project.projectLink)
           && (
           <div className={classes.iconButton}>
             <IconButton
@@ -80,19 +80,19 @@ console.log(project.comments);
               open={open}
               onClose={handleClose}
             >
-              {project.github_link
+              {project.githubLink
               && (
               <MenuItem onClick={handleClose} className={classes.link}>
-                <a href={project.github_link} className={classes.githubLink}>
+                <a href={project.githubLink} className={classes.githubLink}>
                   <img src={githubLogo} alt="project-header" />
                   Github
                 </a>
               </MenuItem>
               )}
-              {project.project_link
+              {project.projectLink
                 && (
                 <MenuItem onClick={handleClose} className={classes.link}>
-                  <a href={project.project_link}>
+                  <a href={project.projectLink}>
                     Projet en ligne
                   </a>
                 </MenuItem>

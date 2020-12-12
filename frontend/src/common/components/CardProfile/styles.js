@@ -2,7 +2,7 @@ export default ({ palette }) => ({
   card: {
     width: '260px',
     margin: '60px 1em',
-    borderRadius: '16px',
+    borderRadius: '32px',
     position: 'relative',
     boxSizing: 'content-box',
     overflow: 'visible',
@@ -12,7 +12,9 @@ export default ({ palette }) => ({
       transform: 'scale(1.1)',
     },
   },
-
+  cardArea: {
+    borderRadius: '32px',
+  },
   large: {
     position: 'absolute',
     top: '-65px',
@@ -26,7 +28,7 @@ export default ({ palette }) => ({
     textAlign: 'center',
     marginBottom: '0.5em;',
     backgroundColor: palette.white,
-    borderRadius: '16px',
+    borderRadius: '32px',
   },
   title: {
     fontSize: '1.5em',
@@ -42,12 +44,28 @@ export default ({ palette }) => ({
     color: palette.white,
     padding: '0 1em',
   },
+  linkLogout: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    backgroundColor: palette.darkBlue,
+    height: '70px',
+    borderRadius: '0 0 16px 16px',
+    color: palette.white,
+    padding: '0 1em',
+  },
   linkProfile: {
     '&:hover': {
       cursor: 'pointer',
+      color: palette.blue,
     },
   },
   follow: {
     fontSize: '30px',
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      cursor: 'pointer',
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.2)',
+    },
   },
 });

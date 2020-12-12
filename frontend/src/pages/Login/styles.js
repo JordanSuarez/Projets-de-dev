@@ -19,6 +19,12 @@ export default ({ palette }) => ({
 
   textfield: {
     marginBottom: '0.5em',
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: palette.darkBlue,
+    },
+    '& .MuiInput-underline:after': {
+      borderBottom: palette.green,
+    },
   },
 
   containerButton: {
@@ -40,10 +46,11 @@ export default ({ palette }) => ({
 
   submit: {
     backgroundColor: palette.darkBlue,
-    color: palette.yellow,
+    color: palette.white,
     margin: '2em 0 2em auto',
     '&:hover': {
-      backgroundColor: palette.blue,
+      color: palette.blue,
+      backgroundColor: palette.darkBlue,
     },
   },
 });

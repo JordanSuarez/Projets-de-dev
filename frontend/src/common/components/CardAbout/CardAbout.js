@@ -1,8 +1,5 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable no-unused-vars */
-/* eslint-disable arrow-body-style */
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { bool } from 'prop-types';
 import {
   Card,
   CardActionArea,
@@ -12,9 +9,10 @@ import {
   Avatar,
 } from '@material-ui/core';
 import GradeIcon from '@material-ui/icons/Grade';
-// import { mergeClasses } from '@material-ui/styles';
 import { classes as classesProps } from 'src/common/classes';
-
+import { isEmpty } from 'lodash';
+import { useHistory } from 'react-router-dom';
+import { getProfileRoute } from 'src/common/routing/routesResolver';
 import avatar2 from './avatar.png';
 
 const CardAbout = ({
@@ -23,12 +21,15 @@ const CardAbout = ({
   avatar,
   description,
   followLink,
-  profileLink,
+  profileId,
+  isLogged,
 }) => {
+  const history = useHistory();
+
   return (
     <Card className={classes.card}>
       <CardActionArea className={classes.cardArea}>
-        <Avatar alt="lePseudo" src={avatar2} className={classes.large} />
+        <Avatar alt="lePseudo" src={!isEmpty(avatar) ? avatar : avatar2} className={classes.large} />
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">
             {name}
@@ -38,9 +39,14 @@ const CardAbout = ({
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions className={classes.link}>
-        <GradeIcon className={classes.follow} />
-        <span className={classes.linkProfile}>Voir son profil</span>
+      <CardActions className={isLogged ? classes.link : classes.linkLogout}>
+        {isLogged && <GradeIcon className={classes.follow} />}
+        <span
+          className={classes.linkProfile}
+          onClick={() => history.push(getProfileRoute(profileId))}
+        >
+          Voir son profil
+        </span>
       </CardActions>
     </Card>
 
@@ -53,7 +59,8 @@ CardAbout.propTypes = {
   avatar: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   followLink: PropTypes.string.isRequired,
-  profileLink: PropTypes.string.isRequired,
+  profileId: PropTypes.string.isRequired,
+  isLogged: bool.isRequired,
 };
 
 export default CardAbout;

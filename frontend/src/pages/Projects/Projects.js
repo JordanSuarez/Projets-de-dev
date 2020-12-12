@@ -10,7 +10,6 @@ import { getProjectsListRoute } from 'src/common/routing/routesResolver';
 import SearchBar from 'src/common/components/SearchBar';
 import { isEmpty } from 'lodash';
 
-// eslint-disable-next-line arrow-body-style
 const Projects = ({
   classes,
   getProjects,
@@ -18,6 +17,7 @@ const Projects = ({
   projectsNumber,
   allProjects,
   loading,
+  isLogged,
 }) => {
   const { offset } = useParams();
   const history = useHistory();
@@ -91,6 +91,7 @@ const Projects = ({
               userId={user.id}
               userImage={user.userImage}
               image={image}
+              isLogged={isLogged}
             />
           ))}
           {searchResults.length === 0
@@ -106,6 +107,7 @@ const Projects = ({
               userId={user.id}
               userImage={user.userImage}
               image={image}
+              isLogged={isLogged}
             />
           ))}
         </div>
@@ -123,6 +125,7 @@ Projects.propTypes = {
   allProjects: PropTypes.object.isRequired,
   projectsNumber: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 export default Projects;

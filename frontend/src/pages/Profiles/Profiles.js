@@ -14,6 +14,7 @@ const Profiles = ({
   getProfiles,
   profiles,
   loading,
+  isLogged,
 }) => {
   const history = useHistory();
   const [inputValue, setInputValue] = useState('');
@@ -68,6 +69,7 @@ const Profiles = ({
               {...profile}
               key={profile.id}
               onClick={() => handleClickCard(profile.id)}
+              isLogged={isLogged}
             />
           ))}
         {searchResults.length === 0
@@ -76,6 +78,7 @@ const Profiles = ({
               {...profile}
               key={profile.id}
               onClick={() => handleClickCard(profile.id)}
+              isLogged={isLogged}
             />
           ))}
       </div>
@@ -89,6 +92,7 @@ Profiles.propTypes = {
   profiles: PropTypes.shape({
   }).isRequired,
   loading: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 export default Profiles;

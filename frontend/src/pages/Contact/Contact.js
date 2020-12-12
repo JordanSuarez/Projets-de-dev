@@ -56,6 +56,7 @@ const Contact = ({ classes }) => {
   const [formContactValues, setFormContactValues] = useState();
 
   const onSubmit = (values) => {
+    console.log(values)
     setFormContactValues(values);
   };
   return (

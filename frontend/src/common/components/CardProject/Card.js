@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
@@ -34,6 +33,7 @@ const CardProject = ({
   tags,
   projectOwnerOptions,
   handleDeleteProject,
+  isLogged,
 }) => {
   const history = useHistory();
 
@@ -83,10 +83,11 @@ const CardProject = ({
           </Typography>
         </CardContent>
         <div className={classes.test}>
-          <CardActions className={classes.link}>
+          <CardActions className={isLogged ? classes.link : classes.linkLogout}>
             {!projectOwnerOptions ? (
               <>
-                <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />
+                {isLogged
+                && <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />}
                 <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
               </>
             ) : (
@@ -111,6 +112,7 @@ CardProject.propTypes = {
   ...classesProps,
   handleDeleteProject: PropTypes.func,
   projectOwnerOptions: PropTypes.bool,
+  isLogged: PropTypes.bool.isRequired,
   projectId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

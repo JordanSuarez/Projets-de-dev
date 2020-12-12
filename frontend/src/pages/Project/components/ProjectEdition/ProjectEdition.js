@@ -27,7 +27,6 @@ const ProjectEdition = ({
       history.push(redirect);
     }
   }, [redirect]);
-
   return (
     <Base loading={loading}>
       <ProjectForm title="Modifier un projet" initialValues={formatInitialValues(project)} handleSubmitProject={handleFormatProjectValues} />
