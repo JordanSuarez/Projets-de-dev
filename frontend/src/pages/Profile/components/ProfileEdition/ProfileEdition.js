@@ -31,6 +31,9 @@ const ProfileEdition = ({
   useEffect(() => {
     getProfile();
   }, []);
+  const [formImage, setFormImage] = useState({ userImage: userProfile.userImage, imageName: 'Choisir une nouvelle image de profil' });
+  useEffect(() => {
+  }, [formImage]);
 
   const [changePassword, onChangePassword] = useState(false);
   useEffect(() => {
@@ -84,6 +87,7 @@ const ProfileEdition = ({
   };
 
   const handleUpdateProfile = (event) => {
+    event.userImage = formImage.userImage;
     handleUpdate(event);
   };
   const history = useHistory();
@@ -94,10 +98,8 @@ const ProfileEdition = ({
     }
   }, [redirect]);
 
-  // eslint-disable-next-line no-unused-vars
-  const getFiles = () => {
-    // TODO
-    console.log('A faire files upload');
+  const getFiles = (files) => {
+    setFormImage({ userImage: files.base64, imageName: files.name });
   };
 
   return (
@@ -113,6 +115,7 @@ const ProfileEdition = ({
                 username: userProfile.username,
                 email: userProfile.email,
                 bio: userProfile.bio,
+                userImage: userProfile.userImage,
               }}
               validate={validate}
               render={({ handleSubmit, submitting }) => (
@@ -146,11 +149,13 @@ const ProfileEdition = ({
                         <label from="nul" className={classes.newButtonUpload}>
                           Choisir un fichier
                         </label>
-                        <p className={classes.fileName}> TODO FILE NAME </p>
+                        <p className={classes.fileName}> {formImage.imageName} </p>
                         <FileBase64
                           hidden
+                          onDone={getFiles}
                         />
                       </div>
+                      {(formImage.userImage !== '') && <img src={formImage.userImage} alt="avatar" className={classes.imageInput} />}
                     </div>
                   </div>
                   <div>
