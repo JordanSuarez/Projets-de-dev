@@ -106,6 +106,18 @@ const UserProfile = ({
               <Avatar alt="avatar" src={userProfile.userImage || avatar2} className={classes.large} />
               <h3 className={classes.username}>{userProfile.username}</h3>
             </div>
+            <div className={classes.containerBio}>
+              {userProfile.bio && (
+                <p className={classes.bio}>
+                  {userProfile.bio}
+                </p>
+              )}
+              {!userProfile.bio && (
+                <p className={classes.bio}>
+                  Renseignez votre decription
+                </p>
+              )}
+            </div>
             <div className={classes.rowCenter}>
               {buttons.map(({ id, label, method }) => (
                 <Button
@@ -126,7 +138,7 @@ const UserProfile = ({
             </h2>
             <div className={classes.cardContainer}>
               {isEmpty(userProfile.projects) && (
-              <p>Cet utilisateur n'a pas encore de projet</p>
+              <p>Je n'ai pas encore de projet</p>
               )}
               {!isEmpty(userProfile.projects)
                 && userProfile.projects.map(({

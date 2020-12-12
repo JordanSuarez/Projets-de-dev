@@ -25,6 +25,9 @@ export default ({ palette, breakpoints }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+    [breakpoints.down(800)]: {
+      justifyContent: 'center',
+    },
   },
   username: {
     fontSize: '1.2em',
@@ -35,6 +38,26 @@ export default ({ palette, breakpoints }) => ({
     width: '150px',
     height: '150px',
     boxShadow: ' 1px 2px 3px 1px rgba(0,0,0,.35)',
+  },
+  containerBio: {
+    width: 'auto',
+    maxWidth: '40%',
+    height: 'auto',
+    margin: '0 auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    [breakpoints.down(800)]: {
+      order: 3,
+      maxWidth: '100%',
+    },
+  },
+  bio: {
+    wordBreak: 'break-word',
+    padding: '2em',
+    margin: '1em',
+    backgroundColor: ' white',
+    borderRadius: '16px',
   },
   button: {
     backgroundColor: palette.darkBlue,

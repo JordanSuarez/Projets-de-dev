@@ -134,6 +134,7 @@ const ProfileEdition = ({
                   <TextField
                     className={classes.textfield}
                     type="string"
+                    multiline
                     label="Description"
                     name="bio"
                     margin="none"

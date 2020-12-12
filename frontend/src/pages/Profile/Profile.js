@@ -34,12 +34,24 @@ const Profile = ({
           <div className={classes.column}>
             <div className={classes.rowCenter}>
               {!profile.userImage && (
-                <Avatar alt="avatar" src={avatar2} className={classes.large} />
+              <Avatar alt="avatar" src={avatar2} className={classes.large} />
               )}
               {profile.userImage && (
-                <Avatar alt="avatar" src={profile.userImage} className={classes.large} />
+              <Avatar alt="avatar" src={profile.userImage} className={classes.large} />
               )}
               <h3 className={classes.username}>{profile.username}</h3>
+            </div>
+            <div className={classes.containerBio}>
+              {profile.bio && (
+              <p className={classes.bio}>
+                {profile.bio}
+              </p>
+              )}
+              {!profile.bio && (
+              <p className={classes.bio}>
+                Cet utilisateur n'a pas encore renseigné de description.
+              </p>
+              )}
             </div>
           </div>
           <div>
@@ -81,6 +93,7 @@ Profile.propTypes = {
     id: PropTypes.number,
     username: PropTypes.string.isRequired,
     userImage: PropTypes.string,
+    bio: PropTypes.string,
     projects: PropTypes.arrayOf(PropTypes.any).isRequired,
   }),
   loading: PropTypes.bool.isRequired,
