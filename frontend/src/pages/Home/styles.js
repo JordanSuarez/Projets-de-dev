@@ -6,7 +6,7 @@ export default ({ palette }) => ({
   },
 
   image: {
-    height: '300px',
+    height: '400px',
     width: '100%',
     objectFit: 'cover',
 
