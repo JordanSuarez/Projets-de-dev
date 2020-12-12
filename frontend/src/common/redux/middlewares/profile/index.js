@@ -2,6 +2,8 @@ import { GET_PROFILE, saveProfile } from 'src/common/redux/actions/profile';
 import { GET, USERS, ONE } from 'src/common/callApiHandler/constants';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
+import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
+import { getNotFoundRoute } from 'src/common/routing/routesResolver';
 
 const profile = (store) => (next) => (action) => {
   switch (action.type) {
@@ -12,8 +14,11 @@ const profile = (store) => (next) => (action) => {
         .then(({ data }) => {
           store.dispatch(saveProfile(data));
         })
-        .catch((error) => {
-          console.log(error.response);
+        .catch(() => {
+          store.dispatch(redirect(getNotFoundRoute()));
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
         });
 
       next(action);

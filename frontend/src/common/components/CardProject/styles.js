@@ -72,7 +72,7 @@ export default ({ breakpoints, palette }) => ({
     transition: 'all .2s ease-in-out',
     '&:hover': {
       cursor: 'pointer',
-      color: palette.darkBlue,
+      color: palette.blue,
       backgroundColor: palette.white,
       transition: 'all .2s ease-in-out',
       transform: 'scale(1.1)',

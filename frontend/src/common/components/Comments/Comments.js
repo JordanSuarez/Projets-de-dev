@@ -259,12 +259,12 @@ Comments.propTypes = {
   handleCommentUpdate: PropTypes.func.isRequired,
   idProject: PropTypes.number.isRequired,
   isLogged: PropTypes.bool.isRequired,
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.number,
   redirect: PropTypes.string.isRequired,
 };
 
 Comments.defaultProps = {
-
+  userId: null,
 };
 
 export default Comments;

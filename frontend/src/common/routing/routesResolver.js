@@ -17,7 +17,7 @@ export const REGISTER = '/register';
 export const ABOUT = '/about';
 export const CONTACT = '/contact';
 export const LEGAL_MENTION = '/legal-mention';
-export const ERROR = '/404';
+export const NOT_FOUND = '/404';
 
 export const getHomeRoute = () => generatePath(HOME);
 
@@ -41,4 +41,4 @@ export const getAboutRoute = () => generatePath(ABOUT);
 export const getContactRoute = () => generatePath(CONTACT);
 export const getLegalMentionRoute = () => generatePath(LEGAL_MENTION);
 
-export const getErrorRoute = () => generatePath(ERROR);
+export const getNotFoundRoute = () => generatePath(NOT_FOUND);

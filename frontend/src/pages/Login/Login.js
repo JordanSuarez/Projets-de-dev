@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes, { func, objectOf, string } from 'prop-types';
+import {
+  func, shape, string, bool,
+} from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
@@ -100,13 +102,10 @@ Login.propTypes = {
   changeHasError: func.isRequired,
   handleLogin: func.isRequired,
   redirect: string.isRequired,
-  hasError: PropTypes.bool.isRequired,
-  initialValues: objectOf({
+  hasError: bool.isRequired,
+  initialValues: shape({
     email: string.isRequired,
   }).isRequired,
 };
 
-Login.defaultProps = {
-
-};
 export default Login;

@@ -22,7 +22,7 @@ export default ({ palette }) => ({
     '& .MuiFormLabel-root.Mui-focused': {
       color: palette.darkBlue,
     },
-    '& .MuiInput-underline:after': {
+    '& .MuiInput-underline': {
       borderBottom: palette.green,
     },
   },

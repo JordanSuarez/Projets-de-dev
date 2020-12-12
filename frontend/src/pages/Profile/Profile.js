@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
@@ -15,12 +15,17 @@ const Profile = ({
   loading,
   profile,
   isLogged,
+  redirect,
 }) => {
+  const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
     getProfile(id);
-  }, []);
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
 
   return (
     <Base loading={loading}>
@@ -80,6 +85,7 @@ Profile.propTypes = {
   }),
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  redirect: PropTypes.string.isRequired,
 };
 
 Profile.defaultProps = {
