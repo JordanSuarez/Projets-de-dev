@@ -88,10 +88,12 @@ export default ({ palette }) => ({
     color: palette.white,
     margin: '1em 10px 1em 10px',
     width: '115px',
+    textAlign: 'center',
   },
   fileName: {
     fontSize: '12px',
-    width: '90px',
+    width: 'auto',
+    maxWidth: '190px',
     wordBreak: 'break-word',
   },
   imageTitle: {

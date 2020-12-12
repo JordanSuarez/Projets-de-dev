@@ -30,7 +30,6 @@ const commentsMiddleware = (store) => (next) => (action) => {
       break;
     }
     case EDIT_COMMENT: {
-      console.log(action.id);
       const url = getEndpoint(COMMENT, PATCH, ONE, action.id);
 
       callApi(url, PATCH, action.comments)
