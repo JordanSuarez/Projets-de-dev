@@ -39,7 +39,6 @@ const Form = ({
     if (formState.image === '') {
       return setErrorFields({ ...errorFields, image: true });
     }
-
     // return form values and project id from useParams
     return handleSubmitProject({ ...formState, ...values }, id);
   };
@@ -164,6 +163,7 @@ const Form = ({
                         checkedIcon={checkedIcon}
                         style={{ marginRight: 8 }}
                         checked={selected}
+                        color="primary"
                       />
                       {option.name}
                     </>

@@ -32,7 +32,8 @@ const authMiddleWare = (store) => (next) => (action) => {
           store.dispatch(submitLoginSuccess(data.userId));
           store.dispatch(showSnackbar('', `Hello! ${data.username}`, 'success'));
         })
-        .catch(() => {
+        .catch((e) => {
+          console.log(e);
           store.dispatch(showSnackbar('Oups!', 'Mot de passe ou email incorrect', 'error'));
           store.dispatch(submitLoginError());
         })
@@ -57,8 +58,9 @@ const authMiddleWare = (store) => (next) => (action) => {
           store.dispatch(submitRegisterSuccess(action.email));
           store.dispatch(showSnackbar('', 'Votre compte à bien été créé', 'success'));
         })
-        .catch(() => {
-          store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
+        .catch(({ response }) => {
+          console.log(response.data.error);
+          store.dispatch(showSnackbar('Oups!', response.data.error, 'error'));
         })
         .finally(() => {
           store.dispatch(redirectSuccess());

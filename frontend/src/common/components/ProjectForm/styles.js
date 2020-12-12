@@ -13,6 +13,12 @@ export default ({ palette }) => ({
   },
   input: {
     marginBottom: '1rem',
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: palette.darkBlue,
+    },
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: palette.darkBlue,
+    },
   },
   // Upload type
   imageContainer: {
@@ -38,6 +44,9 @@ export default ({ palette }) => ({
     alignItems: 'center',
     fontSize: '12px',
     paddingTop: '4px',
+    '& :hover': {
+      cursor: 'pointer',
+    },
   },
   newButtonUpload: {
     zIndex: '-1',
@@ -46,7 +55,7 @@ export default ({ palette }) => ({
     borderRadius: '4px',
     backgroundColor: palette.darkBlue,
     fontSize: '12px',
-    color: palette.yellow,
+    color: palette.white,
     margin: '1em 10px 1em 10px',
     width: '115px',
   },
@@ -79,6 +88,12 @@ export default ({ palette }) => ({
       color: palette.darkBlue,
       backgroundColor: palette.yellow,
     },
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: palette.darkBlue,
+    },
+    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+      borderColor: palette.darkBlue,
+    },
   },
   // Submit and Quit buttons
   buttonsWrapper: {
@@ -89,17 +104,18 @@ export default ({ palette }) => ({
   },
   submitButton: {
     margin: '1rem 1.3rem 1rem 2rem',
-    color: palette.yellow,
+    color: palette.white,
     backgroundColor: palette.darkBlue,
     '&:hover': {
-      backgroundColor: palette.blue,
+      color: palette.blue,
+      backgroundColor: palette.darkBlue,
     },
   },
   quitButton: {
     margin: '1rem 1.3rem 1rem 2rem',
     color: palette.darkBlue,
     '&:hover': {
-      color: palette.blue,
+      color: palette.errorField,
       backgroundColor: palette.white,
     },
   },
@@ -138,5 +154,4 @@ export default ({ palette }) => ({
     color: palette.errorField,
     margin: '0.5em',
   },
-  
 });

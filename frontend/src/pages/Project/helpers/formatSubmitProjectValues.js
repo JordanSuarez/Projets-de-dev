@@ -2,8 +2,8 @@ import { get } from 'lodash';
 
 export default (formValues) => ({
   title: formValues.title,
-  github_Link: formValues.github_Link,
-  project_link: formValues.project_link,
+  githubLink: formValues.githubLink,
+  projectLink: formValues.projectLink,
   description: formValues.description,
   image: formValues.image,
   tag1: get(formValues, 'tags[0].id'),

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -13,6 +12,7 @@ const mapStateToProps = (state) => ({
   allProjects: state.projects.allProjects,
   projectsNumber: state.projects.projectsNumber,
   loading: state.projects.loading,
+  isLogged: state.auth.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -31,6 +31,9 @@ export default ({ breakpoints, palette }) => ({
       padding: '0.5em',
       margin: '0 auto',
     },
+    '&:hover': {
+      color: palette.blue,
+    },
   },
 
 });

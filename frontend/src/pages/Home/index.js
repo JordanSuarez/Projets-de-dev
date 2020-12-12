@@ -9,6 +9,7 @@ import styles from './styles';
 const mapStateToProps = (state) => ({
   loading: state.home.loading,
   projects: state.home.projects,
+  isLogged: state.auth.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({

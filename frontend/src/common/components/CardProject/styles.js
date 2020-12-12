@@ -49,6 +49,12 @@ export default ({ breakpoints, palette }) => ({
     backgroundColor: palette.darkBlue,
     height: '70px',
   },
+  linkLogout: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    backgroundColor: palette.darkBlue,
+    height: '70px',
+  },
   like: {
     margin: '0.50em',
     color: palette.white,
@@ -111,6 +117,9 @@ export default ({ breakpoints, palette }) => ({
     },
     '& :nth-child(3n)': {
       color: palette.green,
+    },
+    '& :nth-child(4n)': {
+      color: palette.errorField,
     },
   },
   tag: {

@@ -1,6 +1,17 @@
 import { withStyles } from '@material-ui/core';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 
 import About from './About';
 import styles from './styles';
 
-export default withStyles(styles)(About);
+const mapStateToProps = (state) => ({
+  isLogged: state.auth.isLogged,
+});
+
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+  ),
+)(About);

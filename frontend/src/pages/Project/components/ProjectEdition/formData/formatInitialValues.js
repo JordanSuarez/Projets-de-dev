@@ -9,8 +9,8 @@ export default (project) => {
 
   return ({
     title: project.title,
-    githubLink: project.github_link,
-    projectLink: project.project_link,
+    githubLink: project.githubLink,
+    projectLink: project.projectLink,
     description: project.description,
     image: project.image,
     imageName: 'Aucun fichier choisi',

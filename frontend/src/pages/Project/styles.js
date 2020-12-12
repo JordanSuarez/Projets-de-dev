@@ -71,7 +71,6 @@ export default ({ palette }) => ({
     marginBottom: '0.5rem',
     color: palette.darkBlue,
     '&:hover': {
-      color: palette.blue,
       cursor: 'pointer',
     },
   },
@@ -79,6 +78,7 @@ export default ({ palette }) => ({
     width: '3rem',
     height: '3rem',
     marginBottom: '0.5rem',
+    transition: 'all .2s ease-in-out',
     '&:hover': {
       transition: 'all .2s ease-in-out',
       transform: 'scale(1.1)',

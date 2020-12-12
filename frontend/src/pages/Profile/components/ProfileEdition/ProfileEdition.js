@@ -148,7 +148,7 @@ const ProfileEdition = ({
                   </div>
                   <div>
                     <Button
-                      className={classes.annuler}
+                      className={classes.submit}
                       variant="contained"
                       type="button"
                       onClick={() => {
@@ -179,8 +179,8 @@ const ProfileEdition = ({
                   <Box className={classes.containerButton}>
                     <Button
                       className={classes.annuler}
-                      variant="contained"
-                      type=""
+                      variant="outlined"
+                      type="button"
                       onClick={() => history.push(getUserProfileRoute())}
                     >
                       Annuler
