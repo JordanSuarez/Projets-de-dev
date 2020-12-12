@@ -14,6 +14,7 @@ const Profile = ({
   getProfile,
   loading,
   profile,
+  isLogged,
 }) => {
   const { id } = useParams();
 
@@ -57,6 +58,7 @@ const Profile = ({
                     userId={profile.id}
                     userImage={profile.userImage}
                     image={image}
+                    isLogged={isLogged}
                   />
                 ))}
             </div>
@@ -77,6 +79,7 @@ Profile.propTypes = {
     projects: PropTypes.arrayOf(PropTypes.any).isRequired,
   }),
   loading: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
 };
 
 Profile.defaultProps = {
