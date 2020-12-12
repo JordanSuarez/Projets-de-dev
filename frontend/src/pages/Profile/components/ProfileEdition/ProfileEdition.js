@@ -112,6 +112,7 @@ const ProfileEdition = ({
               initialValues={{
                 username: userProfile.username,
                 email: userProfile.email,
+                bio: userProfile.bio,
               }}
               validate={validate}
               render={({ handleSubmit, submitting }) => (
@@ -122,14 +123,19 @@ const ProfileEdition = ({
                     label="Nom d'utilisateur"
                     name="username"
                     margin="none"
-                  >
-                    coucou
-                  </TextField>
+                  />
                   <TextField
                     className={classes.textfield}
                     type="email"
                     label="Email"
                     name="email"
+                    margin="none"
+                  />
+                  <TextField
+                    className={classes.textfield}
+                    type="string"
+                    label="Description"
+                    name="bio"
                     margin="none"
                   />
                   <div className={classes.imageContainer}>
