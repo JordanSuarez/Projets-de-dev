@@ -83,8 +83,8 @@ module.exports = {
           id: project.id,
           title: project.title,
           description: project.description,
-          github_link: project.github_link,
-          project_link: project.project_link,
+          githubLink: project.github_link,
+          projectLink: project.project_link,
           image: project.image,
           vote: project.vote,
           tags: [
@@ -111,8 +111,8 @@ module.exports = {
     const title = req.body.title;
     const description	 = req.body.description;
     const image	 = req.body.image;
-    const github_link	 = req.body.github_link;
-    const project_link	 = req.body.project_link;
+    const githubLink	 = req.body.githubLink;
+    const projectLink	 = req.body.projectLink;
     const tagId	 = req.body.tag1;
     const tag2Id	 = req.body.tag2;
     const tag3Id	 = req.body.tag3;
@@ -138,8 +138,8 @@ module.exports = {
             title:title,
             description:description,
             image:image,
-            github_link: github_link,
-            project_link: project_link,
+            github_link: githubLink,
+            project_link: projectLink,
             UserId: userId,
             TagId:tagId,
             Tag2Id: tag2Id,
@@ -154,8 +154,8 @@ module.exports = {
               'title': title,
               'description': description,
               'image': image,
-              'github_link': github_link,
-              'project_link': project_link,
+              'github_link': githubLink,
+              'project_link': projectLink,
               'userId': userId,
               'Tag1': tagId,
               'Tag2': tag2Id,
@@ -176,12 +176,13 @@ module.exports = {
   },
 
   edit: (req, res) => {
+    console.log(req.body.githubLink, req.body.projectLink)
     const id = req.params.id;
     const title = req.body.title;
     const description	 = req.body.description;
     const image	 = req.body.image;
-    const github_link	 = req.body.github_link;
-    const project_link	 = req.body.project_link;
+    const githubLink	 = req.body.githubLink;
+    const projectLink	 = req.body.projectLink;
     const tagId	 = req.body.tag1;
     const tag2Id	 = req.body.tag2;
     const tag3Id	 = req.body.tag3;
@@ -207,8 +208,8 @@ module.exports = {
             title: (title ? title : projectEdit.title),
             description: (description ? description : projectEdit.description),
             image: (image ? image : projectEdit.description),
-            github_link: (github_link ? github_link : projectEdit.github_link),
-            project_link: (project_link ? project_link : projectEdit.project_link),
+            github_link: (githubLink ? githubLink : projectEdit.githubLink),
+            project_link: (projectLink ? projectLink : projectEdit.projectLink),
             TagId: (tagId ? tagId : projectEdit.TagId),
             Tag2Id: (tag2Id ? tag2Id : null),
             Tag3Id: (tag3Id ? tag3Id : null),
