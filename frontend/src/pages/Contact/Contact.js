@@ -1,8 +1,5 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
 import {
@@ -76,7 +73,7 @@ const Contact = ({ classes }) => {
                   label="Name"
                   name="name"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -84,7 +81,7 @@ const Contact = ({ classes }) => {
                   label="Email"
                   name="email"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -100,7 +97,7 @@ const Contact = ({ classes }) => {
                   label="Objet"
                   name="objet"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -108,7 +105,7 @@ const Contact = ({ classes }) => {
                   label="message"
                   name="message"
                   margin="none"
-                  required={true}
+                  required
                   multiline
                   rows={4}
                 />
