@@ -37,7 +37,6 @@ const userProfile = (store) => (next) => (action) => {
     }
     case UPDATE_USER_PROFILE: {
       const url = getEndpoint(USERS, PATCH, PRIVATE_PROFILE);
-      console.log(action.data);
       callApi(url, PATCH, action.data)
         .then(() => {
           store.dispatch(redirect(getUserProfileRoute()));

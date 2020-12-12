@@ -14,7 +14,6 @@ const mapStateToProps = (state) => ({
 
 const mapsDispatchToProps = (dispatch) => ({
   handleComment: (values) => {
-    console.log(values);
     dispatch(addComment(values));
   },
   handleCommentUpdate: (values, id) => {
