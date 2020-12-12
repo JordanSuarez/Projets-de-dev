@@ -9,6 +9,7 @@ import styles from './styles';
 const mapStateToProps = (state) => ({
   project: state.project.project,
   loading: state.project.loading,
+  redirect: state.redirection.redirect,
 });
 
 const mapDispatchToProps = (dispatch) => ({

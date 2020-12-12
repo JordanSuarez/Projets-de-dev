@@ -18,7 +18,7 @@ import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import {
   PROJECTS, GET, POST, PATCH, ONE, DELETE, TAGS, ALL,
 } from 'src/common/callApiHandler/constants';
-import { getUserProfileRoute } from 'src/common/routing/routesResolver';
+import { getUserProfileRoute, getNotFoundRoute } from 'src/common/routing/routesResolver';
 import { get } from 'lodash';
 import axios from 'axios';
 
@@ -38,7 +38,12 @@ const projectMiddleWare = (store) => (next) => (action) => {
         const tags = get(response[1], 'data');
         store.dispatch(showProjectById(project, tags));
       })
-        .catch(() => {});
+        .catch(() => {
+          store.dispatch(redirect(getNotFoundRoute()));
+        })
+        .finally(() => {
+          store.dispatch(redirectSuccess());
+        });
 
       next(action);
       break;

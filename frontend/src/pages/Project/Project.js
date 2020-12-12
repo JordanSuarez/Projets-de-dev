@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { bool, func, object } from 'prop-types';
+import {
+  bool, func, object, string,
+} from 'prop-types';
 import { Grid, Avatar } from '@material-ui/core';
 import { useHistory, useParams } from 'react-router-dom';
 import Base from 'src/common/components/Base';
@@ -16,7 +18,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Comments from 'src/common/components/Comments';
 
 const Project = ({
-  classes, fetchProject, project, loading,
+  classes, fetchProject, project, loading, redirect,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
@@ -33,7 +35,10 @@ const Project = ({
 
   useEffect(() => {
     fetchProject(id);
-  }, []);
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
 
   const handleClickProfile = () => {
     history.push(getProfileRoute(project.user.id));
@@ -125,6 +130,7 @@ Project.propTypes = {
   fetchProject: func.isRequired,
   project: object.isRequired,
   loading: bool.isRequired,
+  redirect: string.isRequired,
 };
 
 export default Project;

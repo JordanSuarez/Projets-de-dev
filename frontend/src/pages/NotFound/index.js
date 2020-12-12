@@ -1,6 +1,6 @@
 import { withStyles } from '@material-ui/core';
 
-import Error from './Error';
+import NotFound from './NotFound';
 import styles from './styles';
 
-export default withStyles(styles)(Error);
+export default withStyles(styles)(NotFound);

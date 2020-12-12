@@ -20,6 +20,7 @@ const UserProfile = ({
   handleDeleteProject,
   handleDeleteUserProfile,
   redirect,
+  isLogged,
 }) => {
   const history = useHistory();
 
@@ -142,6 +143,7 @@ const UserProfile = ({
                     image={image}
                     projectOwnerOptions
                     handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
+                    isLogged={isLogged}
                   />
                 ))}
             </div>
@@ -159,7 +161,8 @@ UserProfile.propTypes = {
   handleDeleteUserProfile: PropTypes.func.isRequired,
   userProfile: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  redirect: string.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  redirect: PropTypes.string.isRequired,
 };
 
 export default UserProfile;

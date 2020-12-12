@@ -15,7 +15,7 @@ import registerRouting from 'src/pages/Register/config/routing';
 import aboutRouting from 'src/pages/About/config/routing';
 import contactRouting from 'src/pages/Contact/config/routing';
 import legalMentionRouting from 'src/pages/LegalMention/config/routing';
-import errorRouting from 'src/pages/404/config/routing';
+import notFoundRouting from 'src/pages/NotFound/config/routing';
 
 // eslint-disable-next-line import/prefer-default-export
 export const routes = [
@@ -36,5 +36,5 @@ export const routes = [
   aboutRouting,
   contactRouting,
   legalMentionRouting,
-  errorRouting,
+  notFoundRouting,
 ];
