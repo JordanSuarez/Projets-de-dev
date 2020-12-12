@@ -8,7 +8,6 @@ import {
   COMMENT,
   CONTACT,
   LOGIN,
-  LOGOUT,
   REGISTER,
   EDIT,
   NEW,
@@ -19,6 +18,7 @@ import {
   TAGS,
   PRIVATE_PROFILE,
   ME,
+  CONNECTED,
 } from './constants';
 import { apiUrl } from './urlHandler';
 
@@ -45,6 +45,7 @@ const endpoints = {
     [POST]: {
       [LOGIN]: `${USERS}/${LOGIN}`,
       [REGISTER]: `${USERS}/${REGISTER}`,
+      [CONNECTED]: `${USERS}/${CONNECTED}`,
     },
     [GET]: {
       [ALL]: `${USERS}`,

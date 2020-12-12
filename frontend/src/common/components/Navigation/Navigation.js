@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   AppBar, Button, Grid, Hidden, IconButton, Menu, MenuItem, Toolbar,
@@ -17,16 +17,22 @@ import {
   getRegisterRoute,
 } from 'src/common/routing/routesResolver';
 import { classes as classesProps } from 'src/common/classes';
-import { bool } from 'prop-types';
+import { bool, func } from 'prop-types';
 import { isUndefined } from 'lodash';
+import { getToken } from 'src/common/authentication/authProvider';
 import NavLink from './NavLink';
 
-const Navigation = ({ classes, isLogged }) => {
+const Navigation = ({ classes, isLogged, userAuthVerify }) => {
   const history = useHistory();
   const params = useParams();
   const [mainAnchorEl, setMainAnchorEl] = useState(null);
   const openMainMenu = Boolean(mainAnchorEl);
 
+  useEffect(() => {
+    if (getToken()) {
+      userAuthVerify(getToken());
+    }
+  }, []);
   // Close burger menu
   const handleClose = (state) => state(null);
 
@@ -174,6 +180,7 @@ const Navigation = ({ classes, isLogged }) => {
 Navigation.propTypes = {
   ...classesProps,
   isLogged: bool.isRequired,
+  userAuthVerify: func.isRequired,
 };
 
 export default Navigation;
