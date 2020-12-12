@@ -5,7 +5,7 @@ import { classes as classesProps } from 'src/common/classes';
 import Base from 'src/common/components/Base';
 import CardAbout from 'src/common/components/CardAbout';
 import datas from './data';
-import headerImage from './header-image.png';
+import headerImage from './header-about.png';
 
 const About = ({ classes, isLogged }) => (
   <Base>
