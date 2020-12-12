@@ -11,6 +11,7 @@ exports.router = (() => {
 
     // Users routes
     apiRouter.route('/users').get(userController.getUsersList); // OK
+    apiRouter.route('/users/connected').post(userController.userAuthVerify); // OK
     apiRouter.route('/users/register/').post(userController.register); // OK
     apiRouter.route('/users/login/').post(userController.login); // OK
     apiRouter.route('/users/me').get(userController.getUserProfile); // OK

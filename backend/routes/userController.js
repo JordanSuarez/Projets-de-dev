@@ -334,6 +334,28 @@ module.exports = {
 			})
 
 		},
+		// Check if user token is valid
+		userAuthVerify: (req,res) => {
 
+			const headerAuth = req.headers['authorization'];
+			const userId = jwtUtils.getUserId(headerAuth);
 
+			if (userId < 0){
+				return res.status(400).json({ 'error': 'La session à expiré' });
+			} 
+			
+			asyncLib.waterfall([
+
+				(done) => {
+					models.User.findOne({
+						where: {id: userId}
+					}).then((userFound) => {
+						done(userFound)
+							return res.status(201).json(userFound);
+					}).catch((err) => {
+						return res.status(500).json({'error': 'Impossible de mettre à jour l\'utilisateur' + err});
+					})
+				}
+			]);
+		},
 }
