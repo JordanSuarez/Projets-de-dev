@@ -347,15 +347,24 @@ module.exports = {
 			asyncLib.waterfall([
 
 				(done) => {
-					models.User.findOne({
-						where: {id: userId}
-					}).then((userFound) => {
-						done(userFound)
-							return res.status(201).json(userFound);
-					}).catch((err) => {
-						return res.status(500).json({'error': 'Impossible de mettre à jour l\'utilisateur' + err});
+					models.User.findByPk(userId).then(result => {
+						if (result) {
+							res.status(200).json({
+								userId: result.id,
+							}) 
+						} else {
+							res.status(500).json({
+								message: "La session à expiré",
+							})
+						}
+					}).catch(error => {
+						res.status(500).json({
+							message: "Something went wrong",
+						})
 					})
 				}
 			]);
 		},
+		 
+			 
 }
