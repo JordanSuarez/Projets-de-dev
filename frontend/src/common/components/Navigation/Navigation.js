@@ -22,7 +22,9 @@ import { isUndefined } from 'lodash';
 import { getToken } from 'src/common/authentication/authProvider';
 import NavLink from './NavLink';
 
-const Navigation = ({ classes, isLogged, userAuthVerify }) => {
+const Navigation = ({
+  classes, isLogged, userAuthVerify, isNotLogged,
+}) => {
   const history = useHistory();
   const params = useParams();
   const [mainAnchorEl, setMainAnchorEl] = useState(null);
@@ -31,6 +33,9 @@ const Navigation = ({ classes, isLogged, userAuthVerify }) => {
   useEffect(() => {
     if (getToken()) {
       userAuthVerify(getToken());
+    }
+    if (!getToken()) {
+      isNotLogged();
     }
   }, []);
   // Close burger menu
@@ -181,6 +186,7 @@ Navigation.propTypes = {
   ...classesProps,
   isLogged: bool.isRequired,
   userAuthVerify: func.isRequired,
+  isNotLogged: func.isRequired,
 };
 
 export default Navigation;

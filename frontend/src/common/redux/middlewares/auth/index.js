@@ -10,7 +10,9 @@ import {
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getProfileInfos } from 'src/common/redux/actions/userProfile';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
-import { setToken, setUserId } from 'src/common/authentication/authProvider';
+import {
+  setToken, setUserId, removeToken, removeUserId,
+} from 'src/common/authentication/authProvider';
 import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
@@ -76,9 +78,12 @@ const authMiddleWare = (store) => (next) => (action) => {
       // Verify on each page if user is connected, and if his token is not expired
       callApi(url, POST, action.token)
         .then(({ data }) => {
+          setUserId(data.userId);
           store.dispatch(submitLoginSuccess(data.userId));
         })
         .catch(() => {
+          removeToken();
+          removeUserId();
           store.dispatch(submitLogoutSuccess());
           store.dispatch(showSnackbar('Oups!', 'Votre session à expiré!', 'error'));
         });

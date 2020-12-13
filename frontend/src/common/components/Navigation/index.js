@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
-import { userAuthVerify } from 'src/common/redux/actions/auth';
+import { userAuthVerify, submitLogoutSuccess } from 'src/common/redux/actions/auth';
 import Navigation from './Navigation';
 import styles from './styles';
 
@@ -13,6 +13,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   userAuthVerify: (token) => {
     dispatch(userAuthVerify(token));
+  },
+  isNotLogged: () => {
+    dispatch(submitLogoutSuccess());
   },
 });
 
