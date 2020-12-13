@@ -31,6 +31,9 @@ const Projects = ({
   // Pagination
   const limit = 12;
   const changePage = (event, value) => {
+    // Scroll to the top of the page after pagination
+    window.scrollTo(0, 0);
+
     setOffset((value * 12) - 12);
     setSearchResults([]);
     getProjects(`?limit=${limit}`, `&offset=${(value * 12) - 12}`);
