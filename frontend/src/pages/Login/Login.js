@@ -7,7 +7,7 @@ import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
 import { TextField } from 'mui-rff';
 import { Box, Button } from '@material-ui/core';
-import { getRegisterRoute } from 'src/common/routing/routesResolver';
+import { getRegisterRoute, getUserProfileRoute } from 'src/common/routing/routesResolver';
 import Base from 'src/common/components/Base';
 
 const validate = (values) => {
@@ -22,13 +22,16 @@ const validate = (values) => {
 };
 
 const Login = ({
-  classes, handleLogin, redirect, initialValues, hasError, changeHasError,
+  classes, handleLogin, redirect, initialValues, hasError, changeHasError, isLogged,
 }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const history = useHistory();
 
   useEffect(() => {
+    if (isLogged) {
+      history.push(getUserProfileRoute());
+    }
     if (redirect.length > 0) {
       history.push(redirect);
     }
@@ -103,6 +106,7 @@ Login.propTypes = {
   handleLogin: func.isRequired,
   redirect: string.isRequired,
   hasError: bool.isRequired,
+  isLogged: bool.isRequired,
   initialValues: shape({
     email: string.isRequired,
   }).isRequired,

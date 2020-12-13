@@ -1,4 +1,4 @@
-import { SAVE_USER_PROFILE } from 'src/common/redux/actions/userProfile';
+import { SAVE_USER_PROFILE, GET_USER_PROFILE } from 'src/common/redux/actions/userProfile';
 import { SUBMIT_LOGOUT_SUCCESS } from 'src/common/redux/actions/auth';
 
 const initialState = {
@@ -26,6 +26,12 @@ const userProfile = (state = initialState, action = {}) => {
     case SUBMIT_LOGOUT_SUCCESS: {
       return {
         ...initialState,
+      };
+    }
+    case GET_USER_PROFILE: {
+      return {
+        ...state,
+        loading: true,
       };
     }
     default: return { ...state };

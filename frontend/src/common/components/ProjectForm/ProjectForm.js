@@ -93,7 +93,7 @@ const Form = ({
         onSubmit={onSubmit}
         autoComplete="on"
         render={({
-          handleSubmit, submitting,
+          handleSubmit,
         }) => (
           <form onSubmit={handleSubmit}>
             <Grid item xs={12} sm={12} className={classes.inputContainer}>
@@ -174,7 +174,6 @@ const Form = ({
                       variant="outlined"
                       label="Catégorie(s)"
                       placeholder="Catégorie(s)"
-
                     />
                   )}
                 />
@@ -254,7 +253,7 @@ const Form = ({
                 )}
             <div className={classes.buttonsWrapper}>
               <Button type="button" variant="outlined" className={classes.quitButton} onClick={handleQuitForm}>Abandonner</Button>
-              <Button type="submit" variant="contained" className={classes.submitButton} disabled={submitting}>Soumettre</Button>
+              <Button type="submit" variant="contained" className={classes.submitButton}>Soumettre</Button>
             </div>
           </form>
         )}

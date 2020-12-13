@@ -29,18 +29,6 @@ export default ({ palette, breakpoints }) => ({
     flexWrap: 'wrap',
     justifyContent: 'center',
     transition: 'all .2s ease-in-out',
-    // '& .MuiPaper-root:nth-child(4n+1)': {
-    //   backgroundColor: palette.darkBlue,
-    // },
-    // '& .MuiPaper-root:nth-child(4n+2)': {
-    //   backgroundColor: palette.yellow,
-    // },
-    // '& .MuiPaper-root:nth-child(4n+3)': {
-    //   backgroundColor: palette.errorField,
-    // },
-    // '& .MuiPaper-root:nth-child(4n+4)': {
-    //   backgroundColor: palette.green,
-    // },
   },
   pagination: {
     width: '255px',
@@ -48,5 +36,4 @@ export default ({ palette, breakpoints }) => ({
     display: 'flex',
     justifyContent: 'center',
   },
-
 });

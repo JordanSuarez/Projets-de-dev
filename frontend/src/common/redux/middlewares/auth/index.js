@@ -4,16 +4,20 @@ import {
   submitRegisterSuccess,
   SUBMIT_REGISTER,
   submitLoginError,
+  USER_AUTH_VERIFY,
+  submitLogoutSuccess,
 } from 'src/common/redux/actions/auth';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getProfileInfos } from 'src/common/redux/actions/userProfile';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
-import { setToken, setUserId } from 'src/common/authentication/authProvider';
+import {
+  setToken, setUserId, removeToken, removeUserId,
+} from 'src/common/authentication/authProvider';
 import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
-  USERS, POST, LOGIN, REGISTER,
+  USERS, POST, LOGIN, REGISTER, CONNECTED,
 } from 'src/common/callApiHandler/constants';
 
 const authMiddleWare = (store) => (next) => (action) => {
@@ -64,6 +68,24 @@ const authMiddleWare = (store) => (next) => (action) => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
+        });
+
+      next(action);
+      break;
+    }
+    case USER_AUTH_VERIFY: {
+      const url = getEndpoint(USERS, POST, CONNECTED);
+      // Verify on each page if user is connected, and if his token is not expired
+      callApi(url, POST, action.token)
+        .then(({ data }) => {
+          setUserId(data.userId);
+          store.dispatch(submitLoginSuccess(data.userId));
+        })
+        .catch(() => {
+          removeToken();
+          removeUserId();
+          store.dispatch(submitLogoutSuccess());
+          store.dispatch(showSnackbar('Oups!', 'Votre session à expiré!', 'error'));
         });
 
       next(action);

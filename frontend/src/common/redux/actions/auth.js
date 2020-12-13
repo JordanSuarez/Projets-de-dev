@@ -5,6 +5,7 @@ export const SUBMIT_LOGIN_ERROR = 'SUBMIT_LOGIN_ERROR';
 export const SUBMIT_LOGOUT_SUCCESS = 'SUBMIT_LOGOUT_SUCCESS';
 export const SUBMIT_REGISTER_SUCCESS = 'SUBMIT_REGISTER_SUCCESS';
 export const CHANGE_HAS_ERROR = 'CHANGE_HAS_ERROR';
+export const USER_AUTH_VERIFY = 'USER_AUTH_VERIFY';
 
 export const submitLogin = (email, password) => ({
   type: SUBMIT_LOGIN,
@@ -17,6 +18,11 @@ export const submitRegister = (email, password, username) => ({
   email,
   password,
   username,
+});
+
+export const userAuthVerify = (token) => ({
+  type: USER_AUTH_VERIFY,
+  token,
 });
 
 export const submitLoginSuccess = (userId) => ({

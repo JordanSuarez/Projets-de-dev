@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   redirect: state.redirection.redirect,
+  isLogged: state.auth.isLogged,
 });
 
 export default compose(

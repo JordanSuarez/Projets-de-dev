@@ -1,20 +1,12 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable react/jsx-boolean-value */
-/* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
-import { func } from 'prop-types';
+import React, { useEffect } from 'react';
+
+import { func, bool } from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import { useHistory } from 'react-router-dom';
 import { Form } from 'react-final-form';
-import {
-  TextField,
-} from 'mui-rff';
-import {
-  Box,
-  Button,
-
-} from '@material-ui/core';
-import { getLoginRoute } from 'src/common/routing/routesResolver';
+import { TextField } from 'mui-rff';
+import { Box, Button } from '@material-ui/core';
+import { getLoginRoute, getUserProfileRoute } from 'src/common/routing/routesResolver';
 import Base from 'src/common/components/Base';
 
 const validate = (values) => {
@@ -67,11 +59,16 @@ const validate = (values) => {
   return errors;
 };
 
-const Register = ({ classes, handleRegister, redirect }) => {
+const Register = ({
+  classes, handleRegister, redirect, isLogged,
+}) => {
   const history = useHistory();
 
   // Redirect after register success
   useEffect(() => {
+    if (isLogged) {
+      history.push(getUserProfileRoute());
+    }
     if (redirect.length > 0) {
       history.push(redirect);
     }
@@ -97,7 +94,7 @@ const Register = ({ classes, handleRegister, redirect }) => {
                   label="Pseudo"
                   name="username"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -105,7 +102,7 @@ const Register = ({ classes, handleRegister, redirect }) => {
                   label="Email"
                   name="email"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -113,7 +110,7 @@ const Register = ({ classes, handleRegister, redirect }) => {
                   label="Confirmation email"
                   name="emailConfirmation"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -121,7 +118,7 @@ const Register = ({ classes, handleRegister, redirect }) => {
                   label="Mot de passe"
                   name="password"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <TextField
                   className={classes.textfield}
@@ -129,7 +126,7 @@ const Register = ({ classes, handleRegister, redirect }) => {
                   label="Confirmation mot de passe"
                   name="passwordConfirmation"
                   margin="none"
-                  required={true}
+                  required
                 />
                 <Box className={classes.containerButton}>
                   <Button
@@ -153,5 +150,6 @@ const Register = ({ classes, handleRegister, redirect }) => {
 Register.propTypes = {
   ...classesProps,
   handleRegister: func.isRequired,
+  isLogged: bool.isRequired,
 };
 export default Register;

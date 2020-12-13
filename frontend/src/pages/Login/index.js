@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   redirect: state.redirection.redirect,
   hasError: state.auth.hasError,
+  isLogged: state.auth.isLogged,
   initialValues: {
     email: state.auth.userEmail,
   },
