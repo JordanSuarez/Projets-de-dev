@@ -25,11 +25,14 @@ exports.router = (() => {
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
     apiRouter.route('/projects/:id/delete-my-project').delete(projectController.deleteMyProject); 
+
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
+
     // Comments routes
     apiRouter.route('/comments/add').post(commentController.new); // OK
     apiRouter.route('/comments/:id/edit').patch(commentController.edit); // OK
+    apiRouter.route('/comments/:id/delete').delete(commentController.deleteComment); // OK
 
     // Admin routes
     apiRouter.route('/users/:id/delete').delete(userController.deleteUser); // OK
