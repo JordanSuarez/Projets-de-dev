@@ -31,6 +31,10 @@ const Navigation = ({
   const openMainMenu = Boolean(mainAnchorEl);
 
   useEffect(() => {
+    // Scroll to the top of the page after redirection
+    window.scrollTo(0, 0);
+
+    // Check if user token is still valid, then refresh his status
     if (getToken()) {
       userAuthVerify(getToken());
     }
@@ -38,6 +42,7 @@ const Navigation = ({
       isNotLogged();
     }
   }, []);
+
   // Close burger menu
   const handleClose = (state) => state(null);
 
