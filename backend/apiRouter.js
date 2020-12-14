@@ -3,6 +3,7 @@ const userController = require('./routes/userController');
 const projectController = require('./routes/projectController');
 const tagController = require('./routes/tagController');
 const commentController = require('./routes/commentController');
+const likeController = require('./routes/likeController');
 
 
 // Router
@@ -23,7 +24,12 @@ exports.router = (() => {
     apiRouter.route('/projects/:id').get(projectController.project); // OK
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
-    apiRouter.route('/projects/:id/delete-my-project').delete(projectController.deleteMyProject); 
+    apiRouter.route('/projects/:id/delete-my-project').delete(projectController.deleteMyProject); // OK
+
+    // Likes routes
+    apiRouter.route('/projects/:projectId/vote/like').post(likeController.likePost);
+    apiRouter.route('/projects/:projectId/vote/dislike').post(likeController.unlikePost);
+
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
     // Comments routes
