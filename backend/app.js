@@ -10,6 +10,10 @@ const apiRouter = require('./apiRouter').router;
 const app = express();
 app.use(cors());
 
+// Socket.io
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 // Body Parser configuration
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
@@ -28,5 +32,14 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/', apiRouter);
+
+// Chat
+io.on('connection', (ws) => {
+  console.log('>> socket.io - connected');
+  ws.on('send_message', (message) => {
+    message.id = ++id;
+    io.emit('send_message', message);
+  });
+});
 
 app.listen(port);
