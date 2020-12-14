@@ -1,3 +1,8 @@
+const messageController = require('./routes/messageController');
+const models   = require('./models');
+const jwtUtils = require('./utils/jwt.utils');
+const asyncLib = require('async');
+
 require('dotenv').config();
 
 const port = process.env.PORT; 
@@ -11,8 +16,16 @@ const app = express();
 app.use(cors());
 
 // Socket.io
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const server = require('http').createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:8080",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
+});
+
 
 // Body Parser configuration
 app.use(bodyParser.json({limit: "50mb"}));
@@ -26,6 +39,7 @@ app.use((request, response, next) => {
   next();
 });
 
+
 app.get('/', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
   res.status(200).send('<h1>Test</h1>');
@@ -34,12 +48,43 @@ app.get('/', (req, res) => {
 app.use('/api/', apiRouter);
 
 // Chat
-io.on('connection', (ws) => {
-  console.log('>> socket.io - connected');
-  ws.on('send_message', (message) => {
-    message.id = ++id;
-    io.emit('send_message', message);
+io.on('connection', socket => { 
+  console.log(socket.id);
+  socket.on('send_message', ({message, userToken, channelId}) => {
+      
+    const userId = jwtUtils.getUserId(userToken);
+
+    if (userId < 0){
+      return null;
+    }
+
+    if (message == null || userId == null || channelId == null) {
+      return null;
+    }
+    asyncLib.waterfall([
+      (done) => {
+          const newMessage = models.Message.create({
+            content: message,
+            UserId: userId,
+            ChannelId: channelId,
+          })
+        .then((newMessage) => {
+          const formatMessage = {
+            id: newMessage.id,
+            message: newMessage.content,
+            userId: newMessage.UserId,
+            channelId: newMessage.ChannelId,
+          }
+          return io.emit('send_message', formatMessage);
+        })
+        .catch((err) => {
+          return 'tata';
+        });
+        }
+    ])
   });
 });
 
-app.listen(port);
+server.listen(3001);
+
+// app.listen(port);

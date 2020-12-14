@@ -2,44 +2,51 @@ const models   = require('../models');
 const jwtUtils = require('../utils/jwt.utils');
 const asyncLib = require('async');
 
-
 module.exports = {
 
-  new: (req, res) => {
+  new: ({message, userToken, channelId}) => {
 
-    const headerAuth = req.headers['authorization'];
-    const userId = jwtUtils.getUserId(headerAuth);
+    
+    const userId = jwtUtils.getUserId(userToken);
 
     if (userId < 0){
-      return res.status(400).json({ 'error': 'Le token est invalide' });
+      return null;
     }
 
-    const content = req.body.content;
-    const channelId	 = req.body.channelId;
-
-
-    if (content == null || userId == null || channelId == null) {
-      return res.status(500).json({'error': 'Requête invalide'});
+    if (message == null || userId == null || channelId == null) {
+      return null;
     }
-  
     asyncLib.waterfall([
       (done) => {
         const newMessage = models.Message.create({
-          content: content,
+          content: message,
           UserId: userId,
           ChannelId: channelId,
         })
         .then ((newMessage) => {
-          return res.status(201).json({
-            'status': 'Message ajouté avec succès'
-          }).catch((err) => {
-            return res.status(500).json({'error': err});
-          })
+          const formatMessage = {
+            id: newMessage.id,
+            message: newMessage.content,
+            userId: newMessage.UserId,
+            channelId: newMessage.ChannelId,
+          }
+          return formatMessage;
         })
         .catch((err) => {
-          return res.status(500).json({'error':  err});
+          return 'tata';
         });
       }
     ])
   },
 }
+
+// .then ((newComment) => {
+//   return res.status(201).json({
+//     'status': 'Commentaire ajouté avec succès'
+//   }).catch((err) => {
+//     return res.status(500).json({'error': err});
+//   })
+// })
+// .catch((err) => {
+//   return res.status(500).json({'error':  err});
+// });
