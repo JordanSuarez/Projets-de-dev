@@ -19,6 +19,7 @@ import {
   PRIVATE_PROFILE,
   ME,
   CONNECTED,
+  CHANNELS,
 } from './constants';
 import { apiUrl } from './urlHandler';
 
@@ -78,6 +79,12 @@ const endpoints = {
   [TAGS]: {
     [GET]: {
       [ALL]: `${TAGS}`,
+    },
+  },
+  [CHANNELS]: {
+    [GET]: {
+      [ALL]: `${CHANNELS}`,
+      [ONE]: (meta) => `${CHANNELS}/${meta}`,
     },
   },
 };

@@ -17,24 +17,26 @@ import { classes as classesProps } from 'src/common/classes';
 const Channel = ({
   classes,
   setChoiceChannel,
-
+  connectWebSocket,
+  getChannels,
+  channels,
 }) => {
   // afficher ou cacher la liste
   const [showChannel, setshowChannel] = useState(true);
 
   useEffect(() => {
+    getChannels();
   }, [showChannel]);
 
   const handleClick = () => {
     setshowChannel(!showChannel);
   };
 
-  const choiceChannel = (id) => {
-    console.log(id);
-    setChoiceChannel(id);
+  const choiceChannel = (channel) => {
+    connectWebSocket(channel.id);
+    setChoiceChannel(channel);
   };
-  // TODO
-  // - boucle sur les channels de table channel
+
   // - CSS
   return (
     <>
@@ -56,77 +58,20 @@ const Channel = ({
           </ListItem>
           {showChannel === true && (
             <List className={classes.listChannel}>
-              <ListItem
-                className={classes.itemChannel}
-                onClick={() => choiceChannel(1)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText>
-                  HTML / CSS
-                </ListItemText>
-              </ListItem>
-
-              <ListItem
-                className={classes.itemChannel}
-                onClick={() => choiceChannel(2)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText>
-                  React
-                </ListItemText>
-              </ListItem>
-
-              <ListItem
-                className={classes.itemChannel}
-                onClick={() => choiceChannel(3)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText>
-                  NodeJs
-                </ListItemText>
-              </ListItem>
-
-              <ListItem
-                className={classes.itemChannel}
-                onClick={() => choiceChannel(4)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText>
-                  Socket.io
-                </ListItemText>
-              </ListItem>
-
-              <ListItem
-                className={classes.itemChannel}
-                onClick={() => choiceChannel(4)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText>
-                  Wordpress
-                </ListItemText>
-              </ListItem>
-
-              <ListItem
-                className={classes.itemChannel}
-                onClick={() => choiceChannel(4)}
-              >
-                <ListItemIcon>
-                  <StarBorder />
-                </ListItemIcon>
-                <ListItemText>
-                  Symfony
-                </ListItemText>
-              </ListItem>
+              {channels.map((channel) => (
+                <ListItem
+                  key={channel.id}
+                  className={classes.itemChannel}
+                  onClick={() => choiceChannel(channel)}
+                >
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {channel.name}
+                  </ListItemText>
+                </ListItem>
+              ))}
             </List>
           )}
         </List>
@@ -138,6 +83,8 @@ const Channel = ({
 Channel.propTypes = {
   ...classesProps,
   setChoiceChannel: PropTypes.func.isRequired,
+  connectWebSocket: PropTypes.func.isRequired,
+  channels: PropTypes.array.isRequired,
 };
 
 Channel.defaultProps = {

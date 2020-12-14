@@ -6,10 +6,13 @@ export default ({ breakpoints, palette }) => ({
     bottom: '80px',
     right: '10px',
     color: 'red',
-    overflowX:'none',
+    overflowX: 'none',
   },
   chatButton: {
     backgroundColor: palette.blue,
+    '&:hover': {
+      backgroundColor: palette.blue,
+    },
   },
   chatIcon: {
     color: palette.darkBlue,
