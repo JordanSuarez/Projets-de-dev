@@ -3,6 +3,7 @@ import React from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PrivateRoute from 'src/common/authentication/privateRoute';
+import NotFound from 'src/pages/NotFound';
 
 const Router = ({ routes }) => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ const Router = ({ routes }) => (
           // Else, redirect to the chosen Route
           <Route key={id} exact={exact} path={path} component={component} />
         )))}
+      <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
 );

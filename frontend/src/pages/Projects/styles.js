@@ -3,6 +3,7 @@ export default ({ palette, breakpoints }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+    padding: '1rem',
     [breakpoints.down('xs')]: {
       flexDirection: 'column',
       alignItems: 'center',
@@ -27,11 +28,12 @@ export default ({ palette, breakpoints }) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-
+    transition: 'all .2s ease-in-out',
   },
   pagination: {
     width: '255px',
     margin: '1em auto',
+    display: 'flex',
+    justifyContent: 'center',
   },
-
 });

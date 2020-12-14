@@ -3,6 +3,7 @@ export default ({ palette, breakpoints }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+    padding: '1rem',
     [breakpoints.down('xs')]: {
       flexDirection: 'column',
       alignItems: 'center',

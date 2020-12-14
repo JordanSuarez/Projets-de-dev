@@ -1,14 +1,16 @@
 export default ({ palette }) => ({
   agreeButton: {
     '&:hover': {
+      color: palette.white,
       backgroundColor: palette.errorField,
     },
   },
   disagreeButton: {
-    color: palette.yellow,
+    color: palette.white,
     backgroundColor: palette.darkBlue,
     '&:hover': {
-      backgroundColor: palette.blue,
+      color: palette.blue,
+      backgroundColor: palette.darkBlue,
     },
   },
 });

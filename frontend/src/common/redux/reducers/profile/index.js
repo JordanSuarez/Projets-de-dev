@@ -1,6 +1,6 @@
 import {
   SAVE_PROFILE,
-// eslint-disable-next-line import/no-unresolved
+  GET_PROFILE,
 } from 'src/common/redux/actions/profile';
 
 const initialState = {
@@ -15,6 +15,12 @@ const initialState = {
 
 const profile = (state = initialState, action = {}) => {
   switch (action.type) {
+    case GET_PROFILE: {
+      return {
+        ...state,
+        loading: true,
+      };
+    }
     case SAVE_PROFILE: {
       if (action.profile.userImage === null || !action.profile.userImage) {
         action.profile.userImage = '';

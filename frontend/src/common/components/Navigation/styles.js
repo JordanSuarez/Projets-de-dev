@@ -52,13 +52,15 @@ export default ({ palette }) => ({
     },
   },
   itemLinkActive: {
-    color: palette.yellow,
+    color: palette.blue,
+    fontWeight: 'bold',
   },
   button: {
     backgroundColor: palette.darkBlue,
-    color: palette.yellow,
+    color: palette.white,
     '&:hover': {
-      backgroundColor: palette.blue,
+      backgroundColor: palette.darkBlue,
+      color: palette.blue,
     },
   },
 });

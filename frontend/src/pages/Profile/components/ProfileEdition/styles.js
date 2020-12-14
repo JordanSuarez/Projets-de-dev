@@ -18,6 +18,12 @@ export default ({ palette }) => ({
 
   textfield: {
     marginBottom: '0.5em',
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: palette.darkBlue,
+    },
+    '& .MuiInput-underline:after': {
+      borderColor: palette.darkBlue,
+    },
   },
 
   containerButton: {
@@ -26,14 +32,22 @@ export default ({ palette }) => ({
   },
 
   submit: {
+    color: palette.white,
     backgroundColor: palette.darkBlue,
-    color: palette.yellow,
     margin: '2em 0',
+    '&:hover': {
+      color: palette.blue,
+      backgroundColor: palette.darkBlue,
+    },
   },
   annuler: {
-    backgroundColor: palette.darkBlue,
-    color: palette.yellow,
+    color: palette.darkBlue,
+    backgroundColor: palette.lightBlue,
     margin: '2em 0 ',
+    '&:hover': {
+      color: palette.errorField,
+      backgroundColor: palette.white,
+    },
   },
   // Upload type
   imageContainer: {
@@ -61,6 +75,9 @@ export default ({ palette }) => ({
     alignItems: 'center',
     fontSize: '12px',
     paddingTop: '4px',
+    '& :hover': {
+      cursor: 'pointer',
+    },
   },
   newButtonUpload: {
     padding: '8px 12px',
@@ -68,13 +85,15 @@ export default ({ palette }) => ({
     borderRadius: '4px',
     backgroundColor: palette.darkBlue,
     fontSize: '12px',
-    color: palette.yellow,
+    color: palette.white,
     margin: '1em 10px 1em 10px',
     width: '115px',
+    textAlign: 'center',
   },
   fileName: {
     fontSize: '12px',
-    width: '90px',
+    width: 'auto',
+    maxWidth: '190px',
     wordBreak: 'break-word',
   },
   imageTitle: {

@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
@@ -34,6 +33,7 @@ const CardProject = ({
   tags,
   projectOwnerOptions,
   handleDeleteProject,
+  isLogged,
 }) => {
   const history = useHistory();
 
@@ -58,16 +58,16 @@ const CardProject = ({
 
   return (
     <Card className={classes.card}>
-      <CardActionArea
-        className={classes.cardActionArea}
-        onClick={handleDisplayProject}
-      >
+      <div>
         <CardMedia
+          onClick={handleDisplayProject}
           className={classes.image}
           image={image}
           title="image website"
         />
-        <CardContent className={classes.text}>
+      </div>
+      <div className={classes.contentCard}>
+        <CardContent className={classes.text} onClick={handleDisplayProject}>
           <Typography className={classes.title} component="h3">
             {title}
           </Typography>
@@ -82,24 +82,27 @@ const CardProject = ({
             })}
           </Typography>
         </CardContent>
-      </CardActionArea>
-      <CardActions className={classes.link}>
-        {!projectOwnerOptions ? (
-          <>
-            <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />
-            <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
-          </>
-        ) : (
-          <>
-            <IconButton title="Supprimer" onClick={() => handleDeleteProject(projectId)} className={classes.deleteIcon}>
-              <DeleteIcon />
-            </IconButton>
-            <IconButton title="Modifier" onClick={() => handleDisplayProjectEdit(projectId)} className={classes.editIcon}>
-              <EditIcon />
-            </IconButton>
-          </>
-        )}
-      </CardActions>
+        <div className={classes.test}>
+          <CardActions className={isLogged ? classes.link : classes.linkLogout}>
+            {!projectOwnerOptions ? (
+              <>
+                {isLogged
+                && <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />}
+                <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
+              </>
+            ) : (
+              <>
+                <IconButton title="Supprimer" onClick={() => handleDeleteProject(projectId)} className={classes.deleteIcon}>
+                  <DeleteIcon />
+                </IconButton>
+                <IconButton title="Modifier" onClick={() => handleDisplayProjectEdit(projectId)} className={classes.editIcon}>
+                  <EditIcon />
+                </IconButton>
+              </>
+            )}
+          </CardActions>
+        </div>
+      </div>
     </Card>
 
   );
@@ -109,6 +112,7 @@ CardProject.propTypes = {
   ...classesProps,
   handleDeleteProject: PropTypes.func,
   projectOwnerOptions: PropTypes.bool,
+  isLogged: PropTypes.bool.isRequired,
   projectId: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,

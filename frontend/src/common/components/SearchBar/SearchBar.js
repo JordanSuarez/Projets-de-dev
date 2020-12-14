@@ -28,7 +28,6 @@ const SearchBar = ({
 
 SearchBar.propTypes = {
   onInputChange: func.isRequired,
-  onSubmit: func.isRequired,
   label: string.isRequired,
   items: array.isRequired,
   helperText: string,

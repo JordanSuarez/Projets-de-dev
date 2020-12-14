@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { func, string } from 'prop-types';
+import { func } from 'prop-types';
 import { getHomeRoute } from 'src/common/routing/routesResolver';
 import { useHistory } from 'react-router-dom';
 
@@ -17,7 +17,6 @@ const Logout = ({ handleLogout }) => {
 
 Logout.propTypes = {
   handleLogout: func.isRequired,
-  redirect: string.isRequired,
 };
 
 export default Logout;

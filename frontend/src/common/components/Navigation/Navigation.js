@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   AppBar, Button, Grid, Hidden, IconButton, Menu, MenuItem, Toolbar,
 } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import {
   getLogoutRoute,
@@ -17,13 +17,31 @@ import {
   getRegisterRoute,
 } from 'src/common/routing/routesResolver';
 import { classes as classesProps } from 'src/common/classes';
-import { bool } from 'prop-types';
+import { bool, func } from 'prop-types';
+import { isUndefined } from 'lodash';
+import { getToken } from 'src/common/authentication/authProvider';
 import NavLink from './NavLink';
 
-const Navigation = ({ classes, isLogged }) => {
+const Navigation = ({
+  classes, isLogged, userAuthVerify, isNotLogged,
+}) => {
   const history = useHistory();
+  const params = useParams();
   const [mainAnchorEl, setMainAnchorEl] = useState(null);
   const openMainMenu = Boolean(mainAnchorEl);
+
+  useEffect(() => {
+    // Scroll to the top of the page after redirection
+    window.scrollTo(0, 0);
+
+    // Check if user token is still valid, then refresh his status
+    if (getToken()) {
+      userAuthVerify(getToken());
+    }
+    if (!getToken()) {
+      isNotLogged();
+    }
+  }, []);
 
   // Close burger menu
   const handleClose = (state) => state(null);
@@ -33,7 +51,7 @@ const Navigation = ({ classes, isLogged }) => {
       name: 'Accueil', route: getHomeRoute(),
     },
     {
-      name: 'Tous les projets', route: getProjectsListRoute(1),
+      name: 'Tous les projets', route: getProjectsListRoute(!isUndefined(params.offset) ? params.offset : 1),
     },
     {
       name: 'Tous les profils', route: getProfilesListRoute(),
@@ -172,6 +190,8 @@ const Navigation = ({ classes, isLogged }) => {
 Navigation.propTypes = {
   ...classesProps,
   isLogged: bool.isRequired,
+  userAuthVerify: func.isRequired,
+  isNotLogged: func.isRequired,
 };
 
 export default Navigation;

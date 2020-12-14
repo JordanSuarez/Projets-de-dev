@@ -3,10 +3,10 @@ export default ({ palette, breakpoints }) => ({
   container: {
     maxWidth: '1400px',
     margin: '1em auto',
-    padding: '1em 3em',
+    padding: '1em 0',
   },
   subtitle: {
-    padding: '1em 0',
+    padding: '1em',
     fontSize: '1.5em',
     color: palette.darkBlue,
   },
@@ -25,6 +25,9 @@ export default ({ palette, breakpoints }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+    [breakpoints.down(800)]: {
+      justifyContent: 'center',
+    },
   },
   username: {
     fontSize: '1.2em',
@@ -36,18 +39,39 @@ export default ({ palette, breakpoints }) => ({
     height: '150px',
     boxShadow: ' 1px 2px 3px 1px rgba(0,0,0,.35)',
   },
+  containerBio: {
+    width: 'auto',
+    maxWidth: '40%',
+    height: 'auto',
+    margin: '0 auto',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    [breakpoints.down(800)]: {
+      order: 3,
+      maxWidth: '100%',
+    },
+  },
+  bio: {
+    wordBreak: 'break-word',
+    padding: '2em',
+    margin: '1em',
+    backgroundColor: ' white',
+    borderRadius: '16px',
+  },
   button: {
     backgroundColor: palette.darkBlue,
-    color: palette.yellow,
+    color: palette.white,
     margin: '1em',
     width: '200px',
     '&:hover': {
-      backgroundColor: palette.blue,
+      color: palette.blue,
+      backgroundColor: palette.darkBlue,
     },
   },
   deleteButton: {
     backgroundColor: palette.darkBlue,
-    color: palette.yellow,
+    color: palette.white,
     margin: '1em',
     width: '200px',
     '&:hover': {
@@ -60,5 +84,8 @@ export default ({ palette, breakpoints }) => ({
     justifyContent: 'center',
     display: 'flex',
     flexWrap: 'wrap',
+    '& .MuiPaper-root:nth-child(1n)': {
+      backgroundColor: palette.darkBlue,
+    },
   },
 });

@@ -9,13 +9,15 @@ export const addComment = (content) => ({
 });
 
 // Edition d'un commentaire
-export const editComment = (data) => ({
+export const editComment = (data, id) => ({
   type: EDIT_COMMENT,
   comments: { ...data },
+  id,
 });
 
 // Suppresion d'un commentaire
-export const deleteComment = (data) => ({
+export const deleteComment = (data, id) => ({
   type: DELETE_COMMENT,
   comments: { ...data },
+  id,
 });

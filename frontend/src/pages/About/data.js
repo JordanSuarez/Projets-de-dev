@@ -1,30 +1,32 @@
+import logoJordan from 'src/common/assets/images/logo-jordan.jpg';
+
 export default [
   {
     name: 'Almigra',
-    avatar: 'TODO',
+    avatar: '',
     description: 'Product owner - Lead dev back',
     followLink: 'X',
-    profileLink: '#',
+    profileId: '#',
   },
   {
     name: 'Alban',
-    avatar: 'TODO',
+    avatar: '',
     description: 'Scrum masster - Dev back',
     followLink: 'X',
-    profileLink: '#',
+    profileId: '#',
   },
   {
     name: 'Jordan',
-    avatar: 'TODO',
+    avatar: logoJordan,
     description: 'Lead dev Front',
     followLink: 'X',
-    profileLink: '#',
+    profileId: '#',
   },
   {
     name: 'Céline',
-    avatar: 'TODO',
+    avatar: '',
     description: 'Git master - Dev front',
     followLink: 'X',
-    profileLink: '#',
+    profileId: '#',
   },
 ];

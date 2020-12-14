@@ -19,8 +19,8 @@ export const ONE = 'one';
 export const NEW = 'new';
 export const EDIT = 'edit';
 export const LOGIN = 'login';
-
 export const REGISTER = 'register';
+export const CONNECTED = 'connected';
 export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';
 export const LATEST = 'latest';
 export const ME = 'me';

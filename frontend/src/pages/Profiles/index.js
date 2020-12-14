@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -11,6 +10,7 @@ const mapStateToProps = (state) => ({
   redirect: state.redirection.redirect,
   profiles: state.profiles.profiles,
   loading: state.profiles.loading,
+  isLogged: state.auth.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({

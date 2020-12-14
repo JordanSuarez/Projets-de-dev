@@ -334,6 +334,37 @@ module.exports = {
 			})
 
 		},
+		// Check if user token is valid
+		userAuthVerify: (req,res) => {
 
+			const headerAuth = req.headers['authorization'];
+			const userId = jwtUtils.getUserId(headerAuth);
 
+			if (userId < 0){
+				return res.status(400).json({ 'error': 'La session à expiré' });
+			} 
+			
+			asyncLib.waterfall([
+
+				(done) => {
+					models.User.findByPk(userId).then(result => {
+						if (result) {
+							res.status(200).json({
+								userId: result.id,
+							}) 
+						} else {
+							res.status(500).json({
+								message: "La session à expiré",
+							})
+						}
+					}).catch(error => {
+						res.status(500).json({
+							message: "Something went wrong",
+						})
+					})
+				}
+			]);
+		},
+		 
+			 
 }

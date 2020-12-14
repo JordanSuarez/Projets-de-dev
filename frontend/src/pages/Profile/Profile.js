@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
@@ -14,12 +14,18 @@ const Profile = ({
   getProfile,
   loading,
   profile,
+  isLogged,
+  redirect,
 }) => {
+  const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
     getProfile(id);
-  }, []);
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
 
   return (
     <Base loading={loading}>
@@ -28,12 +34,24 @@ const Profile = ({
           <div className={classes.column}>
             <div className={classes.rowCenter}>
               {!profile.userImage && (
-                <Avatar alt="avatar" src={avatar2} className={classes.large} />
+              <Avatar alt="avatar" src={avatar2} className={classes.large} />
               )}
               {profile.userImage && (
-                <Avatar alt="avatar" src={profile.userImage} className={classes.large} />
+              <Avatar alt="avatar" src={profile.userImage} className={classes.large} />
               )}
               <h3 className={classes.username}>{profile.username}</h3>
+            </div>
+            <div className={classes.containerBio}>
+              {profile.bio && (
+              <p className={classes.bio}>
+                {profile.bio}
+              </p>
+              )}
+              {!profile.bio && (
+              <p className={classes.bio}>
+                Cet utilisateur n'a pas encore renseigné de description.
+              </p>
+              )}
             </div>
           </div>
           <div>
@@ -57,6 +75,7 @@ const Profile = ({
                     userId={profile.id}
                     userImage={profile.userImage}
                     image={image}
+                    isLogged={isLogged}
                   />
                 ))}
             </div>
@@ -74,9 +93,12 @@ Profile.propTypes = {
     id: PropTypes.number,
     username: PropTypes.string.isRequired,
     userImage: PropTypes.string,
+    bio: PropTypes.string,
     projects: PropTypes.arrayOf(PropTypes.any).isRequired,
   }),
   loading: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
+  redirect: PropTypes.string.isRequired,
 };
 
 Profile.defaultProps = {

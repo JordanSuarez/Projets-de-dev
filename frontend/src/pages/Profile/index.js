@@ -10,6 +10,7 @@ const mapStateToProps = (state) => ({
   redirect: state.redirection.redirect,
   profile: state.profile.profile,
   loading: state.profile.loading,
+  isLogged: state.auth.isLogged,
 });
 
 const mapDispatchToProps = (dispatch) => ({

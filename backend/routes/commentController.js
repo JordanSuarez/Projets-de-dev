@@ -5,7 +5,6 @@ const asyncLib = require('async');
 
 module.exports = {
 
-
   new: (req, res) => {
 
     const headerAuth = req.headers['authorization'];
@@ -44,18 +43,18 @@ module.exports = {
       ])
 },
 
-edit: (req, res) => {
+  edit: (req, res) => {
 
-  const headerAuth = req.headers['authorization'];
-  const userId = jwtUtils.getUserId(headerAuth);
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
 
-  if (userId < 0){
-    return res.status(400).json({ 'error': 'Le token est invalide' });
-  }
+    if (userId < 0){
+      return res.status(400).json({ 'error': 'Le token est invalide' });
+    }
 
-  const id = req.params.id;
-  const content = req.body.content;
-  const projectId	 = req.body.projectId;
+    const id = req.params.id;
+    const content = req.body.content;
+    const projectId	 = req.body.projectId;
 
 
     asyncLib.waterfall([
@@ -83,5 +82,23 @@ edit: (req, res) => {
         
       },
     ]);
+  },
+
+  deleteComment: (req, res) => {
+
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
+
+    if (userId < 0){
+      return res.status(400).json({ 'error': 'Le token est invalide' });
+    }
+    
+    models.Comment.destroy({
+      where: {id: req.params.id, userId: userId}
+    }).then(() => {
+      return res.status(200).json({ 'message': 'Le commentaire a bien été supprimé' });
+    }).catch((err) => {
+      return res.status(400).json({'error' : 'La requête n\'a pas pu aboutir' + err});
+    })
   }
 }

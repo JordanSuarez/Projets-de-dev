@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
-
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
+import headerImage from './header-home.jpg';
 
-import { bool } from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import { getProjectRoute } from 'src/common/routing/routesResolver';
-import headerImage from './header-image.png';
-
-// eslint-disable-next-line arrow-body-style
 const Home = ({
   classes,
   getProjects,
   projects,
   loading,
+  isLogged,
 }) => {
   useEffect(() => {
     getProjects();
@@ -39,6 +35,7 @@ const Home = ({
                   userId={project.user.id}
                   userImage={project.user.userImage}
                   image={project.image}
+                  isLogged={isLogged}
                 />
               ))}
             </div>
@@ -51,7 +48,8 @@ const Home = ({
 
 Home.propTypes = {
   ...classesProps,
-  loading: bool.isRequired,
+  loading: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
   getProjects: PropTypes.func.isRequired,
   projects: PropTypes.shape({
   }).isRequired,

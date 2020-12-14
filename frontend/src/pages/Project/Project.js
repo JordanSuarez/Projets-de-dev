@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { bool, func, object } from 'prop-types';
+import {
+  bool, func, object, string,
+} from 'prop-types';
 import { Grid, Avatar } from '@material-ui/core';
 import { useHistory, useParams } from 'react-router-dom';
 import Base from 'src/common/components/Base';
@@ -16,7 +18,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Comments from 'src/common/components/Comments';
 
 const Project = ({
-  classes, fetchProject, project, loading,
+  classes, fetchProject, project, loading, redirect,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
@@ -33,12 +35,15 @@ const Project = ({
 
   useEffect(() => {
     fetchProject(id);
-  }, []);
+    if (redirect.length > 0) {
+      history.push(redirect);
+    }
+  }, [redirect]);
 
   const handleClickProfile = () => {
     history.push(getProfileRoute(project.user.id));
   };
-console.log(project.comments);
+
   return (
     <Base loading={loading}>
       <div className={classes.projectContainer}>
@@ -62,7 +67,7 @@ console.log(project.comments);
               />
               {project.user.username}
             </div>
-            {(project.github_link || project.project_link)
+            {(project.githubLink || project.projectLink)
           && (
           <div className={classes.iconButton}>
             <IconButton
@@ -80,19 +85,19 @@ console.log(project.comments);
               open={open}
               onClose={handleClose}
             >
-              {project.github_link
+              {project.githubLink
               && (
               <MenuItem onClick={handleClose} className={classes.link}>
-                <a href={project.github_link} className={classes.githubLink}>
+                <a href={project.githubLink} className={classes.githubLink}>
                   <img src={githubLogo} alt="project-header" />
                   Github
                 </a>
               </MenuItem>
               )}
-              {project.project_link
+              {project.projectLink
                 && (
                 <MenuItem onClick={handleClose} className={classes.link}>
-                  <a href={project.project_link}>
+                  <a href={project.projectLink}>
                     Projet en ligne
                   </a>
                 </MenuItem>
@@ -125,6 +130,7 @@ Project.propTypes = {
   fetchProject: func.isRequired,
   project: object.isRequired,
   loading: bool.isRequired,
+  redirect: string.isRequired,
 };
 
 export default Project;

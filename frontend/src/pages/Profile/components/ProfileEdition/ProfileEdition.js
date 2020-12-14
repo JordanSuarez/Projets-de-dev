@@ -31,6 +31,9 @@ const ProfileEdition = ({
   useEffect(() => {
     getProfile();
   }, []);
+  const [formImage, setFormImage] = useState({ userImage: userProfile.userImage, imageName: 'Choisir une nouvelle image de profil' });
+  useEffect(() => {
+  }, [formImage]);
 
   const [changePassword, onChangePassword] = useState(false);
   useEffect(() => {
@@ -84,6 +87,7 @@ const ProfileEdition = ({
   };
 
   const handleUpdateProfile = (event) => {
+    event.userImage = formImage.userImage;
     handleUpdate(event);
   };
   const history = useHistory();
@@ -94,10 +98,8 @@ const ProfileEdition = ({
     }
   }, [redirect]);
 
-  // eslint-disable-next-line no-unused-vars
-  const getFiles = () => {
-    // TODO
-    console.log('A faire files upload');
+  const getFiles = (files) => {
+    setFormImage({ userImage: files.base64, imageName: files.name });
   };
 
   return (
@@ -112,6 +114,8 @@ const ProfileEdition = ({
               initialValues={{
                 username: userProfile.username,
                 email: userProfile.email,
+                bio: userProfile.bio,
+                userImage: userProfile.userImage,
               }}
               validate={validate}
               render={({ handleSubmit, submitting }) => (
@@ -122,14 +126,20 @@ const ProfileEdition = ({
                     label="Nom d'utilisateur"
                     name="username"
                     margin="none"
-                  >
-                    coucou
-                  </TextField>
+                  />
                   <TextField
                     className={classes.textfield}
                     type="email"
                     label="Email"
                     name="email"
+                    margin="none"
+                  />
+                  <TextField
+                    className={classes.textfield}
+                    type="string"
+                    multiline
+                    label="Description"
+                    name="bio"
                     margin="none"
                   />
                   <div className={classes.imageContainer}>
@@ -139,16 +149,18 @@ const ProfileEdition = ({
                         <label from="nul" className={classes.newButtonUpload}>
                           Choisir un fichier
                         </label>
-                        <p className={classes.fileName}> TODO FILE NAME </p>
+                        <p className={classes.fileName}> {formImage.imageName} </p>
                         <FileBase64
                           hidden
+                          onDone={getFiles}
                         />
                       </div>
+                      {(formImage.userImage !== '') && <img src={formImage.userImage} alt="avatar" className={classes.imageInput} />}
                     </div>
                   </div>
                   <div>
                     <Button
-                      className={classes.annuler}
+                      className={classes.submit}
                       variant="contained"
                       type="button"
                       onClick={() => {
@@ -179,8 +191,8 @@ const ProfileEdition = ({
                   <Box className={classes.containerButton}>
                     <Button
                       className={classes.annuler}
-                      variant="contained"
-                      type=""
+                      variant="outlined"
+                      type="button"
                       onClick={() => history.push(getUserProfileRoute())}
                     >
                       Annuler
