@@ -16,7 +16,8 @@ export const editComment = (data, id) => ({
 });
 
 // Suppresion d'un commentaire
-export const deleteComment = (data) => ({
+export const deleteComment = (data, id) => ({
   type: DELETE_COMMENT,
   comments: { ...data },
+  id,
 });

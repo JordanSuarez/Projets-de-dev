@@ -19,8 +19,8 @@ const mapsDispatchToProps = (dispatch) => ({
   handleCommentUpdate: (values, id) => {
     dispatch(editComment(values, id));
   },
-  handleCommentdelete: (id) => {
-    dispatch(deleteComment(id));
+  handleCommentDelete: (values, id) => {
+    dispatch(deleteComment(values, id));
   },
 });
 
