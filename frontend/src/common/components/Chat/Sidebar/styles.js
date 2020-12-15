@@ -8,7 +8,7 @@ export default ({ breakpoints, palette }) => ({
     top: '0',
     right: '0',
     backgroundColor: palette.blue,
-    padding: '80px 10px 10px 10px',
+    padding: '80px 3px 3px 3px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -17,10 +17,8 @@ export default ({ breakpoints, palette }) => ({
     },
   },
   messages: {
-    flex:1,
-    padding: '0.5em',
+
     [breakpoints.up('md')]: {
-      order: 1,
       padding: '30px 1em 1em 1em',
     },
   },
@@ -28,7 +26,6 @@ export default ({ breakpoints, palette }) => ({
   channel: {
     padding: '30px 0.5em 0.5em 0.5em',
     [breakpoints.up('md')]: {
-      order: 2,
     },
   },
 

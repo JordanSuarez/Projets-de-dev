@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   TextField,
+  Avatar,
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
 
@@ -29,8 +30,18 @@ const Messages = ({
 
         <ul className={classes.messages}>
           {messages.map(({ id, message, userId }) => (
-            <li key={id} className={userId === currentUserId ? classes.myMessage : classes.message}>
-              {message}: {userId}
+            <li
+              key={id}
+              className={userId === currentUserId ? classes.alignRight : classes.alignLeft}
+            >
+              <div className={userId === currentUserId ? classes.myMessage : classes.message}>
+                <div>
+                  <p>Name{userId}</p>
+                  <p>le 12/05 a 18h03</p>
+                </div>
+                {message}
+              </div>
+              <Avatar alt="Cindy Baker" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZXWk4HOB6y3GDM1oGMJYWUM_rPChE80R-OQ&usqp=CAU" />
             </li>
           ))}
         </ul>

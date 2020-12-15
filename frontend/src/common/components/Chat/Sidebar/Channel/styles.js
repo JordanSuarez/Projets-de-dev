@@ -1,7 +1,11 @@
 export default ({ breakpoints, palette }) => ({
   listChannel: {
-    overflowX: 'scroll',
-    height: '220px',
+    overflowX: 'hidden',
+    height: '200px',
     backgroundColor: 'white',
+    overflowY: 'scroll',
+    [breakpoints.up('md')]: {
+      height: '100%',
+    },
   },
 });
