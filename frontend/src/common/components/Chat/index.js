@@ -9,6 +9,7 @@ import styles from './styles';
 
 const mapStateToProps = (state) => ({
   status: state.chat.status,
+  isLogged: state.auth.isLogged,
 });
 
 const mapsDispatchToProps = (dispatch) => ({

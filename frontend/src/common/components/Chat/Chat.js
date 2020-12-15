@@ -14,8 +14,8 @@ const Chat = ({
   status,
   connectWebSocket,
   getMessageList,
+  isLogged,
 }) => {
-  const [open, setOpen] = useState(status);
   useEffect(() => {
     connectWebSocket();
   }, []);
@@ -23,11 +23,10 @@ const Chat = ({
   const handleClick = () => {
     getMessageList();
     setStatus(!status);
-    setOpen(!status);
   };
   return (
     <>
-      {open === false && (
+      {(!status && isLogged) && (
         <div className={classes.chatContainerButton}>
           <IconButton className={classes.chatButton} aria-label="open chat" onClick={handleClick}>
             <ForumIcon className={classes.chatIcon} />
@@ -35,7 +34,7 @@ const Chat = ({
         </div>
       )}
 
-      {open === true && (
+      {(status && isLogged) && (
         <>
           <IconButton className={classes.closeChatButton} aria-label="open chat" onClick={handleClick}>
             <CloseIcon className={classes.closedIcon} />
@@ -52,6 +51,7 @@ Chat.propTypes = {
   setStatus: PropTypes.func.isRequired,
   connectWebSocket: PropTypes.func.isRequired,
   status: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
   getMessageList: PropTypes.func.isRequired,
 };
 

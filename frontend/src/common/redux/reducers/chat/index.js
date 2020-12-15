@@ -24,7 +24,6 @@ const chat = (state = initialState, action = {}) => {
       };
     }
     case SAVE_MESSAGES: {
-      console.log(action.messages);
       return {
         ...state,
         messages: action.messages,
