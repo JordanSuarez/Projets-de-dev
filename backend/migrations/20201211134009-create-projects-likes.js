@@ -27,7 +27,7 @@ module.exports = {
       isLike: {
         allowNull: false, 
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue: 1,
       },
       createdAt: {
         allowNull: false,

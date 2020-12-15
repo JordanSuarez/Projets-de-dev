@@ -44,7 +44,7 @@ module.exports = {
             return res.status(500).json({ 'error': 'impossible de vérifier l\'utilisateur'});
           })
         } else {
-          res.status(404).json({ 'error': 'impossible de liker, vous devez vous conncter'});
+          res.status(404).json({ 'error': 'impossible de liker, vous devez vous connecter'});
         }
       },
       (projectFound, userFound, done) => {
@@ -67,7 +67,7 @@ module.exports = {
       },
       (projectFound, userFound, userAlreadyLikedFound, done) => {
         if(!userAlreadyLikedFound) {
-          projectFound.addUser(userFound, { isLike: LIKED })
+          projectFound.addUser(userFound)
           .then((alreadyLikedFound) => {
             done(null, projectFound, userFound);
           })
@@ -92,7 +92,7 @@ module.exports = {
       },
       (projectFound, userFound, done) => {
         projectFound.update({
-          likes: projectFound.likes + 1,
+          vote: projectFound.vote + 1,
         })
         .then(() => {
           done(projectFound);
@@ -144,7 +144,7 @@ module.exports = {
             return res.status(500).json({ 'error': 'impossible de vérifier l\'utilisateur'});
           })
         } else {
-          res.status(404).json({ 'error': 'impossible de liker, vous devez vous conncter'});
+          res.status(404).json({ 'error': 'impossible de liker, vous devez vous connecter'});
         }
       },
       (projectFound, userFound, done) => {
@@ -167,13 +167,7 @@ module.exports = {
       },
       (projectFound, userFound, userAlreadyLikedFound, done) => {
         if(!userAlreadyLikedFound) {
-          projectFound.addUser(userFound, { isLike: DISLIKED })
-          .then((alreadyLikedFound) => {
-            done(null, projectFound, userFound);
-          })
-          .catch((err) => {
-            return res.status(500).json({ 'error': 'impossible de voter pour ce projet' });
-          });
+            return res.status(500).json({ 'error': 'Vous ne pouvez pas disliker un projet que vous n\'avez pas liké' });
         } else {
           if (userAlreadyLikedFound.isLike === LIKED) {
             userAlreadyLikedFound.update({
@@ -192,7 +186,7 @@ module.exports = {
       },
       (projectFound, userFound, done) => {
         projectFound.update({
-          likes: projectFound.likes - 1,
+          vote: projectFound.vote - 1,
         })
         .then(() => {
           done(projectFound);
