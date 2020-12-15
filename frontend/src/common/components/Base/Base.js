@@ -5,7 +5,6 @@ import { classes as classesProps } from 'src/common/classes';
 import Navigation from 'src/common/components/Navigation';
 import Loader from 'src/common/components/Loader';
 import Footer from 'src/common/components/Footer';
-import Chat from 'src/common/components/Chat';
 
 const Base = ({
   classes, children, loading,
@@ -17,7 +16,6 @@ const Base = ({
       {!loading && (
         children
       )}
-      <Chat className={classes.chat} />
     </main>
     <Footer className={classes.footer} />
   </div>

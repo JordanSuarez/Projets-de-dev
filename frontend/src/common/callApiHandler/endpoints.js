@@ -20,6 +20,7 @@ import {
   ME,
   CONNECTED,
   CHANNELS,
+  MESSAGES,
 } from './constants';
 import { apiUrl } from './urlHandler';
 
@@ -85,6 +86,11 @@ const endpoints = {
     [GET]: {
       [ALL]: `${CHANNELS}`,
       [ONE]: (meta) => `${CHANNELS}/${meta}`,
+    },
+  },
+  [MESSAGES]: {
+    [GET]: {
+      [ALL]: `${MESSAGES}`,
     },
   },
 };

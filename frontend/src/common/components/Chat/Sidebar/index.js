@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-
+  
 });
 
 export default compose(

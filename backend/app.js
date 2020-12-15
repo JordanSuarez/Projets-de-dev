@@ -49,16 +49,14 @@ app.use('/api/', apiRouter);
 
 // Chat
 io.on('connection', socket => { 
-  console.log(socket.id);
-  socket.on('send_message', ({message, userToken, channelId}) => {
-      
+  socket.on('send_message', ({message, userToken}) => {
     const userId = jwtUtils.getUserId(userToken);
 
     if (userId < 0){
       return null;
     }
 
-    if (message == null || userId == null || channelId == null) {
+    if (message == null || userId == null) {
       return null;
     }
     asyncLib.waterfall([
@@ -66,16 +64,15 @@ io.on('connection', socket => {
           const newMessage = models.Message.create({
             content: message,
             UserId: userId,
-            ChannelId: channelId,
+            ChannelId: 1,
           })
         .then((newMessage) => {
           const formatMessage = {
             id: newMessage.id,
-            message: newMessage.content,
+            content: newMessage.content,
             userId: newMessage.UserId,
-            channelId: newMessage.ChannelId,
           }
-          return io.emit('send_message', formatMessage);
+         return io.emit('send_message', formatMessage);
         })
         .catch((err) => {
           return 'tata';
