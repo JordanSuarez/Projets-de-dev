@@ -67,7 +67,7 @@ module.exports = {
       },
       (projectFound, userFound, userAlreadyLikedFound, done) => {
         if(!userAlreadyLikedFound) {
-          projectFound.addUser(userFound, /*{ isLike: 1 }*/ )
+          projectFound.addUser(userFound)
           .then((alreadyLikedFound) => {
             done(null, projectFound, userFound);
           })
@@ -75,9 +75,9 @@ module.exports = {
             return res.status(500).json({ 'error': 'impossible de voter pour ce projet' + err });
           });
         } else {
-          if (userAlreadyLikedFound.isLike === 0) {
+          if (userAlreadyLikedFound.isLike === DISLIKED) {
             userAlreadyLikedFound.update({
-              isLike: 1,
+              isLike: LIKED,
             })
             .then(() => {
               done(null, projectFound, userFound);
@@ -167,17 +167,11 @@ module.exports = {
       },
       (projectFound, userFound, userAlreadyLikedFound, done) => {
         if(!userAlreadyLikedFound) {
-          /*projectFound.addUser(userFound, { isLike: 0 })
-          .then((alreadyLikedFound) => {
-            done(null, projectFound, userFound);
-          })
-          .catch((err) => {*/
-            return res.status(500).json({ 'error': 'impossible de voter pour ce projet' });
-          //});
+            return res.status(500).json({ 'error': 'Vous ne pouvez pas disliker un projet que vous n\'avez pas liké' });
         } else {
-          if (userAlreadyLikedFound.isLike === 1) {
+          if (userAlreadyLikedFound.isLike === LIKED) {
             userAlreadyLikedFound.update({
-              isLike: 0,
+              isLike: DISLIKED,
             })
             .then(() => {
               done(null, projectFound, userFound);
