@@ -44,7 +44,7 @@ module.exports = {
             return res.status(500).json({ 'error': 'impossible de vérifier l\'utilisateur'});
           })
         } else {
-          res.status(404).json({ 'error': 'impossible de liker, vous devez vous conncter'});
+          res.status(404).json({ 'error': 'impossible de liker, vous devez vous connecter'});
         }
       },
       (projectFound, userFound, done) => {
@@ -67,7 +67,7 @@ module.exports = {
       },
       (projectFound, userFound, userAlreadyLikedFound, done) => {
         if(!userAlreadyLikedFound) {
-          projectFound.addUser(userFound, { isLike: LIKED })
+          projectFound.addUser(userFound, /*{ isLike: 1 }*/ )
           .then((alreadyLikedFound) => {
             done(null, projectFound, userFound);
           })
@@ -75,9 +75,9 @@ module.exports = {
             return res.status(500).json({ 'error': 'impossible de voter pour ce projet' + err });
           });
         } else {
-          if (userAlreadyLikedFound.isLike === DISLIKED) {
+          if (userAlreadyLikedFound.isLike === 0) {
             userAlreadyLikedFound.update({
-              isLike: LIKED,
+              isLike: 1,
             })
             .then(() => {
               done(null, projectFound, userFound);
@@ -92,7 +92,7 @@ module.exports = {
       },
       (projectFound, userFound, done) => {
         projectFound.update({
-          likes: projectFound.likes + 1,
+          vote: projectFound.vote + 1,
         })
         .then(() => {
           done(projectFound);
@@ -144,7 +144,7 @@ module.exports = {
             return res.status(500).json({ 'error': 'impossible de vérifier l\'utilisateur'});
           })
         } else {
-          res.status(404).json({ 'error': 'impossible de liker, vous devez vous conncter'});
+          res.status(404).json({ 'error': 'impossible de liker, vous devez vous connecter'});
         }
       },
       (projectFound, userFound, done) => {
@@ -167,17 +167,17 @@ module.exports = {
       },
       (projectFound, userFound, userAlreadyLikedFound, done) => {
         if(!userAlreadyLikedFound) {
-          projectFound.addUser(userFound, { isLike: DISLIKED })
+          /*projectFound.addUser(userFound, { isLike: 0 })
           .then((alreadyLikedFound) => {
             done(null, projectFound, userFound);
           })
-          .catch((err) => {
+          .catch((err) => {*/
             return res.status(500).json({ 'error': 'impossible de voter pour ce projet' });
-          });
+          //});
         } else {
-          if (userAlreadyLikedFound.isLike === LIKED) {
+          if (userAlreadyLikedFound.isLike === 1) {
             userAlreadyLikedFound.update({
-              isLike: DISLIKED,
+              isLike: 0,
             })
             .then(() => {
               done(null, projectFound, userFound);
@@ -192,7 +192,7 @@ module.exports = {
       },
       (projectFound, userFound, done) => {
         projectFound.update({
-          likes: projectFound.likes - 1,
+          vote: projectFound.vote - 1,
         })
         .then(() => {
           done(projectFound);
