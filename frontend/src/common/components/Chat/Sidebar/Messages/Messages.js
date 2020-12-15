@@ -22,14 +22,14 @@ const Messages = ({
     sendMessage(inputValue);
     setInputValue('');
   };
-console.log(messages)
+  console.log(messages);
   return (
     <>
       <div className={classes.chat}>
         <h3>Chat</h3>
 
         <ul className={classes.messages}>
-          {messages.map(({ id, message, userId }) => (
+          {messages.map(({ id, content, userId }) => (
             <li
               key={id}
               className={userId === currentUserId ? classes.alignRight : classes.alignLeft}
@@ -39,7 +39,7 @@ console.log(messages)
                   <p>Name{userId}</p>
                   <p>le 12/05 a 18h03</p>
                 </div>
-                {message}
+                {content}
               </div>
               <Avatar alt="Cindy Baker" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZXWk4HOB6y3GDM1oGMJYWUM_rPChE80R-OQ&usqp=CAU" />
             </li>

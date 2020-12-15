@@ -50,7 +50,6 @@ app.use('/api/', apiRouter);
 // Chat
 io.on('connection', socket => { 
   socket.on('send_message', ({message, userToken}) => {
-      console.log(message, userToken)
     const userId = jwtUtils.getUserId(userToken);
 
     if (userId < 0){
@@ -70,7 +69,7 @@ io.on('connection', socket => {
         .then((newMessage) => {
           const formatMessage = {
             id: newMessage.id,
-            message: newMessage.content,
+            content: newMessage.content,
             userId: newMessage.UserId,
           }
          return io.emit('send_message', formatMessage);

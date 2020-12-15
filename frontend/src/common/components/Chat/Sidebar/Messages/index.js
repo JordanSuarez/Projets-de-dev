@@ -8,14 +8,13 @@ import styles from './styles';
 
 const mapStateToProps = (state) => ({
   channel: state.chat.channel,
-  messages: state.chat.channel.messages,
+  messages: state.chat.messages,
   currentUserId: state.auth.userId,
 });
 
 const mapsDispatchToProps = (dispatch) => ({
   sendMessage: (message) => {
-    console.log(message)
-
+    console.log('mapdispatchtopprops', message);
     dispatch(emitMessage(message));
   },
 });
