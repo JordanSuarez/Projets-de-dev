@@ -7,7 +7,7 @@ const { REACT_APP_API_HOST } = process.env;
 const { REACT_APP_API_PORT } = process.env;
 
 // BASE URL of api, from .env file
-export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT_APP_API_PORT}/api`;
+export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}/api`;
 
 // Create client instance for axios, send token if exist, else null
 // const axiosInstance = axios.create({
