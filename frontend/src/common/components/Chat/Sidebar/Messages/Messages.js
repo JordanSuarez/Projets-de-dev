@@ -8,7 +8,6 @@ import { classes as classesProps } from 'src/common/classes';
 
 const Messages = ({
   classes,
-  channel,
   sendMessage,
   messages,
   currentUserId,
@@ -20,13 +19,14 @@ const Messages = ({
   // Detecter si le message viens de l'utilisateur qui est connecté pour affichage diff
   const handleSubmit = (event) => {
     event.preventDefault();
-    sendMessage(inputValue, channel.id);
+    sendMessage(inputValue);
+    setInputValue('');
   };
-
+console.log(messages)
   return (
     <>
       <div className={classes.chat}>
-        <h3>{channel.name}</h3>
+        <h3>Chat</h3>
 
         <ul className={classes.messages}>
           {messages.map(({ id, message, userId }) => (
@@ -57,7 +57,6 @@ const Messages = ({
 
 Messages.propTypes = {
   ...classesProps,
-  channel: PropTypes.object.isRequired,
   messages: PropTypes.array.isRequired,
   currentUserId: PropTypes.number.isRequired,
 };

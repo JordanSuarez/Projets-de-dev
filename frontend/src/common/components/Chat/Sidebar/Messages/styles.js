@@ -4,7 +4,7 @@ export default ({ breakpoints, palette }) => ({
     justifyContent: 'space-between',
     flexDirection: 'column',
     padding: '2px',
-    margin: '0 auto'
+    margin: '0 auto',
 
   },
   alignRight:{

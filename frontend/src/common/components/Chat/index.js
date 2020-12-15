@@ -2,7 +2,7 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
-import { setSidebar } from 'src/common/redux/actions/chat';
+import { setSidebar, connectWebSocket } from 'src/common/redux/actions/chat';
 
 import Chat from './Chat';
 import styles from './styles';
@@ -15,6 +15,9 @@ const mapStateToProps = (state) => ({
 const mapsDispatchToProps = (dispatch) => ({
   setStatus: (status) => {
     dispatch(setSidebar(status));
+  },
+  connectWebSocket: () => {
+    dispatch(connectWebSocket());
   },
 });
 

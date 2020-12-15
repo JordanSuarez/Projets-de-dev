@@ -12,9 +12,11 @@ const Chat = ({
   classes,
   setStatus,
   status,
+  connectWebSocket,
 }) => {
   const [open, setOpen] = useState(status);
   useEffect(() => {
+    connectWebSocket();
   }, [open]);
 
   const handleClick = () => {
@@ -46,6 +48,7 @@ const Chat = ({
 Chat.propTypes = {
   ...classesProps,
   setStatus: PropTypes.func.isRequired,
+  connectWebSocket: PropTypes.func.isRequired,
   status: PropTypes.bool.isRequired,
 };
 

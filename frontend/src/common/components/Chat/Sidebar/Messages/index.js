@@ -13,8 +13,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-  sendMessage: (message, channelId) => {
-    dispatch(emitMessage(message, channelId));
+  sendMessage: (message) => {
+    console.log(message)
+
+    dispatch(emitMessage(message));
   },
 });
 

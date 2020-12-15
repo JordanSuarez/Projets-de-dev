@@ -38,6 +38,10 @@ exports.router = (() => {
     // Channels routes
     apiRouter.route('/channels').get(channelController.getChannelList); // OK
     apiRouter.route('/channels/:id').get(channelController.getChannel); // OK
+
+    // Messages routes
+    apiRouter.route('/messages').get(channelController.getChannelList); // OK
+    apiRouter.route('/channels/:id').get(channelController.getChannel); // OK
     
 
     // Admin routes
