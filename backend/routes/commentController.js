@@ -5,6 +5,20 @@ const asyncLib = require('async');
 
 module.exports = {
 
+  commentsList: (req, res) => {
+
+    models.Comment.findAll()
+    .then((allComments) => {
+      
+      return res.status(200).json(allComments);
+
+    }).catch((error) => {
+
+      return res.status(500).json({ 'Error': 'Erreur lors de la récupréation des données, les commenataires n\'ont pas pu être récupérés' })
+
+    })
+  },
+
   new: (req, res) => {
 
     const headerAuth = req.headers['authorization'];

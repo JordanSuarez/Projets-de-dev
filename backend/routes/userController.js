@@ -196,7 +196,7 @@ module.exports = {
 				attributes: ['id', 'username', 'userImage'],
 			}).then((user) => {
 				if (user) {
-					return res.status(201).json(user);
+					return res.status(200).json(user);
 				} else {
 					return res.status(404).json({ 'error': /*'Aucun utilisateur n\'a pu être trouvé'*/ err });
 				}
