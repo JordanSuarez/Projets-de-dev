@@ -224,7 +224,7 @@ module.exports = {
     })
 
   },
-
+ 
   deleteProject: (req, res) => {
 
     const headerAuth = req.headers['authorization'];
