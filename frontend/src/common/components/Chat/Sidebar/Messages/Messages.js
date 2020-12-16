@@ -32,15 +32,17 @@ const Messages = ({
         <h3>Chat</h3>
 
         <ul className={classes.messages}>
-          {messages.map(({ id, content, userId }) => (
+          {messages.map(({
+            id, content, userId, User: user, createdAt,
+          }) => (
             <li
               key={id}
               className={userId === currentUserId ? classes.alignRight : classes.alignLeft}
             >
               <div className={userId === currentUserId ? classes.myMessage : classes.message}>
                 <div>
-                  <p>Name{userId}</p>
-                  <p>le 12/05 a 18h03</p>
+                  <p>{user.username}</p>
+                  <p>le {new Date(createdAt).toLocaleString('fr-FR')}</p>
                 </div>
                 {content}
               </div>

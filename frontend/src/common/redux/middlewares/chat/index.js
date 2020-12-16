@@ -29,7 +29,6 @@ const chatMiddleWare = (store) => (next) => (action) => {
 
       callApi(url, GET)
         .then((response) => {
-          console.log('get response API, before save state', response.data)
           store.dispatch(saveMessages(response.data));
         })
         .catch((error) => {
