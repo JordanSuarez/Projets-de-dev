@@ -5,6 +5,7 @@ const tagController = require('./routes/tagController');
 const commentController = require('./routes/commentController');
 const channelController = require('./routes/channelController');
 const messageController = require('./routes/messageController');
+const likeController = require('./routes/likeController');
 
 
 // Router
@@ -26,14 +27,19 @@ exports.router = (() => {
     apiRouter.route('/projects/:id').get(projectController.project); // OK
     apiRouter.route('/projects/new').post(projectController.new); // OK
     apiRouter.route('/projects/:id/edit').patch(projectController.edit); // OK
-    apiRouter.route('/projects/:id/delete-my-project').delete(projectController.deleteMyProject); 
+    apiRouter.route('/projects/:id/delete-my-project').delete(projectController.deleteMyProject); // Ok
     
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
     
+    // Likes routes
+    apiRouter.route('/projects/:projectId/vote/like').post(likeController.likePost); // OK
+    apiRouter.route('/projects/:projectId/vote/dislike').post(likeController.unlikePost); // OK
+
     // Comments routes
     apiRouter.route('/comments/add').post(commentController.new); // OK
     apiRouter.route('/comments/:id/edit').patch(commentController.edit); // OK
+    apiRouter.route('/comments/:id/delete').delete(commentController.deleteComment); // OK
 
     // Channels routes
     apiRouter.route('/channels').get(channelController.getChannelList); // OK
