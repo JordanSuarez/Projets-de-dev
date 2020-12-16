@@ -266,8 +266,6 @@ module.exports = {
 			if (userId < 0){
 				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
-
-			
 			
 			models.User.findOne({
 				where: {id: userId}

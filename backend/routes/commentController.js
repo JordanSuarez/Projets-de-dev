@@ -64,7 +64,7 @@ module.exports = {
         content: (content ? content : commentEdit.content),
       })
       .then(() => {
-        return res.status(201).json({editComment})
+        return res.status(201).json({commentEdit})
       })
       .catch(function(err) {
         return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
