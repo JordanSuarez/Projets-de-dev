@@ -82,6 +82,6 @@ io.on('connection', socket => {
   });
 });
 
-//server.listen(port);
+server.listen(port);
 
-app.listen(port);
+// app.listen(port);
