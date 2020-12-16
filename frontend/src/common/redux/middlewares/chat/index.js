@@ -9,9 +9,9 @@ import { io } from 'socket.io-client';
 import { GET, ALL, MESSAGES } from 'src/common/callApiHandler/constants';
 
 const chatMiddleWare = (store) => (next) => (action) => {
-  const socket = io();
   switch (action.type) {
     case CONNECT_WEBSOCKET: {
+      const socket = io();
       socket.on('send_message', (message) => {
         console.log('EMIT_MESSAGE middleware pass', message);
         store.dispatch(addMessage(message));
@@ -19,6 +19,7 @@ const chatMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case EMIT_MESSAGE: {
+      const socket = io();
       // console.log('EMIT_MESSAGE middleware', action.message)
       socket.emit('send_message', { message: action.message, userToken: getToken() });
       break;
