@@ -7,7 +7,7 @@ export default ({ breakpoints, palette }) => ({
     position: 'fixed',
     top: '0',
     right: '0',
-    backgroundColor: palette.blue,
+    backgroundColor: palette.lightBlue,
     padding: '80px 3px 3px 3px',
     display: 'flex',
     flexDirection: 'column',

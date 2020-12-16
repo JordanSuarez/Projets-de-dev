@@ -28,7 +28,6 @@ export default ({ breakpoints, palette }) => ({
   },
 
   message: {
-
     margin: '10px auto',
     borderRadius: '8px 8px 8px 0',
     backgroundColor: palette.blue,
@@ -39,7 +38,6 @@ export default ({ breakpoints, palette }) => ({
   },
 
   myMessage: {
-
     margin: '10px auto',
     borderRadius: '8px 8px 0 8px',
     backgroundColor: palette.yellow,
@@ -47,6 +45,21 @@ export default ({ breakpoints, palette }) => ({
     padding: '10px',
     textAlign: 'right',
     position: 'relative',
-    
   },
+
+  form: {
+    width: '100%',
+    display: 'flex',
+  },
+
+  inputMessage: {
+    width: 'calc(100% - 6px)',
+    padding: '8px',
+    margin: '10px 3px',
+    borderRadius: '25px',
+    border: 'none',
+    outline: 'none',
+    boxShadow: 'inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff',
+  },
+  
 });

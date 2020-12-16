@@ -6,6 +6,8 @@ import {
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
 import SendIcon from '@material-ui/icons/Send';
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const Messages = ({
   classes,
@@ -48,7 +50,24 @@ const Messages = ({
         </ul>
         <div>
           <form className={classes.form} autoComplete="off" onSubmit={handleSubmit}>
-            <TextField id="standard-basic" label="Entrez votre message" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
+            <Input
+              id="input-with-icon-adornment"
+              className={classes.inputMessage}
+              type="text"
+              label="Entrez votre message"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+              startAdornment={(
+                <InputAdornment position="end">
+                  <SendIcon />
+                </InputAdornment>
+              )}
+              endAdornment={(
+                <InputAdornment position="end">
+                  <SendIcon />
+                </InputAdornment>
+              )}
+            />
           </form>
         </div>
       </div>
