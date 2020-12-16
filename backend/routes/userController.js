@@ -281,7 +281,7 @@ module.exports = {
 	
 					}).catch((error) => {
 
-						res.status(500).json(error);
+						res.status(500).json({ 'error': 'Le profil n\'a pas pu être mis à jour' });
 
 					});
 
