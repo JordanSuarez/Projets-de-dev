@@ -13,7 +13,7 @@ let socket;
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET:
-      socket = io('http://localhost:3001');
+      socket = io('http://localhost:5050');
       socket.on('send_message', (message) => {
         // console.log('EMIT_MESSAGE middleware pass', message);
         store.dispatch(addMessage(message));
