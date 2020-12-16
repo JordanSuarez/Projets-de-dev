@@ -281,7 +281,8 @@ module.exports = {
 						}).then((userFoundEdit) => {
 							done(userFoundEdit)
 								return res.status(201).json(userFoundEdit);
-							
+						}).catch((err) => {
+							return res.status(500).json({err});
 						})
 					}).catch((err) => {
 						return res.status(500).json({'error': 'Impossible de mettre à jour l\'utilisateur' + err});
