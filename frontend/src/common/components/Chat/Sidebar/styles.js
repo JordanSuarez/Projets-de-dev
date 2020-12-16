@@ -18,15 +18,7 @@ export default ({ breakpoints, palette }) => ({
   },
   messages: {
 
-    [breakpoints.up('md')]: {
-      padding: '30px 1em 1em 1em',
-    },
   },
 
-  channel: {
-    padding: '30px 0.5em 0.5em 0.5em',
-    [breakpoints.up('md')]: {
-    },
-  },
 
 });

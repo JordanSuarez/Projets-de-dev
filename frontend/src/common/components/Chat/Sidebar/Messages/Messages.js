@@ -5,6 +5,7 @@ import {
   Avatar,
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
+import SendIcon from '@material-ui/icons/Send';
 
 const Messages = ({
   classes,

@@ -3,20 +3,25 @@ export default ({ breakpoints, palette }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'column',
-    padding: '2px',
-    margin: '0 auto',
-
+    height: 'calc(100vh - 80px)',
+    padding: '3em 0 1em 0',
+    [breakpoints.up('md')]: {
+      width: '80vw',
+      padding: '3em 1em 1em 1em',
+    },
   },
-  alignRight:{
+
+  alignRight: {
     display: 'flex',
     flexDirection: 'row-reverse',
 
   },
-  alignRight:{
+
+  alignRight: {
 
   },
   messages: {
-    height: '180px',
+
     backgroundColor: 'white',
     overflowX: 'hidden',
     overflowY: 'scroll',
