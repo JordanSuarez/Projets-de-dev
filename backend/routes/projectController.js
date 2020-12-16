@@ -200,9 +200,9 @@ module.exports = {
     models.Project.update(updatedProject, 
       {where: {id: id, userId: userId}
     }).then(result => {
-        return res.status(201).json({projectEdit})
+        return result.status(201).json({projectEdit})
      }).catch(error => {
-        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + error });
      })
   },
 
