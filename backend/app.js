@@ -49,6 +49,7 @@ app.use('/api/', apiRouter);
 
 // Chat
 io.on('connection', socket => { 
+  console.log('pass', socket.id)
   socket.on('send_message', ({message, userToken}) => {
     const userId = jwtUtils.getUserId(userToken);
 
