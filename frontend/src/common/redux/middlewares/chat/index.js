@@ -5,13 +5,15 @@ import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getToken } from 'src/common/authentication/authProvider';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import { GET, ALL, MESSAGES } from 'src/common/callApiHandler/constants';
+
+let socket;
 
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET: {
-      const socket = io();
+      socket = window.io('http://ec2-34-202-164-145.compute-1.amazonaws.com/');
       socket.on('send_message', (message) => {
         console.log('EMIT_MESSAGE middleware pass', message);
         store.dispatch(addMessage(message));
@@ -19,7 +21,6 @@ const chatMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case EMIT_MESSAGE: {
-      const socket = io();
       // console.log('EMIT_MESSAGE middleware', action.message)
       socket.emit('send_message', { message: action.message, userToken: getToken() });
       break;
