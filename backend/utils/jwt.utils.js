@@ -1,6 +1,7 @@
 // Import
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const SIGN_SECRET = '5azdgPzefUB77719zdzajrvmpBtcfU42FbiozeARW72162';
+const SIGN_SECRET = process.env.HASH;
 
 // Exported functions
  module.exports = {

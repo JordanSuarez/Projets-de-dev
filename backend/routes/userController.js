@@ -1,4 +1,5 @@
 // Imports
+require('dotenv').config();
 const bcrypt   = require('bcrypt');
 const jwtUtils = require('../utils/jwt.utils');
 const models   = require('../models');
@@ -33,13 +34,70 @@ module.exports = {
 				return res.status(400).json({'error': 'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'});
 			}			
 			
-			asyncLib.waterfall([
+			models.User.findOne({
+
+				attributes: ['email'],
+				where: {email: email},
+
+			}).then((isEmailExist) => {
+
+				if(isEmailExist){
+
+					return res.status(409).json({ 'error': 'Cet email est déjà utilisé' });
+
+				} else {
+
+					models.User.findOne({
+
+						attributes: ['username'],
+						where: {username: username},
+
+					}).then((isUsernameExist) => {
+
+						if(isUsernameExist) {
+
+							return res.status(409).json({ 'error': 'Ce nom d\'utilisateur est déjà utilisé' });
+
+						} else {
+
+							bcrypt.hash(password, 5, (errBycrypt, bcryptedPassword ) => {
+							
+								models.User.create({
+
+									email:email,
+									username:username,
+									password: bcryptedPassword,
+									isAdmin: 0
+								
+								}).then ((newUser) => {
+
+									res.status(200).json({ 'userId': newUser.id });
+
+								}).catch((error) => {
+
+									return res.status(409).json(error);
+
+								})
+
+						})
+					}
+				})
+				}
+			});
+
+			/*asyncLib.waterfall([
 				
 				(done) => {
 					models.User.findOne({
 						attributes: ['email'],
 						where: { email: email}
 					})
+					.then(() => {
+						models
+					})
+					
+					
+					
 					.then((userFound) => {
 						done(null, userFound);
 					})
@@ -80,7 +138,7 @@ module.exports = {
 			} else {
 				return res.status(500).json({'error': err});
 			}
-			});
+			});*/
 		},
 
 		login: (req, res) => {
