@@ -174,19 +174,21 @@ module.exports = {
   },
 
   edit: (req, res) => {
-    console.log(req.body.githubLink, req.body.projectLink)
-    const id = req.params.id;
-    const title = req.body.title;
-    const description	 = req.body.description;
-    const image	 = req.body.image;
-    const githubLink	 = req.body.githubLink;
-    const projectLink	 = req.body.projectLink;
-    const tagId	 = req.body.tag1;
-    const tag2Id	 = req.body.tag2;
-    const tag3Id	 = req.body.tag3;
-    const tag4Id	 = req.body.tag4;
-    const tag5Id	 = req.body.tag5;
-    const tag6Id	 = req.body.tag6;
+  
+    const updatedProject = {
+      id: req.params.id,
+      title: req.body.title,
+      description: req.body.description,
+      image: req.body.image,
+      githubLink: req.body.githubLink,
+      projectLink: req.body.projectLink,
+      tagId: req.body.tag1,
+      tag2Id: req.body.tag2,
+      tag3Id: req.body.tag3,
+      tag4Id: req.body.tag4,
+      tag5Id: req.body.tag5,
+      tag6Id: req.body.tag6,
+  };
 
     const headerAuth = req.headers['authorization'];
     const userId = jwtUtils.getUserId(headerAuth);
@@ -195,40 +197,13 @@ module.exports = {
       return res.status(400).json({ 'error': 'Le token est invalide'});
       } 
 
-      
-    asyncLib.waterfall([
-      (done) => {
-        models.Project.findOne({
-          where: { id: id, userId: userId }
-        })
-        .then((projectEdit) => {
-          projectEdit.update({
-            title: (title ? title : projectEdit.title),
-            description: (description ? description : projectEdit.description),
-            image: (image ? image : projectEdit.description),
-            github_link: (githubLink ? githubLink : projectEdit.githubLink),
-            project_link: (projectLink ? projectLink : projectEdit.projectLink),
-            TagId: (tagId ? tagId : projectEdit.TagId),
-            Tag2Id: (tag2Id ? tag2Id : null),
-            Tag3Id: (tag3Id ? tag3Id : null),
-            Tag4Id: (tag4Id ? tag4Id : null),
-            Tag5Id: (tag5Id ? tag5Id : null),
-            Tag6Id: (tag6Id ? tag6Id : null),
-          })
-          .then((editProject) => {
-            done(editProject)
-            return res.status(201).json({projectEdit})
-          })
-          .catch(function(err) {
-          return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
-          })
-        })
-        .catch(function(err) {
-          return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
-        });
-        
-      },
-    ]);
+    models.Project.update(updatedProject, 
+      {where: {id: id, userId: userId}
+    }).then(result => {
+        return res.status(201).json({projectEdit})
+     }).catch(error => {
+        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+     })
   },
 
   deleteMyProject: (req, res) => {
