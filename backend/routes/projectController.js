@@ -174,9 +174,9 @@ module.exports = {
   },
 
   edit: (req, res) => {
-  
+    const id = req.params.id;
+
     const updatedProject = {
-      id: req.params.id,
       title: req.body.title,
       description: req.body.description,
       image: req.body.image,
