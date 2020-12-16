@@ -201,9 +201,9 @@ module.exports = {
       {where: {id: id, userId: userId}
     }).then(() => {
         return res.status(201).json({updatedProject})
-     }).catch(error => {
+      }).catch(error => {
         return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + error });
-     })
+      })
   },
 
   deleteMyProject: (req, res) => {

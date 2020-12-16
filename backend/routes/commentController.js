@@ -55,30 +55,24 @@ module.exports = {
     const projectId	 = req.body.projectId;
 
 
-    asyncLib.waterfall([
-      (done) => {
-        models.Comment.findOne({
-          where: { id: id, userId: userId, projectId: projectId }
-        })
-        .then((commentEdit) => {
-          commentEdit.update({
-            content: (content ? content : commentEdit.content),
-          })
-          .then((editComment) => {
-            done(editComment)
-            return res.status(201).json({
-              editComment
-            })
-          })
-          .catch(function(err) {
-            return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
-          });
-        })
-        .catch(function(err) {
-          return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
-        });
-      },
-    ]);
+    
+    models.Comment.findOne({
+      where: { id: id, userId: userId, projectId: projectId }
+    })
+    .then((commentEdit) => {
+      commentEdit.update({
+        content: (content ? content : commentEdit.content),
+      })
+      .then(() => {
+        return res.status(201).json({editComment})
+      })
+      .catch(function(err) {
+        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+      });
+    })
+    .catch(function(err) {
+      return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
+    });
   },
 
   deleteComment: (req, res) => {

@@ -267,25 +267,24 @@ module.exports = {
 				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
-			asyncLib.waterfall([
-				(done) => {
-					models.User.findOne({
-						where: {id: userId}
-					}).then((userFoundEdit) => {
-						userFoundEdit.update({
-							username: (username ? username : userFoundEdit.username),
-							bio: (bio ? bio : userFoundEdit.bio),
-							userImage: (userImage ? userImage : userFoundEdit.userImage),
-							password: (password ? password : userFoundEdit.password),
-						}).then((userFoundEdit) => {
-							done(userFoundEdit)
-								return res.status(201).json(userFoundEdit);
-						})
-					}).catch((err) => {
-						return res.status(500).json({'error': 'Impossible de mettre à jour l\'utilisateur' + err});
-					})
-				}
-			]);
+			
+			
+			models.User.findOne({
+				where: {id: userId}
+			}).then((userFoundEdit) => {
+				userFoundEdit.update({
+					username: (username ? username : userFoundEdit.username),
+					bio: (bio ? bio : userFoundEdit.bio),
+					userImage: (userImage ? userImage : userFoundEdit.userImage),
+					password: (password ? password : userFoundEdit.password),
+				}).then(() => {
+					return res.status(201).json({userFoundEdit});
+				}).catch((err) => {
+					return res.status(500).json({'error': + err});
+				})
+			}).catch((err) => {
+				return res.status(500).json({'error': 'Impossible de mettre à jour l\'utilisateur' + err});
+			})
 		},
 
 		deleteUser: (req, res) => {
