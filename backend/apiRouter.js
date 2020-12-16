@@ -37,6 +37,7 @@ exports.router = (() => {
     apiRouter.route('/projects/:projectId/vote/dislike').post(likeController.unlikePost); // OK
 
     // Comments routes
+    apiRouter.route('/comments/').get(commentController.commentsList);    
     apiRouter.route('/comments/add').post(commentController.new); // OK
     apiRouter.route('/comments/:id/edit').patch(commentController.edit); // OK
     apiRouter.route('/comments/:id/delete').delete(commentController.deleteComment); // OK
