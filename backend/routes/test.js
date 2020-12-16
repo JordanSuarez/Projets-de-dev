@@ -12,12 +12,15 @@ function update(req, res) {
          partnerId: req.body.partnerId,
      };
  
-     models.Project.update(updatedProject, 
-        {where: {id: id, userId: userId}
-    })
-    .then(result => {
-        return res.status(201).json({projectEdit})
+     models.Project.update(updatedProject, {where: {id: id, userId: userId}}).then(result => {
+         res.status(200).json({
+             message: "Project updated successfully",
+             project: updatedProject
+         })
      }).catch(error => {
-        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+         res.status(500).json({
+             message: "Something went wrong",
+             error: error
+         })
      })
  }
