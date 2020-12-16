@@ -215,13 +215,35 @@ module.exports = {
       return res.status(400).json({ 'error': 'Le token est invalide' });
     }
 
-    models.Project.destroy({
+
+    models.Project.findOne({
+
       where: {id: req.params.id, userId: userId}
-    }).then(() => {
-      return res.status(200).json({ message: 'Votre projet a bien été supprimé' });
-    }).catch(() => {
-      return res.status(400).json({ 'error': 'La requête n\'a pas pu aboutir' });
+
+    }).then((findProject) => {
+
+      models.Comment.destroy({
+        where: {ProjectId: req.params.id}
+      })
+
+    }).then((commentsDelete) => {
+
+      models.Project.destroy({
+        where: {id: req.params.id, userId: userId}
+      }).then(() => {
+        return res.status(200).json({ message: 'Votre projet a bien été supprimé' });
+      }).catch(() => {
+        return res.status(400).json({ 'error': 'La requête n\'a pas pu aboutir' });
+      });
+
+    }).catch((error) => {
+
+      res.status(500).json({ 'Error' : 'Impossible de supprimer le projet'});
+
     })
+
+    
+   
 
   },
  
