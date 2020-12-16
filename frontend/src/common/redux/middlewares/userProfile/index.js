@@ -8,7 +8,7 @@ import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection'
 import { submitLogoutSuccess } from 'src/common/redux/actions/auth';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi, apiUrl } from 'src/common/callApiHandler/urlHandler';
-import { removeToken, getToken } from 'src/common/authentication/authProvider';
+import { removeToken, getToken, setUser } from 'src/common/authentication/authProvider';
 import {
   USERS, PATCH, PRIVATE_PROFILE, DELETE, ME,
 } from 'src/common/callApiHandler/constants';
@@ -26,6 +26,7 @@ const userProfile = (store) => (next) => (action) => {
           },
         })
         .then(({ data }) => {
+          setUser({ id: data.id, username: data.username, userImage: data.userImage });
           store.dispatch(saveUserProfile(data));
         })
         .catch((error) => {
