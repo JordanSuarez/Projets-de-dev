@@ -9,7 +9,6 @@ import io from 'socket.io-client';
 import { GET, ALL, MESSAGES } from 'src/common/callApiHandler/constants';
 
 let socket;
-
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET:

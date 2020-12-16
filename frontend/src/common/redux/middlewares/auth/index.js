@@ -74,19 +74,19 @@ const authMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case USER_AUTH_VERIFY: {
-      st url = getEndpoint(USERS, POST, CONNECTED);
-      Verify on each page if user is connected, and if his token is not expired
-      lApi(url, POST, action.token)
-      then(({ data }) => {
-       setUserId(data.userId);
-       store.dispatch(submitLoginSuccess(data.userId));
-      )
-      catch(() => {
-       removeToken();
-       removeUserId();
-       store.dispatch(submitLogoutSuccess());
-       store.dispatch(showSnackbar('Oups!', 'Votre session à expiré!', 'error'));
-      );
+      const url = getEndpoint(USERS, POST, CONNECTED);
+      // Verify on each page if user is connected, and if his token is not expired
+      callApi(url, POST, action.token)
+        .then(({ data }) => {
+          setUserId(data.userId);
+          store.dispatch(submitLoginSuccess(data.userId));
+        })
+        .catch(() => {
+          removeToken();
+          removeUserId();
+          store.dispatch(submitLogoutSuccess());
+          store.dispatch(showSnackbar('Oups!', 'Votre session à expiré!', 'error'));
+        });
 
       next(action);
       break;
