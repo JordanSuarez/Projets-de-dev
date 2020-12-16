@@ -11,6 +11,8 @@ export const PROJECTS = 'projects';
 export const TAGS = 'tags';
 export const CONTACT = 'contact';
 export const COMMENT = 'comments';
+export const CHANNELS = 'channels';
+export const MESSAGES = 'messages';
 
 // Resources type
 export const ALL = 'all';

@@ -23,7 +23,7 @@ import { getToken } from 'src/common/authentication/authProvider';
 import NavLink from './NavLink';
 
 const Navigation = ({
-  classes, isLogged, userAuthVerify, isNotLogged,
+  classes, isLogged, userAuthVerify, isNotLogged, setChatIsOpen,
 }) => {
   const history = useHistory();
   const params = useParams();
@@ -64,12 +64,16 @@ const Navigation = ({
     },
   ];
 
+  // Close Chat window
+  const handleCloseChat = () => {
+    setChatIsOpen(false);
+  };
+
   // Routes
-  const handleLogout = () => history.push(getLogoutRoute());
-  const handleLogin = () => history.push(getLoginRoute());
-  const handleHome = () => history.push(getHomeRoute());
-  const handleRegister = () => history.push(getRegisterRoute());
-  const handleProfilePage = () => history.push(getUserProfileRoute());
+  const handlePushRoute = (route) => {
+    handleCloseChat();
+    history.push(route());
+  };
 
   return (
     <AppBar position="sticky" color="inherit" className={classes.navigation}>
@@ -101,7 +105,7 @@ const Navigation = ({
               onClose={() => handleClose(setMainAnchorEl)}
             >
               {routes.map(({ name, route }) => (
-                <MenuItem key={name}>
+                <MenuItem key={name} onClick={handleCloseChat}>
                   <NavLink
                     label={name}
                     route={route}
@@ -115,7 +119,7 @@ const Navigation = ({
                 {isLogged
                   ? (
                     <MenuItem
-                      onClick={handleProfilePage}
+                      onClick={() => handlePushRoute(getUserProfileRoute)}
                       className={classes.menuItem}
                     >
                       Profil
@@ -123,7 +127,7 @@ const Navigation = ({
                   )
                   : (
                     <MenuItem
-                      onClick={handleLogin}
+                      onClick={() => handlePushRoute(getLoginRoute)}
                       className={classes.menuItem}
                     >Connexion
                     </MenuItem>
@@ -131,7 +135,7 @@ const Navigation = ({
                 {isLogged
                   ? (
                     <MenuItem
-                      onClick={handleLogout}
+                      onClick={() => handlePushRoute(getLogoutRoute)}
                       className={classes.menuItem}
                     >
                       Se déconnecter
@@ -139,7 +143,7 @@ const Navigation = ({
                   )
                   : (
                     <MenuItem
-                      onClick={handleRegister}
+                      onClick={() => handlePushRoute(getRegisterRoute)}
                       className={classes.menuItem}
                     >
                       Inscription
@@ -149,21 +153,22 @@ const Navigation = ({
             </Menu>
           </Hidden>
           <Hidden smUp>
-            <div className={classes.logoMobile} onClick={handleHome} />
+            <div className={classes.logoMobile} onClick={() => handlePushRoute(getHomeRoute)} />
           </Hidden>
           <Hidden smDown>
             <div className={classes.wrapper}>
-              <div className={classes.logoDesktop} onClick={handleHome} />
+              <div className={classes.logoDesktop} onClick={() => handlePushRoute(getHomeRoute)} />
               {routes.map(({
                 name, route,
               }) => (
-                <NavLink
-                  key={name}
-                  label={name}
-                  route={route}
-                  activeClassName={classes.itemLinkActive}
-                  className={classes.itemLink}
-                />
+                <div onClick={handleCloseChat} key={name}>
+                  <NavLink
+                    label={name}
+                    route={route}
+                    activeClassName={classes.itemLinkActive}
+                    className={classes.itemLink}
+                  />
+                </div>
               ))}
             </div>
           </Hidden>
@@ -171,13 +176,13 @@ const Navigation = ({
             <Grid container alignItems="center" justify="flex-end" spacing={2}>
               <Grid item>
                 {isLogged
-                  ? <Button onClick={handleProfilePage} label="Profil" variant="contained" className={classes.button}>Profil</Button>
-                  : <Button onClick={handleLogin} label="Connexion" variant="contained" className={classes.button}>Connexion</Button>}
+                  ? <Button onClick={() => handlePushRoute(getUserProfileRoute)} label="Profil" variant="contained" className={classes.button}>Profil</Button>
+                  : <Button onClick={() => handlePushRoute(getLoginRoute)} label="Connexion" variant="contained" className={classes.button}>Connexion</Button>}
               </Grid>
               <Grid item>
                 {isLogged
-                  ? <Button onClick={handleLogout} label="Se déconnecter" variant="contained" className={classes.button}>Se déconnecter</Button>
-                  : <Button onClick={handleRegister} label="Connexion" variant="contained" className={classes.button}>Inscription</Button>}
+                  ? <Button onClick={() => handlePushRoute(getLogoutRoute)} label="Se déconnecter" variant="contained" className={classes.button}>Se déconnecter</Button>
+                  : <Button onClick={() => handlePushRoute(getRegisterRoute)} label="Connexion" variant="contained" className={classes.button}>Inscription</Button>}
               </Grid>
             </Grid>
           </Hidden>
@@ -192,6 +197,7 @@ Navigation.propTypes = {
   isLogged: bool.isRequired,
   userAuthVerify: func.isRequired,
   isNotLogged: func.isRequired,
+  setChatIsOpen: func.isRequired,
 };
 
 export default Navigation;

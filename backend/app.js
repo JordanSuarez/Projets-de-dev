@@ -1,3 +1,8 @@
+const messageController = require('./routes/messageController');
+const models   = require('./models');
+const jwtUtils = require('./utils/jwt.utils');
+const asyncLib = require('async');
+
 require('dotenv').config();
 
 const port = process.env.PORT; 
@@ -9,6 +14,18 @@ const apiRouter = require('./apiRouter').router;
 // Server instance
 const app = express();
 app.use(cors());
+
+// Socket.io
+const server = require('http').createServer(app);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true
+  }
+});
+
 
 // Body Parser configuration
 app.use(bodyParser.json({limit: "50mb"}));
@@ -22,11 +39,49 @@ app.use((request, response, next) => {
   next();
 });
 
+
 app.get('/', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
   res.status(200).send('<h1>Test</h1>');
 });
 
 app.use('/api/', apiRouter);
+
+// Chat
+io.on('connection', socket => { 
+  socket.on('send_message', ({message, userToken}) => {
+    const userId = jwtUtils.getUserId(userToken);
+
+    if (userId < 0){
+      return null;
+    }
+
+    if (message == null || userId == null) {
+      return null;
+    }
+    asyncLib.waterfall([
+      (done) => {
+          const newMessage = models.Message.create({
+            content: message,
+            UserId: userId,
+            ChannelId: 1,
+          })
+        .then((newMessage) => {
+          const formatMessage = {
+            id: newMessage.id,
+            content: newMessage.content,
+            userId: newMessage.UserId,
+          }
+         return io.emit('send_message', formatMessage);
+        })
+        .catch((err) => {
+          return 'tata';
+        });
+        }
+    ])
+  });
+});
+
+//server.listen(port);
 
 app.listen(port);
