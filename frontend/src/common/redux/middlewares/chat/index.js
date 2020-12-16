@@ -5,7 +5,7 @@ import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getToken } from 'src/common/authentication/authProvider';
-// import { io } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { GET, ALL, MESSAGES } from 'src/common/callApiHandler/constants';
 
 let socket;
@@ -13,7 +13,7 @@ let socket;
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET: {
-      socket = window.io('http://ec2-34-202-164-145.compute-1.amazonaws.com/');
+      socket = io();
       socket.on('send_message', (message) => {
         console.log('EMIT_MESSAGE middleware pass', message);
         store.dispatch(addMessage(message));
