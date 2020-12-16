@@ -13,9 +13,9 @@ let socket;
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET:
-      socket = io('http://ec2-34-202-164-145.compute-1.amazonaws.com/api');
+      socket = io('http://ec2-34-202-164-145.compute-1.amazonaws.com');
       socket.on('send_message', (message) => {
-        // console.log('EMIT_MESSAGE middleware pass', message);
+        console.log('EMIT_MESSAGE middleware pass', message);
         store.dispatch(addMessage(message));
       });
       break;
