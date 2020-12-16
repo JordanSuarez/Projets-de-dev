@@ -268,7 +268,6 @@ module.exports = {
 			}
 
 			asyncLib.waterfall([
-
 				(done) => {
 					models.User.findOne({
 						where: {id: userId}
@@ -281,15 +280,12 @@ module.exports = {
 						}).then((userFoundEdit) => {
 							done(userFoundEdit)
 								return res.status(201).json(userFoundEdit);
-							
 						})
 					}).catch((err) => {
 						return res.status(500).json({'error': 'Impossible de mettre à jour l\'utilisateur' + err});
 					})
 				}
 			]);
-
-
 		},
 
 		deleteUser: (req, res) => {

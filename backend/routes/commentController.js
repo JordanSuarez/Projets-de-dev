@@ -32,8 +32,6 @@ module.exports = {
           .then ((newComment) => {
             return res.status(201).json({
               'status': 'Commentaire ajouté avec succès'
-            }).catch((err) => {
-              return res.status(500).json({'error': err});
             })
           })
           .catch((err) => {
@@ -73,13 +71,12 @@ module.exports = {
             })
           })
           .catch(function(err) {
-          return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
-        });
+            return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+          });
         })
         .catch(function(err) {
           return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
         });
-        
       },
     ]);
   },

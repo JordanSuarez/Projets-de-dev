@@ -164,8 +164,6 @@ module.exports = {
               'Tag5': tag5Id,
               'Tag6': tag6Id,
               'status': 'Projet ajouté avec succès'
-            }).catch((err) => {
-              return res.status(500).json({'error': 'Erreur lors de l\'ajout du nouveau projet 2: ' + err});
             })
           })
           .catch((err) => {
@@ -219,13 +217,11 @@ module.exports = {
           })
           .then((editProject) => {
             done(editProject)
-            return res.status(201).json({
-              projectEdit
-            })
+            return res.status(201).json({projectEdit})
           })
           .catch(function(err) {
           return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
-        });
+          })
         })
         .catch(function(err) {
           return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
