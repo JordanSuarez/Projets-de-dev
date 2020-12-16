@@ -13,6 +13,7 @@ let socket;
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET: {
+      console.log('pass CONNECT_WEBSOCKET')
       socket = io();
       socket.on('send_message', (message) => {
         console.log('EMIT_MESSAGE middleware pass', message);
@@ -21,7 +22,7 @@ const chatMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case EMIT_MESSAGE: {
-      // console.log('EMIT_MESSAGE middleware', action.message)
+      console.log('EMIT_MESSAGE middleware', action.message)
       socket.emit('send_message', { message: action.message, userToken: getToken() });
       break;
     }
