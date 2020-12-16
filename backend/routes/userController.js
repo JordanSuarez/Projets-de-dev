@@ -323,7 +323,7 @@ module.exports = {
 			}).then(() => {
 				return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
 			}).catch(() => {
-				return res.status(400).json({'error' : 'la requête n\'a pas pu aboutir' + err});
+				return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
 			})
 
 		},

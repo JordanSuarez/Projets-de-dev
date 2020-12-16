@@ -53,8 +53,6 @@ module.exports = {
     const id = req.params.id;
     const content = req.body.content;
     const projectId	 = req.body.projectId;
-
-
     
     models.Comment.findOne({
       where: { id: id, userId: userId, projectId: projectId }
