@@ -60,6 +60,16 @@ export default ({ breakpoints, palette }) => ({
     border: 'none',
     outline: 'none',
     boxShadow: 'inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff',
+    '&:before': {
+      borderBottom: 'none',
+
+    },
+    '&:hover:not(.Mui-disabled):before': {
+      borderBottom: 'none',
+
+    },
+    '&:after': {
+      borderBottom: 'none',
+    },
   },
-  
 });
