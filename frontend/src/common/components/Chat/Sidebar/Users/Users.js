@@ -6,6 +6,7 @@ import {
   Avatar,
   Button,
 } from '@material-ui/core';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import avatar from './avatar.png';
 
 const Users = ({
@@ -25,10 +26,14 @@ const Users = ({
     console.log(profileSelected);
   }, [profileSelected]);
 
-  //console.log(profiles);
+  const showList = () => {
+    console.log('click button');
+  };
   return (
     <div className="users">
-    <Button className={classes.showProfileMobile} > V </Button>
+      <Button className={classes.showProfileMobile} onClick={showList}>
+        <KeyboardArrowDownIcon />
+      </Button>
       <div className={classes.containerUsers}>
         {arrayProfiles.map((profile) => (
           <div

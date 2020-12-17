@@ -1,14 +1,8 @@
-import React, { useState, useEffect, useRef  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
-import {
-  Input,
-  Button,
-  Avatar,
-  InputAdornment,
-} from '@material-ui/core';
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { Input, Button, Avatar } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
@@ -49,8 +43,11 @@ const Messages = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    sendMessage(inputValue, currentUser.username, currentUser.userImage);
-    setInputValue('');
+    SetEmojiPicker(false);
+    if (inputValue.length > 0) {
+      sendMessage(inputValue, currentUser.username, currentUser.userImage);
+      setInputValue('');
+    }
   };
 
   return (
@@ -87,7 +84,6 @@ const Messages = ({
               id="input-with-icon-adornment"
               className={classes.inputMessage}
               type="text"
-              multiline
               label="Entrez votre message"
               value={inputValue}
               onChange={(event) => setInputValue(event.target.value)}
@@ -97,7 +93,7 @@ const Messages = ({
                   className={classes.picker}
                   onClick={triggerPicker}
                 >
-                  <SentimentVerySatisfiedIcon />
+                  😍
                 </Button>
               )}
               endAdornment={(
