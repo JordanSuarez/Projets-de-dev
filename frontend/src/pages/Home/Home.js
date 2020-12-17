@@ -44,9 +44,10 @@ const Home = ({
                 let like = false;
                 myLikes.map((myLike) => {
                   if ((project.id === myLike.projectId) && (myLike.isLike === 1)) {
-                    like = true; console.log(myLike);
+                    like = true;
                   }
                 });
+                console.log(project);
                 return (
                   <CardProject
                     key={project.id}
@@ -59,6 +60,7 @@ const Home = ({
                     image={project.image}
                     isLogged={isLogged}
                     like={like}
+                    vote={project.vote}
                   />
                 );
               })}

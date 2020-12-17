@@ -87,7 +87,7 @@ const Projects = ({
         <div className={classes.listCard}>
           {searchResults.length > 0
           && searchResults.map(({
-            id: projectId, title, description, tags, user, image,
+            id: projectId, title, description, tags, user, image, vote
           }) => (
             <CardProject
               key={projectId}
@@ -99,6 +99,7 @@ const Projects = ({
               userImage={user.userImage}
               image={image}
               isLogged={isLogged}
+              vote={vote}
             />
           ))}
           {searchResults.length === 0

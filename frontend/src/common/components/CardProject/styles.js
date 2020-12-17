@@ -75,6 +75,9 @@ export default ({ breakpoints, palette }) => ({
       transform: 'scale(1.1)',
     },
   },
+  vote: {
+    color: 'white',
+  },
   editIcon: {
     margin: '0.50em',
     color: palette.darkBlue,

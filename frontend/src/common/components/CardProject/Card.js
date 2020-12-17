@@ -38,9 +38,9 @@ const CardProject = ({
   like,
   setLike,
   setDislike,
+  vote,
 }) => {
   const history = useHistory();
-
   const handleDisplayProject = () => {
     history.push(getProjectRoute(projectId));
   };
@@ -96,11 +96,14 @@ const CardProject = ({
             {!projectOwnerOptions ? (
               <>
                 {isLogged
-                && like
-                && <FavoriteIcon className={classes.like} onClick={() => handleDislikeProject(projectId)} />}
+                  && like
+                  && <FavoriteIcon className={classes.like} onClick={() => handleDislikeProject(projectId)} />}
                 {isLogged
                   && !like
-                && <FavoriteBorderIcon className={classes.dontLike} onClick={() => handleLikeProject(projectId)} />}
+                  && <FavoriteBorderIcon className={classes.dontLike} onClick={() => handleLikeProject(projectId)} />}
+
+                {vote !== null ? <span className={classes.vote}>{vote} vote</span> : <span className={classes.vote}>0 vote</span>}
+
                 <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
               </>
             ) : (
@@ -141,7 +144,7 @@ CardProject.propTypes = {
   setLike: PropTypes.func.isRequired,
   setDislike: PropTypes.func.isRequired,
   like: PropTypes.bool.isRequired,
-  redirect: PropTypes.string.isRequired,
+  vote: PropTypes.number.isRequired,
 };
 
 CardProject.defaultProps = {
