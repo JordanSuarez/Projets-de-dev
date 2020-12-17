@@ -379,12 +379,28 @@ module.exports = {
 				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
-			models.User.destroy({
+			models.User.findOne({
 				where: { id: userId }
 			}).then(() => {
-				return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
-			}).catch(() => {
-				return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
+				models.Comment.destroy({
+					where: {userId: userId}
+				}).then(() => {
+					models.Project.destroy({
+						where: {userId: userId}						
+					}).then(() => {
+						models.Message.destroy({
+							where: {userId: userId}
+						}).then(() => {
+							models.User.destroy({
+								where: { id: userId }
+							}).then(() => {
+								return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
+							}).catch(() => {
+								return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
+							})
+						})
+				})
+			})
 			})
 
 		},
