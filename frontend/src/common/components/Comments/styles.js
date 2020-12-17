@@ -26,7 +26,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   containerPicker: {
-    width: '100px !important',
+
   },
 
   picker: {
