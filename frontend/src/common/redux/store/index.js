@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from 'src/common/redux/reducers';
@@ -10,6 +9,7 @@ import profiles from 'src/common/redux/middlewares/profiles';
 import project from 'src/common/redux/middlewares/project';
 import projects from 'src/common/redux/middlewares/projects';
 import comments from 'src/common/redux/middlewares/comments';
+import chat from 'src/common/redux/middlewares/chat';
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
@@ -21,6 +21,7 @@ const enhancers = composeWithDevTools(
     project,
     projects,
     comments,
+    chat,
   ),
 );
 

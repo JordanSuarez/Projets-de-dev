@@ -5,6 +5,20 @@ const asyncLib = require('async');
 
 module.exports = {
 
+  commentsList: (req, res) => {
+
+    models.Comment.findAll()
+    .then((allComments) => {
+      
+      return res.status(200).json(allComments);
+
+    }).catch((error) => {
+
+      return res.status(500).json({ 'Error': 'Erreur lors de la récupréation des données, les commenataires n\'ont pas pu être récupérés' })
+
+    })
+  },
+
   new: (req, res) => {
 
     const headerAuth = req.headers['authorization'];
@@ -32,8 +46,6 @@ module.exports = {
           .then ((newComment) => {
             return res.status(201).json({
               'status': 'Commentaire ajouté avec succès'
-            }).catch((err) => {
-              return res.status(500).json({'error': err});
             })
           })
           .catch((err) => {
@@ -55,33 +67,24 @@ module.exports = {
     const id = req.params.id;
     const content = req.body.content;
     const projectId	 = req.body.projectId;
-
-
-    asyncLib.waterfall([
-      (done) => {
-        models.Comment.findOne({
-          where: { id: id, userId: userId, projectId: projectId }
-        })
-        .then((commentEdit) => {
-          commentEdit.update({
-            content: (content ? content : commentEdit.content),
-          })
-          .then((editComment) => {
-            done(editComment)
-            return res.status(201).json({
-              editComment
-            })
-          })
-          .catch(function(err) {
-          return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
-        });
-        })
-        .catch(function(err) {
-          return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
-        });
-        
-      },
-    ]);
+    
+    models.Comment.findOne({
+      where: { id: id, userId: userId, projectId: projectId }
+    })
+    .then((commentEdit) => {
+      commentEdit.update({
+        content: (content ? content : commentEdit.content),
+      })
+      .then(() => {
+        return res.status(201).json({commentEdit})
+      })
+      .catch(function(err) {
+        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+      });
+    })
+    .catch(function(err) {
+      return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
+    });
   },
 
   deleteComment: (req, res) => {
