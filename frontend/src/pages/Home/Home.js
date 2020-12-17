@@ -5,6 +5,7 @@ import { classes as classesProps } from 'src/common/classes';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
 import headerImage from './header-home.jpg';
+import robot from './robot.png';
 
 const Home = ({
   classes,
@@ -50,12 +51,14 @@ const Home = ({
             </div>
           </div>
         </div>
+        <div className={classes.containerPresentation}>
         <div className={classes.presentation}>
-          <img className={classes.robot} src="" alt="robot" />
-          <div className={classes.title}>Title</div>
-          <p className={classes.desciptionSite}>
+          <img className={classes.robot} src={robot} alt="robot" />
+          <div className={classes.title}>Projets de dev</div>
+          <p className={classes.descriptionSite}>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
           </p>
+        </div>
         </div>
       </div>
     </Base>
