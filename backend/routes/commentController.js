@@ -7,10 +7,28 @@ module.exports = {
 
   commentsList: (req, res) => {
 
-    models.Comment.findAll()
+    models.Comment.findAll({
+      include: {all:true}
+    })
     .then((allComments) => {
-      
+      const arrayAllComments = Object.values(allComments);
+      res.set('X-Total-Count', arrayAllComments.length);
       return res.status(200).json(allComments);
+
+    }).catch((error) => {
+
+      return res.status(500).json({ 'Error': 'Erreur lors de la récupréation des données, les commenataires n\'ont pas pu être récupérés' })
+
+    })
+  },
+
+  comment: (req, res) => {
+
+    models.Comment.findOne({
+      where : {id : req.params.id},
+    })
+    .then((comment) => {
+      return res.status(200).json(comment);
 
     }).catch((error) => {
 

@@ -31,6 +31,8 @@ exports.router = (() => {
     
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
+    apiRouter.route('/tags/:id').get(tagController.getTagbyId); // OK
+
     
     // Likes routes
     apiRouter.route('/projects/:projectId/vote/like').post(likeController.likePost); // OK
@@ -38,6 +40,7 @@ exports.router = (() => {
 
     // Comments routes
     apiRouter.route('/comments/').get(commentController.commentsList);    
+    apiRouter.route('/comments/:id').get(commentController.comment);    
     apiRouter.route('/comments/add').post(commentController.new); // OK
     apiRouter.route('/comments/:id/edit').patch(commentController.edit); // OK
     apiRouter.route('/comments/:id/delete').delete(commentController.deleteComment); // OK
@@ -52,6 +55,8 @@ exports.router = (() => {
     // Admin routes
     apiRouter.route('/users/:id/delete').delete(userController.deleteUser); // OK
     apiRouter.route('/projects/:id/delete').delete(projectController.deleteProject); //OK
+    apiRouter.route('/projects/:id').put(projectController.editBackOffice); // OK
+
 
     return apiRouter;
 })();

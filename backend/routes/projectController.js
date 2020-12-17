@@ -60,6 +60,8 @@ module.exports = {
           };
           formatProject.push(newFormat)
         }
+        const arrayAllProjects = Object.values(formatProject);
+        res.set('X-Total-Count', arrayAllProjects.length);
         return res.status(200).json(formatProject)
     })
     .catch((error) => {
@@ -266,5 +268,39 @@ module.exports = {
     } else {
       return res.status(401).json({'error': 'vous n\'avez pas l\'autorisation de supprimer ce projet' });
     }
-  }
+  },
+
+  editBackOffice: (req, res) => {
+    const id = req.params.id;
+
+    const updatedProject = {
+      id: parseInt(req.params.id, 10),
+      title: req.body.title,
+      description: req.body.description,
+      image: req.body.image,
+      githubLink: req.body.githubLink,
+      projectLink: req.body.projectLink,
+      tagId: req.body.tag1,
+      tag2Id: req.body.tag2,
+      tag3Id: req.body.tag3,
+      tag4Id: req.body.tag4,
+      tag5Id: req.body.tag5,
+      tag6Id: req.body.tag6,
+  };
+
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
+
+    if (UserId < 0){
+      return res.status(400).json({ 'error': 'Le token est invalide'});
+      } 
+
+    models.Project.update(updatedProject, 
+      {where: {id: id}
+    }).then(() => {
+        return res.status(201).json(updatedProject)
+      }).catch(error => {
+        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + error });
+      })
+  },
 }
