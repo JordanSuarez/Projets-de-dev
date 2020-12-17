@@ -8,6 +8,7 @@ import { Form } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
+import defaultAvatar from 'src/common/assets/images/avatar.png';
 import {
   TextField,
 } from 'mui-rff';
@@ -155,7 +156,7 @@ const ProfileEdition = ({
                           onDone={getFiles}
                         />
                       </div>
-                      {(formImage.userImage !== '') && <img src={formImage.userImage} alt="avatar" className={classes.imageInput} />}
+                      <img src={formImage.userImage || defaultAvatar} alt="avatar" className={classes.imageInput} />
                     </div>
                   </div>
                   <div>

@@ -25,11 +25,12 @@ const Home = ({
           <h2 className={classes.subtitle}> Projets de Dev</h2>
           <p className={classes.homeText}>
             Une plateforme crée par des développeurs, pour des développeurs,
-            où vous pourrez lister vos projets de développement, cherchez de l'inspiration, partager, échanger
+            où vous pourrez lister vos projets de développement, cherchez de l'inspiration, 
+            partager et échanger!
           </p>
         </div>
 
-        <h2 className={classes.subtitle}> Derniers projets publiés</h2>
+        <h2 className={classes.subtitleProjects}> Derniers projets publiés</h2>
         <div className={classes.latestProject}>
           <div className={classes.container}>
             <div className={classes.listCard}>
