@@ -35,7 +35,9 @@ export const connectWebSocket = () => ({
 });
 
 // envoi message
-export const emitMessage = (message) => ({
+export const emitMessage = (message, username, userImage) => ({
   type: EMIT_MESSAGE,
   message,
+  username,
+  userImage,
 });

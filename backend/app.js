@@ -49,7 +49,7 @@ app.use('/api/', apiRouter);
 
 // Chat
 io.on('connection', socket => { 
-  socket.on('send_message', ({message, userToken}) => {
+  socket.on('send_message', ({message, userToken, username, userImage}) => {
     const userId = jwtUtils.getUserId(userToken);
 
     if (userId < 0){
@@ -59,26 +59,37 @@ io.on('connection', socket => {
     if (message == null || userId == null) {
       return null;
     }
-    asyncLib.waterfall([
-      (done) => {
-          const newMessage = models.Message.create({
-            content: message,
-            UserId: userId,
-            ChannelId: 1,
-          })
-        .then((newMessage) => {
-          const formatMessage = {
-            id: newMessage.id,
-            content: newMessage.content,
-            userId: newMessage.UserId,
-          }
-         return io.emit('send_message', formatMessage);
-        })
-        .catch((err) => {
-          return 'tata';
-        });
+
+
+    models.User.findOne({
+      where: { id: userId },
+      attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email', 'bio', 'createdAt'],},
+    }).then((user) => {
+      const newMessage = models.Message.create({
+        content: message,
+        UserId: userId,
+        ChannelId: 1,
+      })
+      .then((newMessage) => {
+        const formatMessage = {
+          User: {
+            id: userId,
+            userImage: userImage,
+            username: username,
+          },
+          id: newMessage.id,
+          content: newMessage.content,
+          userId: newMessage.UserId,
+          createdAt: newMessage.createdAt,
         }
-    ])
+        return io.emit('send_message', formatMessage);
+      })
+      .catch((err) => {
+        return 'tata';
+      });
+    }).catch((err) => {
+      return 'tata';
+    });
   });
 });
 

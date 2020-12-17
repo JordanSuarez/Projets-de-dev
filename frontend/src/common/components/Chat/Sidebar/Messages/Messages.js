@@ -19,8 +19,10 @@ const Messages = ({
   sendMessage,
   messages,
   currentUserId,
+  currentUser,
 }) => {
   const [inputValue, setInputValue] = useState('');
+
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const messageScroll = useRef(null);
   useEffect(() => {
@@ -44,16 +46,13 @@ const Messages = ({
     event.preventDefault();
     SetEmojiPicker(!emojiPickerState);
   };
-  // TODO
-  // Recuperer le nom du channel
-  // Recuperation des messages du channel depuis la DB + boucles sur li
-  // Detecter si le message viens de l'utilisateur qui est connecté pour affichage diff
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    sendMessage(inputValue);
+    sendMessage(inputValue, currentUser.username, currentUser.userImage);
     setInputValue('');
   };
-  console.log(messages);
+
   return (
     <div className="chat">
       <div className={classes.chat}>
@@ -62,7 +61,7 @@ const Messages = ({
         </div>
         <ul ref={messageScroll} className={classes.messages}>
           {messages.map(({
-            id, content, userId, User: user, createdAt,
+            id, content, userId, User, createdAt,
           }) => (
             <li
               key={id}
@@ -70,14 +69,14 @@ const Messages = ({
             >
               <div>
                 <p className={userId === currentUserId ? classes.pseudoRight : classes.pseudoLeft}>
-                  {user.username}
+                  {User.username}
                 </p>
                 <div className={userId === currentUserId ? classes.myMessage : classes.message}>
                   {content}
                 </div>
                 <p className={classes.date}>le {new Date(createdAt).toLocaleString('fr-FR')}</p>
               </div>
-              <Avatar className={classes.avatar} alt="Cindy Baker" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZXWk4HOB6y3GDM1oGMJYWUM_rPChE80R-OQ&usqp=CAU" />
+              <Avatar className={classes.avatar} alt="Cindy Baker" src={User.userImage} />
             </li>
 
           ))}
@@ -118,7 +117,7 @@ const Messages = ({
 Messages.propTypes = {
   ...classesProps,
   messages: PropTypes.array.isRequired,
-  currentUserId: PropTypes.number.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 Messages.defaultProps = {

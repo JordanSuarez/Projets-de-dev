@@ -25,6 +25,8 @@ const Comments = ({
   userId,
   redirect,
 }) => {
+  const [submitting, setSubmitting] = useState(false);
+
   /* ----------------- reload ------------------- */
   const history = useHistory();
   useEffect(() => {
@@ -38,6 +40,7 @@ const Comments = ({
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const [message, SetMessage] = useState('');
   const onComment = (e) => {
+    setSubmitting(true);
     e.preventDefault();
     handleComment({ content: message, projectId: idProject });
   };
@@ -175,7 +178,7 @@ const Comments = ({
                           <EditIcon />
                         </IconButton>
                         <IconButton
-                          className={classes.editButton}
+                          className={classes.deleteButton}
                           variant="contained"
                           type="button"
                           onClick={() => {
@@ -224,6 +227,7 @@ const Comments = ({
                         className={classes.submit}
                         variant="contained"
                         type="submit"
+                        disabled={submitting}
                       >
                         Envoyer
                       </Button>

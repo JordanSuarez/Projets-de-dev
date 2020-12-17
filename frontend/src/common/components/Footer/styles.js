@@ -2,12 +2,13 @@ export default ({ breakpoints, palette }) => ({
 
   footer: {
     width: '100%',
-    padding: '1em 0',
+    padding: '3em 0',
     backgroundColor: palette.darkBlue,
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
     [breakpoints.down('xs')]: {
+      padding: '1.4rem 0',
       flexDirection: 'column',
     },
     color: palette.white,

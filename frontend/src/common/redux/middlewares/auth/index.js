@@ -11,7 +11,7 @@ import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection'
 import { getProfileInfos } from 'src/common/redux/actions/userProfile';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import {
-  setToken, setUserId, removeToken, removeUserId,
+  setToken, setUserId, removeToken, removeUserId, removeUser,
 } from 'src/common/authentication/authProvider';
 import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
@@ -84,6 +84,7 @@ const authMiddleWare = (store) => (next) => (action) => {
         .catch(() => {
           removeToken();
           removeUserId();
+          removeUser();
           store.dispatch(submitLogoutSuccess());
           store.dispatch(showSnackbar('Oups!', 'Votre session à expiré!', 'error'));
         });
