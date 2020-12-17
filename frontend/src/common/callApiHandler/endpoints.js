@@ -23,6 +23,12 @@ import {
   MESSAGES,
   PRIVATE_PROFILE_LIKES,
   PROFILE_LIKES,
+  LIKEPROJECT,
+  LIKE,
+  DISLIKE,
+  ILIKE,
+  IDISLIKE,
+  VOTE,
 } from './constants';
 import { apiUrl } from './urlHandler';
 
@@ -74,6 +80,12 @@ const endpoints = {
     },
     [DELETE]: {
       [ONE]: (meta) => `${COMMENT}/${meta}/${DELETE}`,
+    },
+  },
+  [LIKEPROJECT]: {
+    [POST]: {
+      [ILIKE]: (meta) => `${PROJECTS}/${meta}/${VOTE}/${LIKE}`,
+      [IDISLIKE]: (meta) => `${PROJECTS}/${meta}/${VOTE}/${DISLIKE}`,
     },
   },
   [CONTACT]: {

@@ -43,8 +43,8 @@ const Home = ({
               {arrayProjects.map((project) => {
                 let like = false;
                 myLikes.map((myLike) => {
-                  if (project.id === myLike.projectId) {
-                    like = true;
+                  if ((project.id === myLike.projectId) && (myLike.isLike === 1)) {
+                    like = true; console.log(myLike);
                   }
                 });
                 return (

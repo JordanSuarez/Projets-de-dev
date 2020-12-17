@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable max-len */
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import {
@@ -35,8 +36,14 @@ const CardProject = ({
   handleDeleteProject,
   isLogged,
   like,
+  setLike,
+  setDislike,
 }) => {
   const history = useHistory();
+  const [reload, setReload] = useState('');
+  useEffect(() => {
+
+  }, [reload]);
 
   const handleDisplayProject = () => {
     history.push(getProjectRoute(projectId));
@@ -50,8 +57,13 @@ const CardProject = ({
     history.push(getProfileRoute(userId));
   };
 
-  const handleLikeProject = () => {
-    // TODO like project and change to FavoriteIcon
+  const handleLikeProject = (id) => {
+    setLike(id);
+    setReload('');
+  };
+  const handleDislikeProject = (id) => {
+    setDislike(id);
+    setReload('');
   };
 
   const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'br', 'p'] };
@@ -89,10 +101,10 @@ const CardProject = ({
               <>
                 {isLogged
                 && like
-                && <FavoriteIcon className={classes.like} onClick={handleLikeProject} />}
+                && <FavoriteIcon className={classes.like} onClick={() => handleDislikeProject(projectId)} />}
                 {isLogged
                   && !like
-                && <FavoriteBorderIcon className={classes.dontLike} onClick={handleLikeProject} />}
+                && <FavoriteBorderIcon className={classes.dontLike} onClick={() => handleLikeProject(projectId)} />}
                 <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
               </>
             ) : (
@@ -130,6 +142,8 @@ CardProject.propTypes = {
       name: PropTypes.string,
     }),
   ),
+  setLike: PropTypes.func.isRequired,
+  setDislike: PropTypes.func.isRequired,
 };
 
 CardProject.defaultProps = {

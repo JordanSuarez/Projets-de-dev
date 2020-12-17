@@ -107,26 +107,24 @@ const Projects = ({
           }) => {
             let like = false;
             myLikes.map((myLike) => {
-              if (projectId === myLike.projectId) {
+              if ((projectId === myLike.projectId) && (myLike.isLike === 1)) {
                 like = true;
-                console.log('j ai like le projet', title);
               }
             });
             return (
               <CardProject
-              key={projectId}
-              projectId={projectId}
-              title={title}
-              tags={tags}
-              description={description}
-              userId={user.id}
-              userImage={user.userImage}
-              image={image}
-              isLogged={isLogged}
-              like={like}
-            />
-            )
-            
+                key={projectId}
+                projectId={projectId}
+                title={title}
+                tags={tags}
+                description={description}
+                userId={user.id}
+                userImage={user.userImage}
+                image={image}
+                isLogged={isLogged}
+                like={like}
+              />
+            );
           })}
         </div>
         {!hidePagination

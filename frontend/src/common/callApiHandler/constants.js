@@ -13,6 +13,7 @@ export const CONTACT = 'contact';
 export const COMMENT = 'comments';
 export const CHANNELS = 'channels';
 export const MESSAGES = 'messages';
+export const LIKEPROJECT = 'likeProject';
 
 // Resources type
 export const ALL = 'all';
@@ -29,3 +30,8 @@ export const PROFILE_LIKES = 'PROFILE_LIKES';
 export const LATEST = 'latest';
 export const ME = 'me';
 export const LIKES = 'likes';
+export const LIKE = 'like';
+export const DISLIKE = 'dislike';
+export const VOTE = 'vote';
+export const ILIKE = 'ilike';
+export const IDISLIKE = 'isdislike';
