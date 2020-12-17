@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import {
+  Avatar,
 } from '@material-ui/core';
+import avatar from './avatar.png';
 
 const Users = ({
   classes,
@@ -25,14 +27,21 @@ const Users = ({
   console.log(profiles);
   return (
     <div className="users">
-      {arrayProfiles.map((profile) => (
-        <div
-          key={profile.id}
-          onClick={() => viewProfile(profile.id, profile.username)}
-        >
-          {profile.username}
-        </div>
-      ))}
+      <div className={classes.containerUsers}>
+        {arrayProfiles.map((profile) => (
+          <div
+            className={classes.user}
+            key={profile.id}
+            onClick={() => viewProfile(profile.id, profile.username)}
+          >
+
+            <Avatar alt="avatar" src={profile.userImage || avatar} className={classes.userImage} />
+            <div>
+              {profile.username}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

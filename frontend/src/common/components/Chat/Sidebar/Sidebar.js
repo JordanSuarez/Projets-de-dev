@@ -16,8 +16,8 @@ const Sidebar = ({
   return (
     <>
       <div className={classes.chatSidebar}>
-          <Users />
           <Messages />
+          <Users />
       </div>
     </>
   );
