@@ -5,6 +5,19 @@ const asyncLib = require('async');
 
 module.exports = {
 
+  commentsList: (req, res) => {
+
+    models.Comment.findAll()
+    .then((allComments) => {
+      
+      return res.status(200).json(allComments);
+
+    }).catch((error) => {
+
+      return res.status(500).json({ 'Error': 'Erreur lors de la récupréation des données, les commenataires n\'ont pas pu être récupérés' })
+
+    })
+  },
 
   new: (req, res) => {
 
@@ -33,8 +46,6 @@ module.exports = {
           .then ((newComment) => {
             return res.status(201).json({
               'status': 'Commentaire ajouté avec succès'
-            }).catch((err) => {
-              return res.status(500).json({'error': err});
             })
           })
           .catch((err) => {
@@ -44,44 +55,53 @@ module.exports = {
       ])
 },
 
-edit: (req, res) => {
+  edit: (req, res) => {
 
-  const headerAuth = req.headers['authorization'];
-  const userId = jwtUtils.getUserId(headerAuth);
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
 
-  if (userId < 0){
-    return res.status(400).json({ 'error': 'Le token est invalide' });
-  }
+    if (userId < 0){
+      return res.status(400).json({ 'error': 'Le token est invalide' });
+    }
 
-  const id = req.params.id;
-  const content = req.body.content;
-  const projectId	 = req.body.projectId;
+    const id = req.params.id;
+    const content = req.body.content;
+    const projectId	 = req.body.projectId;
+    
+    models.Comment.findOne({
+      where: { id: id, userId: userId, projectId: projectId }
+    })
+    .then((commentEdit) => {
+      commentEdit.update({
+        content: (content ? content : commentEdit.content),
+      })
+      .then(() => {
+        return res.status(201).json({commentEdit})
+      })
+      .catch(function(err) {
+        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
+      });
+    })
+    .catch(function(err) {
+      return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
+    });
+  },
 
+  deleteComment: (req, res) => {
 
-    asyncLib.waterfall([
-      (done) => {
-        models.Comment.findOne({
-          where: { id: id, userId: userId, projectId: projectId }
-        })
-        .then((commentEdit) => {
-          commentEdit.update({
-            content: (content ? content : commentEdit.content),
-          })
-          .then((editComment) => {
-            done(editComment)
-            return res.status(201).json({
-              editComment
-            })
-          })
-          .catch(function(err) {
-          return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
-        });
-        })
-        .catch(function(err) {
-          return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
-        });
-        
-      },
-    ]);
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
+
+    if (userId < 0){
+      return res.status(400).json({ 'error': 'Le token est invalide' });
+    }
+    
+    models.Comment.destroy({
+      where: {id: req.params.id, userId: userId}
+    }).then(() => {
+      return res.status(200).json({ 'message': 'Le commentaire a bien été supprimé' });
+    }).catch((err) => {
+      return res.status(400).json({'error' : 'La requête n\'a pas pu aboutir' + err});
+    })
   }
 }

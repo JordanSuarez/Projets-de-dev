@@ -20,6 +20,7 @@ const Comments = ({
   comments,
   handleComment,
   handleCommentUpdate,
+  handleCommentDelete,
   idProject,
   isLogged,
   userId,
@@ -31,7 +32,6 @@ const Comments = ({
   const history = useHistory();
   useEffect(() => {
     if (redirect.length > 0) {
-      window.location.reload();
       history.push(redirect);
     }
   }, [redirect]);
@@ -101,8 +101,7 @@ const Comments = ({
 
   /* ----------------- delete ------------------- */
   const onClickDelete = (comment) => {
-    console.log('TODO');
-    // handleCommentDelete(comment.id);
+    handleCommentDelete({ content: messageUpdate, projectId: idProject }, comment.id);
   };
 
   return (
@@ -261,6 +260,7 @@ Comments.propTypes = {
   comments: PropTypes.array.isRequired,
   handleComment: PropTypes.func.isRequired,
   handleCommentUpdate: PropTypes.func.isRequired,
+  handleCommentDelete: PropTypes.func.isRequired,
   idProject: PropTypes.number.isRequired,
   isLogged: PropTypes.bool.isRequired,
   userId: PropTypes.number,

@@ -1,4 +1,5 @@
 // Imports
+require('dotenv').config();
 const bcrypt   = require('bcrypt');
 const jwtUtils = require('../utils/jwt.utils');
 const models   = require('../models');
@@ -33,18 +34,75 @@ module.exports = {
 				return res.status(400).json({'error': 'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'});
 			}			
 			
-			asyncLib.waterfall([
+			models.User.findOne({
+
+				attributes: ['email'],
+				where: {email: email},
+
+			}).then((isEmailExist) => {
+
+				if(isEmailExist){
+
+					return res.status(409).json({ 'error': 'Cet email est déjà utilisé' });
+
+				} else {
+
+					models.User.findOne({
+
+						attributes: ['username'],
+						where: {username: username},
+
+					}).then((isUsernameExist) => {
+
+						if(isUsernameExist) {
+
+							return res.status(409).json({ 'error': 'Ce nom d\'utilisateur est déjà utilisé' });
+
+						} else {
+
+							bcrypt.hash(password, 5, (errBycrypt, bcryptedPassword ) => {
+							
+								models.User.create({
+
+									email:email,
+									username:username,
+									password: bcryptedPassword,
+									isAdmin: 0
+								
+								}).then ((newUser) => {
+
+									res.status(200).json({ 'userId': newUser.id });
+
+								}).catch((error) => {
+
+									return res.status(409).json(error);
+
+								})
+
+						})
+					}
+				})
+				}
+			});
+
+			/*asyncLib.waterfall([
 				
 				(done) => {
 					models.User.findOne({
 						attributes: ['email'],
 						where: { email: email}
 					})
+					.then(() => {
+						models
+					})
+					
+					
+					
 					.then((userFound) => {
 						done(null, userFound);
 					})
-					.catch((err) => {
-						return res.status(500).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' + err});
+					.catch(() => {
+						return res.status(500).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' });
 					});
 				},
 
@@ -54,7 +112,7 @@ module.exports = {
 							done(null, userFound, bcryptedPassword);
 						});
 					} else {
-						return res.status(409).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' + err});
+						return res.status(409).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' });
 					}
 				},
 
@@ -80,7 +138,7 @@ module.exports = {
 			} else {
 				return res.status(500).json({'error': err});
 			}
-			});
+			});*/
 		},
 
 		login: (req, res) => {
@@ -196,7 +254,7 @@ module.exports = {
 				attributes: ['id', 'username', 'userImage'],
 			}).then((user) => {
 				if (user) {
-					return res.status(201).json(user);
+					return res.status(200).json(user);
 				} else {
 					return res.status(404).json({ 'error': /*'Aucun utilisateur n\'a pu être trouvé'*/ err });
 				}
@@ -256,41 +314,36 @@ module.exports = {
 			const headerAuth = req.headers['authorization'];
 			const userId = jwtUtils.getUserId(headerAuth);
 
-			
-			const username = req.body.username;
-			const bio = req.body.bio;
-			const userImage = req.body.userImage;
-			const password = req.body.password;
-			
 
 			if (userId < 0){
 				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
-			asyncLib.waterfall([
+				bcrypt.hash(req.body.password, 5, (errBycrypt, bcryptedPassword) => {
 
-				(done) => {
-					models.User.findOne({
-						where: {id: userId}
-					}).then((userFoundEdit) => {
-						userFoundEdit.update({
-							username: (username ? username : userFoundEdit.username),
-							bio: (bio ? bio : userFoundEdit.bio),
-							userImage: (userImage ? userImage : userFoundEdit.userImage),
-							password: (password ? password : userFoundEdit.password),
-						}).then((userFoundEdit) => {
-							done(userFoundEdit)
-								return res.status(201).json(userFoundEdit);
-						}).catch((err) => {
-							return res.status(500).json({err});
-						})
-					}).catch((err) => {
-						return res.status(500).json({'error': 'Impossible de mettre à jour l\'utilisateur' + err});
-					})
-				}
-			]);
+					const updateUser = {
+						username: req.body.username,
+						email: req.body.email,
+						bio: req.body.bio,
+						userImage: req.body.userImage,
+						password: bcryptedPassword,
+					};
+	
+					models.User.update(updateUser, {
+						
+						where: { id: userId }
+	
+					}).then((userFound) => {
+	
+						res.status(200).json(updateUser);
+	
+					}).catch((error) => {
 
+						res.status(500).json({ 'error': 'Le profil n\'a pas pu être mis à jour' });
 
+					});
+
+				})
 		},
 
 		deleteUser: (req, res) => {
@@ -331,7 +384,7 @@ module.exports = {
 			}).then(() => {
 				return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
 			}).catch(() => {
-				return res.status(400).json({'error' : 'la requête n\'a pas pu aboutir' + err});
+				return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
 			})
 
 		},

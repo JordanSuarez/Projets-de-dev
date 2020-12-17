@@ -4,19 +4,20 @@ import {
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import { getToken } from 'src/common/authentication/authProvider';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { GET, ALL, MESSAGES } from 'src/common/callApiHandler/constants';
 
 let socket;
 
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
-    case CONNECT_WEBSOCKET:
-      socket = io('http://localhost:5050');
+    case CONNECT_WEBSOCKET: {
+      socket = io();
       socket.on('send_message', (message) => {
         store.dispatch(addMessage(message));
       });
       break;
+    }
     case EMIT_MESSAGE: {
       socket.emit('send_message', {
         message: action.message,
