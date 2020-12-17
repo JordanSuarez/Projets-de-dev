@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
 import { userAuthVerify, submitLogoutSuccess } from 'src/common/redux/actions/auth';
+import { setChat } from 'src/common/redux/actions/chat';
 import Navigation from './Navigation';
 import styles from './styles';
 
@@ -16,6 +17,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   isNotLogged: () => {
     dispatch(submitLogoutSuccess());
+  },
+  setChatIsOpen: (status) => {
+    dispatch(setChat(status));
   },
 });
 

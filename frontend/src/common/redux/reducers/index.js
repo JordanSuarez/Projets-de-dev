@@ -9,6 +9,7 @@ import profileReducer from './profile';
 import profilesReducer from './profiles';
 import snackbarReducer from './snackbar';
 import redirectionReducer from './redirection';
+import chatReducer from './chat';
 
 const rootReducer = combineReducers({
   redirection: redirectionReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   userProfile: userProfileReducer,
   profile: profileReducer,
   profiles: profilesReducer,
+  chat: chatReducer,
 });
 
 export default rootReducer;

@@ -13,6 +13,7 @@ import IconButton from 'src/common/components/IconButton';
 import ScrollButton from '@material-ui/icons/ExpandLessRounded';
 import { classes as classesProps } from 'src/common/classes';
 import styles from './styles';
+import Chat from 'src/common/components/Chat';
 
 const App = ({ classes }) => {
   const [atTheTopOfThePage, setAtTheTopOfThePage] = useState(true);
@@ -38,6 +39,7 @@ const App = ({ classes }) => {
           <ScrollButton />
         </IconButton>
         )}
+        <Chat />
       </Provider>
     </MuiThemeProvider>
   );
