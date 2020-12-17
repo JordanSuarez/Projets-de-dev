@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect, useRef  } from 'react';
 import PropTypes from 'prop-types';
-import { Avatar } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
+import {
+  Input,
+  Button,
+  Avatar,
+  InputAdornment,
+} from '@material-ui/core';
+import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SendIcon from '@material-ui/icons/Send';
-import Input from '@material-ui/core/Input';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
+import './style.scss';
 
 const Messages = ({
   classes,
@@ -16,6 +23,30 @@ const Messages = ({
 }) => {
   const [inputValue, setInputValue] = useState('');
 
+  const [emojiPickerState, SetEmojiPicker] = useState(false);
+  const messageScroll = useRef(null);
+  useEffect(() => {
+    messageScroll.current.scrollTop = messageScroll.current.scrollHeight;
+  }, [messages]);
+
+  let emojiPicker;
+  if (emojiPickerState) {
+    emojiPicker = (
+      <Picker
+        className={classes.containerPicker}
+        title=" "
+        onSelect={(emoji) => setInputValue(inputValue + emoji.native)}
+        i18n={{ search: 'Recherche', categories: { search: 'Résultats de recherche', recent: 'Récents' } }}
+        showPreview={false}
+        showSkinTones={false}
+      />
+    );
+  }
+  const triggerPicker = (event) => {
+    event.preventDefault();
+    SetEmojiPicker(!emojiPickerState);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     sendMessage(inputValue, currentUser.username, currentUser.userImage);
@@ -23,11 +54,12 @@ const Messages = ({
   };
 
   return (
-    <>
+    <div className="chat">
       <div className={classes.chat}>
-        <h3>Chat</h3>
-
-        <ul className={classes.messages}>
+        <div className={classes.channelTitleContainer}>
+          <h3 className={classes.channelTitleSelected}># GENERAL</h3>
+        </div>
+        <ul ref={messageScroll} className={classes.messages}>
           {messages.map(({
             id, content, userId, User, createdAt,
           }) => (
@@ -35,41 +67,50 @@ const Messages = ({
               key={id}
               className={userId === currentUserId ? classes.alignRight : classes.alignLeft}
             >
-              <div className={userId === currentUserId ? classes.myMessage : classes.message}>
-                <div>
-                  <p>{User.username}</p>
-                  <p>le {new Date(createdAt).toLocaleString('fr-FR')}</p>
+              <div>
+                <p className={userId === currentUserId ? classes.pseudoRight : classes.pseudoLeft}>
+                  {User.username}
+                </p>
+                <div className={userId === currentUserId ? classes.myMessage : classes.message}>
+                  {content}
                 </div>
-                {content}
+                <p className={classes.date}>le {new Date(createdAt).toLocaleString('fr-FR')}</p>
               </div>
-              <Avatar alt="Cindy Baker" src={User.userImage} />
+              <Avatar className={classes.avatar} alt="Cindy Baker" src={User.userImage} />
             </li>
+
           ))}
-        </ul>
+        </ul>{emojiPicker}
         <div>
           <form className={classes.form} autoComplete="off" onSubmit={handleSubmit}>
             <Input
               id="input-with-icon-adornment"
               className={classes.inputMessage}
               type="text"
+              multiline
               label="Entrez votre message"
               value={inputValue}
               onChange={(event) => setInputValue(event.target.value)}
               startAdornment={(
-                <InputAdornment position="end">
-                  <SendIcon />
-                </InputAdornment>
+                <Button
+                  position="start"
+                  className={classes.picker}
+                  onClick={triggerPicker}
+                >
+                  <SentimentVerySatisfiedIcon />
+                </Button>
               )}
               endAdornment={(
-                <InputAdornment position="end">
+                <Button position="end" type="submit" className={classes.submitButton}>
                   <SendIcon />
-                </InputAdornment>
+                </Button>
               )}
             />
           </form>
+
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

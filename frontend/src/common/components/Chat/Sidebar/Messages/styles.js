@@ -11,40 +11,83 @@ export default ({ breakpoints, palette }) => ({
     },
   },
 
-  alignRight: {
-    display: 'flex',
-    flexDirection: 'row-reverse',
-
+  channelTitleContainer: {
+    padding: '1em',
+    borderBottom: 'solid 1px #bdbdbd',
   },
 
-  alignRight: {
-
+  channelTitleSelected: {
+    display: 'inline-block',
+    position: 'relative',
+    padding: '1em',
+    bottom: '-17px',
+    backgroundColor: palette.lightBlue,
+    border: 'solid 1px #bdbdbd',
+    borderRadius: '20px 20px 0 0',
+    borderBottom: 'none',
+    fontSize: '0.75em',
+    fontWeight: 'bold',
+    color: '#505050',
   },
+
   messages: {
-
-    backgroundColor: 'white',
+    backgroundColor: palette.lightBlue,
     overflowX: 'hidden',
     overflowY: 'scroll',
   },
 
+  alignRight: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    margin: '30px 0',
+    textAlign: 'right',
+  },
+
+  alignLeft: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-end',
+    margin: '30px 0',
+  },
+
   message: {
-    margin: '10px auto',
-    borderRadius: '8px 8px 8px 0',
-    backgroundColor: palette.blue,
+    display: 'inline-block',
+    margin: '3px 10px 3px 0',
+    minWidth: '130px',
+    borderRadius: '0px 8px 8px 8px',
+    backgroundColor: palette.darkBlue,
     color: 'white',
     padding: '10px',
     textAlign: 'left',
     position: 'relative',
+    wordBreak: 'break-word',
   },
 
   myMessage: {
-    margin: '10px auto',
-    borderRadius: '8px 8px 0 8px',
-    backgroundColor: palette.yellow,
+    margin: '3px 0 3px 0',
+    minWidth: '130px',
+    display: 'inline-block',
+    borderRadius: '8px 0px 8px 8px',
+    backgroundColor: '#949494',
     color: 'white',
     padding: '10px',
     textAlign: 'right',
     position: 'relative',
+    wordBreak: 'break-word',
+  },
+
+  avatar: {
+    margin: '-6px 5px 10px 5px',
+    width: '50px',
+    height: '50px',
+  },
+
+  date: {
+    fontSize: '10px',
+    padding: '0 10px',
   },
 
   form: {
@@ -60,6 +103,31 @@ export default ({ breakpoints, palette }) => ({
     border: 'none',
     outline: 'none',
     boxShadow: 'inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff',
+    '&:before': {
+      borderBottom: 'none',
+
+    },
+    '&:hover:not(.Mui-disabled):before': {
+      borderBottom: 'none',
+
+    },
+    '&:after': {
+      borderBottom: 'none',
+    },
   },
-  
+
+  picker: {
+    color: '#bdbdbd',
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
+
+  submitButton: {
+    color: '#bdbdbd',
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
+
 });
