@@ -1,4 +1,5 @@
 const express = require('express');
+
 const userController = require('./routes/userController');
 const projectController = require('./routes/projectController');
 const tagController = require('./routes/tagController');
@@ -7,6 +8,11 @@ const channelController = require('./routes/channelController');
 const messageController = require('./routes/messageController');
 const likeController = require('./routes/likeController');
 
+// Controllers BackOffice
+const userControllerBackOffice = require('./routes_backOffice/userControllerBackOffice');
+const projectControllerBackOffice = require('./routes_backOffice/projectControllerBackOffice');
+const tagControllerBackOffice = require('./routes_backOffice/tagControllerBackOffice');
+const commentControllerBackOffice = require('./routes_backOffice/commentControllerBackOffice');
 
 // Router
 exports.router = (() => {
@@ -32,7 +38,7 @@ exports.router = (() => {
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
     apiRouter.route('/tags/:id').get(tagController.getTagbyId); // OK
-
+    
     
     // Likes routes
     apiRouter.route('/projects/:projectId/vote/like').post(likeController.likePost); // OK
@@ -52,13 +58,23 @@ exports.router = (() => {
     // Messages routes
     apiRouter.route('/messages').get(messageController.getMessagesList); // OK
 
-    // Admin routes
-    apiRouter.route('/users/:id/delete').delete(userController.deleteUser); // OK
-    apiRouter.route('/projects/:id/delete').delete(projectController.deleteProject); //OK
+    // BackOffice routes:
+    // -Projects routes
+    apiRouter.route('/backOffice/projects/:id').put(projectControllerBackOffice.updateProject); // OK
+    apiRouter.route('/backOffice/projects/:id').delete(projectControllerBackOffice.deleteProject); //OK
 
-    // Backoffice routes
-    apiRouter.route('/projects/:id').put(projectController.editBackOffice); // OK
-    // Il manque : CreateProject, CreateTag, EditTag, EditComment, EditUser
+    // -Comment routes
+    apiRouter.route('/backOffice/comments/:id').put(commentControllerBackOffice.updateComment); // OK
+    apiRouter.route('/backOffice/comments/:id').delete(commentControllerBackOffice.deleteComment); //OK
+
+    // -Users routes
+    apiRouter.route('/backOffice/users/:id').put(userControllerBackOffice.updateUser); // OK
+    apiRouter.route('/backOffice/users/:id').delete(userControllerBackOffice.deleteUser); // OK
+
+    // -Tags routes
+    apiRouter.route('/backOffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
+    apiRouter.route('/backOffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
+    apiRouter.route('/backOffice/tags').post(tagControllerBackOffice.createTag); // OK
 
     return apiRouter;
 })();
