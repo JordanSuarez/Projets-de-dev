@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       models.Project.belongsTo(models.Tag, {as: 'Tag6'})
       models.Project.hasMany(models.Comment);
 
-
     }
   };
   Project.init({

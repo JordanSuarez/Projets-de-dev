@@ -84,61 +84,6 @@ module.exports = {
 				})
 				}
 			});
-
-			/*asyncLib.waterfall([
-				
-				(done) => {
-					models.User.findOne({
-						attributes: ['email'],
-						where: { email: email}
-					})
-					.then(() => {
-						models
-					})
-					
-					
-					
-					.then((userFound) => {
-						done(null, userFound);
-					})
-					.catch(() => {
-						return res.status(500).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' });
-					});
-				},
-
-				(userFound, done) => {
-					if (!userFound) {
-						bcrypt.hash(password, 5, (err, bcryptedPassword ) => {
-							done(null, userFound, bcryptedPassword);
-						});
-					} else {
-						return res.status(409).json({ 'error': 'Le nom d\'utilisateur et/ou l\'email est déjà utilisé' });
-					}
-				},
-
-				(userFound, bcryptedPassword, done) => {
-					const newUser = models.User.create({
-						email:email,
-						username:username,
-						password: bcryptedPassword,
-						isAdmin: 0
-					})
-					.then ((newUser) => {
-						done(newUser);
-					})
-					.catch((err) => {
-						return res.status(500).json({'error': err});
-					});
-				}
-			], (newUser) => {
-				if(newUser) {
-					return res.status(201).json({
-					'userId': newUser.id
-				});
-			} else {
-				return res.status(500).json({'error': err});
-			}
-			});*/
 		},
 
 		login: (req, res) => {

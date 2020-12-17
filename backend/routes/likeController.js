@@ -202,5 +202,40 @@ module.exports = {
         return res.status(500).json({ 'error': 'Impossible de mettre à jour le compteur' });
       }
     });
+  },
+
+  getLikesByUserId: (req, res) => {
+
+    models.ProjectsLikes.findAll({
+
+      where: {userId: req.params.id},
+      attributes: ['id', 'userId', 'projectId', 'isLike'],
+
+    }).then((likes) => {
+
+      if(likes) {
+        return res.status(200).json(likes)
+      }
+
+    })
+  },
+
+  getLikesByMe: (req, res) => {
+
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
+
+    models.ProjectsLikes.findAll({
+
+      where: {userId: userId},
+      attributes: ['id', 'userId', 'projectId', 'isLike'],
+
+    }).then((likes) => {
+
+      if(likes) {
+        return res.status(200).json(likes)
+      }
+
+    })
   }
 }

@@ -21,7 +21,12 @@ exports.router = (() => {
     apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/me/delete').delete(userController.deleteMe); //OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
+
+    // Users Like
+    apiRouter.route('/users/me/likes').get(likeController.getLikesByMe); // OK
+    apiRouter.route('/users/:id/likes').get(likeController.getLikesByUserId); // OK
     
+
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
     apiRouter.route('/projects/:id').get(projectController.project); // OK
