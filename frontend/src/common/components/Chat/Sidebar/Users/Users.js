@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import {
   Avatar,
+  Button,
 } from '@material-ui/core';
 import avatar from './avatar.png';
 
@@ -24,9 +25,10 @@ const Users = ({
     console.log(profileSelected);
   }, [profileSelected]);
 
-  console.log(profiles);
+  //console.log(profiles);
   return (
     <div className="users">
+    <Button className={classes.showProfileMobile} > V </Button>
       <div className={classes.containerUsers}>
         {arrayProfiles.map((profile) => (
           <div
