@@ -18,6 +18,8 @@ const Projects = ({
   allProjects,
   loading,
   isLogged,
+  getMyLikes,
+  myLikes,
 }) => {
   const { offset } = useParams();
   const history = useHistory();
@@ -42,6 +44,9 @@ const Projects = ({
 
   useEffect(() => {
     getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
+    if (isLogged) {
+      getMyLikes();
+    }
   }, []);
 
   // SearchBar
@@ -66,7 +71,6 @@ const Projects = ({
       setSearchResults(arrayAllProjects);
     }
   };
-
   return (
     <Base loading={loading}>
       <div className={classes.headerContainer}>
@@ -100,8 +104,16 @@ const Projects = ({
           {searchResults.length === 0
           && arrayProjectsCurrentPage.map(({
             id: projectId, title, description, tags, user, image,
-          }) => (
-            <CardProject
+          }) => {
+            let like = false;
+            myLikes.map((myLike) => {
+              if (projectId === myLike.projectId) {
+                like = true;
+                console.log('j ai like le projet', title);
+              }
+            });
+            return (
+              <CardProject
               key={projectId}
               projectId={projectId}
               title={title}
@@ -111,8 +123,11 @@ const Projects = ({
               userImage={user.userImage}
               image={image}
               isLogged={isLogged}
+              like={like}
             />
-          ))}
+            )
+            
+          })}
         </div>
         {!hidePagination
         && <Pagination className={classes.pagination} page={parseInt(offset, 10)} count={Math.ceil(projectsNumber / limit)} size="small" onChange={changePage} />}
@@ -129,6 +144,11 @@ Projects.propTypes = {
   projectsNumber: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
+  getMyLikes: PropTypes.func.isRequired,
+  myLikes: PropTypes.array,
 };
 
+Projects.defaultProps = {
+  myLikes: [],
+};
 export default Projects;

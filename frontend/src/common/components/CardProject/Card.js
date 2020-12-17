@@ -34,6 +34,7 @@ const CardProject = ({
   projectOwnerOptions,
   handleDeleteProject,
   isLogged,
+  like,
 }) => {
   const history = useHistory();
 
@@ -87,7 +88,11 @@ const CardProject = ({
             {!projectOwnerOptions ? (
               <>
                 {isLogged
-                && <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />}
+                && like
+                && <FavoriteIcon className={classes.like} onClick={handleLikeProject} />}
+                {isLogged
+                  && !like
+                && <FavoriteBorderIcon className={classes.dontLike} onClick={handleLikeProject} />}
                 <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
               </>
             ) : (
@@ -129,6 +134,7 @@ CardProject.propTypes = {
 
 CardProject.defaultProps = {
   userImage: avatar,
+  like: PropTypes.bool.isRequired,
   handleDeleteProject: Function.prototype,
   projectOwnerOptions: false,
   tags: PropTypes.arrayOf(

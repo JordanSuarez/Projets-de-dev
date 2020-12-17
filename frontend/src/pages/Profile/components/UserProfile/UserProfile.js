@@ -21,11 +21,14 @@ const UserProfile = ({
   handleDeleteUserProfile,
   redirect,
   isLogged,
+  getMyLikes,
+  myLikes,
 }) => {
   const history = useHistory();
 
   useEffect(() => {
     getProfile();
+    getMyLikes();
     if (redirect.length > 0) {
       history.push(redirect);
     }
@@ -86,6 +89,7 @@ const UserProfile = ({
       id: 3, method: newProject, label: 'Ajouter un projet',
     },
   ];
+  console.log(myLikes);
 
   return (
     <Base loading={loading}>
@@ -175,6 +179,11 @@ UserProfile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
+  getMyLikes: PropTypes.func.isRequired,
+  myLikes: PropTypes.array,
 };
 
+UserProfile.defaultProps = {
+  myLikes: [],
+};
 export default UserProfile;
