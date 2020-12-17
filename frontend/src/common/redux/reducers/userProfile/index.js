@@ -1,12 +1,13 @@
 import { SAVE_USER_PROFILE, GET_USER_PROFILE } from 'src/common/redux/actions/userProfile';
 import { SUBMIT_LOGOUT_SUCCESS } from 'src/common/redux/actions/auth';
+import { getUser } from 'src/common/authentication/authProvider';
 
 const initialState = {
   userProfile: {
     id: '',
     email: '',
-    username: '',
-    userImage: '',
+    username: getUser() ? getUser().username : null,
+    userImage: getUser() ? getUser().userImage : null,
     projects: [],
   },
   isLogged: false,
@@ -25,7 +26,15 @@ const userProfile = (state = initialState, action = {}) => {
     }
     case SUBMIT_LOGOUT_SUCCESS: {
       return {
-        ...initialState,
+        userProfile: {
+          id: '',
+          email: '',
+          username: '',
+          userImage: '',
+          projects: [],
+        },
+        isLogged: false,
+        loading: true,
       };
     }
     case GET_USER_PROFILE: {

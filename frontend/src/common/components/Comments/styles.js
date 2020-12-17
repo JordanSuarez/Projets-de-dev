@@ -13,6 +13,12 @@ export default ({ breakpoints, palette }) => ({
   textfield: {
     width: 'calc(100% - 3em)',
     margin: '0.5em 1.5em 0 1.5em',
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: palette.darkBlue,
+    },
+    '& .MuiInput-underline:after': {
+      borderBottom: palette.darkBlue,
+    },
   },
 
   containerButton: {
@@ -23,10 +29,16 @@ export default ({ breakpoints, palette }) => ({
 
   submit: {
     marginBottom: '1.5em',
+    color: palette.white,
+    backgroundColor: palette.darkBlue,
+    '&:hover': {
+      color: palette.blue,
+      backgroundColor: palette.darkBlue,
+    },
   },
 
   containerPicker: {
-    width: '100px !important',
+
   },
 
   picker: {
@@ -96,7 +108,30 @@ export default ({ breakpoints, palette }) => ({
   },
 
   editButton: {
+    color: palette.darkBlue,
     backgroundColor: palette.lightBlue,
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      backgroundColor: palette.lightBlue,
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+    },
+  },
+
+  deleteButton: {
+    margin: '1rem 0 1rem 1rem',
+    backgroundColor: palette.lightBlue,
+    color: palette.darkBlue,
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      color: palette.darkBlue,
+      backgroundColor: palette.lightBlue,
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+      '& span': {
+        color: palette.errorField,
+      },
+    },
   },
 
   date: {

@@ -10,12 +10,15 @@ const mapStateToProps = (state) => ({
   channel: state.chat.channel,
   messages: state.chat.messages,
   currentUserId: state.auth.userId,
+  currentUser: {
+    username: state.userProfile.userProfile.username,
+    userImage: state.userProfile.userProfile.userImage,
+  },
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-  sendMessage: (message) => {
-    console.log('mapdispatchtopprops', message);
-    dispatch(emitMessage(message));
+  sendMessage: (message, username, userImage) => {
+    dispatch(emitMessage(message, username, userImage));
   },
 });
 
