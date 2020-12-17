@@ -55,8 +55,10 @@ exports.router = (() => {
     // Admin routes
     apiRouter.route('/users/:id/delete').delete(userController.deleteUser); // OK
     apiRouter.route('/projects/:id/delete').delete(projectController.deleteProject); //OK
-    apiRouter.route('/projects/:id').put(projectController.editBackOffice); // OK
 
+    // Backoffice routes
+    apiRouter.route('/projects/:id').put(projectController.editBackOffice); // OK
+    // Il manque : CreateProject, CreateTag, EditTag, EditComment, EditUser
 
     return apiRouter;
 })();
