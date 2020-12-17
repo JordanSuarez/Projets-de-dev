@@ -144,13 +144,14 @@ CardProject.propTypes = {
   setLike: PropTypes.func.isRequired,
   setDislike: PropTypes.func.isRequired,
   like: PropTypes.bool.isRequired,
-  vote: PropTypes.number.isRequired,
+  vote: PropTypes.number,
 };
 
 CardProject.defaultProps = {
   userImage: avatar,
   handleDeleteProject: Function.prototype,
   projectOwnerOptions: false,
+  vote: 0,
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: null,

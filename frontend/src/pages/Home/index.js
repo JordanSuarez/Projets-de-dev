@@ -15,8 +15,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getProjects: () => {
-    dispatch(getLatestProjects('?limit=12', '&offset=1'));
+  getProjects: (projectLimit, projectOffset) => {
+    dispatch(getLatestProjects(projectLimit, projectOffset));
   },
   getMyLikes: () => {
     dispatch(getProfileLikes());

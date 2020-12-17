@@ -15,6 +15,7 @@ const homeMiddleware = (store) => (next) => (action) => {
 
       callApi(url, GET)
         .then((response) => {
+          console.log(response);
           store.dispatch(saveLastestProjects(response.data));
         })
         .catch((response) => {

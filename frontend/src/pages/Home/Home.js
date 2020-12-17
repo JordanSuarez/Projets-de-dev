@@ -17,7 +17,7 @@ const Home = ({
   myLikes,
 }) => {
   useEffect(() => {
-    getProjects();
+    getProjects('?limit=12', '&offset=0');
     if (isLogged) {
       getMyLikes();
     }
@@ -41,13 +41,13 @@ const Home = ({
           <div className={classes.container}>
             <div className={classes.listCard}>
               {arrayProjects.map((project) => {
+                console.log(project);
                 let like = false;
                 myLikes.map((myLike) => {
                   if ((project.id === myLike.projectId) && (myLike.isLike === 1)) {
                     like = true;
                   }
                 });
-                console.log(project);
                 return (
                   <CardProject
                     key={project.id}
