@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Admin, Resource } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
+import simpleRestProvider from 'ra-data-json-server';
 import { Create, Edit, SimpleForm, TextInput, ImageInput, required, List, Datagrid, ImageField, EmailField, FunctionField, UrlField, TextField, ChipField, ArrayField, SingleFieldList, EditButton, ShowButton, fetchUtils } from 'react-admin';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import RichTextInput from 'ra-input-rich-text';
 import addUploadFeature from './addUploadFeature';
 import authProvider from './authProvider';
-
+import FileBase64 from 'react-file-base64';
 
 
 
@@ -130,17 +130,33 @@ export const ProjectCreate = (props) => {
 }
 
 export const ProjectEdit = (props) => {
+
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+
   const classes = useStyles();
-  console.log(props)
   const PreviewImage = ({ record, source }) => {
-    if (typeof (record) == "string") {
+    console.log(typeof(record))
+    if (typeof (record) == "object") {
         record = {
-            [source]: record
+            [source]: 'ALLOOO'
         }
     }
+    console.log(record)
+    
     return <ImageField record={record} source={source} />
-}
-  return (
+  }
+
+  const convertBase64 = async (record, source) => {
+    const imageSrc = await toBase64(record.rawFile)
+    return imageSrc
+  }
+
+return (
     <Edit {...props}>
     <SimpleForm>
         <TextInput disabled label="Id" source="id" />
@@ -150,7 +166,7 @@ export const ProjectEdit = (props) => {
         <RichTextInput name="Description" source="description" />
         <ImageField label="Image actuelle" source="image" />
         <ImageInput
-                source="data.pictures"
+                source="record.src"
                 label="Nouvelle image"
                 accept="image/png, image/jpg, image/jpeg"
                 maxSize={5000000}
@@ -216,9 +232,9 @@ export const CommentList = (props) => {
   return(
 <List {...props}>
     <Datagrid key="id" >
-        <TextField label="Contenu" source="content" />
+        <TextField label="Commentaire" source="content" />
         <TextField label="Auteur" source="User.username" />
-        <TextField label="ID du Projet" source="Project.id" />
+        <TextField label="Projet" source="Project.title" />
       <EditButton />
     </Datagrid>
 </List>
@@ -230,25 +246,13 @@ export const CommentEdit = (props) => {
     <Edit {...props}>
     <SimpleForm>
     <TextField label="ID" source="id" />
-    <TextInput label="Contenu" source="content" />
-    <TextInput label="Auteur" source="User.username" />
+    <TextInput label="Commentaire" source="content" />
+    <TextInput label="ID de l'utilisateur" source="User.id" />
     <TextInput label="ID du Projet" source="Project.id" />
     </SimpleForm>
 </Edit>
   )
 }
-
-// const httpClient = (url, options = {}) => {
-//   if (!options.headers) {
-//       options.headers = new Headers({ 
-//         Accept: 'application/json',
-//         Authorization: `${localStorage.getItem('token')}`
-//       });
-//   }
-  
-//   options.headers.set('X-Custom-Header', 'foobar');
-//   return fetchUtils.fetchJson(url, options);
-// };
 
 const httpClient = (url, options = {}) => {
   options.user = {
@@ -259,7 +263,7 @@ const httpClient = (url, options = {}) => {
 };
 
 const Dashboard = () => (
-    <Admin authProvider={authProvider} theme={theme} dataProvider={jsonServerProvider('http://localhost:3001/api', httpClient)}>
+    <Admin authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://localhost:3001/api', httpClient)}>
         <Resource name="users" list={UserList} edit={UserEdit}/>
         <Resource name="projects" list={ProjectList} create={ProjectCreate} edit={ProjectEdit} />
         <Resource name="tags" list={TagList} create={TagCreate} edit={TagEdit}/>
