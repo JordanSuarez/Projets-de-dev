@@ -40,10 +40,6 @@ const CardProject = ({
   setDislike,
 }) => {
   const history = useHistory();
-  const [reload, setReload] = useState('');
-  useEffect(() => {
-
-  }, [reload]);
 
   const handleDisplayProject = () => {
     history.push(getProjectRoute(projectId));
@@ -59,11 +55,11 @@ const CardProject = ({
 
   const handleLikeProject = (id) => {
     setLike(id);
-    setReload('');
+    window.location.reload(false);
   };
   const handleDislikeProject = (id) => {
     setDislike(id);
-    setReload('');
+    window.location.reload(false);
   };
 
   const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'br', 'p'] };
@@ -144,11 +140,12 @@ CardProject.propTypes = {
   ),
   setLike: PropTypes.func.isRequired,
   setDislike: PropTypes.func.isRequired,
+  like: PropTypes.bool.isRequired,
+  redirect: PropTypes.string.isRequired,
 };
 
 CardProject.defaultProps = {
   userImage: avatar,
-  like: PropTypes.bool.isRequired,
   handleDeleteProject: Function.prototype,
   projectOwnerOptions: false,
   tags: PropTypes.arrayOf(

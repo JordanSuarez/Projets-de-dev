@@ -7,7 +7,7 @@ import Card from './Card';
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
-
+  redirect: state.redirection.redirect,
   loading: state.profiles.loading,
 
 });
