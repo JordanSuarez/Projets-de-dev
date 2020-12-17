@@ -28,15 +28,20 @@ const Form = ({
   const { id } = useParams();
   const [errorFields, setErrorFields] = useState({});
   const [formState, setFormState] = useState(initialValues);
+  const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = (values) => {
+    setSubmitting(true);
     if (formState.tags.length === 0) {
+      setSubmitting(false);
       return setErrorFields({ ...errorFields, tagsMinValue: true });
     }
     if (formState.tags.length > 5) {
+      setSubmitting(false);
       return setErrorFields({ ...errorFields, tagsMaxValue: true });
     }
     if (formState.image === '') {
+      setSubmitting(false);
       return setErrorFields({ ...errorFields, image: true });
     }
     // return form values and project id from useParams
@@ -253,7 +258,7 @@ const Form = ({
                 )}
             <div className={classes.buttonsWrapper}>
               <Button type="button" variant="outlined" className={classes.quitButton} onClick={handleQuitForm}>Abandonner</Button>
-              <Button type="submit" variant="contained" className={classes.submitButton}>Soumettre</Button>
+              <Button type="submit" variant="contained" className={classes.submitButton} disabled={submitting}>Soumettre</Button>
             </div>
           </form>
         )}
