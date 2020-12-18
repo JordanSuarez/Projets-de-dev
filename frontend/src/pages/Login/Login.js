@@ -85,7 +85,7 @@ const Login = ({
                     type="submit"
                     disabled={submitting}
                   >
-                    Submit
+                    Se connecter
                   </Button>
                   <p className={classes.inscription} onClick={handleClick}>
                     Pas de compte ? <span>Je veux m'inscrire</span>
