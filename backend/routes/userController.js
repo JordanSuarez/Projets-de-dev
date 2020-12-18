@@ -326,9 +326,22 @@ module.exports = {
 				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
+			/*models.User.findOne({
+				where: { id: userId }
+			}).then(()=> {
+				models.Project.findAll({
+					where: {userId: userId}
+				})
+			})*/
+			
+			
+			
+			
+			
+			
 			models.User.findOne({
 				where: { id: userId }
-			}).then(() => {
+			.then(() => {
 				models.Comment.destroy({
 					where: {userId: userId}
 				}).then(() => {
