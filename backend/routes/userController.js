@@ -341,7 +341,7 @@ module.exports = {
 			
 			models.User.findOne({
 				where: { id: userId }
-			.then(() => {
+			}).then(() => {
 				models.Comment.destroy({
 					where: {userId: userId}
 				}).then(() => {
@@ -366,8 +366,8 @@ module.exports = {
 					})
 				})
 				})
-				
-				
+			
+			
 				
 
 		},
