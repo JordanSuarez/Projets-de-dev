@@ -182,14 +182,14 @@ module.exports = {
       title: req.body.title,
       description: req.body.description,
       image: req.body.image,
-      githubLink: req.body.githubLink,
-      projectLink: req.body.projectLink,
-      tagId: req.body.tag1,
-      tag2Id: req.body.tag2,
-      tag3Id: req.body.tag3,
-      tag4Id: req.body.tag4,
-      tag5Id: req.body.tag5,
-      tag6Id: req.body.tag6,
+      github_link: req.body.githubLink,
+      project_link: req.body.projectLink,
+      TagId: req.body.tag1,
+      Tag2Id: req.body.tag2,
+      Tag3Id: req.body.tag3,
+      Tag4Id: req.body.tag4,
+      Tag5Id: req.body.tag5,
+      Tag6Id: req.body.tag6,
   };
 
     const headerAuth = req.headers['authorization'];
