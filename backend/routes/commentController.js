@@ -25,6 +25,7 @@ module.exports = {
   comment: (req, res) => {
 
     models.Comment.findOne({
+      include: {all:true},
       where : {id : req.params.id},
     })
     .then((comment) => {

@@ -60,18 +60,26 @@ exports.router = (() => {
 
     // BackOffice routes:
     // -Projects routes
+    apiRouter.route('/backOffice/projects/').get(projectController.allProjects); // OK
+    apiRouter.route('/backOffice/projects/:id').get(projectController.project); // OK
     apiRouter.route('/backOffice/projects/:id').put(projectControllerBackOffice.updateProject); // OK
     apiRouter.route('/backOffice/projects/:id').delete(projectControllerBackOffice.deleteProject); //OK
 
     // -Comment routes
+    apiRouter.route('/backOffice/comments/').get(commentController.commentsList);    
+    apiRouter.route('/backOffice/comments/:id').get(commentController.comment);    
     apiRouter.route('/backOffice/comments/:id').put(commentControllerBackOffice.updateComment); // OK
     apiRouter.route('/backOffice/comments/:id').delete(commentControllerBackOffice.deleteComment); //OK
 
     // -Users routes
+    apiRouter.route('/backOffice/users').get(userController.getUsersList); // OK
+    apiRouter.route('/backOffice/users/:id').get(userControllerBackOffice.getUserById); // OK
     apiRouter.route('/backOffice/users/:id').put(userControllerBackOffice.updateUser); // OK
     apiRouter.route('/backOffice/users/:id').delete(userControllerBackOffice.deleteUser); // OK
 
     // -Tags routes
+    apiRouter.route('/backOffice/tags').get(tagController.getTagList); // OK
+    apiRouter.route('/backOffice/tags/:id').get(tagController.getTagbyId); // OK
     apiRouter.route('/backOffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
     apiRouter.route('/backOffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
     apiRouter.route('/backOffice/tags').post(tagControllerBackOffice.createTag); // OK

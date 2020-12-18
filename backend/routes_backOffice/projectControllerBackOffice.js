@@ -12,31 +12,28 @@ module.exports = {
       title: req.body.title,
       description: req.body.description,
       image: req.body.image,
-      githubLink: req.body.githubLink,
-      projectLink: req.body.projectLink,
-      tagId: req.body.tag1,
-      tag2Id: req.body.tag2,
-      tag3Id: req.body.tag3,
-      tag4Id: req.body.tag4,
-      tag5Id: req.body.tag5,
-      tag6Id: req.body.tag6,
+      github_link: req.body.githubLink,
+      project_link: req.body.projectLink,
+      TagId: req.body.tags[0].id,
+      Tag2Id: req.body.tags[1].id,
+      Tag3Id: req.body.tags[2].id,
+      Tag4Id: req.body.tags[3].id,
+      Tag5Id: req.body.tags[4].id,
+      Tag6Id: req.body.tags[5].id,
   };
 
+  console.log(updatedProject)
     const headerAuth = req.headers['authorization'];
     const isAdmin = jwtUtils.getIsAdminUser(headerAuth);
 
-    if (isAdmin == true) {
 
-      models.Project.update(updatedProject, 
-        {where: {id: id}
-      }).then(() => {
-          return res.status(201).json(updatedProject)
-        }).catch(error => {
-          return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + error });
-        })
-    } else {
-			return res.status(401).json({'error': '' });
-		}
+    models.Project.update(updatedProject, 
+      {where: {id: id}
+    }).then(() => {
+        return res.status(201).json(updatedProject)
+      }).catch(error => {
+        return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + error });
+      })
   },
 
   deleteProject: (req, res) => {

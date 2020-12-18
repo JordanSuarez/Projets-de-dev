@@ -15,7 +15,13 @@ module.exports = {
             models.Tag.create({
                 name: req.body.name,
             }).then((createdTag) => {
-                return res.status(201).json({ 'message': 'Le tag ' + createdTag + ' a bien été créé' });
+              const tag = {
+              id: createdTag.id,
+              name: createdTag.name
+            }
+              console.log(createdTag)
+            
+                return res.status(201).json(tag);
             }).catch(() => {
                 res.status(500).json({ 'error': 'Impossible de créer le tag' });
             });
@@ -26,32 +32,26 @@ module.exports = {
 
         const headerAuth = req.headers['authorization'];
         const isAdmin = jwtUtils.getIsAdminUser(headerAuth);
-    
+        const id = req.params.id;
+
         if (isAdmin == true) {
     
-          const tagId = req.params.id;
-          const tagName = req.body.name;
-          
-          models.Tag.findOne({
-            where: { id: tagId}
-          })
-          .then((tagEdit) => {
-            tagEdit.update({
-              name: (tagName ? tagName : tagEdit.name),
+          const updateTag = {
+            id: req.params.id,
+            name : req.body.name
+          }
+
+          models.Tag.update(updateTag, 
+            {where: {id: id}
+          }).then(() => {
+              return res.status(201).json(updateTag);
             })
-            .then(() => {
-              return res.status(201).json({tagEdit})
-            })
-            .catch(function(err) {
+            .catch((err) => {
               return res.status(500).json({ 'error': 'Erreur dans les données saisis :' + err });
             });
-          })
-          .catch(function(err) {
-            return res.status(500).json({ 'error': /*'Accès non autorisé'*/ err });
-          });
         } else {
-            return res.status(401).json({'error': '' });
-        }
+        return res.status(401).json({'error': '' });
+    }
     },
 
     deleteTag: (req, res) => {
