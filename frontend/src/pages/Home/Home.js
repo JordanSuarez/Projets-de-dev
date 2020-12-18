@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
-import headerImage from './home.jpg';
+import headerImage from './header-home.jpg';
 import robot from './robot.png';
 
 const Home = ({
