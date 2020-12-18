@@ -2,8 +2,8 @@ import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
-import { getProfileInfos, handleDeleteUserProfile, getProfileLikes, getProjects  } from 'src/common/redux/actions/userProfile';
-import { handleDeleteProject} from 'src/common/redux/actions/project';
+import { getProfileInfos, handleDeleteUserProfile, getProfileLikes, getProjects } from 'src/common/redux/actions/userProfile';
+import { handleDeleteProject } from 'src/common/redux/actions/project';
 import UserProfile from './UserProfile';
 import styles from './styles';
 

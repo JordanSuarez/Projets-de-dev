@@ -3,6 +3,7 @@ import {
   GET_LATEST_PROJECTS,
   saveLastestProjects,
 } from 'src/common/redux/actions/home';
+import { getProfileLikes } from 'src/common/redux/actions/userProfile';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
   PROJECTS, GET, TWELVE,
@@ -15,12 +16,15 @@ const homeMiddleware = (store) => (next) => (action) => {
 
       callApi(url, GET)
         .then((response) => {
-          console.log(response);
           store.dispatch(saveLastestProjects(response.data));
+        })
+        .then(() => {
+          store.dispatch(getProfileLikes());
         })
         .catch((response) => {
           console.log(response);
         });
+        
 
       next(action);
       break;

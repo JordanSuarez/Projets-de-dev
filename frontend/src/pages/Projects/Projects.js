@@ -71,6 +71,7 @@ const Projects = ({
       setSearchResults(arrayAllProjects);
     }
   };
+
   return (
     <Base loading={loading}>
       <div className={classes.headerContainer}>
@@ -87,7 +88,7 @@ const Projects = ({
         <div className={classes.listCard}>
           {searchResults.length > 0
           && searchResults.map(({
-            id: projectId, title, description, tags, user, image, vote
+            id: projectId, title, description, tags, user, image, vote,
           }) => (
             <CardProject
               key={projectId}

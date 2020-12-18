@@ -41,6 +41,8 @@ const CardProject = ({
   vote,
 }) => {
   const history = useHistory();
+  const [isLike, setIsLike] = useState(like);
+  const [voteCount, setVoteCount] = useState(vote);
   const handleDisplayProject = () => {
     history.push(getProjectRoute(projectId));
   };
@@ -55,11 +57,13 @@ const CardProject = ({
 
   const handleLikeProject = (id) => {
     setLike(id);
-    window.location.reload(false);
+    setIsLike(true);
+    setVoteCount(voteCount + 1);
   };
   const handleDislikeProject = (id) => {
     setDislike(id);
-    window.location.reload(false);
+    setIsLike(false);
+    setVoteCount(voteCount - 1);
   };
 
   const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'br', 'p'] };
@@ -96,13 +100,13 @@ const CardProject = ({
             {!projectOwnerOptions ? (
               <>
                 {isLogged
-                  && like
+                  && isLike
                   && <FavoriteIcon className={classes.like} onClick={() => handleDislikeProject(projectId)} />}
                 {isLogged
-                  && !like
+                  && !isLike
                   && <FavoriteBorderIcon className={classes.dontLike} onClick={() => handleLikeProject(projectId)} />}
 
-                {vote !== null ? <span className={classes.vote}>{vote} vote</span> : <span className={classes.vote}>0 vote</span>}
+                {voteCount !== null ? <span className={classes.vote}>{voteCount} vote</span> : <span className={classes.vote}>0 vote</span>}
 
                 <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
               </>
@@ -143,7 +147,7 @@ CardProject.propTypes = {
   ),
   setLike: PropTypes.func.isRequired,
   setDislike: PropTypes.func.isRequired,
-  like: PropTypes.bool.isRequired,
+  like: PropTypes.bool,
   vote: PropTypes.number,
 };
 
@@ -158,6 +162,7 @@ CardProject.defaultProps = {
       name: '',
     }),
   ),
+  like: null,
 };
 
 export default CardProject;

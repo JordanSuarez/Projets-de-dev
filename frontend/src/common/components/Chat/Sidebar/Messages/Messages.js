@@ -92,7 +92,7 @@ const Messages = ({
               onChange={(event) => setInputValue(event.target.value)}
               startAdornment={(
                 <IconButton
-                  size="large"
+                  size="medium"
                   position="start"
                   className={classes.picker}
                   onClick={triggerPicker}
