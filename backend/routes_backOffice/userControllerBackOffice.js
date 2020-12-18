@@ -88,7 +88,7 @@ module.exports = {
 		if (isAdmin) {
 			
 			models.User.findOne({
-				where: { id: userId}
+				where: { id: userId }
 			}).then(() => {
 				models.Comment.destroy({
 					where: {userId: userId}
@@ -99,16 +99,22 @@ module.exports = {
 						models.Message.destroy({
 							where: {userId: userId}
 						}).then(() => {
-							models.User.destroy({
-								where: { id: userId }
-							}).then(() => {
-								return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
-							}).catch(() => {
-								return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
+							models.ProjectsLikes.destroy({
+								where: {userId: userId}
+							})
+							.then(() => {
+								models.User.destroy({
+									where: { id: userId }
+								}).then(() => {
+									return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
+								}).catch(() => {
+									return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
+								})
 							})
 						})
-					})
+						
 				})
+			})
 			})
 			
 		} else {
