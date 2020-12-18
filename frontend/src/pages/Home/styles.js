@@ -79,12 +79,13 @@ export default ({ palette, breakpoints }) => ({
       top: '-10px',
     },
     [breakpoints.up('lg')]: {
-      top: '-30px',
+      top: '30px',
     },
   },
 
   title: {
-    fontSize: '1.8em',
+    fontSize: '2em',
+    fontWeight: '500',
     paddingBottom: '1em',
     [breakpoints.up('md')]: {
       paddingLeft: '14px',
@@ -92,7 +93,10 @@ export default ({ palette, breakpoints }) => ({
   },
 
   descriptionSite: {
+    fontSize: '1.2em',
+    fontWeight: '300',
     textAlign: 'left',
+    lineHeight: '1.5',
     [breakpoints.up('md')]: {
       padding: '0 1em 1em 1em',
     },

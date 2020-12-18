@@ -30,9 +30,7 @@ const Home = ({
         <div className={classes.textContainer}>
           <h2 className={classes.subtitle}> Projets de Dev</h2>
           <p className={classes.homeText}>
-            Une plateforme crée par des développeurs, pour des développeurs,
-            où vous pourrez lister vos projets de développement, cherchez de l'inspiration,
-            partager et échanger!
+          Description
           </p>
         </div>
 
@@ -71,11 +69,10 @@ const Home = ({
             <img className={classes.robot} src={robot} alt="robot" />
             <div className={classes.title}>Projets de dev fait par des Dev’s POUR des Dev’s !</div>
             <p className={classes.descriptionSite}>
-              L’idée a germé quand l’un d’entre nous s’est rendu compte qu’il n’était pas si facile que cela de partager nos projets et idées de projets avec d’autres personnes.
-              Pour remédier à cette problématique, il a fallu trouver une solution ! Mais il fallait une plateforme  qui serait à la fois visuelle, pratique et qui permettrait à n’importe quel développeur de partager ses idées et créations rapidement, en quelques clics ! 
-              Notre petite équipe s’est donc attelée à la tâche ! Nous avons transpiré, crié, maudit et aimé le saint javascript.
-              C’est ainsi qu’après non pas 9 mais seulement 1 mois de gestation, Projets De Dev a enfin pu voir le jour ! Bon ok, il était pas tout à fait fini, il manquait peut-être un œil par-ci et un bras par là mais l’essentiel était là ! 
-              C’est ainsi que Projets de Dev est né, un beau matin d’été… (ouais c’était en décembre mais ça rimait ^^ )
+              L’idée a germé quand l’un d’entre nous s’est rendu compte qu’il n’était pas facile de partager nos projets et idées de projets avec d’autres personnes.
+              Pour remédier à cette problématique, il a fallu trouver une solution : une plateforme  qui serait à la fois visuelle, pratique et qui permettrait à n’importe quel développeur de partager ses idées et créations rapidement, en quelques clics ! 
+              Notre petite équipe s’est donc attelée à la tâche ! Nous avons transpiré, crié, maudit et aimé le saint Javascript.
+              C’est ainsi qu’après seulement 1 mois de gestation, Projets De Dev est né, un beau matin d’été… (ouais c’était en décembre mais ça rimait)
             </p>
           </div>
         </div>

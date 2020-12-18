@@ -15,7 +15,7 @@ const palette = {
 };
 
 const font = {
-  main: 'Roboto',
+  main: 'Yanone Kaffeesatz',
 };
 
 const breakpoints = {
