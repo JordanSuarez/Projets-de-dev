@@ -340,8 +340,7 @@ module.exports = {
 						}).then(() => {
 							models.ProjectsLikes.destroy({
 								where: {userId: userId}
-							})
-							.then(() => {
+							}).then(() => {
 								models.User.destroy({
 									where: { id: userId }
 								}).then(() => {
@@ -351,7 +350,6 @@ module.exports = {
 								})
 							})
 						})
-						
 				})
 			})
 			})
