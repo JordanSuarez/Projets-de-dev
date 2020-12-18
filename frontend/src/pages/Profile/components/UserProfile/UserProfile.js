@@ -91,7 +91,6 @@ const UserProfile = ({
     },
   ];
 
-  // TODO : loading after get projects & likes for show projectsLikes
   return (
     <Base loading={loading}>
       <>
@@ -174,29 +173,25 @@ const UserProfile = ({
               {isEmpty(userProfile.projects) && (
               <p>Je n'ai pas encore de projet</p>
               )}
-              {/* TODO add loading for show result (console.log ok ) */}
               {myLikes.map((myLike) => {
                 projects.filter((project) => project.id === myLike.projectId).map(({
                   id: projectId, title: projectTitle, description, tags, image,
-                }) => {
-                  console.log('j ai like le projet', projectId, projectTitle);
-                  return (
-                    <CardProject
-                      key={projectId}
-                      projectId={projectId}
-                      title={projectTitle}
-                      tags={tags}
-                      description={description}
-                      userId={userProfile.id}
-                      userImage={userProfile.userImage}
-                      image={image}
-                      projectOwnerOptions
-                      handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
-                      isLogged={isLogged}
-                      like={false}
-                    />
-                  );
-                });
+                }) => (
+                  <CardProject
+                    key={projectId}
+                    projectId={projectId}
+                    title={projectTitle}
+                    tags={tags}
+                    description={description}
+                    userId={userProfile.id}
+                    userImage={userProfile.userImage}
+                    image={image}
+                    projectOwnerOptions
+                    handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
+                    isLogged={isLogged}
+                    like={false}
+                  />
+                ));
               })}
             </div>
           </div>

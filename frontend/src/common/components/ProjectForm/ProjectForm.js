@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   arrayOf, func, number, shape, string,
+  bool,
 } from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
 import { Form as FormRff } from 'react-final-form';
@@ -22,13 +23,17 @@ import fields from './formData/fields';
 import './styles.scss';
 
 const Form = ({
-  classes, title, initialValues, handleSubmitProject, tags,
+  classes, title, initialValues, handleSubmitProject, tags, hasError,
 }) => {
   const history = useHistory();
   const { id } = useParams();
   const [errorFields, setErrorFields] = useState({});
   const [formState, setFormState] = useState(initialValues);
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(hasError);
+
+  useEffect(() => {
+    setSubmitting(false);
+  }, [hasError]);
 
   const onSubmit = (values) => {
     setSubmitting(true);
@@ -278,6 +283,7 @@ Form.propTypes = {
       image: string,
     }).isRequired,
   ).isRequired,
+  hasError: bool.isRequired,
 };
 
 export default Form;

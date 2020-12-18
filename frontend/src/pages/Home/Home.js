@@ -41,7 +41,6 @@ const Home = ({
           <div className={classes.container}>
             <div className={classes.listCard}>
               {arrayProjects.map((project) => {
-                console.log(project);
                 let like = false;
                 myLikes.map((myLike) => {
                   if ((project.id === myLike.projectId) && (myLike.isLike === 1)) {

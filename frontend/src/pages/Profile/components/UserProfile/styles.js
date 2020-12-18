@@ -60,6 +60,7 @@ export default ({ palette, breakpoints }) => ({
     borderRadius: '16px',
   },
   button: {
+    textTransform: 'initial',
     backgroundColor: palette.darkBlue,
     color: palette.white,
     margin: '1em',
@@ -70,6 +71,7 @@ export default ({ palette, breakpoints }) => ({
     },
   },
   deleteButton: {
+    textTransform: 'initial',
     backgroundColor: palette.darkBlue,
     color: palette.white,
     margin: '1em',

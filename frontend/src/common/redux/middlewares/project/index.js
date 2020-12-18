@@ -6,6 +6,7 @@ import {
   HANDLE_DELETE_PROJECT,
   FETCH_PROJECT_TAGS,
   showProjectTags,
+  projectHasError,
 } from 'src/common/redux/actions/project';
 import {
   getProfileInfos,
@@ -68,9 +69,9 @@ const projectMiddleWare = (store) => (next) => (action) => {
           store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(showSnackbar('', 'Votre projet à bien été soumis', 'success'));
         })
-        .catch((e) => {
+        .catch(() => {
+          store.dispatch(projectHasError());
           store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
-          console.log(e.request);
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
@@ -88,9 +89,9 @@ const projectMiddleWare = (store) => (next) => (action) => {
           store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(showSnackbar('', 'Votre projet à bien été soumis', 'success'));
         })
-        .catch((e) => {
+        .catch(() => {
+          store.dispatch(projectHasError());
           store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
-          console.log(e.request);
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
@@ -110,9 +111,8 @@ const projectMiddleWare = (store) => (next) => (action) => {
           store.dispatch(getProfileInfos());
           store.dispatch(showSnackbar('', 'Votre projet à bien été supprimé', 'success'));
         })
-        .catch((e) => {
+        .catch(() => {
           store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
-          console.log(e.request);
         });
 
       next(action);
