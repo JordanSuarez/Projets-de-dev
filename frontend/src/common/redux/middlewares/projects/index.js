@@ -36,7 +36,6 @@ const profiles = (store) => (next) => (action) => {
 
       callApi(url, POST)
         .then(({ data }) => {
-          console.log('ok', data);
         })
         .catch((error) => {
           console.log(error);
@@ -50,7 +49,6 @@ const profiles = (store) => (next) => (action) => {
 
       callApi(url, POST)
         .then(({ data }) => {
-          console.log('ok', data);
         })
         .catch((error) => {
           console.log(error);

@@ -26,7 +26,6 @@ const Users = ({
   }, []);
 
   useEffect(() => {
-    console.log(profileSelected);
   }, [profileSelected]);
 
   const showListUser = () => {

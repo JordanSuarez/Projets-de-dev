@@ -104,7 +104,7 @@ const Projects = ({
           ))}
           {searchResults.length === 0
           && arrayProjectsCurrentPage.map(({
-            id: projectId, title, description, tags, user, image,
+            id: projectId, title, description, tags, user, image, vote,
           }) => {
             let like = false;
             myLikes.map((myLike) => {
@@ -124,6 +124,7 @@ const Projects = ({
                 image={image}
                 isLogged={isLogged}
                 like={like}
+                vote={vote}
               />
             );
           })}

@@ -1,4 +1,4 @@
-import { SAVE_USER_PROFILE, GET_USER_PROFILE, SET_MY_LIKES } from 'src/common/redux/actions/userProfile';
+import { SAVE_USER_PROFILE, GET_USER_PROFILE, SET_MY_LIKES, SAVE_PROJECTS } from 'src/common/redux/actions/userProfile';
 import { SUBMIT_LOGOUT_SUCCESS } from 'src/common/redux/actions/auth';
 import { getUser } from 'src/common/authentication/authProvider';
 
@@ -48,6 +48,12 @@ const userProfile = (state = initialState, action = {}) => {
       return {
         ...state,
         myLikes: action.data,
+      };
+    }
+    case SAVE_PROJECTS: {
+      return {
+        ...state,
+        projects: action.data,
       };
     }
     default: return { ...state };
