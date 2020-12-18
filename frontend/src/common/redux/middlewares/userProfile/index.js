@@ -3,6 +3,10 @@ import {
   UPDATE_USER_PROFILE,
   saveUserProfile,
   HANDLE_DELETE_USER_PROFILE,
+  GET_PROFILE_LIKES,
+  setMyLikes,
+  saveProjects,
+  GET_PROJECTS,
 } from 'src/common/redux/actions/userProfile';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { submitLogoutSuccess } from 'src/common/redux/actions/auth';
@@ -10,7 +14,7 @@ import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi, apiUrl } from 'src/common/callApiHandler/urlHandler';
 import { removeToken, getToken, setUser } from 'src/common/authentication/authProvider';
 import {
-  USERS, PATCH, PRIVATE_PROFILE, DELETE, ME,
+  USERS, PATCH, PRIVATE_PROFILE, DELETE, ME, LIKES, PROJECTS, ALL, GET,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
@@ -71,6 +75,37 @@ const userProfile = (store) => (next) => (action) => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
+        });
+
+      next(action);
+      break;
+    }
+    case GET_PROFILE_LIKES: {
+      axios.get(`${apiUrl}/${USERS}/${ME}/${LIKES}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}` || null,
+          },
+        })
+        .then(({ data }) => {
+          store.dispatch(setMyLikes(data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      next(action);
+      break;
+    }
+    case GET_PROJECTS: {
+      const url = getEndpoint(PROJECTS, GET, ALL);
+
+      callApi(url, GET)
+        .then((response) => {
+          store.dispatch(saveProjects(response.data));
+        })
+        .catch((response) => {
+          console.log(response);
         });
 
       next(action);

@@ -42,6 +42,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   picker: {
+    color: '#bdbdbd',
     position: 'absolute',
     right: '0.5em',
     top: '60px',
@@ -144,6 +145,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   pickerUpdate: {
+    color: '#bdbdbd',
     position: 'absolute',
     top: '10px',
     right: '0px',
@@ -152,6 +154,12 @@ export default ({ breakpoints, palette }) => ({
   textfieldUpdate: {
     width: 'calc(100%)',
     margin: '0',
+    '& .MuiFormLabel-root.Mui-focused': {
+      color: palette.darkBlue,
+    },
+    '& .MuiInput-underline:after': {
+      borderBottom: palette.darkBlue,
+    },
   },
 
   commentText: {

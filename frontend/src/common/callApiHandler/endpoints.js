@@ -14,13 +14,21 @@ import {
   ONE,
   ALL,
   TWELVE,
-  LATEST,
   TAGS,
   PRIVATE_PROFILE,
   ME,
+  LIKES,
   CONNECTED,
   CHANNELS,
   MESSAGES,
+  PRIVATE_PROFILE_LIKES,
+  PROFILE_LIKES,
+  LIKEPROJECT,
+  LIKE,
+  DISLIKE,
+  ILIKE,
+  IDISLIKE,
+  VOTE,
 } from './constants';
 import { apiUrl } from './urlHandler';
 
@@ -53,6 +61,8 @@ const endpoints = {
       [ALL]: `${USERS}`,
       [ONE]: (meta) => `${USERS}/${meta}`,
       [PRIVATE_PROFILE]: `${USERS}/${ME}`,
+      [PRIVATE_PROFILE_LIKES]: `${USERS}/${ME}/${LIKES}`,
+      [PROFILE_LIKES]: (meta) => `${USERS}/${meta}/${LIKES}`,
     },
     [DELETE]: {
       [PRIVATE_PROFILE]: `${USERS}/${ME}/${DELETE}`,
@@ -70,6 +80,12 @@ const endpoints = {
     },
     [DELETE]: {
       [ONE]: (meta) => `${COMMENT}/${meta}/${DELETE}`,
+    },
+  },
+  [LIKEPROJECT]: {
+    [POST]: {
+      [ILIKE]: (meta) => `${PROJECTS}/${meta}/${VOTE}/${LIKE}`,
+      [IDISLIKE]: (meta) => `${PROJECTS}/${meta}/${VOTE}/${DISLIKE}`,
     },
   },
   [CONTACT]: {

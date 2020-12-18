@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
@@ -13,6 +14,7 @@ import {
 import { classes as classesProps } from 'src/common/classes';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+import defaultAvatar from 'src/common/assets/images/avatar.png';
 import './style.scss';
 
 const Comments = ({
@@ -124,12 +126,12 @@ const Comments = ({
                   required
                 />
                 {emojiPicker}
-                <Button
+                <IconButton
                   className={classes.picker}
                   onClick={triggerPicker}
                 >
                   😍
-                </Button>
+                </IconButton>
 
                 <Box className={classes.containerButton}>
                   <Button
@@ -156,7 +158,7 @@ const Comments = ({
                 <Avatar
                   className={classes.avatar}
                   alt={classes.username}
-                  src={comment.User.userImage}
+                  src={comment.User.userImage || defaultAvatar}
                 />
                 <div className={classes.headerComment}>
                   <div className={classes.usernameContent}>
@@ -214,12 +216,12 @@ const Comments = ({
                       required
                     />
                     {emojiPickerUpdate}
-                    <Button
+                    <IconButton
                       className={classes.pickerUpdate}
                       onClick={triggerPickerUpdate}
                     >
                       😍
-                    </Button>
+                    </IconButton>
 
                     <Box className={classes.containerButton}>
                       <Button

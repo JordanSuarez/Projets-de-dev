@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useRef  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import {
-  Input,
-  Button,
-  Avatar,
-  InputAdornment,
+  Input, IconButton, Avatar, Divider,
 } from '@material-ui/core';
-import SentimentVerySatisfiedIcon from '@material-ui/icons/SentimentVerySatisfied';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SendIcon from '@material-ui/icons/Send';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+import defaultAvatar from 'src/common/assets/images/avatar.png';
 import './style.scss';
 
 const Messages = ({
@@ -49,8 +46,11 @@ const Messages = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    sendMessage(inputValue, currentUser.username, currentUser.userImage);
-    setInputValue('');
+    SetEmojiPicker(false);
+    if (inputValue.length > 0) {
+      sendMessage(inputValue, currentUser.username, currentUser.userImage);
+      setInputValue('');
+    }
   };
 
   return (
@@ -76,7 +76,7 @@ const Messages = ({
                 </div>
                 <p className={classes.date}>le {new Date(createdAt).toLocaleString('fr-FR')}</p>
               </div>
-              <Avatar className={classes.avatar} alt="Cindy Baker" src={User.userImage} />
+              <Avatar className={classes.avatar} alt="avatar user" src={User.userImage || defaultAvatar} />
             </li>
 
           ))}
@@ -87,23 +87,23 @@ const Messages = ({
               id="input-with-icon-adornment"
               className={classes.inputMessage}
               type="text"
-              multiline
               label="Entrez votre message"
               value={inputValue}
               onChange={(event) => setInputValue(event.target.value)}
               startAdornment={(
-                <Button
+                <IconButton
+                  size="medium"
                   position="start"
                   className={classes.picker}
                   onClick={triggerPicker}
                 >
-                  <SentimentVerySatisfiedIcon />
-                </Button>
+                  😍
+                </IconButton>
               )}
               endAdornment={(
-                <Button position="end" type="submit" className={classes.submitButton}>
+                <IconButton position="end" type="submit" className={classes.submitButton}>
                   <SendIcon />
-                </Button>
+                </IconButton>
               )}
             />
           </form>
