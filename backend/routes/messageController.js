@@ -6,7 +6,11 @@ const asyncLib = require('async');
 module.exports = {
 
   getMessagesList: (req, res) => {
+    let limit = req.query.limit;
+    let offset = req.query.offset;
     models.Message.findAll({
+      limit: (limit ? parseInt(limit) : 999),
+      offset: (offset ? parseInt(offset) : 0),
       attributes: ['id', 'content', 'userId', 'createdAt'],
       include: {
         all:true, 

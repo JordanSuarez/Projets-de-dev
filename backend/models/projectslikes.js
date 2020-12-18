@@ -14,22 +14,26 @@ module.exports = (sequelize, DataTypes) => {
         through: models.ProjectsLikes,
         foreignKey: 'userId',
         otherKey: 'projectId',
+        onDelete: 'CASCADE',
       });
 
       models.Project.belongsToMany(models.User, {
         through: models.ProjectsLikes,
         foreignKey: 'projectId',
         otherKey: 'userId',
+        onDelete: 'CASCADE',
       });
 
       models.ProjectsLikes.belongsTo(models.User, {
         foreignKey: 'userId',
         as: 'user',
+        onDelete: 'CASCADE',
       });
 
       models.ProjectsLikes.belongsTo(models.Project, {
         foreignKey: 'projectId',
         as: 'project',
+        onDelete: 'CASCADE',
       });
     }
   };

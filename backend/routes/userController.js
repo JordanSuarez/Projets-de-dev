@@ -196,10 +196,12 @@ module.exports = {
 
 		getUsersList: (req, res) => {
 			models.User.findAll({
-				attributes: ['id', 'username', 'userImage'],
+				attributes: ['id', 'username', 'userImage', 'email'],
 			}).then((user) => {
 				if (user) {
-					return res.status(200).json(user);
+					const arrayAllUsers = Object.values(user);
+					res.set('X-Total-Count', arrayAllUsers.length);
+					return res.status(201).json(user);
 				} else {
 					return res.status(404).json({ 'error': /*'Aucun utilisateur n\'a pu être trouvé'*/ err });
 				}
@@ -324,29 +326,49 @@ module.exports = {
 				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
+			/*models.User.findOne({
+				where: { id: userId }
+			}).then(()=> {
+				models.Project.findAll({
+					where: {userId: userId}
+				})
+			})*/
+			
+			
+			
+			
+			
+			
 			models.User.findOne({
 				where: { id: userId }
 			}).then(() => {
 				models.Comment.destroy({
 					where: {userId: userId}
 				}).then(() => {
-					models.Project.destroy({
-						where: {userId: userId}						
+					models.ProjectsLikes.destroy({
+						where: {userId: userId}
 					}).then(() => {
-						models.Message.destroy({
-							where: {userId: userId}
+						models.Project.destroy({
+							where: {userId: userId}						
 						}).then(() => {
-							models.User.destroy({
-								where: { id: userId }
-							}).then(() => {
-								return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
-							}).catch(() => {
-								return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
+							models.Message.destroy({
+								where: {userId: userId}
+								}).then(() => {
+									models.User.destroy({
+										where: { id: userId }
+									}).then(() => {
+										return res.status(200).json({ message: 'l\'utilisateur a bien été supprimé' });
+									}).catch(() => {
+										return res.status(400).json({ 'error' : 'la requête n\'a pas pu aboutir' });
+									})
+								})
 							})
-						})
+					})
 				})
-			})
-			})
+				})
+			
+			
+				
 
 		},
 		// Check if user token is valid

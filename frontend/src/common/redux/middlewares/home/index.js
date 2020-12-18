@@ -24,7 +24,6 @@ const homeMiddleware = (store) => (next) => (action) => {
         .catch((response) => {
           console.log(response);
         });
-        
 
       next(action);
       break;

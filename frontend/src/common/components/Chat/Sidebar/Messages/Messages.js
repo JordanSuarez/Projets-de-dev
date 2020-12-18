@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import {
-  Input, IconButton, Avatar, Divider,
+  Input, IconButton, Avatar,
 } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 import 'emoji-mart/css/emoji-mart.css';
