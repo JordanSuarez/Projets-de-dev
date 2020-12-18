@@ -25,7 +25,7 @@ const Home = ({
   const arrayProjects = Object.values(projects);
   return (
     <Base loading={loading}>
-      <img className={classes.image} src={headerImage} alt="header" />
+      <img className={classes.image} src={headerImage} alt="header" style={{backgroundPosition: 'left'}} />
       <div className={classes.home}>
         <div className={classes.textContainer}>
           <h2 className={classes.subtitle}> Projets de Dev</h2>
