@@ -60,6 +60,8 @@ module.exports = {
           };
           formatProject.push(newFormat)
         }
+        const arrayAllProjects = Object.values(formatProject);
+        res.set('X-Total-Count', arrayAllProjects.length);
         return res.status(200).json(formatProject)
     })
     .catch((error) => {
@@ -241,10 +243,6 @@ module.exports = {
       res.status(500).json({ 'Error' : 'Impossible de supprimer le projet'});
 
     })
-
-    
-   
-
   },
  
   deleteProject: (req, res) => {
@@ -266,5 +264,5 @@ module.exports = {
     } else {
       return res.status(401).json({'error': 'vous n\'avez pas l\'autorisation de supprimer ce projet' });
     }
-  }
+  },
 }
