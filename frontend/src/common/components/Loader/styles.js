@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 export default ({ palette }) => ({
   loader: {
     margin: 'auto',
@@ -6,5 +5,7 @@ export default ({ palette }) => ({
     flexDirection: 'column',
     marginTop: '2rem',
     color: palette.darkBlue,
+    position: 'relative',
+    top: '20vh',
   },
 });

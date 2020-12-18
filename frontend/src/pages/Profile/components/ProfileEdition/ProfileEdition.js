@@ -168,7 +168,7 @@ const ProfileEdition = ({
                         onChangePassword(!changePassword);
                       }}
                     >
-                      Je souhaite changer mon mot de passe
+                      modifier mon mot de passe
                     </Button>
                   </div>
                   {changePassword && (
@@ -204,7 +204,7 @@ const ProfileEdition = ({
                       type="submit"
                       disabled={submitting}
                     >
-                      Submit
+                      Valider
                     </Button>
                   </Box>
                 </form>

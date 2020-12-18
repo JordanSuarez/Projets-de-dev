@@ -111,10 +111,12 @@ export default ({ palette }) => ({
     margin: 'auto',
   },
   quillEditor: {
+    margin: '0',
     color: palette.darkBlue,
     '& .ql-editor': {
-      backgroundColor: palette.lightBlue,
+      backgroundColor: palette.white,
       border: 'none',
+      borderRadius: '1rem',
     },
     '& p': {
       display: 'content',

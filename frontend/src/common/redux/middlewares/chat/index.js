@@ -12,7 +12,7 @@ let socket;
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET: {
-      socket = io();
+      socket = io('http://localhost:5050');
       socket.on('send_message', (message) => {
         store.dispatch(addMessage(message));
       });
@@ -34,8 +34,7 @@ const chatMiddleWare = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(saveMessages(response.data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
       next(action);
       break;

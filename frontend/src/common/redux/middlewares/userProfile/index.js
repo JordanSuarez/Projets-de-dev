@@ -33,8 +33,7 @@ const userProfile = (store) => (next) => (action) => {
           setUser({ id: data.id, username: data.username, userImage: data.userImage });
           store.dispatch(saveUserProfile(data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
 
       next(action);
@@ -47,9 +46,8 @@ const userProfile = (store) => (next) => (action) => {
           store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(showSnackbar('', 'Ton profil à bien été modifié!', 'success'));
         })
-        .catch((error) => {
+        .catch(() => {
           store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
@@ -70,8 +68,7 @@ const userProfile = (store) => (next) => (action) => {
           store.dispatch(redirect(getHomeRoute()));
           store.dispatch(showSnackbar('', 'Votre compte à bien été supprimé', 'success'));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
@@ -90,8 +87,7 @@ const userProfile = (store) => (next) => (action) => {
         .then(({ data }) => {
           store.dispatch(setMyLikes(data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
 
       next(action);
@@ -104,8 +100,7 @@ const userProfile = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(saveProjects(response.data));
         })
-        .catch((response) => {
-          console.log(response);
+        .catch(() => {
         });
 
       next(action);

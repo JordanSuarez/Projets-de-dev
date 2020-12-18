@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
-import headerImage from './header-home.jpg';
+import headerImage from './header.jpg';
 import robot from './robot.png';
 
 const Home = ({
@@ -41,7 +41,6 @@ const Home = ({
           <div className={classes.container}>
             <div className={classes.listCard}>
               {arrayProjects.map((project) => {
-                console.log(project);
                 let like = false;
                 myLikes.map((myLike) => {
                   if ((project.id === myLike.projectId) && (myLike.isLike === 1)) {

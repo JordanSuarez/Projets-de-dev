@@ -25,8 +25,7 @@ const profiles = (store) => (next) => (action) => {
           store.dispatch(saveProjectsCurrentPage(response[0].data));
           store.dispatch(saveAllProjects(response[1].data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
       next(action);
       break;
@@ -35,10 +34,9 @@ const profiles = (store) => (next) => (action) => {
       const url = getEndpoint(LIKEPROJECT, POST, ILIKE, action.projectId);
 
       callApi(url, POST)
-        .then(({ data }) => {
+        .then(() => {
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
 
       next(action);
@@ -48,10 +46,9 @@ const profiles = (store) => (next) => (action) => {
       const url = getEndpoint(LIKEPROJECT, POST, IDISLIKE, action.projectId);
 
       callApi(url, POST)
-        .then(({ data }) => {
+        .then(() => {
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
 
       next(action);
