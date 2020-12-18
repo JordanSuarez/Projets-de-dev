@@ -1,12 +1,11 @@
 import * as React from "react";
 import { Admin, Resource } from 'react-admin';
 import simpleRestProvider from 'ra-data-json-server';
-import { Create, Edit, SimpleForm, TextInput, ImageInput, required, List, Datagrid, ImageField, EmailField, FunctionField, UrlField, TextField, ChipField, ArrayField, SingleFieldList, EditButton, ShowButton, fetchUtils } from 'react-admin';
+import { Create, Edit, SimpleForm, TextInput, ImageInput, required, List, Datagrid, SelectArrayInput, ReferenceInput , SelectInput, ArrayInput, SimpleFormIterator, ImageField, EmailField, FunctionField, UrlField, TextField, ChipField, ArrayField, SingleFieldList, EditButton, ShowButton, fetchUtils } from 'react-admin';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import RichTextInput from 'ra-input-rich-text';
 import addUploadFeature from './addUploadFeature';
 import authProvider from './authProvider';
-import FileBase64 from 'react-file-base64';
 
 
 
@@ -24,7 +23,7 @@ const theme = createMuiTheme({
 
 
 export const UserList = (props) => (
-    <List {...props}>
+    <List {...props} bulkActionButtons={false}>
         <Datagrid key="id" >
             <TextField label="ID" source="id" />
             <TextField label="Nom d'utilisateur" source="username" />
@@ -50,7 +49,7 @@ export const UserEdit = (props) => {
     <SimpleForm>
         <TextInput disabled label="Id" source="id" />
         <TextInput label="Nom d'utilisateur" source="username" />
-        <TextInput label="Adresse email" source="email" />
+        <TextInput disabled label="Adresse email" source="email" />
         <ImageField label="Image actuelle" source="userImage" />
         <ImageInput
                 source="data.pictures"
@@ -85,7 +84,7 @@ const useStyles = makeStyles({
 export const ProjectList = (props) => {
     const classes = useStyles();
     return(
-  <List {...props}>
+  <List {...props} bulkActionButtons={false}>
       <Datagrid expand={<TextField name="Description" source="description" />} key="id" 	>
           <TextField label="ID" source="id" sortBy="id" />
         
@@ -131,29 +130,17 @@ export const ProjectCreate = (props) => {
 
 export const ProjectEdit = (props) => {
 
-  const toBase64 = file => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-  });
-
   const classes = useStyles();
   const PreviewImage = ({ record, source }) => {
     console.log(typeof(record))
     if (typeof (record) == "object") {
         record = {
-            [source]: 'ALLOOO'
+            [source]: record.src,
         }
     }
-    console.log(record)
+
     
     return <ImageField record={record} source={source} />
-  }
-
-  const convertBase64 = async (record, source) => {
-    const imageSrc = await toBase64(record.rawFile)
-    return imageSrc
   }
 
 return (
@@ -181,11 +168,16 @@ return (
               >
               <PreviewImage source="src" />
               </ImageInput>
-        <ArrayField source="tags" required>
-           <SingleFieldList key="id" >
-           <ChipField source="name" className={classes.tags}/>
-          </SingleFieldList>
-        </ArrayField>
+
+
+              <ArrayInput source="tags">
+                <SimpleFormIterator disableAdd disableRemove >
+                <ReferenceInput label="Tags" source="id" reference="tags">
+                <SelectInput optionText="name" />
+                </ReferenceInput>
+                </SimpleFormIterator>
+              </ArrayInput>
+
     </SimpleForm>
 </Edit>
   )
@@ -194,7 +186,7 @@ return (
 export const TagList = (props) => {
     console.log(props)
     return(
-  <List {...props}>
+  <List {...props} bulkActionButtons={false}>
       <Datagrid key="id" >
           <TextField label="ID" source="id" />
           <TextField label="Nom" source="name" />
@@ -230,7 +222,7 @@ export const TagEdit = (props) => {
 export const CommentList = (props) => {
   console.log(props)
   return(
-<List {...props}>
+<List {...props} bulkActionButtons={false}>
     <Datagrid key="id" >
         <TextField label="Commentaire" source="content" />
         <TextField label="Auteur" source="User.username" />
@@ -245,10 +237,10 @@ export const CommentEdit = (props) => {
   return (
     <Edit {...props}>
     <SimpleForm>
-    <TextField label="ID" source="id" />
+    <TextInput disabled label="ID" source="id" />
     <TextInput label="Commentaire" source="content" />
-    <TextInput label="ID de l'utilisateur" source="User.id" />
-    <TextInput label="ID du Projet" source="Project.id" />
+    <TextInput disabled label="Utilisateur" source="User.username" />
+    <TextInput disabled label="Projet" source="Project.title" />
     </SimpleForm>
 </Edit>
   )
@@ -263,7 +255,7 @@ const httpClient = (url, options = {}) => {
 };
 
 const Dashboard = () => (
-    <Admin authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://localhost:3001/api', httpClient)}>
+    <Admin authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://localhost:3001/api/backOffice', httpClient)}>
         <Resource name="users" list={UserList} edit={UserEdit}/>
         <Resource name="projects" list={ProjectList} create={ProjectCreate} edit={ProjectEdit} />
         <Resource name="tags" list={TagList} create={TagCreate} edit={TagEdit}/>
