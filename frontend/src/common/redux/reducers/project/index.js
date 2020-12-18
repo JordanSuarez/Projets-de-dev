@@ -4,6 +4,7 @@ import {
   SHOW_PROJECT_TAGS,
   HANDLE_EDIT_PROJECT,
   HANDLE_CREATE_PROJECT,
+  PROJECT_HAS_ERROR,
 } from 'src/common/redux/actions/project';
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   },
   tags: [],
   loading: true,
+  hasError: false,
 };
 
 const project = (state = initialState, action = {}) => {
@@ -36,21 +38,31 @@ const project = (state = initialState, action = {}) => {
         project: action.project,
         tags: action.tags,
         loading: false,
+        hasError: false,
       };
     case SHOW_PROJECT_TAGS:
       return {
         ...state,
         tags: action.tags,
+        hasError: false,
       };
     case HANDLE_EDIT_PROJECT:
       return {
         ...state,
         loading: true,
+        hasError: false,
       };
     case HANDLE_CREATE_PROJECT:
       return {
         ...state,
         loading: true,
+        hasError: false,
+      };
+    case PROJECT_HAS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        hasError: true,
       };
     default:
       return { ...state };

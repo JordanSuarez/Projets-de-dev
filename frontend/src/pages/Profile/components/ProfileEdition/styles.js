@@ -32,6 +32,7 @@ export default ({ palette }) => ({
   },
 
   submit: {
+    textTransform: 'initial',
     color: palette.white,
     backgroundColor: palette.darkBlue,
     margin: '2em 0',
@@ -41,6 +42,7 @@ export default ({ palette }) => ({
     },
   },
   annuler: {
+    textTransform: 'initial',
     color: palette.darkBlue,
     backgroundColor: palette.lightBlue,
     margin: '2em 0 ',

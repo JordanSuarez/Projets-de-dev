@@ -9,7 +9,6 @@ import styles from './styles';
 const mapStateToProps = (state) => ({
   profiles: state.profiles.profiles,
   loading: state.profiles.loading,
-
 });
 
 const mapsDispatchToProps = (dispatch) => ({

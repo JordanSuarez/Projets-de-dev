@@ -21,10 +21,8 @@ const homeMiddleware = (store) => (next) => (action) => {
         .then(() => {
           store.dispatch(getProfileLikes());
         })
-        .catch((response) => {
-          console.log(response);
+        .catch(() => {
         });
-        
 
       next(action);
       break;

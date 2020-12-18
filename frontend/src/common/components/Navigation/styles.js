@@ -62,6 +62,7 @@ export default ({ palette, breakpoints }) => ({
     fontWeight: 'bold',
   },
   button: {
+    textTransform: 'initial',
     backgroundColor: palette.darkBlue,
     color: palette.white,
     '&:hover': {
