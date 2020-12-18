@@ -28,8 +28,8 @@ const io = require("socket.io")(server, {
 
 
 // Body Parser configuration
-app.use(bodyParser.json({limit: "50mb"}));
-app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
+app.use(bodyParser.json({limit: "100mb"}));
+app.use(bodyParser.urlencoded({limit: "100mb", extended: true}));
 
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*');

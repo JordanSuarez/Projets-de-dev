@@ -1,6 +1,6 @@
 import simpleRestProvider from 'ra-data-simple-rest';
 
-const dataProvider = simpleRestProvider('http://localhost:3001/api');
+const dataProvider = simpleRestProvider('http://ubuntu@ec2-34-202-164-145.compute-1.amazonaws.com/api');
 
 const myDataProvider = {
     ...dataProvider,
