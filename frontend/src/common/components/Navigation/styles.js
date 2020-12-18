@@ -1,6 +1,6 @@
 import logo from 'src/common/assets/images/logo.png';
 
-export default ({ palette }) => ({
+export default ({ palette, breakpoints }) => ({
   navigation: {
     minHeight: '5rem',
     display: 'flex',
@@ -30,6 +30,12 @@ export default ({ palette }) => ({
     marginLeft: 'calc(39% - 2rem)',
     '&:hover': {
       cursor: 'pointer',
+    },
+    [breakpoints.down('sm')]: {
+      marginLeft: 'calc(35% - 2rem)',
+    },
+    [breakpoints.down('xs')]: {
+      marginLeft: 'calc(32% - 2rem)',
     },
   },
   wrapper: {

@@ -71,7 +71,7 @@ export default ({ breakpoints, palette }) => ({
     minWidth: '130px',
     display: 'inline-block',
     borderRadius: '8px 0px 8px 8px',
-    backgroundColor: '#949494',
+    backgroundColor: palette.blue,
     color: 'white',
     padding: '10px',
     textAlign: 'right',
@@ -124,7 +124,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   submitButton: {
-    color: '#bdbdbd',
+    color: palette.blue,
     '&:hover': {
       backgroundColor: 'transparent',
     },

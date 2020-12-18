@@ -13,7 +13,7 @@ import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import {
   setToken, setUserId, removeToken, removeUserId, removeUser,
 } from 'src/common/authentication/authProvider';
-import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
+import { getUserProfileRoute, getLoginRoute } from 'src/common/routing/routesResolver';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
@@ -32,7 +32,7 @@ const authMiddleWare = (store) => (next) => (action) => {
         .then(({ data }) => {
           setToken(data.token);
           setUserId(data.userId);
-          store.dispatch(redirect(getHomeRoute()));
+          store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(submitLoginSuccess(data.userId));
           store.dispatch(showSnackbar('', `Hello! ${data.username}`, 'success'));
         })

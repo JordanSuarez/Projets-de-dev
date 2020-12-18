@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable max-len */
+import React, { useState, useEffect } from 'react';
 
 import PropTypes from 'prop-types';
 import {
@@ -34,9 +35,14 @@ const CardProject = ({
   projectOwnerOptions,
   handleDeleteProject,
   isLogged,
+  like,
+  setLike,
+  setDislike,
+  vote,
 }) => {
   const history = useHistory();
-
+  const [isLike, setIsLike] = useState(like);
+  const [voteCount, setVoteCount] = useState(vote);
   const handleDisplayProject = () => {
     history.push(getProjectRoute(projectId));
   };
@@ -49,8 +55,15 @@ const CardProject = ({
     history.push(getProfileRoute(userId));
   };
 
-  const handleLikeProject = () => {
-    // TODO like project and change to FavoriteIcon
+  const handleLikeProject = (id) => {
+    setLike(id);
+    setIsLike(true);
+    setVoteCount(voteCount + 1);
+  };
+  const handleDislikeProject = (id) => {
+    setDislike(id);
+    setIsLike(false);
+    setVoteCount(voteCount - 1);
   };
 
   const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'br', 'p'] };
@@ -87,7 +100,14 @@ const CardProject = ({
             {!projectOwnerOptions ? (
               <>
                 {isLogged
-                && <FavoriteBorderIcon className={classes.like} onClick={handleLikeProject} />}
+                  && isLike
+                  && <FavoriteIcon className={classes.like} onClick={() => handleDislikeProject(projectId)} />}
+                {isLogged
+                  && !isLike
+                  && <FavoriteBorderIcon className={classes.dontLike} onClick={() => handleLikeProject(projectId)} />}
+
+                {voteCount !== null ? <span className={classes.vote}>{voteCount} vote</span> : <span className={classes.vote}>0 vote</span>}
+
                 <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
               </>
             ) : (
@@ -125,18 +145,24 @@ CardProject.propTypes = {
       name: PropTypes.string,
     }),
   ),
+  setLike: PropTypes.func.isRequired,
+  setDislike: PropTypes.func.isRequired,
+  like: PropTypes.bool,
+  vote: PropTypes.number,
 };
 
 CardProject.defaultProps = {
   userImage: avatar,
   handleDeleteProject: Function.prototype,
   projectOwnerOptions: false,
+  vote: 0,
   tags: PropTypes.arrayOf(
     PropTypes.shape({
       id: null,
       name: '',
     }),
   ),
+  like: null,
 };
 
 export default CardProject;

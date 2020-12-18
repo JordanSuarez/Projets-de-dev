@@ -57,6 +57,16 @@ export default ({ breakpoints, palette }) => ({
   },
   like: {
     margin: '0.50em',
+    color: 'red',
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      cursor: 'pointer',
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+    },
+  },
+  dontLike: {
+    margin: '0.50em',
     color: palette.white,
     transition: 'all .2s ease-in-out',
     '&:hover': {
@@ -64,6 +74,9 @@ export default ({ breakpoints, palette }) => ({
       transition: 'all .2s ease-in-out',
       transform: 'scale(1.1)',
     },
+  },
+  vote: {
+    color: 'white',
   },
   editIcon: {
     margin: '0.50em',

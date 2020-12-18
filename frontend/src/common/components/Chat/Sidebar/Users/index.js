@@ -14,7 +14,6 @@ const mapStateToProps = (state) => ({
 
 const mapsDispatchToProps = (dispatch) => ({
   getProfiles: () => {
-    console.log('mapdispatchtopprops getUsers');
     dispatch(getProfilesInfos());
   },
 });

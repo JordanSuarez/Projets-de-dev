@@ -2,6 +2,19 @@ export default ({ breakpoints }) => ({
   container: {
     display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  text: {
+    margin: '2rem auto 1rem auto',
+    fontSize: 'larger',
+    [breakpoints.down('sm')]: {
+      margin: '2rem 1rem 1rem 1rem',
+      textAlign: 'center',
+    },
+  },
+  backToHome: {
+    margin: '1rem auto',
+    width: 'fit-content',
   },
   image: {
     margin: 'auto',

@@ -21,6 +21,10 @@ const UserProfile = ({
   handleDeleteUserProfile,
   redirect,
   isLogged,
+  getMyLikes,
+  myLikes,
+  getProjects,
+  projects,
 }) => {
   const history = useHistory();
 
@@ -87,6 +91,7 @@ const UserProfile = ({
     },
   ];
 
+  // TODO : loading after get projects & likes for show projectsLikes
   return (
     <Base loading={loading}>
       <>
@@ -134,7 +139,7 @@ const UserProfile = ({
           </div>
           <div>
             <h2 className={classes.subtitle}>
-              Liste des projets
+              Mes projets
             </h2>
             <div className={classes.cardContainer}>
               {isEmpty(userProfile.projects) && (
@@ -156,10 +161,46 @@ const UserProfile = ({
                     projectOwnerOptions
                     handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
                     isLogged={isLogged}
+                    like={false}
                   />
                 ))}
             </div>
           </div>
+          <div>
+            <h2 className={classes.subtitle}>
+              Mes projets préférés
+            </h2>
+            <div className={classes.cardContainer}>
+              {isEmpty(userProfile.projects) && (
+              <p>Je n'ai pas encore de projet</p>
+              )}
+              {/* TODO add loading for show result (console.log ok ) */}
+              {myLikes.map((myLike) => {
+                projects.filter((project) => project.id === myLike.projectId).map(({
+                  id: projectId, title: projectTitle, description, tags, image,
+                }) => {
+                  console.log('j ai like le projet', projectId, projectTitle);
+                  return (
+                    <CardProject
+                      key={projectId}
+                      projectId={projectId}
+                      title={projectTitle}
+                      tags={tags}
+                      description={description}
+                      userId={userProfile.id}
+                      userImage={userProfile.userImage}
+                      image={image}
+                      projectOwnerOptions
+                      handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
+                      isLogged={isLogged}
+                      like={false}
+                    />
+                  );
+                });
+              })}
+            </div>
+          </div>
+
         </div>
       </>
     </Base>
@@ -175,6 +216,14 @@ UserProfile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
+  getMyLikes: PropTypes.func.isRequired,
+  myLikes: PropTypes.array,
+  getProjects: PropTypes.func.isRequired,
+  projects: PropTypes.array,
 };
 
+UserProfile.defaultProps = {
+  myLikes: [],
+  projects: [],
+};
 export default UserProfile;
