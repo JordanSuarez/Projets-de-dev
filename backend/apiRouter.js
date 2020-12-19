@@ -7,12 +7,14 @@ const commentController = require('./routes/commentController');
 const channelController = require('./routes/channelController');
 const messageController = require('./routes/messageController');
 const likeController = require('./routes/likeController');
+const contactController = require('./routes/contactController');
 
 // Controllers BackOffice
 const userControllerBackOffice = require('./routes_backOffice/userControllerBackOffice');
 const projectControllerBackOffice = require('./routes_backOffice/projectControllerBackOffice');
 const tagControllerBackOffice = require('./routes_backOffice/tagControllerBackOffice');
 const commentControllerBackOffice = require('./routes_backOffice/commentControllerBackOffice');
+const contactControllerBackOffice = require('./routes_backOffice/contactControllerBackOffice');
 
 // Router
 exports.router = (() => {
@@ -63,6 +65,9 @@ exports.router = (() => {
     // Messages routes
     apiRouter.route('/messages').get(messageController.getMessagesList); // OK
 
+    // Contact routes
+    apiRouter.route('/contact').post(contactController.new); // OK
+
     // BackOffice routes:
     // -Projects routes
     apiRouter.route('/backOffice/projects/').get(projectController.allProjects); // OK
@@ -88,6 +93,12 @@ exports.router = (() => {
     apiRouter.route('/backOffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
     apiRouter.route('/backOffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
     apiRouter.route('/backOffice/tags').post(tagControllerBackOffice.createTag); // OK
+
+    // -Contact routes
+    apiRouter.route('/backOffice/contacts').get(contactControllerBackOffice.getContactList); // OK
+    apiRouter.route('/backOffice/contacts/:id').get(contactControllerBackOffice.getContactById); // OK
+    apiRouter.route('/backOffice/contacts/:id').delete(contactControllerBackOffice.deleteContact); // OK
+
 
     return apiRouter;
 })();
