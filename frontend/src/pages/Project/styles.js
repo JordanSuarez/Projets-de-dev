@@ -1,4 +1,4 @@
-export default ({ palette }) => ({
+export default ({ palette, breakpoints }) => ({
   projectContainer: {
     padding: '1rem',
   },
@@ -32,7 +32,7 @@ export default ({ palette }) => ({
     color: palette.darkBlue,
     backgroundColor: palette.white,
     padding: '0.5rem',
-    borderRadius: '0.4rem',
+    borderRadius: '8px',
     boxShadow: '1px 2px 3px 1px rgba(0,0,0,.35)',
   },
   link: {
@@ -66,24 +66,31 @@ export default ({ palette }) => ({
   },
   profile: {
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
+    marginLeft: '1rem',
     marginBottom: '0.5rem',
     color: palette.darkBlue,
-    '&:hover': {
-      cursor: 'pointer',
-    },
   },
   profileLogo: {
     width: '3rem',
     height: '3rem',
+    marginRight: '0.5rem',
     marginBottom: '0.5rem',
     transition: 'all .2s ease-in-out',
     '&:hover': {
       transition: 'all .2s ease-in-out',
       transform: 'scale(1.1)',
+      cursor: 'pointer',
     },
     boxShadow: ' 1px 2px 3px 1px rgba(0,0,0,.35)',
+  },
+  profileText: {
+    lineHeight: '1.3rem',
+    display: 'flex',
+    flexWrap: 'wrap',
+    '& span': {
+      marginRight: '0.5rem',
+    },
   },
   iconButton: {
     display: 'flex',
@@ -100,12 +107,15 @@ export default ({ palette }) => ({
   },
   image: {
     width: '-webkit-fill-available',
-    maxWidth: 'inherit',
-    borderRadius: '1rem',
+    maxWidth: '50%',
+    borderRadius: '8px',
     margin: '0.2rem auto',
     display: 'flex',
     justifyContent: 'center',
     boxShadow: '1px 2px 3px 1px rgba(0,0,0,.35)',
+    [breakpoints.down('xs')]: {
+      maxWidth: '100%',
+    },
   },
   description: {
     margin: 'auto',
@@ -114,9 +124,11 @@ export default ({ palette }) => ({
     margin: '0',
     color: palette.darkBlue,
     '& .ql-editor': {
+      fontSize: '1rem',
+      padding: '1.5rem',
       backgroundColor: palette.white,
       border: 'none',
-      borderRadius: '1rem',
+      borderRadius: '8px',
     },
     '& p': {
       display: 'content',
