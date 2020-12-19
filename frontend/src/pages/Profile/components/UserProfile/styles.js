@@ -86,8 +86,8 @@ export default ({ palette, breakpoints }) => ({
     justifyContent: 'center',
     display: 'flex',
     flexWrap: 'wrap',
-    '& .MuiPaper-root:nth-child(1n)': {
-      backgroundColor: palette.darkBlue,
-    },
+    // '& .MuiPaper-root:nth-child(1n)': {
+    //   backgroundColor: palette.darkBlue,
+    // },
   },
 });
