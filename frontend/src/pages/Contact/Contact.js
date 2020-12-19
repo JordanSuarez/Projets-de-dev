@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
