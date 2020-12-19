@@ -1,5 +1,6 @@
 {
   "name": "backoffice",
+  "homepage": "/backoffice/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -255,7 +255,7 @@ const httpClient = (url, options = {}) => {
 };
 
 const Dashboard = () => (
-    <Admin authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://ubuntu@ec2-34-202-164-145.compute-1.amazonaws.com/api/backOffice', httpClient)}>
+    <Admin authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://ec2-34-202-164-145.compute-1.amazonaws.com/api/backOffice', httpClient)}>
         <Resource name="users" list={UserList} edit={UserEdit}/>
         <Resource name="projects" list={ProjectList} create={ProjectCreate} edit={ProjectEdit} />
         <Resource name="tags" list={TagList} create={TagCreate} edit={TagEdit}/>
