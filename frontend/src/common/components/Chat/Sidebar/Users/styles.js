@@ -1,5 +1,20 @@
 export default ({ breakpoints, palette }) => ({
+
+  users: {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    height: 'auto',
+    width: '100vw',
+    zIndex: '30',
+    backgroundColor: palette.lightBlue,
+    padding: '80px 0 0 0 ',
+  },
   showProfileMobile: {
+    zIndex: '30',
+    backgroundColor: 'yellow',
+    position: 'fixed',
+    right: '0',
     padding: '1em',
     [breakpoints.up('md')]: {
       display: 'none',
@@ -14,12 +29,12 @@ export default ({ breakpoints, palette }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    justifyContent: 'center',
-    height: 'calc(100vh - 200px)',
+    justifyContent: 'flex-start',
+    height: 'calc(100vh - 80px)',
     overflowY: 'scroll',
     overflowX: 'hidden',
     margin: '1em auto',
-    padding: '10em 0 0 0 ',
+    padding: '1em 0 0 0 ',
 
     [breakpoints.up('md')]: {
 
@@ -29,9 +44,9 @@ export default ({ breakpoints, palette }) => ({
   user: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     padding: '5px',
-    height: 'calc(100vh - 80px)',
     wordBreak: ' break-word',
   },
 

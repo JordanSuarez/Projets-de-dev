@@ -20,28 +20,33 @@ const Chat = ({
     connectWebSocket();
   }, []);
 
-  const handleClick = () => {
+  const openChat = () => {
     getMessageList();
-    setStatus(!status);
+    setStatus(1);
+  };
+  const closeChat = () => {
+    setStatus(0);
   };
   return (
     <>
-      {(!status && isLogged) && (
+      {(status === 0 && isLogged) && (
         <div className={classes.chatContainerButton}>
-          <IconButton className={classes.chatButton} aria-label="open chat" onClick={handleClick}>
+          <IconButton className={classes.chatButton} aria-label="open chat" onClick={openChat}>
             <ForumIcon className={classes.chatIcon} />
           </IconButton>
         </div>
       )}
 
-      {(status && isLogged) && (
+      {(status === 1 && isLogged) && (
         <>
-          <IconButton className={classes.closeChatButton} aria-label="open chat" onClick={handleClick}>
+          <IconButton className={classes.closeChatButton} aria-label="open chat" onClick={closeChat}>
             <CloseIcon className={classes.closedIcon} />
           </IconButton>
-          <Sidebar />
         </>
       ) }
+      {((status === 1 || status === 2 || status === 3) && isLogged) && (
+        <Sidebar />
+      )}
     </>
   );
 };
@@ -50,7 +55,7 @@ Chat.propTypes = {
   ...classesProps,
   setStatus: PropTypes.func.isRequired,
   connectWebSocket: PropTypes.func.isRequired,
-  status: PropTypes.bool.isRequired,
+  status: PropTypes.number.isRequired,
   isLogged: PropTypes.bool.isRequired,
   getMessageList: PropTypes.func.isRequired,
 };

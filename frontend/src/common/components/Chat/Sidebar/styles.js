@@ -3,7 +3,7 @@ export default ({ breakpoints, palette }) => ({
   chatSidebar: {
     height: '100vh',
     width: '100vw',
-    zIndex: '50',
+    zIndex: '20',
     position: 'fixed',
     top: '0',
     right: '0',

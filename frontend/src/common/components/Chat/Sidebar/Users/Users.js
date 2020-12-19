@@ -13,10 +13,35 @@ const Users = ({
   getProfiles,
   profiles,
   loading,
+  setStatus,
+  status,
 }) => {
   const arrayProfiles = Object.values(profiles);
   const [profileSelected, setProfileSelected] = useState('');
-  const [showList, setShowList] = useState(true);
+  const [showList, setShowList] = useState(false);
+
+  /* ------------------------------------------------------- */
+  // Affichage de la liste des users si width > 959
+  // sinon bouton affichage du bouton pour ouvrir la liste
+  const [width, setWidth] = useState(window.innerWidth);
+  const updateWidthAndHeight = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', updateWidthAndHeight);
+    return () => window.removeEventListener('resize', updateWidthAndHeight);
+  });
+  useEffect(() => {
+    if (width > 959) {
+      setShowList(true);
+      console.log(width, ' je veux voir la liste');
+    }
+    else {
+      setShowList(false);
+      console.log(width, ' je veux pas voir la liste');
+    }
+  }, [width]);
+  /* ------------------------------------------------------ */
 
   useEffect(() => {
     getProfiles();
@@ -26,17 +51,26 @@ const Users = ({
   }, [profileSelected]);
 
   const showListUser = () => {
-    setShowList(!showList);
+    setStatus(2);
+    setShowList(true);
+  };
+
+  const closedListUser = () => {
+    setStatus(1);
+    setShowList(false);
   };
 
   return (
-    <div className="users">
+    <div className={classes.users}>
       <Button className={classes.showProfileMobile} onClick={showListUser}>
-        {showList === true ? <CloseIcon /> : <KeyboardArrowDownIcon />}
+        {showList === false && <KeyboardArrowDownIcon />}
       </Button>
       {showList === true && (
         <>
-          <h4 className={classes.listTitle}>Liste des utilisateurs</h4>
+          <Button className={classes.showProfileMobile} onClick={closedListUser}>
+            {showList === true && <CloseIcon />}
+          </Button>
+          <h4 className="title">Liste des utilisateurs</h4>
           <div className={classes.containerUsers}>
             {loading && <Loader />}
             {!loading && (
@@ -46,7 +80,7 @@ const Users = ({
                   className={classes.user}
                   key={profile.id}
                 >
-                  <Avatar alt="avatar" src={profile.listUserImage || avatar} className={classes.userImage} />
+                  <Avatar alt="avatar" src={profile.userImage || avatar} className={classes.userImage} />
                   <div className={classes.listUsername}>
                     {profile.username}
                   </div>
@@ -67,6 +101,8 @@ Users.propTypes = {
   }).isRequired,
   getProfiles: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  status: PropTypes.number.isRequired,
 };
 
 export default Users;
