@@ -21,12 +21,11 @@ const commentsMiddleware = (store) => (next) => (action) => {
       const url = getEndpoint(COMMENT, POST, ONE);
 
       callApi(url, POST, action.content)
-        .then((response) => {
+        .then(() => {
           store.dispatch(fetchProjectById(action.content.projectId));
           store.dispatch(redirect(getProjectRoute(action.content.projectId)));
         })
-        .catch((response) => {
-          console.log(response);
+        .catch(() => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
@@ -39,11 +38,10 @@ const commentsMiddleware = (store) => (next) => (action) => {
       const url = getEndpoint(COMMENT, PATCH, ONE, action.id);
 
       callApi(url, PATCH, action.comments)
-        .then((response) => {
+        .then(() => {
           store.dispatch(redirect(getProjectRoute(action.comments.projectId)));
         })
-        .catch((response) => {
-          console.log(response);
+        .catch(() => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());

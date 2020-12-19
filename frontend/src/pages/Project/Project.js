@@ -44,6 +44,11 @@ const Project = ({
     history.push(getProfileRoute(project.user.id));
   };
 
+  // Date options
+  const options = {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  };
+
   return (
     <Base loading={loading}>
       <div className={classes.projectContainer}>
@@ -57,15 +62,20 @@ const Project = ({
             }
           })}
         </div>
-        <Grid item xs={12} sm={12} md={9} className={classes.imageContainer}>
-          <Grid item xs={12} sm={12} md={9} className={classes.linksGrid}>
-            <div onClick={handleClickProfile} className={classes.profile}>
+        <Grid item xs={12} sm={12} md={10} className={classes.imageContainer}>
+          <img className={classes.image} src={project.image} alt="project-header" />
+          <Grid item xs={12} sm={12} md={11} className={classes.linksGrid}>
+            <div className={classes.profile}>
               <Avatar
                 alt={project.user.username}
                 src={project.user.userImage || profileLogo}
                 className={classes.profileLogo}
+                onClick={handleClickProfile}
               />
-              {project.user.username}
+              <div className={classes.profileText}>
+                <span>Par&nbsp;{project.user.username},</span>
+                <span>le&nbsp;{new Date(project.createdAt).toLocaleString('fr-FR', options)}</span>
+              </div>
             </div>
             {(project.githubLink || project.projectLink)
           && (
@@ -106,10 +116,8 @@ const Project = ({
           </div>
           )}
           </Grid>
-          <img className={classes.image} src={project.image} alt="project-header" />
         </Grid>
         <Grid item xs={12} sm={12} md={9} className={classes.description}>
-          <h3 className={classes.subtitle}>Description</h3>
           <ReactQuill
             value={project.description}
             readOnly

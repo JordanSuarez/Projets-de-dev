@@ -6,7 +6,7 @@ export default ({ breakpoints, palette }) => ({
       width: '300px',
     },
     margin: '1em',
-    borderRadius: '32px',
+    borderRadius: '20px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',

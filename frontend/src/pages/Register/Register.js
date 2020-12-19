@@ -135,9 +135,9 @@ const Register = ({
                     type="submit"
                     disabled={submitting}
                   >
-                    Submit
+                    S'inscrire
                   </Button>
-                  <p className={classes.login} onClick={handleClick}> J'ai deja un compte !</p>
+                  <p className={classes.login} onClick={handleClick}> J'ai deja un compte</p>
                 </Box>
               </form>
             )}

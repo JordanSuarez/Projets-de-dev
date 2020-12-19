@@ -34,8 +34,7 @@ const chatMiddleWare = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(saveMessages(response.data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
       next(action);
       break;

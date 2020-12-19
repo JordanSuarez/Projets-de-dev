@@ -10,11 +10,13 @@ import {
   Button,
   IconButton,
   TextField,
+  Grid,
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import defaultAvatar from 'src/common/assets/images/avatar.png';
+import { getProfileRoute } from 'src/common/routing/routesResolver';
 import './style.scss';
 
 const Comments = ({
@@ -105,9 +107,8 @@ const Comments = ({
   const onClickDelete = (comment) => {
     handleCommentDelete({ content: messageUpdate, projectId: idProject }, comment.id);
   };
-
   return (
-    <div className={classes.commentSection}>
+    <Grid item xs={12} sm={12} md={9} lg={9} xl={9} className={classes.commentSection}>
       <div className={classes.containerForm}>
         {isLogged
           ? (
@@ -159,6 +160,7 @@ const Comments = ({
                   className={classes.avatar}
                   alt={classes.username}
                   src={comment.User.userImage || defaultAvatar}
+                  onClick={() => history.push(getProfileRoute(comment.User.id))}
                 />
                 <div className={classes.headerComment}>
                   <div className={classes.usernameContent}>
@@ -252,7 +254,7 @@ const Comments = ({
 
       </div>
 
-    </div>
+    </Grid>
 
   );
 };

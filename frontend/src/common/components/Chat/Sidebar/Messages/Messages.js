@@ -9,6 +9,7 @@ import SendIcon from '@material-ui/icons/Send';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import defaultAvatar from 'src/common/assets/images/avatar.png';
+import Loader from 'src/common/components/Loader';
 import './style.scss';
 
 const Messages = ({
@@ -17,13 +18,16 @@ const Messages = ({
   messages,
   currentUserId,
   currentUser,
+  loading,
 }) => {
   const [inputValue, setInputValue] = useState('');
 
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const messageScroll = useRef(null);
   useEffect(() => {
-    messageScroll.current.scrollTop = messageScroll.current.scrollHeight;
+    if (!loading) {
+      messageScroll.current.scrollTop = messageScroll.current.scrollHeight;
+    }
   }, [messages]);
 
   let emojiPicker;
@@ -59,28 +63,33 @@ const Messages = ({
         <div className={classes.channelTitleContainer}>
           <h3 className={classes.channelTitleSelected}># GENERAL</h3>
         </div>
-        <ul ref={messageScroll} className={classes.messages}>
-          {messages.map(({
-            id, content, userId, User, createdAt,
-          }) => (
-            <li
-              key={id}
-              className={userId === currentUserId ? classes.alignRight : classes.alignLeft}
-            >
-              <div>
-                <p className={userId === currentUserId ? classes.pseudoRight : classes.pseudoLeft}>
-                  {User.username}
-                </p>
-                <div className={userId === currentUserId ? classes.myMessage : classes.message}>
-                  {content}
+        {loading && <Loader />}
+        {!loading && (
+        <>
+          <ul ref={messageScroll} className={classes.messages}>
+            {messages.map(({
+              id, content, userId, User, createdAt,
+            }) => (
+              <li
+                key={id}
+                className={userId === currentUserId ? classes.alignRight : classes.alignLeft}
+              >
+                <div>
+                  <p className={userId === currentUserId ? classes.pseudoRight : classes.pseudoLeft}>
+                    {User.username}
+                  </p>
+                  <div className={userId === currentUserId ? classes.myMessage : classes.message}>
+                    {content}
+                  </div>
+                  <p className={classes.date}>le {new Date(createdAt).toLocaleString('fr-FR')}</p>
                 </div>
-                <p className={classes.date}>le {new Date(createdAt).toLocaleString('fr-FR')}</p>
-              </div>
-              <Avatar className={classes.avatar} alt="avatar user" src={User.userImage || defaultAvatar} />
-            </li>
+                <Avatar className={classes.avatar} alt="avatar user" src={User.userImage || defaultAvatar} />
+              </li>
 
-          ))}
-        </ul>{emojiPicker}
+            ))}
+          </ul>{emojiPicker}
+        </>
+        )}
         <div>
           <form className={classes.form} autoComplete="off" onSubmit={handleSubmit}>
             <Input
@@ -107,7 +116,6 @@ const Messages = ({
               )}
             />
           </form>
-
         </div>
       </div>
     </div>
@@ -118,6 +126,7 @@ Messages.propTypes = {
   ...classesProps,
   messages: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 Messages.defaultProps = {

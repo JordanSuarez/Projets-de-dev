@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 
 import Base from 'src/common/components/Base';
+import { func } from 'prop-types';
 
 const validate = (values) => {
   const errors = {};
@@ -48,12 +49,9 @@ const validate = (values) => {
   return errors;
 };
 
-// eslint-disable-next-line arrow-body-style
-const Contact = ({ classes }) => {
-  const [formContactValues, setFormContactValues] = useState();
-
+const Contact = ({ classes, submitContact }) => {
   const onSubmit = (values) => {
-    setFormContactValues(values);
+    submitContact(values);
   };
   return (
     <Base>
@@ -130,6 +128,7 @@ const Contact = ({ classes }) => {
 
 Contact.propTypes = {
   ...classesProps,
+  submitContact: func.isRequired,
 };
 
 export default Contact;

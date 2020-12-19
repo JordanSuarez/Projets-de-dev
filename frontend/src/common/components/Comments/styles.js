@@ -1,12 +1,18 @@
 export default ({ breakpoints, palette }) => ({
+  commentSection: {
+    margin: 'auto',
+  },
+
   containerForm: {
+    borderRadius: '8px',
     margin: '0.5em auto',
-    maxWidth: '1200px',
+    maxWidth: '100%',
     position: 'relative',
     backgroundColor: 'white',
   },
 
   formTitle: {
+    color: palette.darkBlue,
     padding: '1.5em 1.5em 0 1.5em',
   },
 
@@ -28,6 +34,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   submit: {
+    textTransform: 'initial',
     marginBottom: '1.5em',
     color: palette.white,
     backgroundColor: palette.darkBlue,
@@ -55,7 +62,7 @@ export default ({ breakpoints, palette }) => ({
 
   comment: {
     margin: '0.5em auto',
-    maxWidth: '1200px',
+    maxWidth: '100%',
     backgroundColor: 'white',
     padding: ' 1em',
     borderRadius: '8px',
@@ -72,6 +79,12 @@ export default ({ breakpoints, palette }) => ({
 
   avatar: {
     margin: '0 auto',
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+      cursor: 'pointer',
+    },
   },
 
   headerComment: {
@@ -163,6 +176,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   commentText: {
+    color: palette.darkBlue,
     margin: '1em auto 0.5em auto',
     wordBreak: 'break-word',
   },
@@ -173,8 +187,9 @@ export default ({ breakpoints, palette }) => ({
   },
 
   noComment: {
+    color: palette.darkBlue,
     margin: '0.5em auto',
-    maxWidth: '1200px',
+    maxWidth: '100%',
     backgroundColor: 'white',
     padding: '1em',
     textAlign: 'center',

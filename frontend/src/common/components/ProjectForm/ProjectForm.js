@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   arrayOf, func, number, shape, string,
+  bool,
 } from 'prop-types';
 import { useParams, useHistory } from 'react-router-dom';
 import { Form as FormRff } from 'react-final-form';
@@ -17,18 +18,24 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
 import { modules, formats } from 'src/common/components/QuillEditor/EditorToolbar';
+import reziseFile from 'src/common/helpers/imageResizer';
 import { profiles } from './formData/fakeData';
 import fields from './formData/fields';
+
 import './styles.scss';
 
 const Form = ({
-  classes, title, initialValues, handleSubmitProject, tags,
+  classes, title, initialValues, handleSubmitProject, tags, hasError,
 }) => {
   const history = useHistory();
   const { id } = useParams();
   const [errorFields, setErrorFields] = useState({});
   const [formState, setFormState] = useState(initialValues);
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setSubmitting] = useState(hasError);
+
+  useEffect(() => {
+    setSubmitting(false);
+  }, [hasError]);
 
   const onSubmit = (values) => {
     setSubmitting(true);
@@ -56,9 +63,14 @@ const Form = ({
     setErrorFields({ ...errorFields, [event.target.name]: false });
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
-  const getFiles = (files) => {
+  const getFiles = async (files) => {
+    const imageResized = await reziseFile(files, 1920);
+    setFormState({
+      ...formState,
+      image: imageResized.length > files.base64.length ? files.base64 : imageResized,
+      imageName: files.name,
+    });
     setErrorFields({ ...errorFields, image: false });
-    setFormState({ ...formState, image: files.base64, imageName: files.name });
   };
   const handleChangeQuillEditorValue = (value) => {
     setFormState({ ...formState, description: value });
@@ -278,6 +290,7 @@ Form.propTypes = {
       image: string,
     }).isRequired,
   ).isRequired,
+  hasError: bool.isRequired,
 };
 
 export default Form;

@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
-
+  
 });
 
 const mapsDispatchToProps = (dispatch) => ({
