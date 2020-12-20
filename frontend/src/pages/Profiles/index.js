@@ -1,7 +1,10 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+
 import { getProfilesInfos } from 'src/common/redux/actions/profiles';
+import { clearProjectsState } from 'src/common/redux/actions/projects';
+import { clearHomeState } from 'src/common/redux/actions/home';
 
 import Profiles from './Profiles';
 import styles from './styles';
@@ -16,6 +19,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getProfiles: () => {
     dispatch(getProfilesInfos());
+  },
+  clearState: () => {
+    dispatch(clearHomeState());
+    dispatch(clearProjectsState());
   },
 });
 

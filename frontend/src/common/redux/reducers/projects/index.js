@@ -2,7 +2,7 @@ import {
   SAVE_ALL_PROJECTS,
   SAVE_PROJECTS_CURRENT_PAGE,
   GET_PROJECTS,
-// eslint-disable-next-line import/no-unresolved
+  CLEAR_PROJECTS_STATE,
 } from 'src/common/redux/actions/projects';
 
 const initialState = {
@@ -34,6 +34,11 @@ const projects = (state = initialState, action = {}) => {
         projectsNumber: number,
         allProjects: action.projects,
         loading: false,
+      };
+    }
+    case CLEAR_PROJECTS_STATE: {
+      return {
+        ...initialState,
       };
     }
     default: return { ...state };

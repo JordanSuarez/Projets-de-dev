@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { getProjectsInfos } from 'src/common/redux/actions/projects';
 import { getProfileLikes } from 'src/common/redux/actions/userProfile';
+import { clearHomeState } from 'src/common/redux/actions/home';
 
 import Projects from './Projects';
 import styles from './styles';
@@ -24,6 +25,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getMyLikes: () => {
     dispatch(getProfileLikes());
+  },
+  clearHomeState: () => {
+    dispatch(clearHomeState());
   },
 });
 

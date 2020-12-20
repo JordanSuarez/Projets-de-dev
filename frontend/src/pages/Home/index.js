@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getLatestProjects } from 'src/common/redux/actions/home';
 import { getProfileLikes } from 'src/common/redux/actions/userProfile';
+import { clearProjectsState } from 'src/common/redux/actions/projects';
 
 import Home from './Home';
 import styles from './styles';
@@ -20,6 +21,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getMyLikes: () => {
     dispatch(getProfileLikes());
+  },
+  clearProjectsState: () => {
+    dispatch(clearProjectsState());
   },
 });
 

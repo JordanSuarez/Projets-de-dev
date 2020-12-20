@@ -85,7 +85,8 @@ const userProfile = (store) => (next) => (action) => {
           },
         })
         .then(({ data }) => {
-          store.dispatch(setMyLikes(data));
+          const myLikes = data.filter((myLike) => myLike.isLike === 1);
+          store.dispatch(setMyLikes(myLikes));
         })
         .catch(() => {
         });

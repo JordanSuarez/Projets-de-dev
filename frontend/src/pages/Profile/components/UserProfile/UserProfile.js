@@ -26,11 +26,16 @@ const UserProfile = ({
   myLikes,
   getProjects,
   projects,
+  clearState,
 }) => {
   const history = useHistory();
+  const [toggleWindow, setToggleWindow] = useState(false);
 
   useEffect(() => {
+    clearState();
     getProfile();
+    getProjects();
+    getMyLikes();
     if (redirect.length > 0) {
       history.push(redirect);
     }
@@ -111,6 +116,31 @@ const UserProfile = ({
     />
   ));
 
+  // eslint-disable-next-line max-len
+  const likedProjects = projects.filter((o1) => myLikes.some((o2) => (o1.id === o2.projectId) && (o2.isLike === 1))).map((project) => {
+    let like = false;
+    myLikes.map((myLike) => {
+      if ((project.id === myLike.projectId) && (myLike.isLike === 1)) {
+        like = true;
+      }
+    });
+    return (
+      <CardProject
+        key={project.id}
+        projectId={project.id}
+        title={project.title}
+        tags={project.tags}
+        description={project.description}
+        userId={project.user.id}
+        userImage={project.user.userImage}
+        image={project.image}
+        isLogged={isLogged}
+        vote={project.vote}
+        like={like}
+      />
+    );
+  });
+
   return (
     <Base loading={loading}>
       <>
@@ -155,11 +185,17 @@ const UserProfile = ({
                 </Button>
               ))}
             </div>
+            <div className={classes.toggleViewHeader}>
+              <h2 className={classes.subtitle} onClick={() => setToggleWindow(!toggleWindow)}>
+                Mes projets
+              </h2>
+              <h2 className={classes.subtitle} onClick={() => setToggleWindow(!toggleWindow)}>
+                Mes projets préférés
+              </h2>
+            </div>
           </div>
+          {!toggleWindow && (
           <div>
-            <h2 className={classes.subtitle}>
-              Mes projets
-            </h2>
             <div className={classes.cardContainer}>
               {isEmpty(userProfile.projects) && (
               <p>Je n'ai pas encore de projet</p>
@@ -168,37 +204,18 @@ const UserProfile = ({
                 && <Carousel items={cardsProjects} />}
             </div>
           </div>
+          )}
+          {toggleWindow && (
           <div>
-            <h2 className={classes.subtitle}>
-              Mes projets préférés
-            </h2>
             <div className={classes.cardContainer}>
-              {isEmpty(userProfile.projects) && (
-              <p>Je n'ai pas encore de projet</p>
+              {isEmpty(likedProjects) && (
+              <p>Je n'ai pas encore de projets préférés</p>
               )}
-              {myLikes.map((myLike) => {
-                projects.filter((project) => project.id === myLike.projectId).map(({
-                  id: projectId, title: projectTitle, description, tags, image,
-                }) => (
-                  <CardProject
-                    key={projectId}
-                    projectId={projectId}
-                    title={projectTitle}
-                    tags={tags}
-                    description={description}
-                    userId={userProfile.id}
-                    userImage={userProfile.userImage}
-                    image={image}
-                    projectOwnerOptions
-                    handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
-                    isLogged={isLogged}
-                    like={false}
-                  />
-                ));
-              })}
+              {!isEmpty(likedProjects)
+                && <Carousel items={likedProjects} />}
             </div>
           </div>
-
+          )}
         </div>
       </>
     </Base>
@@ -217,6 +234,7 @@ UserProfile.propTypes = {
   getMyLikes: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
   getProjects: PropTypes.func.isRequired,
+  clearState: PropTypes.func.isRequired,
   projects: PropTypes.array,
 };
 

@@ -90,4 +90,10 @@ export default ({ palette, breakpoints }) => ({
     //   backgroundColor: palette.darkBlue,
     // },
   },
+
+  toggleViewHeader: {
+    display: 'flex',
+    width: '100%',
+    borderBottom: `1px solid ${palette.darkBlue}`,
+  },
 });

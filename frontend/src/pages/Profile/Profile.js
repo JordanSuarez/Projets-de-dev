@@ -19,11 +19,13 @@ const Profile = ({
   redirect,
   getMyLikes,
   myLikes,
+  clearState,
 }) => {
   const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
+    clearState();
     getProfile(id);
     if (redirect.length > 0) {
       history.push(redirect);
@@ -120,6 +122,7 @@ Profile.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
   getMyLikes: PropTypes.func.isRequired,
+  clearState: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
 };
 

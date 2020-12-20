@@ -16,8 +16,10 @@ const Home = ({
   isLogged,
   getMyLikes,
   myLikes,
+  clearProjectsState,
 }) => {
   useEffect(() => {
+    clearProjectsState();
     getProjects('?limit=12', '&offset=0');
     if (isLogged) {
       getMyLikes();
@@ -96,6 +98,7 @@ Home.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   getProjects: PropTypes.func.isRequired,
   getMyLikes: PropTypes.func.isRequired,
+  clearProjectsState: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
   projects: PropTypes.shape({
   }).isRequired,
