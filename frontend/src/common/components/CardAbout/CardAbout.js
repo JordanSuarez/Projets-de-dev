@@ -13,7 +13,7 @@ import { classes as classesProps } from 'src/common/classes';
 import { isEmpty } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { getProfileRoute } from 'src/common/routing/routesResolver';
-import avatar2 from './avatar.png';
+import avatar2 from 'src/common/assets/images/avatar.png';
 
 const CardAbout = ({
   classes,
