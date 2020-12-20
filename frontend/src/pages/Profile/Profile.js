@@ -8,7 +8,7 @@ import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
 import Carousel from 'src/common/components/Carousel';
 import { isEmpty } from 'lodash';
-import avatar2 from './avatar.png';
+import avatar2 from 'src/common/assets/images/avatar.png';
 
 const Profile = ({
   classes,

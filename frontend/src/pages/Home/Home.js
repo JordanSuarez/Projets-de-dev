@@ -5,8 +5,8 @@ import { classes as classesProps } from 'src/common/classes';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
 import Carousel from 'src/common/components/Carousel';
-import headerImage from './header-home.jpg';
-import robot from './robot.png';
+import headerImage from 'src/common/assets/images/header-home.jpg';
+import robot from 'src/common/assets/images/robot.png';
 
 const Home = ({
   classes,

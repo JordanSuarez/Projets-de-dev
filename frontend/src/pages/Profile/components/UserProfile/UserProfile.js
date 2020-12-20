@@ -10,7 +10,7 @@ import Base from 'src/common/components/Base';
 import { isEmpty } from 'lodash';
 import AlertDialog from 'src/common/components/AlertDialog';
 import Carousel from 'src/common/components/Carousel';
-import avatar2 from './avatar.png';
+import avatar2 from 'src/common/assets/images/avatar.png';
 import { alertUserProfile, alertUserProject } from './alertTextProvider';
 
 const UserProfile = ({

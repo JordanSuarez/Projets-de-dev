@@ -1,5 +1,4 @@
-/* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import {
@@ -21,7 +20,7 @@ import DOMPurify from 'dompurify';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from 'src/common/components/IconButton';
-import avatar from './avatar.png';
+import avatar from 'src/common/assets/images/avatar.png';
 
 const CardProject = ({
   projectId,

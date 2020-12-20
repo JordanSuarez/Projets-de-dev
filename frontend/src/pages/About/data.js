@@ -3,8 +3,6 @@ import logoAlmigra from 'src/common/assets/images/logo-almigra.jpg';
 import logoAlban from 'src/common/assets/images/logo-alban.jpg'
 import logoCeline from 'src/common/assets/images/logo-celine.jpg'
 
-
-
 export default [
   {
     name: 'Almigra',
