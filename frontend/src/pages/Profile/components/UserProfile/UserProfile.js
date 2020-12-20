@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { getEditionProfileRoute, getCreationProjectRoute } from 'src/common/routing/routesResolver';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
@@ -9,6 +9,7 @@ import CardProject from 'src/common/components/CardProject';
 import Base from 'src/common/components/Base';
 import { isEmpty } from 'lodash';
 import AlertDialog from 'src/common/components/AlertDialog';
+import Carousel from 'src/common/components/Carousel';
 import avatar2 from './avatar.png';
 import { alertUserProfile, alertUserProject } from './alertTextProvider';
 
@@ -91,6 +92,25 @@ const UserProfile = ({
     },
   ];
 
+  const cardsProjects = userProfile.projects.map(({
+    id: projectId, title: projectTitle, description, tags, image,
+  }) => (
+    <CardProject
+      key={projectId}
+      projectId={projectId}
+      title={projectTitle}
+      tags={tags}
+      description={description}
+      userId={userProfile.id}
+      userImage={userProfile.userImage}
+      image={image}
+      projectOwnerOptions
+      handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
+      isLogged={isLogged}
+      like={false}
+    />
+  ));
+
   return (
     <Base loading={loading}>
       <>
@@ -145,24 +165,7 @@ const UserProfile = ({
               <p>Je n'ai pas encore de projet</p>
               )}
               {!isEmpty(userProfile.projects)
-                && userProfile.projects.map(({
-                  id: projectId, title: projectTitle, description, tags, image,
-                }) => (
-                  <CardProject
-                    key={projectId}
-                    projectId={projectId}
-                    title={projectTitle}
-                    tags={tags}
-                    description={description}
-                    userId={userProfile.id}
-                    userImage={userProfile.userImage}
-                    image={image}
-                    projectOwnerOptions
-                    handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
-                    isLogged={isLogged}
-                    like={false}
-                  />
-                ))}
+                && <Carousel items={cardsProjects} />}
             </div>
           </div>
           <div>

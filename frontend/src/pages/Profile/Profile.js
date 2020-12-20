@@ -6,6 +6,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
+import Carousel from 'src/common/components/Carousel';
 import { isEmpty } from 'lodash';
 import avatar2 from './avatar.png';
 
@@ -26,6 +27,22 @@ const Profile = ({
       history.push(redirect);
     }
   }, [redirect]);
+
+  const cardsProjects = profile.projects.map(({
+    id: projectId, title, description, tags, image,
+  }) => (
+    <CardProject
+      key={projectId}
+      projectId={projectId}
+      title={title}
+      tags={tags}
+      description={description}
+      userId={profile.id}
+      userImage={profile.userImage}
+      image={image}
+      isLogged={isLogged}
+    />
+  ));
 
   return (
     <Base loading={loading}>
@@ -56,28 +73,16 @@ const Profile = ({
           </div>
           <div>
             <h2 className={classes.subtitle}>
-              Liste des projets
+              Liste de ses projets
             </h2>
             <div className={classes.cardContainer}>
               {isEmpty(profile.projects) && (
                 <p>Cet utilisateur n'a pas encore de projet</p>
               )}
               {!isEmpty(profile.projects)
-                && profile.projects.map(({
-                  id: projectId, title, description, tags, image,
-                }) => (
-                  <CardProject
-                    key={projectId}
-                    projectId={projectId}
-                    title={title}
-                    tags={tags}
-                    description={description}
-                    userId={profile.id}
-                    userImage={profile.userImage}
-                    image={image}
-                    isLogged={isLogged}
-                  />
-                ))}
+                && (
+                <Carousel items={cardsProjects} />
+                )}
             </div>
           </div>
         </div>
