@@ -17,6 +17,8 @@ const Profile = ({
   profile,
   isLogged,
   redirect,
+  getMyLikes,
+  myLikes,
 }) => {
   const history = useHistory();
   const { id } = useParams();
@@ -26,23 +28,36 @@ const Profile = ({
     if (redirect.length > 0) {
       history.push(redirect);
     }
+    if (isLogged) {
+      getMyLikes();
+    }
   }, [redirect]);
 
   const cardsProjects = profile.projects.map(({
-    id: projectId, title, description, tags, image,
-  }) => (
-    <CardProject
-      key={projectId}
-      projectId={projectId}
-      title={title}
-      tags={tags}
-      description={description}
-      userId={profile.id}
-      userImage={profile.userImage}
-      image={image}
-      isLogged={isLogged}
-    />
-  ));
+    id: projectId, title, description, tags, image, vote,
+  }) => {
+    let like = false;
+    myLikes.map((myLike) => {
+      if ((projectId === myLike.projectId) && (myLike.isLike === 1)) {
+        like = true;
+      }
+    });
+    return (
+      <CardProject
+        key={projectId}
+        projectId={projectId}
+        title={title}
+        tags={tags}
+        description={description}
+        userId={profile.id}
+        userImage={profile.userImage}
+        image={image}
+        isLogged={isLogged}
+        like={like}
+        vote={vote}
+      />
+    );
+  });
 
   return (
     <Base loading={loading}>
@@ -104,6 +119,8 @@ Profile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
+  getMyLikes: PropTypes.func.isRequired,
+  myLikes: PropTypes.array,
 };
 
 Profile.defaultProps = {
@@ -111,6 +128,7 @@ Profile.defaultProps = {
     id: null,
     userImage: '',
   }),
+  myLikes: [],
 };
 
 export default Profile;

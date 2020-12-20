@@ -39,6 +39,9 @@ export default ({ breakpoints, palette }) => ({
   },
 
   title: {
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
     fontSize: '1.5em',
     paddingBottom: '0.5em',
     color: palette.darkBlue,

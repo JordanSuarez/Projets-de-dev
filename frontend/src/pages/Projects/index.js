@@ -1,6 +1,7 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+
 import { getProjectsInfos } from 'src/common/redux/actions/projects';
 import { getProfileLikes } from 'src/common/redux/actions/userProfile';
 
