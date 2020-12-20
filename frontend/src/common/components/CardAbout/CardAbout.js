@@ -59,7 +59,7 @@ CardAbout.propTypes = {
   avatar: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   followLink: PropTypes.string.isRequired,
-  profileId: PropTypes.string.isRequired,
+  profileId: PropTypes.number.isRequired,
   isLogged: bool.isRequired,
 };
 
