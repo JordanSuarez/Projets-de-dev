@@ -33,7 +33,7 @@ const UserProfile = ({
   useEffect(() => {
     clearState();
     getProfile();
-    getMyProjectsLiked();
+    // getMyProjectsLiked();
     if (redirect.length > 0) {
       history.push(redirect);
     }
