@@ -1,6 +1,7 @@
 import {
   SAVE_PROFILE,
   GET_PROFILE,
+  CLEAR_PROFILE_STATE,
 } from 'src/common/redux/actions/profile';
 
 const initialState = {
@@ -29,6 +30,11 @@ const profile = (state = initialState, action = {}) => {
         ...state,
         profile: action.profile,
         loading: false,
+      };
+    }
+    case CLEAR_PROFILE_STATE: {
+      return {
+        ...initialState,
       };
     }
     default: return { ...state };

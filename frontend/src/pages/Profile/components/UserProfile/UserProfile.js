@@ -22,24 +22,26 @@ const UserProfile = ({
   handleDeleteUserProfile,
   redirect,
   isLogged,
-  getMyLikes,
-  myLikes,
-  getProjects,
-  projects,
+  getMyProjectsLiked,
+  myProjectsLiked,
   clearState,
 }) => {
   const history = useHistory();
   const [toggleWindow, setToggleWindow] = useState(false);
+  const [projectsLiked, setProjectsLiked] = useState([]);
 
   useEffect(() => {
     clearState();
     getProfile();
-    getProjects();
-    getMyLikes();
+    getMyProjectsLiked();
     if (redirect.length > 0) {
       history.push(redirect);
     }
   }, [redirect]);
+
+  useEffect(() => {
+    setProjectsLiked(myProjectsLiked);
+  }, [myProjectsLiked]);
 
   // The AlertDialog context for each case where it will be called
   const [context, setContext] = useState({
@@ -97,6 +99,7 @@ const UserProfile = ({
     },
   ];
 
+  // Data for Carousel
   const cardsProjects = userProfile.projects.map(({
     id: projectId, title: projectTitle, description, tags, image,
   }) => (
@@ -116,30 +119,11 @@ const UserProfile = ({
     />
   ));
 
-  // eslint-disable-next-line max-len
-  const likedProjects = projects.filter((o1) => myLikes.some((o2) => (o1.id === o2.projectId) && (o2.isLike === 1))).map((project) => {
-    let like = false;
-    myLikes.map((myLike) => {
-      if ((project.id === myLike.projectId) && (myLike.isLike === 1)) {
-        like = true;
-      }
-    });
-    return (
-      <CardProject
-        key={project.id}
-        projectId={project.id}
-        title={project.title}
-        tags={project.tags}
-        description={project.description}
-        userId={project.user.id}
-        userImage={project.user.userImage}
-        image={project.image}
-        isLogged={isLogged}
-        vote={project.vote}
-        like={like}
-      />
-    );
-  });
+  // Remove card from projectsLiked on click
+  const handleClick = (id) => {
+    const test = projectsLiked.filter((myLike) => myLike.projectId !== id);
+    setProjectsLiked(test);
+  };
 
   return (
     <Base loading={loading}>
@@ -154,9 +138,9 @@ const UserProfile = ({
             onAgree={handleAgreeAlertDialog}
             onCancel={() => setContext({ ...context, isOpen: false })}
           />
-          <h2 className={classes.subtitle}> Mon profil </h2>
           <div className={classes.column}>
             <div className={classes.rowCenter}>
+              <h2 className={classes.title}> Mon profil </h2>
               <Avatar alt="avatar" src={userProfile.userImage || avatar2} className={classes.large} />
               <h3 className={classes.username}>{userProfile.username}</h3>
             </div>
@@ -186,10 +170,16 @@ const UserProfile = ({
               ))}
             </div>
             <div className={classes.toggleViewHeader}>
-              <h2 className={classes.subtitle} onClick={() => setToggleWindow(!toggleWindow)}>
+              <h2
+                className={!toggleWindow ? classes.subtitleActive : classes.subtitle}
+                onClick={() => setToggleWindow(false)}
+              >
                 Mes projets
               </h2>
-              <h2 className={classes.subtitle} onClick={() => setToggleWindow(!toggleWindow)}>
+              <h2
+                className={toggleWindow ? classes.subtitleActive : classes.subtitle}
+                onClick={() => setToggleWindow(true)}
+              >
                 Mes projets préférés
               </h2>
             </div>
@@ -208,11 +198,43 @@ const UserProfile = ({
           {toggleWindow && (
           <div>
             <div className={classes.cardContainer}>
-              {isEmpty(likedProjects) && (
+              {isEmpty(projectsLiked) && (
               <p>Je n'ai pas encore de projets préférés</p>
               )}
-              {!isEmpty(likedProjects)
-                && <Carousel items={likedProjects} />}
+              {!isEmpty(projectsLiked)
+                && (
+                <Carousel items={
+                  projectsLiked.map((myProjectLiked) => {
+                    const { project } = myProjectLiked;
+                    let like = false;
+                    // eslint-disable-next-line max-len
+                    if ((project.id === myProjectLiked.projectId) && (myProjectLiked.isLike === 1)) {
+                      like = true;
+                    }
+                    return (
+                      <>
+                        {(like !== false) && (
+                          <CardProject
+                            key={project.id}
+                            projectId={project.id}
+                            title={project.title}
+                            tags={project.tags}
+                            description={project.description}
+                            userId={project.user.id}
+                            userImage={project.user.userImage}
+                            image={project.image}
+                            isLogged={isLogged}
+                            vote={project.vote}
+                            like={like}
+                            handleClick={handleClick}
+                          />
+                        )}
+                      </>
+                    );
+                  })
+                }
+                />
+                )}
             </div>
           </div>
           )}
@@ -231,15 +253,14 @@ UserProfile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
-  getMyLikes: PropTypes.func.isRequired,
-  myLikes: PropTypes.array,
-  getProjects: PropTypes.func.isRequired,
+  getMyProjectsLiked: PropTypes.func.isRequired,
+  myProjectsLiked: PropTypes.array,
   clearState: PropTypes.func.isRequired,
   projects: PropTypes.array,
 };
 
 UserProfile.defaultProps = {
-  myLikes: [],
+  myProjectsLiked: [],
   projects: [],
 };
 export default UserProfile;

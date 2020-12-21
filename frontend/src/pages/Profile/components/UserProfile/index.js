@@ -3,21 +3,21 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 
 import {
-  getProfileInfos, handleDeleteUserProfile, getProfileLikes, getProjects,
+  getProfileInfos, handleDeleteUserProfile, getProfileProjectsLikes,
 } from 'src/common/redux/actions/userProfile';
-import { handleDeleteProject } from 'src/common/redux/actions/project';
+import { handleDeleteProject, clearProjectPageState } from 'src/common/redux/actions/project';
 import { clearProjectsState } from 'src/common/redux/actions/projects';
 import { clearHomeState } from 'src/common/redux/actions/home';
+import { clearProfileState } from 'src/common/redux/actions/profile';
 import UserProfile from './UserProfile';
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
   redirect: state.redirection.redirect,
   userProfile: state.userProfile.userProfile,
-  myLikes: state.userProfile.myLikes,
+  myProjectsLiked: state.userProfile.myProjectsLiked,
   loading: state.userProfile.loading,
   isLogged: state.auth.isLogged,
-  projects: state.userProfile.projects,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -30,15 +30,14 @@ const mapDispatchToProps = (dispatch) => ({
   handleDeleteUserProfile: () => {
     dispatch(handleDeleteUserProfile());
   },
-  getMyLikes: () => {
-    dispatch(getProfileLikes());
-  },
-  getProjects: () => {
-    dispatch(getProjects());
+  getMyProjectsLiked: () => {
+    dispatch(getProfileProjectsLikes());
   },
   clearState: () => {
     dispatch(clearHomeState());
     dispatch(clearProjectsState());
+    dispatch(clearProfileState());
+    dispatch(clearProjectPageState());
   },
 });
 

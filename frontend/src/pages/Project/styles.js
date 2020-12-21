@@ -130,6 +130,12 @@ export default ({ palette, breakpoints }) => ({
       border: 'none',
       borderRadius: '8px',
     },
+    '& h1': {
+      fontSize: '2.1rem',
+    },
+    '& h2': {
+      fontSize: '1.3rem',
+    },
     '& p': {
       display: 'content',
     },
@@ -137,10 +143,24 @@ export default ({ palette, breakpoints }) => ({
       display: 'flex',
       flexWrap: 'wrap',
       margin: 'auto',
-      maxWidth: '30%',
+      maxWidth: '40%',
+      [breakpoints.down('md')]: {
+        maxWidth: '50%',
+      },
+      [breakpoints.up('xs')]: {
+        maxWidth: '100%',
+      },
     },
     '& iframe': {
       margin: 'auto',
     },
+    '& a': {
+      color: palette.blue,
+      '&:hover': {
+        cursor: 'pointer',
+        textDecoration: 'underline',
+      },
+    },
+
   },
 });

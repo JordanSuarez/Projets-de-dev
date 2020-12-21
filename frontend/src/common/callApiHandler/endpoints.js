@@ -29,6 +29,7 @@ import {
   ILIKE,
   IDISLIKE,
   VOTE,
+  PRIVATE_PROFILE_PROJECTS_LIKES,
 } from './constants';
 import { apiUrl } from './urlHandler';
 
@@ -62,6 +63,7 @@ const endpoints = {
       [ONE]: (meta) => `${USERS}/${meta}`,
       [PRIVATE_PROFILE]: `${USERS}/${ME}`,
       [PRIVATE_PROFILE_LIKES]: `${USERS}/${ME}/${LIKES}`,
+      [PRIVATE_PROFILE_PROJECTS_LIKES]: `${USERS}/${ME}/${LIKES}-${PROJECTS}`,
       [PROFILE_LIKES]: (meta) => `${USERS}/${meta}/${LIKES}`,
     },
     [DELETE]: {

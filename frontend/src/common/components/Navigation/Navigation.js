@@ -60,7 +60,7 @@ const Navigation = ({
       name: 'Contact', route: getContactRoute(),
     },
     {
-      name: 'About', route: getAboutRoute(),
+      name: 'A propos', route: getAboutRoute(),
     },
   ];
 

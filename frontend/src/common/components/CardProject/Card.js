@@ -38,6 +38,7 @@ const CardProject = ({
   setLike,
   setDislike,
   vote,
+  handleClick,
 }) => {
   const history = useHistory();
   const [isLike, setIsLike] = useState(like);
@@ -45,7 +46,6 @@ const CardProject = ({
   const handleDisplayProject = () => {
     history.push(getProjectRoute(projectId));
   };
-
   const handleDisplayProjectEdit = () => {
     history.push(getEditionProjectRoute(projectId));
   };
@@ -63,6 +63,7 @@ const CardProject = ({
     setDislike(id);
     setIsLike(false);
     setVoteCount(voteCount - 1);
+    handleClick(id);
   };
 
   const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'br', 'p'] };
@@ -100,12 +101,34 @@ const CardProject = ({
               <>
                 {isLogged
                   && isLike
-                  && <FavoriteIcon className={classes.like} onClick={() => handleDislikeProject(projectId)} />}
+                  && (
+                  <FavoriteIcon
+                    className={classes.like}
+                    onClick={() => handleDislikeProject(projectId)}
+                  />
+                  )}
                 {isLogged
                   && !isLike
-                  && <FavoriteBorderIcon className={classes.dontLike} onClick={() => handleLikeProject(projectId)} />}
+                  && (
+                  <FavoriteBorderIcon
+                    className={classes.dontLike}
+                    onClick={() => handleLikeProject(projectId)}
+                  />
+                  )}
 
-                {voteCount !== null ? <span className={classes.vote}>{voteCount} vote</span> : <span className={classes.vote}>0 vote</span>}
+                {voteCount !== null
+                  ? (
+                    <span
+                      className={classes.vote}
+                    >
+                      {voteCount} vote
+                    </span>
+                  )
+                  : (
+                    <span className={classes.vote}>
+                      0 vote
+                    </span>
+                  )}
 
                 <Avatar className={classes.avatar} alt="Pikachu" src={userImage || avatar} onClick={handleDisplayProfile} />
               </>
@@ -146,6 +169,7 @@ CardProject.propTypes = {
   ),
   setLike: PropTypes.func.isRequired,
   setDislike: PropTypes.func.isRequired,
+  handleClick: PropTypes.func,
   like: PropTypes.bool,
   vote: PropTypes.number,
 };
@@ -153,6 +177,7 @@ CardProject.propTypes = {
 CardProject.defaultProps = {
   userImage: avatar,
   handleDeleteProject: Function.prototype,
+  handleClick: Function.prototype,
   projectOwnerOptions: false,
   vote: 0,
   tags: PropTypes.arrayOf(

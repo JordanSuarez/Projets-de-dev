@@ -26,6 +26,7 @@ export const REGISTER = 'register';
 export const CONNECTED = 'connected';
 export const PRIVATE_PROFILE = 'PRIVATE_PROFILE';
 export const PRIVATE_PROFILE_LIKES = 'PRIVATE_PROFILE_LIKES';
+export const PRIVATE_PROFILE_PROJECTS_LIKES = 'PRIVATE_PROFILE_PROJECTS_LIKES';
 export const PROFILE_LIKES = 'PROFILE_LIKES';
 export const LATEST = 'latest';
 export const ME = 'me';
