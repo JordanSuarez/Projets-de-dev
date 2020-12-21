@@ -108,7 +108,7 @@ const endpoints = {
   },
   [MESSAGES]: {
     [GET]: {
-      [ALL]: `${MESSAGES}`,
+      [ALL]: (meta, offset) => `${MESSAGES}/${meta}${offset}`,
     },
   },
 };

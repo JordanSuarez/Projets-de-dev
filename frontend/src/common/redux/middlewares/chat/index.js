@@ -28,7 +28,7 @@ const chatMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case GET_MESSAGES: {
-      const url = getEndpoint(MESSAGES, GET, ALL);
+      const url = getEndpoint(MESSAGES, GET, ALL, `?limit=${50}`, `&offset=${0}`);
 
       callApi(url, GET)
         .then((response) => {
