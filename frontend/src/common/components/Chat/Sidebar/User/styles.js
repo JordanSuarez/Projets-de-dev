@@ -19,6 +19,7 @@ export default ({ breakpoints, palette }) => ({/* --------------  Show individua
     [breakpoints.up('lg')]: {
       right: '0',
       left: 'inherit',
+      top: '140px',
       width: '266px',
 
     },
@@ -31,6 +32,14 @@ export default ({ breakpoints, palette }) => ({/* --------------  Show individua
     top: '90px',
     right: '0',
     padding: '1em',
+    [breakpoints.up('md')]: {
+      right: 'inherit',
+      left: '0',
+    },
+    [breakpoints.up('lg')]: {
+      right: '0',
+      left: 'inherit',
+    },
   },
 
   user: {
