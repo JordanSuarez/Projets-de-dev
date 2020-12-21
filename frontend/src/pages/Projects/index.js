@@ -1,8 +1,12 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
+
 import { getProjectsInfos } from 'src/common/redux/actions/projects';
-import { getProfileLikes } from 'src/common/redux/actions/userProfile';
+import { getProfileLikes, clearUserProfileState } from 'src/common/redux/actions/userProfile';
+import { clearProjectPageState } from 'src/common/redux/actions/project';
+import { clearHomeState } from 'src/common/redux/actions/home';
+import { clearProfileState } from 'src/common/redux/actions/profile';
 
 import Projects from './Projects';
 import styles from './styles';
@@ -23,6 +27,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getMyLikes: () => {
     dispatch(getProfileLikes());
+  },
+  clearState: () => {
+    dispatch(clearHomeState());
+    dispatch(clearUserProfileState());
+    dispatch(clearProfileState());
+    dispatch(clearProjectPageState());
   },
 });
 

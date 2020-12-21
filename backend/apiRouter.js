@@ -34,6 +34,7 @@ exports.router = (() => {
     // Users Like
     apiRouter.route('/users/me/likes').get(likeController.getLikesByMe); // OK
     apiRouter.route('/users/:id/likes').get(likeController.getLikesByUserId); // OK
+    apiRouter.route('/users/me/likes-projects').get(likeController.getLikesProjectByMe) // Ok
     
 
     // Projects routes

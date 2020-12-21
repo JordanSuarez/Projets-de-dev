@@ -2,57 +2,17 @@ import React from 'react';
 
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
-import {
-  TextField,
-} from 'mui-rff';
-import {
-  Box,
-  Button,
-
-} from '@material-ui/core';
-
+import { TextField } from 'mui-rff';
+import { Box, Button } from '@material-ui/core';
 import Base from 'src/common/components/Base';
 import { func } from 'prop-types';
-
-const validate = (values) => {
-  const errors = {};
-  let validationEmail = null;
-  const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  if (regexEmail.test(values.email)) {
-    validationEmail = true;
-  }
-  else {
-    validationEmail = false;
-  }
-
-  if (!values.email) {
-    errors.email = 'Ce champ est requis';
-  }
-
-  if (validationEmail === false) {
-    errors.email = 'Adresse email invalide';
-  }
-
-  if (!values.name) {
-    errors.name = 'Ce champ est requis';
-  }
-
-  if (!values.objet) {
-    errors.objet = 'Ce champ est requis';
-  }
-
-  if (!values.message) {
-    errors.message = 'Ce champ est requis';
-  }
-
-  return errors;
-};
+import validate from './validation';
 
 const Contact = ({ classes, submitContact }) => {
   const onSubmit = (values) => {
     submitContact(values);
   };
+
   return (
     <Base>
       <div className={classes.container}>
@@ -63,8 +23,18 @@ const Contact = ({ classes, submitContact }) => {
             onSubmit={onSubmit}
             initialValues=""
             validate={validate}
-            render={({ handleSubmit, submitting }) => (
-              <form onSubmit={handleSubmit} noValidate>
+            render={({ handleSubmit, submitting, form }) => (
+              <form
+                onSubmit={async (event) => {
+                  await handleSubmit(event);
+                  form.reset();
+                  // Disable validation after form reset
+                  form.resetFieldState('name');
+                  form.resetFieldState('email');
+                  form.resetFieldState('object');
+                  form.resetFieldState('message');
+                }}
+              >
                 <TextField
                   className={classes.textfield}
                   type="text"
@@ -93,7 +63,7 @@ const Contact = ({ classes, submitContact }) => {
                   className={classes.textfield}
                   type="text"
                   label="Objet"
-                  name="objet"
+                  name="object"
                   margin="none"
                   required
                 />

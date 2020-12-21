@@ -3,6 +3,7 @@ export const SAVE_PROJECTS_CURRENT_PAGE = 'SAVE_PROJECTS_CURRENT_PAGE';
 export const SAVE_ALL_PROJECTS = 'SAVE_ALL_PROJECTS';
 export const ADD_LIKE = 'ADD_LIKE';
 export const ADD_DISLIKE = 'ADD_DISLIKE';
+export const CLEAR_PROJECTS_STATE = 'CLEAR_PROJECTS_STATE';
 
 // Récuperation de tout les projets
 export const getProjectsInfos = (projectLimit, projectOffset) => ({
@@ -33,4 +34,9 @@ export const addLike = (projectId) => ({
 export const addDislike = (projectId) => ({
   type: ADD_DISLIKE,
   projectId,
+});
+
+// Clear le state de la page projects
+export const clearProjectsState = () => ({
+  type: CLEAR_PROJECTS_STATE,
 });

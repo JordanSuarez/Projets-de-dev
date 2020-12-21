@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { getEditionProfileRoute, getCreationProjectRoute } from 'src/common/routing/routesResolver';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
@@ -9,7 +9,8 @@ import CardProject from 'src/common/components/CardProject';
 import Base from 'src/common/components/Base';
 import { isEmpty } from 'lodash';
 import AlertDialog from 'src/common/components/AlertDialog';
-import avatar2 from './avatar.png';
+import Carousel from 'src/common/components/Carousel';
+import avatar2 from 'src/common/assets/images/avatar.png';
 import { alertUserProfile, alertUserProject } from './alertTextProvider';
 
 const UserProfile = ({
@@ -21,19 +22,26 @@ const UserProfile = ({
   handleDeleteUserProfile,
   redirect,
   isLogged,
-  getMyLikes,
-  myLikes,
-  getProjects,
-  projects,
+  getMyProjectsLiked,
+  myProjectsLiked,
+  clearState,
 }) => {
   const history = useHistory();
+  const [toggleWindow, setToggleWindow] = useState(false);
+  const [projectsLiked, setProjectsLiked] = useState([]);
 
   useEffect(() => {
+    clearState();
     getProfile();
+    getMyProjectsLiked();
     if (redirect.length > 0) {
       history.push(redirect);
     }
   }, [redirect]);
+
+  // useEffect(() => {
+  //   setProjectsLiked(myProjectsLiked);
+  // }, [myProjectsLiked]);
 
   // The AlertDialog context for each case where it will be called
   const [context, setContext] = useState({
@@ -91,6 +99,32 @@ const UserProfile = ({
     },
   ];
 
+  // Data for Carousel
+  const cardsProjects = userProfile.projects.map(({
+    id: projectId, title: projectTitle, description, tags, image,
+  }) => (
+    <CardProject
+      key={projectId}
+      projectId={projectId}
+      title={projectTitle}
+      tags={tags}
+      description={description}
+      userId={userProfile.id}
+      userImage={userProfile.userImage}
+      image={image}
+      projectOwnerOptions
+      handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
+      isLogged={isLogged}
+      like={false}
+    />
+  ));
+
+  // Remove card from projectsLiked on click
+  const handleClick = (id) => {
+    const test = projectsLiked.filter((myLike) => myLike.projectId !== id);
+    setProjectsLiked(test);
+  };
+
   return (
     <Base loading={loading}>
       <>
@@ -104,9 +138,9 @@ const UserProfile = ({
             onAgree={handleAgreeAlertDialog}
             onCancel={() => setContext({ ...context, isOpen: false })}
           />
-          <h2 className={classes.subtitle}> Mon profil </h2>
           <div className={classes.column}>
             <div className={classes.rowCenter}>
+              <h2 className={classes.title}> Mon profil </h2>
               <Avatar alt="avatar" src={userProfile.userImage || avatar2} className={classes.large} />
               <h3 className={classes.username}>{userProfile.username}</h3>
             </div>
@@ -135,67 +169,75 @@ const UserProfile = ({
                 </Button>
               ))}
             </div>
+            <div className={classes.toggleViewHeader}>
+              <h2
+                className={!toggleWindow ? classes.subtitleActive : classes.subtitle}
+                onClick={() => setToggleWindow(false)}
+              >
+                Mes projets
+              </h2>
+              {/* <h2
+                className={toggleWindow ? classes.subtitleActive : classes.subtitle}
+                onClick={() => setToggleWindow(true)}
+              >
+                Mes projets préférés
+              </h2> */}
+            </div>
           </div>
+          {!toggleWindow && (
           <div>
-            <h2 className={classes.subtitle}>
-              Mes projets
-            </h2>
             <div className={classes.cardContainer}>
               {isEmpty(userProfile.projects) && (
               <p>Je n'ai pas encore de projet</p>
               )}
               {!isEmpty(userProfile.projects)
-                && userProfile.projects.map(({
-                  id: projectId, title: projectTitle, description, tags, image,
-                }) => (
-                  <CardProject
-                    key={projectId}
-                    projectId={projectId}
-                    title={projectTitle}
-                    tags={tags}
-                    description={description}
-                    userId={userProfile.id}
-                    userImage={userProfile.userImage}
-                    image={image}
-                    projectOwnerOptions
-                    handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
-                    isLogged={isLogged}
-                    like={false}
-                  />
-                ))}
+                && <Carousel items={cardsProjects} />}
             </div>
           </div>
+          )}
+          {/* {toggleWindow && (
           <div>
-            <h2 className={classes.subtitle}>
-              Mes projets préférés
-            </h2>
             <div className={classes.cardContainer}>
-              {isEmpty(userProfile.projects) && (
-              <p>Je n'ai pas encore de projet</p>
+              {isEmpty(projectsLiked) && (
+              <p>Je n'ai pas encore de projets préférés</p>
               )}
-              {myLikes.map((myLike) => {
-                projects.filter((project) => project.id === myLike.projectId).map(({
-                  id: projectId, title: projectTitle, description, tags, image,
-                }) => (
-                  <CardProject
-                    key={projectId}
-                    projectId={projectId}
-                    title={projectTitle}
-                    tags={tags}
-                    description={description}
-                    userId={userProfile.id}
-                    userImage={userProfile.userImage}
-                    image={image}
-                    projectOwnerOptions
-                    handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
-                    isLogged={isLogged}
-                    like={false}
-                  />
-                ));
-              })}
+              {!isEmpty(projectsLiked)
+                && (
+                <Carousel items={
+                  projectsLiked.map((myProjectLiked) => {
+                    const { project } = myProjectLiked;
+                    let like = false;
+                    // eslint-disable-next-line max-len
+                    if ((project.id === myProjectLiked.projectId) && (myProjectLiked.isLike === 1)) {
+                      like = true;
+                    }
+                    return (
+                      <>
+                        {(like !== false) && (
+                          <CardProject
+                            key={project.id}
+                            projectId={project.id}
+                            title={project.title}
+                            tags={project.tags}
+                            description={project.description}
+                            userId={project.user.id}
+                            userImage={project.user.userImage}
+                            image={project.image}
+                            isLogged={isLogged}
+                            vote={project.vote}
+                            like={like}
+                            handleClick={handleClick}
+                          />
+                        )}
+                      </>
+                    );
+                  })
+                }
+                />
+                )}
             </div>
           </div>
-
+          )} */}
         </div>
       </>
     </Base>
@@ -211,14 +253,14 @@ UserProfile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
-  getMyLikes: PropTypes.func.isRequired,
-  myLikes: PropTypes.array,
-  getProjects: PropTypes.func.isRequired,
+  getMyProjectsLiked: PropTypes.func.isRequired,
+  myProjectsLiked: PropTypes.array,
+  clearState: PropTypes.func.isRequired,
   projects: PropTypes.array,
 };
 
 UserProfile.defaultProps = {
-  myLikes: [],
+  myProjectsLiked: [],
   projects: [],
 };
 export default UserProfile;

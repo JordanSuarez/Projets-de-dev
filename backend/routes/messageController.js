@@ -1,7 +1,6 @@
+
 const { Op, where } = require("sequelize");
 const models   = require('../models');
-const jwtUtils = require('../utils/jwt.utils');
-const asyncLib = require('async');
 
 module.exports = {
 
@@ -14,7 +13,7 @@ module.exports = {
       attributes: ['id', 'content', 'userId', 'createdAt'],
       include: {
         all:true, 
-        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email', 'bio', 'createdAt'],
+        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email', 'createdAt'],
         where: {id: models.Message.userId}
       }
     }

@@ -7,6 +7,9 @@ import {
   USER_AUTH_VERIFY,
   submitLogoutSuccess,
 } from 'src/common/redux/actions/auth';
+import {
+  setChat
+} from 'src/common/redux/actions/chat';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getProfileInfos } from 'src/common/redux/actions/userProfile';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
@@ -32,6 +35,7 @@ const authMiddleWare = (store) => (next) => (action) => {
         .then(({ data }) => {
           setToken(data.token);
           setUserId(data.userId);
+          store.dispatch(setChat('chatClosed'));
           store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(submitLoginSuccess(data.userId));
           store.dispatch(showSnackbar('', `Hello! ${data.username}`, 'success'));
