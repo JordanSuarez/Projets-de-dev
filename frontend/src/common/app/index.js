@@ -19,14 +19,14 @@ const App = ({ classes }) => {
   const [atTheTopOfThePage, setAtTheTopOfThePage] = useState(true);
 
   // Display scrollButton when scroll event is trigger
-  const handleScroll = () => (
-    window.pageYOffset > 200
-      ? setAtTheTopOfThePage(false)
-      : setAtTheTopOfThePage(true));
+  // const handleScroll = () => (
+  //   window.pageYOffset > 200
+  //     ? setAtTheTopOfThePage(false)
+  //     : setAtTheTopOfThePage(true));
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  // }, []);
 
   return (
     <MuiThemeProvider theme={theme}>

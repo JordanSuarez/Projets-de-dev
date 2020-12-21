@@ -39,9 +39,10 @@ const UserProfile = ({
     }
   }, [redirect]);
 
-  useEffect(() => {
-     setProjectsLiked(myProjectsLiked);
-  }, [myProjectsLiked]); 
+  // useEffect(() => {
+  //   setProjectsLiked(myProjectsLiked);
+  // }, [myProjectsLiked]);
+
   // The AlertDialog context for each case where it will be called
   const [context, setContext] = useState({
     alertId: null,
@@ -175,12 +176,12 @@ const UserProfile = ({
               >
                 Mes projets
               </h2>
-              <h2
+              {/* <h2
                 className={toggleWindow ? classes.subtitleActive : classes.subtitle}
                 onClick={() => setToggleWindow(true)}
               >
                 Mes projets préférés
-              </h2>
+              </h2> */}
             </div>
           </div>
           {!toggleWindow && (
@@ -194,7 +195,7 @@ const UserProfile = ({
             </div>
           </div>
           )}
-          {toggleWindow && (
+          {/* {toggleWindow && (
           <div>
             <div className={classes.cardContainer}>
               {isEmpty(projectsLiked) && (
@@ -236,7 +237,7 @@ const UserProfile = ({
                 )}
             </div>
           </div>
-          )}
+          )} */}
         </div>
       </>
     </Base>
