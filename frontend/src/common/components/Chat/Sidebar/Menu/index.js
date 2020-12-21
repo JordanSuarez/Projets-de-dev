@@ -1,9 +1,9 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-import { setChat, saveUserSelected } from 'src/common/redux/actions/chat';
-import { getProfilesInfos } from 'src/common/redux/actions/profiles';
-import Users from './Users';
+import { setChat } from 'src/common/redux/actions/chat';
+import { } from 'src/common/redux/actions/profiles';
+import Menu from './Menu';
 import styles from './styles';
 
 const mapStateToProps = (state) => ({
@@ -13,14 +13,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-  getProfiles: () => {
-    dispatch(getProfilesInfos());
-  },
   setStatus: (status) => {
     dispatch(setChat(status));
-  },
-  setUserSelected: (status) => {
-    dispatch(saveUserSelected(status));
   },
 });
 
@@ -30,4 +24,4 @@ export default compose(
     mapStateToProps,
     mapsDispatchToProps,
   ),
-)(Users);
+)(Menu);

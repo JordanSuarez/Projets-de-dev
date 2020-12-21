@@ -66,7 +66,7 @@ const Navigation = ({
 
   // Close Chat window
   const handleCloseChat = () => {
-    setChatIsOpen(false);
+    setChatIsOpen('chatClosed');
   };
 
   // Routes

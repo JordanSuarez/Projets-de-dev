@@ -5,6 +5,7 @@ import { classes as classesProps } from 'src/common/classes';
 import { Avatar, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import GroupIcon from '@material-ui/icons/Group';
 import Loader from 'src/common/components/Loader';
 import avatar from './avatar.png';
 
@@ -15,14 +16,15 @@ const Users = ({
   loading,
   setStatus,
   status,
+  setUserSelected,
 }) => {
   const arrayProfiles = Object.values(profiles);
-  const [profileSelected, setProfileSelected] = useState('');
-  const [showList, setShowList] = useState(false);
 
-  /* ------------------------------------------------------- */
-  // Affichage de la liste des users si width > 959
+  /* ---------------------- a stocker dans le state ---------------------------- */
+  // Affichage de la liste des users sur la droite si width > 1280
+  // si width entre 960 et 1279 affichage sur la gauche
   // sinon bouton affichage du bouton pour ouvrir la liste
+  const [showUserList, setShowUserList] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const updateWidthAndHeight = () => {
     setWidth(window.innerWidth);
@@ -32,13 +34,11 @@ const Users = ({
     return () => window.removeEventListener('resize', updateWidthAndHeight);
   });
   useEffect(() => {
-    if (width > 959) {
-      setShowList(true);
-      console.log(width, ' je veux voir la liste');
+    if (width > 1280) {
+      setShowUserList(true);
     }
     else {
-      setShowList(false);
-      console.log(width, ' je veux pas voir la liste');
+      setShowUserList(false);
     }
   }, [width]);
   /* ------------------------------------------------------ */
@@ -47,38 +47,34 @@ const Users = ({
     getProfiles();
   }, []);
 
-  useEffect(() => {
-  }, [profileSelected]);
-
-  const showListUser = () => {
-    setStatus(2);
-    setShowList(true);
-  };
-
   const closedListUser = () => {
-    setStatus(1);
-    setShowList(false);
+    setStatus('menuOpen');
   };
-
   return (
-    <div className={classes.users}>
-      <Button className={classes.showProfileMobile} onClick={showListUser}>
-        {showList === false && <KeyboardArrowDownIcon />}
-      </Button>
-      {showList === true && (
-        <>
-          <Button className={classes.showProfileMobile} onClick={closedListUser}>
-            {showList === true && <CloseIcon />}
-          </Button>
-          <h4 className="title">Liste des utilisateurs</h4>
-          <div className={classes.containerUsers}>
-            {loading && <Loader />}
-            {!loading && (
+    <>
+      {((status === 'usersListOpen') || (showUserList === true)) && (
+      <div className={classes.users}>
+        <Button className={classes.closedList} onClick={closedListUser}>
+          <CloseIcon />
+        </Button>
+        <h4 className={classes.title}>
+          {(width < 960 || width > 1280) && (
+            <GroupIcon className={classes.menuItemIcon} />
+          )}
+          Liste des utilisateurs
+        </h4>
+        <div className={classes.containerUsers}>
+          {loading && <Loader />}
+          {!loading && (
             <>
               {arrayProfiles.map((profile) => (
                 <div
                   className={classes.user}
                   key={profile.id}
+                  onClick={() => {
+                    setUserSelected(profile);
+                    setStatus('userProfileOpen');
+                  }}
                 >
                   <Avatar alt="avatar" src={profile.userImage || avatar} className={classes.userImage} />
                   <div className={classes.listUsername}>
@@ -87,11 +83,11 @@ const Users = ({
                 </div>
               ))}
             </>
-            )}
-          </div>
-        </>
+          )}
+        </div>
+      </div>
       )}
-    </div>
+    </>
   );
 };
 
@@ -102,7 +98,8 @@ Users.propTypes = {
   getProfiles: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   setStatus: PropTypes.func.isRequired,
-  status: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
+  setUserSelected: PropTypes.func.isRequired,
 };
 
 export default Users;

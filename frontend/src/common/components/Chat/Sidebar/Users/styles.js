@@ -7,22 +7,62 @@ export default ({ breakpoints, palette }) => ({
     height: 'auto',
     width: '100vw',
     zIndex: '30',
-    backgroundColor: palette.lightBlue,
-    padding: '80px 0 0 0 ',
+    backgroundColor: '#313131',
+    color: palette.blue,
+    padding: '150px 0 0 30px ',
+    [breakpoints.up('md')]: {
+      color: palette.lightBlue,
+      padding: '0 0 0 0 ',
+      position: 'fixed',
+      left: '0',
+      top: '200px',
+      maxWidth: '320px',
+    },
+    [breakpoints.up('lg')]: {
+      padding: '69px 0 0 0',
+      position: 'static',
+      maxWidth: '280px',
+    },
   },
-  showProfileMobile: {
+  closedList: {
     zIndex: '30',
-    backgroundColor: 'yellow',
+    color: palette.blue,
     position: 'fixed',
+    top: '90px',
     right: '0',
     padding: '1em',
     [breakpoints.up('md')]: {
       display: 'none',
+      position: 'relative',
     },
   },
 
-  listTitle:{
+  listTitle: {
     padding: '2em 0 0 0',
+  },
+
+  title: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    color: palette.lightBlue,
+    [breakpoints.up('md')]: {
+      padding: '1em 0 1em 0',
+      backgroundColor: palette.blue,
+      justifyContent: 'center',
+    },
+  },
+
+  menuItemIcon: {
+    marginRight: '1em',
+  },
+
+  menuItemIconSelected: {
+    marginRight: '1em',
+    padding: '5em',
+    backgroundColor: palette.lightBlue,
+
   },
 
   containerUsers: {
@@ -37,14 +77,15 @@ export default ({ breakpoints, palette }) => ({
     padding: '1em 0 0 0 ',
 
     [breakpoints.up('md')]: {
-
+      padding: '1em 0 0 1em ',
     },
   },
 
   user: {
+    color: palette.lightBlue,
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'flex-start',
     padding: '5px',
     wordBreak: ' break-word',

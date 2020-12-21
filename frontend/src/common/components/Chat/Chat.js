@@ -16,35 +16,57 @@ const Chat = ({
   getMessageList,
   isLogged,
 }) => {
+  /* ---------------------- a stocker dans le state ---------------------------- */
+  // Affichage de la liste des users sur la droite si width > 1280
+  // si width entre 960 et 1279 affichage sur la gauche
+  // sinon bouton affichage du bouton pour ouvrir la liste
+  const [showButtonClosed, setShowButtonClosed] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+  const updateWidthAndHeight = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', updateWidthAndHeight);
+    return () => window.removeEventListener('resize', updateWidthAndHeight);
+  });
+  useEffect(() => {
+    if (width > 960) {
+      setShowButtonClosed(true);
+    }
+    else {
+      setShowButtonClosed(false);
+    }
+  }, [width]);
+  /* ------------------------------------------------------ */
   useEffect(() => {
     connectWebSocket();
   }, []);
 
   const openChat = () => {
     getMessageList();
-    setStatus(1);
+    setStatus('chatOpen');
   };
   const closeChat = () => {
-    setStatus(0);
+    setStatus('chatClosed');
   };
   return (
     <>
-      {(status === 0 && isLogged) && (
+      {(status === 'chatClosed' && isLogged) && (
         <div className={classes.chatContainerButton}>
-          <IconButton className={classes.chatButton} aria-label="open chat" onClick={openChat}>
+          <IconButton className={classes.chatButton} aria-label="close chat" onClick={openChat}>
             <ForumIcon className={classes.chatIcon} />
           </IconButton>
         </div>
       )}
 
-      {(status === 1 && isLogged) && (
+      {((status === 'chatOpen' || (status !== 'chatClosed' && status !== 'userProfileOpen' && width > 960)) && isLogged) && (
         <>
           <IconButton className={classes.closeChatButton} aria-label="open chat" onClick={closeChat}>
             <CloseIcon className={classes.closedIcon} />
           </IconButton>
         </>
-      ) }
-      {((status === 1 || status === 2 || status === 3) && isLogged) && (
+      )}
+      {((status !== 'chatClosed') && isLogged) && (
         <Sidebar />
       )}
     </>
@@ -55,7 +77,7 @@ Chat.propTypes = {
   ...classesProps,
   setStatus: PropTypes.func.isRequired,
   connectWebSocket: PropTypes.func.isRequired,
-  status: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   getMessageList: PropTypes.func.isRequired,
 };

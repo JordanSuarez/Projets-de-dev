@@ -14,7 +14,7 @@ module.exports = {
       attributes: ['id', 'content', 'userId', 'createdAt'],
       include: {
         all:true, 
-        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email', 'bio', 'createdAt'],
+        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email', 'createdAt'],
         where: {id: models.Message.userId}
       }
     }

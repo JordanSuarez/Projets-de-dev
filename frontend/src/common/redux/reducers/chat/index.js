@@ -3,6 +3,7 @@ import {
   ADD_MESSAGE,
   SAVE_MESSAGES,
   GET_MESSAGES,
+  SAVE_USER_SELECTED,
 } from 'src/common/redux/actions/chat';
 
 const initialState = {
@@ -12,9 +13,10 @@ const initialState = {
   status = 2 > chat users list ouvert (mobile ou basse resolution)
   status = 3 > chat user ouvert (mobile ou basse resolution)
   */
-  status: 0,
+  status: 'chatClosed',
   loading: true,
   messages: [],
+  profileSelected: {},
 };
 
 const chat = (state = initialState, action = {}) => {
@@ -42,6 +44,12 @@ const chat = (state = initialState, action = {}) => {
       return {
         ...state,
         loading: true,
+      };
+    }
+    case SAVE_USER_SELECTED: {
+      return {
+        ...state,
+        profileSelected: action.profile,
       };
     }
     default: return { ...state };
