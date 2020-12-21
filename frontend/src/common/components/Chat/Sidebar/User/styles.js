@@ -25,7 +25,12 @@ export default ({ breakpoints, palette }) => ({/* --------------  Show individua
   },
 
   closeUser: {
+    zIndex: '30',
     color: palette.blue,
+    position: 'fixed',
+    top: '90px',
+    right: '0',
+    padding: '1em',
   },
 
   user: {

@@ -62,7 +62,7 @@ const User = ({
             <h4 className={classes.userTitle}>Infos</h4>
             <Avatar alt="avatar" src={profileSelected.userImage || avatar} className={classes.userImage} />
             <h4 className={classes.username}>{profileSelected.username}</h4>
-            { profileSelected.bio !== null ? <p className={classes.userBio} >{profileSelected.bio}</p> : <p>Cet utilisateur n'a pas encore renseigner de description</p>}
+            { profileSelected.bio !== null ? <p className={classes.userBio} >{profileSelected.bio}</p> : <p className={classes.userBio} >Cet utilisateur n'a pas encore renseigner de description</p>}
             <Button
               className={classes.userProfile}
               variant="contained"
