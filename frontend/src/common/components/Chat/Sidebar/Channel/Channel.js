@@ -51,7 +51,7 @@ const Channel = ({
             <CloseIcon />
           </Button>
         )}
-        {(width > 960 ) && (status === 'channelsListOpen' || status === 'chatOpen') && (
+        {((width > 960) && (status === 'channelsListOpen' || status === 'chatOpen' || ((width > 1280) && status === 'userProfileOpen') || ((width > 1280) && status === 'usersListOpen'))) && (
           <h4 className={classes.title}>
             {(width < 960 || width > 1280) && (
             <ForumIcon className={classes.channelIcon} />
