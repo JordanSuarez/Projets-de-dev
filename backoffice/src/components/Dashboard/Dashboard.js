@@ -118,7 +118,7 @@ export const ProjectCreate = (props) => {
         <TextInput label="Lien Github" source="githubLink" />
         <TextInput label="Lien du Projet" source="projectLink" />
         <ImageInput source="image" />
-        <RichTextInput name="Description" source="description" />
+        <RichTextInput label="Description" source="description" />
         <ArrayField source="tags">
            <SingleFieldList key="id" >
            <ChipField source="name" className={classes.tags}/>
@@ -150,7 +150,7 @@ return (
         <TextInput label="Titre" source="title" key="id" required />
         <TextInput label="Lien Github" source="githubLink" />
         <TextInput label="Lien du Projet" source="projectLink" />
-        <RichTextInput name="Description" source="description" />
+        <RichTextInput label="Description" source="description" />
         <ImageField label="Image actuelle" source="image" />
         <ImageInput
                 source="record.src"

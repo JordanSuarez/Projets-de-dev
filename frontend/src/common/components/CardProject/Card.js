@@ -66,7 +66,7 @@ const CardProject = ({
     handleClick(id);
   };
 
-  const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'br', 'p'] };
+  const configSanitize = { ALLOWED_TAGS: ['em', 'strong', 'p'] };
   const cleanDescription = DOMPurify.sanitize(description, configSanitize);
 
   return (

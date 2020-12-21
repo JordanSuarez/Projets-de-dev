@@ -64,14 +64,6 @@ const Channel = ({
             <p className={classes.channel}># Général</p>
             <ChevronRightIcon className={classes.menuItemArrow} />
           </div>
-          <div className={classes.channelItem}>
-            <p className={classes.channel}># React</p>
-            <ChevronRightIcon className={classes.menuItemArrow} />
-          </div>
-          <div className={classes.channelItem}>
-            <p className={classes.channel}># Nodejs</p>
-            <ChevronRightIcon className={classes.menuItemArrow} />
-          </div>
         </div>
 
       </div>

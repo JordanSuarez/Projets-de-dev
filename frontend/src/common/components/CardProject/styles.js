@@ -1,7 +1,7 @@
 export default ({ breakpoints, palette }) => ({
   card: {
     width: '240px',
-    height: '29rem',
+    height: '31rem',
     transition: 'all .2s ease-in-out',
     [breakpoints.up('sm')]: {
       width: '300px',
@@ -142,6 +142,7 @@ export default ({ breakpoints, palette }) => ({
   tag: {
     borderRadius: '8px',
     marginRight: '5px',
+    marginTop: '0.4rem',
     backgroundColor: palette.darkBlue,
     padding: '0.5em',
     color: palette.darkBlue,
