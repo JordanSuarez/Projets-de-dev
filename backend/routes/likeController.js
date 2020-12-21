@@ -210,6 +210,7 @@ module.exports = {
 
       where: {userId: req.params.id},
       attributes: ['id', 'userId', 'projectId', 'isLike'],
+      
 
     }).then((likes) => {
 
@@ -229,13 +230,63 @@ module.exports = {
 
       where: {userId: userId},
       attributes: ['id', 'userId', 'projectId', 'isLike'],
+      }).then((likes) => {
 
-    }).then((likes) => {
+        if(likes) {
+          return res.status(200).json(likes)
+        }
 
-      if(likes) {
-        return res.status(200).json(likes)
+      })
+  }, 
+
+  getLikesProjectByMe: (req, res) => {
+
+    const headerAuth = req.headers['authorization'];
+    const userId = jwtUtils.getUserId(headerAuth);
+
+    models.ProjectsLikes.findAll({
+
+      where: {userId: userId},
+      attributes: ['id', 'userId', 'projectId', 'isLike'],
+      include: [
+        {model: models.Project, all: true, required: false, 
+          include: [{model: models.Tag, all:true}, {model: models.User, all:true, attributes: {exclude: ['createdAt', 'updatedAt', 'password', 'bio', 'isAdmin', 'email']}}]
+        },
+      ],
+
+    }).then((projectLikes) => {
+      if(projectLikes) {
+        
+        const formatLikesProjects = projectLikes.map((projectLike) => {
+            const formatProject = {
+              id: projectLike.project.id,
+              title: projectLike.project.title,
+              description: projectLike.project.description,
+              image: projectLike.project.image,
+              user: projectLike.project.User,
+              tags: [
+                projectLike.project.Tag,
+                projectLike.project.Tag2,
+                projectLike.project.Tag3,
+                projectLike.project.Tag4,
+                projectLike.project.Tag5,
+                projectLike.project.Tag6,
+              ],
+              vote: projectLike.project.vote,
+            };
+            return formatGetLikesProject= {
+              id: projectLike.id,
+              isLike: projectLike.isLike,
+              projectId: projectLike.projectId,
+              userId:  projectLike.userId,
+              project: formatProject,
+            }
+        })
+        
+        return res.status(200).json(formatLikesProjects)
+        
       }
 
-    })
+    }).catch(() => {})
   }
 }
