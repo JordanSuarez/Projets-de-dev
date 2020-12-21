@@ -29,14 +29,23 @@ export default ({ breakpoints, palette }) => ({
       margin: '0 auto',
     },
   },
+  list: {
+    [breakpoints.down('md')]: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      padding: '1em',
+
+    },
+  },
 
   footerLinks: {
     cursor: 'pointer',
     textAlign: 'end',
     padding: '0 1em',
     [breakpoints.down('xs')]: {
-      padding: '0.5em',
-      margin: '0 auto',
+      padding: '0 0.5em',
+
     },
     '&:hover': {
       color: palette.blue,
