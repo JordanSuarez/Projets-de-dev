@@ -68,10 +68,9 @@ const Users = ({
           {!loading && (
             <>
               {arrayProfiles.map((profile) => (
-                <div className={classes.userContent}>
+                <div className={classes.userContent} key={profile.id}>
                   <div
                     className={classes.user}
-                    key={profile.id}
                     onClick={() => {
                       setUserSelected(profile);
                       setStatus('userProfileOpen');
