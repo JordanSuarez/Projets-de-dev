@@ -28,9 +28,9 @@ const Home = ({
       <img className={classes.image} src={headerImage} alt="header" style={{backgroundPosition: 'left'}} />
       <div className={classes.home}>
         <div className={classes.textContainer}>
-          <h2 className={classes.subtitle}> Projets de Dev</h2>
+          <h2 className={classes.subtitle}>º Projets de Dev º</h2>
           <p className={classes.homeText}>
-          Description
+          Le site où on partage les fruits de son expérience en matière de création de projets de dev, que ce soit un projet mené individuellement ou à plusieurs.
           </p>
         </div>
 
@@ -71,8 +71,6 @@ const Home = ({
             <p className={classes.descriptionSite}>
               L’idée a germé quand l’un d’entre nous s’est rendu compte qu’il n’était pas facile de partager nos projets et idées de projets avec d’autres personnes.
               Pour remédier à cette problématique, il a fallu trouver une solution : une plateforme  qui serait à la fois visuelle, pratique et qui permettrait à n’importe quel développeur de partager ses idées et créations rapidement, en quelques clics ! 
-              Notre petite équipe s’est donc attelée à la tâche ! Nous avons transpiré, crié, maudit et aimé le saint Javascript.
-              C’est ainsi qu’après seulement 1 mois de gestation, Projets De Dev est né, un beau matin d’été… (ouais c’était en décembre mais ça rimait)
             </p>
           </div>
         </div>

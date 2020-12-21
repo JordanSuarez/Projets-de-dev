@@ -22,4 +22,10 @@ export default ({ palette, breakpoints }) => ({
     justifyContent: 'center',
     flexWrap: 'wrap',
   },
+
+  image: {
+    height: '400px',
+    width: '100%',
+    objectFit: 'cover',
+  },
 });

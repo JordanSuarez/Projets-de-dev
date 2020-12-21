@@ -5,7 +5,6 @@ export default ({ palette }) => ({
   },
 
   subtitle: {
-    fontFamily: 'Orbitron',
     padding: '1em',
     fontSize: '1.5em',
     color: palette.darkBlue,

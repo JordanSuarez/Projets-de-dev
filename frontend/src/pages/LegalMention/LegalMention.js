@@ -3,9 +3,12 @@ import React from 'react';
 
 import Base from 'src/common/components/Base';
 import { classes as classesProps } from 'src/common/classes';
+import headerImage from './header-home.jpg';
+
 
 const LegalMention = ({ classes }) => (
   <Base>
+  <img className={classes.image} src={headerImage} alt="header" style={{backgroundPosition: 'left'}} />
     <div className={classes.legalMentionContainer}>
       <h3>Conditions d'utilisation</h3>
       <div>

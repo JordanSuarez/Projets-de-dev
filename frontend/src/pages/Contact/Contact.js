@@ -11,6 +11,7 @@ import {
 
 } from '@material-ui/core';
 
+import headerImage from './header-about.png';
 import Base from 'src/common/components/Base';
 
 const validate = (values) => {
@@ -57,6 +58,7 @@ const Contact = ({ classes }) => {
   };
   return (
     <Base>
+    <img className={classes.image} src={headerImage} alt="header" />
       <div className={classes.container}>
         <Box borderRadius={16} className={classes.content} boxShadow={2}>
           <h2 className={classes.formTitle}>Nous contacter</h2>
