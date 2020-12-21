@@ -5,6 +5,22 @@ const models   = require('../models');
 
 module.exports = {
 
+	getUsersList: (req, res) => {
+		models.User.findAll({
+			attributes: ['id', 'username', 'userImage', 'email'],
+		}).then((user) => {
+			if (user) {
+				const arrayAllUsers = Object.values(user);
+				res.set('X-Total-Count', arrayAllUsers.length);
+				return res.status(201).json(user);
+			} else {
+				return res.status(404).json({ 'error': /*'Aucun utilisateur n\'a pu être trouvé'*/ err });
+			}
+		}).catch((err) => {
+			return res.status(500).json({ 'error': /*'Impossible de récupérer les utilisateurs'*/ err });
+		});
+	},
+
 	updateUser: (req, res) => {
 		const headerAuth = req.headers['authorization'];
 		const isAdmin = jwtUtils.getIsAdminUser(headerAuth);
