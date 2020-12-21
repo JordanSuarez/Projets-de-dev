@@ -13,8 +13,7 @@ export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}/api`;
 // const axiosInstance = axios.create({
 //   baseURL: apiUrl,
 //   headers: {
-//     'Access-Control-Allow-Origin': '*',
-//     'Access-Control-Allow-Headers': '*',
+//     s
 //     // 'Content-Type': 'application/json, charset=utf-8',
 //     // Accept: 'application/json',
 //     Authorization: `Bearer ${getToken()}` || null,

@@ -14,3 +14,10 @@ body {
   background-color: vars.$light-blue ;
 }
 
+#root ::-webkit-scrollbar {
+  width: 10px;
+}
+#root ::-webkit-scrollbar-thumb {
+  background: #59B0DF;
+  border-radius: 10px;
+}
