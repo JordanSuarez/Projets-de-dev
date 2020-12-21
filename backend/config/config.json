@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "explorateur",
-    "password": "Ereul9Aeng",
-    "database": "projets_de_dev_development",
-    "host": "localhost",
+    "username": "adminpda",
+    "password": "Pikachu1",
+    "database": "projet_de_dev",
+    "host": "database-1.cgbnetjsmhmu.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "projets_de_dev_prod",
-    "host": "127.0.0.1",
+    "username": "adminpda",
+    "password": "Pikachu1",
+    "database": "projet_de_dev",
+    "host": "database-1.cgbnetjsmhmu.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
