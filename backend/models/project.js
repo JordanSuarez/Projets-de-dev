@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 
-const Tag = require('./index').Tag;
+//const Tag = require('./index').Tag;
 
 module.exports = (sequelize, DataTypes) => {
   class Project extends Model {

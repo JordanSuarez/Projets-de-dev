@@ -40,9 +40,8 @@ const UserProfile = ({
   }, [redirect]);
 
   useEffect(() => {
-    setProjectsLiked(myProjectsLiked);
-  }, [myProjectsLiked]);
-
+     setProjectsLiked(myProjectsLiked);
+  }, [myProjectsLiked]); 
   // The AlertDialog context for each case where it will be called
   const [context, setContext] = useState({
     alertId: null,

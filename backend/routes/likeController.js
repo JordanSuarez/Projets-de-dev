@@ -250,7 +250,7 @@ module.exports = {
       attributes: ['id', 'userId', 'projectId', 'isLike'],
       include: [
         {model: models.Project, all: true, required: false, 
-          include: [{model: models.Tag, all:true}, {model: models.User, all:true, attributes: {exclude: ['createdAt', 'updatedAt', 'password', 'bio', 'isAdmin', 'email']}}]
+          include: [{model: models.Tag, required:false}, {model: models.User, attributes: {exclude: ['createdAt', 'updatedAt', 'password', 'bio', 'isAdmin', 'email']}}]
         },
       ],
 
@@ -274,7 +274,7 @@ module.exports = {
               ],
               vote: projectLike.project.vote,
             };
-            return formatGetLikesProject= {
+            return {
               id: projectLike.id,
               isLike: projectLike.isLike,
               projectId: projectLike.projectId,
