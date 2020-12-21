@@ -60,13 +60,13 @@ const Navigation = ({
       name: 'Contact', route: getContactRoute(),
     },
     {
-      name: 'About', route: getAboutRoute(),
+      name: 'A propos', route: getAboutRoute(),
     },
   ];
 
   // Close Chat window
   const handleCloseChat = () => {
-    setChatIsOpen(false);
+    setChatIsOpen('chatClosed');
   };
 
   // Routes

@@ -12,7 +12,7 @@ let socket;
 const chatMiddleWare = (store) => (next) => (action) => {
   switch (action.type) {
     case CONNECT_WEBSOCKET: {
-      socket = io('http://localhost:5050');
+      socket = io();
       socket.on('send_message', (message) => {
         store.dispatch(addMessage(message));
       });
@@ -28,7 +28,7 @@ const chatMiddleWare = (store) => (next) => (action) => {
       break;
     }
     case GET_MESSAGES: {
-      const url = getEndpoint(MESSAGES, GET, ALL);
+      const url = getEndpoint(MESSAGES, GET, ALL, `?limit=${50}`, `&offset=${0}`);
 
       callApi(url, GET)
         .then((response) => {

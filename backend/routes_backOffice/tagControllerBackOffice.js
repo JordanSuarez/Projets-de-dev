@@ -4,7 +4,19 @@ const asyncLib = require('async');
 
 module.exports = {
 
-    
+  getTagList: (req, res) => {
+
+    models.Tag.findAll({
+    }).then((tagList) => {
+      const tagArray = Object.values(tagList);
+      res.set('X-Total-Count', tagArray.length);
+      return res.status(201).json(tagArray);
+    }).catch((err) => {
+      res.status(404).json({'error': 'Impossible de récupérer les tags' + err });
+    })
+  },
+
+
     createTag: (req, res) => {
 
         const headerAuth = req.headers['authorization'];
@@ -42,7 +54,7 @@ module.exports = {
           }
 
           models.Tag.update(updateTag, 
-            {where: {id: id}
+            {where: {id: id},
           }).then(() => {
               return res.status(201).json(updateTag);
             })

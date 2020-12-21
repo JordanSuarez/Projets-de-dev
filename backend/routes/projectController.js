@@ -98,7 +98,8 @@ module.exports = {
             project.Tag6,
           ],
           user: project.User,
-          comments: project.Comments
+          comments: project.Comments,
+          createdAt: project.createdAt,
         };
         return res.status(200).json(formatProject)
     })

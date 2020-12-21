@@ -10,6 +10,7 @@ import styles from './styles';
 const mapStateToProps = (state) => ({
   status: state.chat.status,
   isLogged: state.auth.isLogged,
+  profileSelected: state.chat.profileSelected,
 });
 
 const mapsDispatchToProps = (dispatch) => ({

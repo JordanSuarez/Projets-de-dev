@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 
 import { getUserProfileRoute } from 'src/common/routing/routesResolver';
@@ -19,8 +17,8 @@ import {
 } from '@material-ui/core';
 import './styles.scss';
 import Base from 'src/common/components/Base';
+import reziseFile from 'src/common/helpers/imageResizer';
 
-// eslint-disable-next-line arrow-body-style
 const ProfileEdition = ({
   classes,
   getProfile,
@@ -99,8 +97,12 @@ const ProfileEdition = ({
     }
   }, [redirect]);
 
-  const getFiles = (files) => {
-    setFormImage({ userImage: files.base64, imageName: files.name });
+  const getFiles = async (files) => {
+    const imageResized = await reziseFile(files, 300);
+    setFormImage({
+      userImage: imageResized.length > files.base64.length ? files.base64 : imageResized,
+      imageName: files.name,
+    });
   };
 
   return (

@@ -22,6 +22,7 @@ const Projects = ({
   isLogged,
   getMyLikes,
   myLikes,
+  clearState,
 }) => {
   const { offset } = useParams();
   const history = useHistory();
@@ -45,6 +46,7 @@ const Projects = ({
   };
 
   useEffect(() => {
+    clearState();
     getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
     if (isLogged) {
       getMyLikes();
@@ -92,20 +94,29 @@ const Projects = ({
           {searchResults.length > 0
           && searchResults.map(({
             id: projectId, title, description, tags, user, image, vote,
-          }) => (
-            <CardProject
-              key={projectId}
-              projectId={projectId}
-              title={title}
-              tags={tags}
-              description={description}
-              userId={user.id}
-              userImage={user.userImage}
-              image={image}
-              isLogged={isLogged}
-              vote={vote}
-            />
-          ))}
+          }) => {
+            let like = false;
+            myLikes.map((myLike) => {
+              if ((projectId === myLike.projectId) && (myLike.isLike === 1)) {
+                like = true;
+              }
+            });
+            return (
+              <CardProject
+                key={projectId}
+                projectId={projectId}
+                title={title}
+                tags={tags}
+                description={description}
+                userId={user.id}
+                userImage={user.userImage}
+                image={image}
+                isLogged={isLogged}
+                like={like}
+                vote={vote}
+              />
+            );
+          })}
           {searchResults.length === 0
           && arrayProjectsCurrentPage.map(({
             id: projectId, title, description, tags, user, image, vote,
@@ -149,6 +160,7 @@ Projects.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   getMyLikes: PropTypes.func.isRequired,
+  clearState: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
 };
 
