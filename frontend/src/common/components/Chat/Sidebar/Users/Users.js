@@ -68,19 +68,22 @@ const Users = ({
           {!loading && (
             <>
               {arrayProfiles.map((profile) => (
-                <div
-                  className={classes.user}
-                  key={profile.id}
-                  onClick={() => {
-                    setUserSelected(profile);
-                    setStatus('userProfileOpen');
-                  }}
-                >
-                  <Avatar alt="avatar" src={profile.userImage || avatar} className={classes.userImage} />
-                  <div className={classes.listUsername}>
-                    {profile.username}
+                <div className={classes.userContent}>
+                  <div
+                    className={classes.user}
+                    key={profile.id}
+                    onClick={() => {
+                      setUserSelected(profile);
+                      setStatus('userProfileOpen');
+                    }}
+                  >
+                    <Avatar alt="avatar" src={profile.userImage || avatar} className={classes.userImage} />
+                    <div className={classes.listUsername}>
+                      {profile.username}
+                    </div>
                   </div>
                 </div>
+
               ))}
             </>
           )}

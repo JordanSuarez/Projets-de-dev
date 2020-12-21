@@ -81,7 +81,12 @@ export default ({ breakpoints, palette }) => ({
     },
   },
 
+  userContent: {
+    cursor: 'pointer',
+  },
+
   user: {
+
     color: palette.lightBlue,
     display: 'flex',
     flexDirection: 'row',

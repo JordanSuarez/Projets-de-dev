@@ -59,6 +59,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   menuItemContent: {
+    cursor: 'pointer',
     display: 'flex',
     alignItems: ' center',
     padding: '1em',
@@ -69,6 +70,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   menuItemContentSelected: {
+    cursor: 'pointer',
     backgroundColor: palette.blue,
     padding: '1em',
     borderRadius: '6px',
