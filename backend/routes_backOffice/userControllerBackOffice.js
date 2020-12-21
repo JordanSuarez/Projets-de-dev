@@ -6,8 +6,14 @@ const models   = require('../models');
 module.exports = {
 
 	getUsersList: (req, res) => {
+		let order = req.query._order;
+		let sort = req.query._sort;
+		
 		models.User.findAll({
 			attributes: ['id', 'username', 'userImage', 'email'],
+			order: [
+        [sort, order],
+      ],
 		}).then((user) => {
 			if (user) {
 				const arrayAllUsers = Object.values(user);
