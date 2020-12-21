@@ -13,32 +13,32 @@ const Footer = ({ classes }) => {
       <p className={classes.infos}>Projets de dev</p>
       <div>
       <span
-        className={classes.legalMention}
-        name="mention-legales"
+        className={classes.footerLinks}
+        name="home"
         onClick={handleHome}
       >
         Accueil
       </span>
       <span
-        className={classes.legalMention}
-        name="mention-legales"
+        className={classes.footerLinks}
+        name="contact"
         onClick={handleHome}
       >
         Nous Contacter
       </span>
       <span
-        className={classes.legalMention}
+        className={classes.footerLinks}
         name="mention-legales"
         onClick={handleHome}
       >
         Mentions légales
       </span>
       <span
-        className={classes.legalMention}
-        name="mention-legales"
+        className={classes.footerLinks}
+        name="a-propos"
         onClick={handleHome}
       >
-        A Propos
+        À Propos
       </span>
       </div>
 

@@ -21,7 +21,7 @@ export default ({ breakpoints, palette }) => ({
 
   infos: {
     fontWeight: '400',
-    fontSize: '1.2em',
+    fontSize: '1.5em',
     margin: '0 1em',
     padding: '0 2em 0 1em',
     [breakpoints.down('xs')]: {
@@ -30,7 +30,7 @@ export default ({ breakpoints, palette }) => ({
     },
   },
 
-  legalMention: {
+  footerLinks: {
     cursor: 'pointer',
     textAlign: 'end',
     padding: '0 1em',
