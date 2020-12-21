@@ -28,7 +28,10 @@ const CardAbout = ({
 
   return (
     <Card className={classes.card}>
-      <CardActionArea className={classes.cardArea}>
+      <CardActionArea
+        className={classes.cardArea}
+        onClick={() => history.push(getProfileRoute(profileId))}
+      >
         <Avatar alt="lePseudo" src={!isEmpty(avatar) ? avatar : avatar2} className={classes.large} />
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">

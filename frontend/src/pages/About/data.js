@@ -1,7 +1,7 @@
 import logoJordan from 'src/common/assets/images/logo-jordan.jpg';
 import logoAlmigra from 'src/common/assets/images/logo-almigra.jpg';
 import logoAlban from 'src/common/assets/images/logo-alban.jpg'
-import logoCeline from 'src/common/assets/images/logo-celine.png'
+import logoCeline from 'src/common/assets/images/logo-celine.jpg'
 
 export default [
   {
