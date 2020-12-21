@@ -1,7 +1,7 @@
 export default ({ palette, breakpoints }) => ({
 
   home: {
-    maxWidth: '1200px',
+    maxWidth: '1500px',
     margin: '0 auto',
   },
 
@@ -18,6 +18,7 @@ export default ({ palette, breakpoints }) => ({
   },
 
   subtitleProjects: {
+    margin: '3rem 0rem 1rem 1rem',
     padding: '1rem 0 1em 1em',
     fontSize: '1.5em',
     color: palette.darkBlue,
@@ -97,6 +98,5 @@ export default ({ palette, breakpoints }) => ({
       padding: '0 1em 1em 1em',
     },
   },
-
 
 });

@@ -7,7 +7,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import GroupIcon from '@material-ui/icons/Group';
 import Loader from 'src/common/components/Loader';
-import avatar from './avatar.png';
+import avatar from 'src/common/assets/images/avatar.png';
 
 const Users = ({
   classes,

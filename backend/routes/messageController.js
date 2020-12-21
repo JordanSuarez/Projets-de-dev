@@ -1,7 +1,6 @@
+
 const { Op, where } = require("sequelize");
 const models   = require('../models');
-const jwtUtils = require('../utils/jwt.utils');
-const asyncLib = require('async');
 
 module.exports = {
 

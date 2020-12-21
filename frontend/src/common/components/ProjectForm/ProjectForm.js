@@ -196,7 +196,7 @@ const Form = ({
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
-                <Autocomplete
+                {/* <Autocomplete
                   name="partners"
                   className={classes.autoComplete}
                   filterSelectedOptions
@@ -220,7 +220,7 @@ const Form = ({
                       placeholder="Collaborateur(s)"
                     />
                   )}
-                />
+                /> */}
               </Grid>
             </div>
             <Grid item xs={12} sm={12} className={classes.editorContainer}>
