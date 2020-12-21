@@ -10,8 +10,9 @@
 }
 
 body {
-  font-family: sans-serif;
   background-color: vars.$light-blue ;
+  font-family: 'Nunito', sans-serif;
+  word-spacing: normal;
 }
 
 #root ::-webkit-scrollbar {

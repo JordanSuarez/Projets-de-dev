@@ -9,6 +9,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { getProjectsListRoute } from 'src/common/routing/routesResolver';
 import SearchBar from 'src/common/components/SearchBar';
 import { isEmpty } from 'lodash';
+import headerImage from './header-home.jpg';
+
 
 const Projects = ({
   classes,
@@ -76,6 +78,7 @@ const Projects = ({
 
   return (
     <Base loading={loading}>
+      <img className={classes.image} src={headerImage} alt="header" style={{backgroundPosition: 'left'}} />
       <div className={classes.headerContainer}>
         <h2 className={classes.subtitle}>Liste des Projets</h2>
         <SearchBar

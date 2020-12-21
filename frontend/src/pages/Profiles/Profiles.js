@@ -8,6 +8,8 @@ import { useHistory } from 'react-router-dom';
 import { getProfileRoute } from 'src/common/routing/routesResolver';
 import { isEmpty } from 'lodash';
 import SearchBar from 'src/common/components/SearchBar';
+import headerImage from './header-home.jpg';
+
 
 const Profiles = ({
   classes,
@@ -54,6 +56,7 @@ const Profiles = ({
 
   return (
     <Base loading={loading}>
+      <img className={classes.image} src={headerImage} alt="header" style={{backgroundPosition: 'left'}} />
       <div className={classes.headerContainer}>
         <h2 className={classes.subtitle}>Liste des Profils</h2>
         <SearchBar

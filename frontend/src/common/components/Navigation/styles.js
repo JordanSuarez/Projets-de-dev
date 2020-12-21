@@ -5,6 +5,8 @@ export default ({ palette, breakpoints }) => ({
     minHeight: '5rem',
     display: 'flex',
     justifyContent: 'center',
+    fontFamily: 'Orbitron',
+    fontWeight: 400,
   },
   burger: {
     color: palette.darkBlue,

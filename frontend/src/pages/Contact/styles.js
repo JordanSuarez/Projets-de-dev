@@ -49,4 +49,10 @@ export default ({ palette }) => ({
     color: palette.darkBlue,
   },
 
+  image: {
+    height: '400px',
+    width: '100%',
+    objectFit: 'cover',
+  },
+
 });

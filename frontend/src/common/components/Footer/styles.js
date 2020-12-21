@@ -5,16 +5,23 @@ export default ({ breakpoints, palette }) => ({
     padding: '3em 0',
     backgroundColor: palette.darkBlue,
     display: 'flex',
+    justifyContent: 'space-between',
     flexWrap: 'wrap',
-    justifyContent: 'center',
-    [breakpoints.down('xs')]: {
+    lineHeight: '2em',
+    [breakpoints.down('md')]: {
       padding: '1.4rem 0',
       flexDirection: 'column',
+    },
+    [breakpoints.between('xs', 'md')]: {
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     color: palette.white,
   },
 
   infos: {
+    fontWeight: '400',
+    fontSize: '1.5em',
     margin: '0 1em',
     padding: '0 2em 0 1em',
     [breakpoints.down('xs')]: {
@@ -22,19 +29,42 @@ export default ({ breakpoints, palette }) => ({
       margin: '0 auto',
     },
   },
+  list: {
+    [breakpoints.down('md')]: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      padding: '1em',
 
-  legalMention: {
-    margin: '0 1em 0 2em',
+    },
+  },
+
+  footerLinks: {
     cursor: 'pointer',
     textAlign: 'end',
     padding: '0 1em',
     [breakpoints.down('xs')]: {
-      padding: '0.5em',
-      margin: '0 auto',
+      padding: '0 0.5em',
+
     },
     '&:hover': {
       color: palette.blue,
     },
   },
 
+  icons: {
+    fontSize: '1.8em',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginRight: '3em',
+    '& i': {
+      paddingLeft : '0.1em',
+      color: '#F4F4F4',
+    },
+    [breakpoints.between('xs', 'md')]: {
+      marginRight: '0',
+    },
+
+  }
 });

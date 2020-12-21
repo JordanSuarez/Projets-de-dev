@@ -11,4 +11,9 @@ export default ({ palette }) => ({
       lineHeight: 'normal',
     },
   },
+  image: {
+    height: '400px',
+    width: '100%',
+    objectFit: 'cover',
+  },
 });
