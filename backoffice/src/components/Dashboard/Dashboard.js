@@ -1,11 +1,17 @@
 import * as React from "react";
 import { Admin, Resource } from 'react-admin';
 import simpleRestProvider from 'ra-data-json-server';
-import { Create, Edit, SimpleForm, TextInput, ImageInput, required, List, Datagrid, SelectArrayInput, ReferenceInput , SelectInput, ArrayInput, SimpleFormIterator, ImageField, EmailField, FunctionField, UrlField, TextField, ChipField, ArrayField, SingleFieldList, EditButton, ShowButton, fetchUtils } from 'react-admin';
+import { Create, Edit, SimpleForm, TextInput, ImageInput, DeleteButton, List, Datagrid, ReferenceInput , SelectInput, ArrayInput, SimpleFormIterator, ImageField, EmailField, UrlField, TextField, ChipField, ArrayField, SingleFieldList, EditButton, ShowButton, fetchUtils, Show, SimpleShowLayout } from 'react-admin';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import RichTextInput from 'ra-input-rich-text';
-import addUploadFeature from './addUploadFeature';
 import authProvider from './authProvider';
+import commentIcon from '@material-ui/icons/AssistantTwoTone';
+import projectIcon from '@material-ui/icons/ClassTwoTone';
+import categoryIcon from '@material-ui/icons/DirectionsBoatTwoTone';
+import userIcon from '@material-ui/icons/FaceTwoTone';
+import contactIcon from '@material-ui/icons/EmailTwoTone';
+import chatIcon from '@material-ui/icons/TextsmsTwoTone';
+import Login from '../Login/Login';
 
 
 
@@ -23,14 +29,13 @@ const theme = createMuiTheme({
 
 
 export const UserList = (props) => (
-    <List {...props} bulkActionButtons={false}>
+    <List {...props} bulkActionButtons={false} Set pagination={false} >
         <Datagrid key="id" >
             <TextField label="ID" source="id" />
             <TextField label="Nom d'utilisateur" source="username" />
             <ImageField label="Photo de profile" source="userImage" />
             <EmailField label="Adresse email" source="email" />
-            <EditButton />
-            <ShowButton />
+            <EditButton label="Modifier"/>
         </Datagrid>
     </List>
 );
@@ -63,7 +68,6 @@ export const UserEdit = (props) => {
                     </span>
                     </p>
                 }
-                options={addUploadFeature}
               >
               <PreviewImage source="src" />
               </ImageInput>
@@ -84,26 +88,23 @@ const useStyles = makeStyles({
 export const ProjectList = (props) => {
     const classes = useStyles();
     return(
-  <List {...props} bulkActionButtons={false}>
+  <List {...props} bulkActionButtons={false} Set pagination={false} >
       <Datagrid expand={<TextField name="Description" source="description" />} key="id" 	>
           <TextField label="ID" source="id" sortBy="id" />
         
-          <TextField label="Auteur" source="user.username" />
+          <TextField label="Auteur" source="user.username" sortable={false} />
 
           <TextField label="Titre" source="title" />
           <UrlField label="Lien Github" source="github_link" />
           <UrlField label="Lien du Projet" source="project_link" />
           <ImageField source="image" />
-          <ArrayField source="tags">
+          <ArrayField source="tags" sortable={false}>
              <SingleFieldList key="id">
                  <ChipField source="name" className={classes.tags}/>
             </SingleFieldList>
           </ArrayField>
-        <EditButton />
-        <ShowButton />
-
-
-
+        <EditButton label='Modifier' />
+        <DeleteButton label='Supprimer'/>
       </Datagrid>
   </List>
 )}
@@ -111,7 +112,7 @@ export const ProjectList = (props) => {
 export const ProjectCreate = (props) => {
   const classes = useStyles();
   return (
-    <Create {...props}>
+    <Create {...props} title="Créer un Projet">
     <SimpleForm>
         <TextInput label="Titre" source="title" />
         <TextInput label="Lien Github" source="githubLink" />
@@ -132,7 +133,6 @@ export const ProjectEdit = (props) => {
 
   const classes = useStyles();
   const PreviewImage = ({ record, source }) => {
-    console.log(typeof(record))
     if (typeof (record) == "object") {
         record = {
             [source]: record.src,
@@ -164,7 +164,6 @@ return (
                     </span>
                     </p>
                 }
-                options={addUploadFeature}
               >
               <PreviewImage source="src" />
               </ImageInput>
@@ -184,17 +183,13 @@ return (
 }
 
 export const TagList = (props) => {
-    console.log(props)
     return(
-  <List {...props} bulkActionButtons={false}>
+  <List {...props} bulkActionButtons={false} Set pagination={false} >
       <Datagrid key="id" >
           <TextField label="ID" source="id" />
           <TextField label="Nom" source="name" />
-          <ImageField source="image" />
-        <EditButton />
-
-
-
+          <ImageField source="image" sortable={false}/>
+        <EditButton label="Modifier" />
       </Datagrid>
   </List>
 )}
@@ -220,14 +215,14 @@ export const TagEdit = (props) => {
 }
 
 export const CommentList = (props) => {
-  console.log(props)
   return(
-<List {...props} bulkActionButtons={false}>
+<List {...props} bulkActionButtons={false} Set pagination={false} >
     <Datagrid key="id" >
         <TextField label="Commentaire" source="content" />
-        <TextField label="Auteur" source="User.username" />
-        <TextField label="Projet" source="Project.title" />
-      <EditButton />
+        <TextField label="Auteur" source="User.username" sortable={false}/>
+        <TextField label="Projet" source="Project.title" sortable={false}/>
+      <EditButton label="Modifier"/>
+      <DeleteButton label="Supprimer"/>
     </Datagrid>
 </List>
 )}
@@ -239,12 +234,51 @@ export const CommentEdit = (props) => {
     <SimpleForm>
     <TextInput disabled label="ID" source="id" />
     <TextInput label="Commentaire" source="content" />
-    <TextInput disabled label="Utilisateur" source="User.username" />
+    <TextInput disabled label="Utilisateur" source="User.username" sortable={false}/>
     <TextInput disabled label="Projet" source="Project.title" />
     </SimpleForm>
 </Edit>
   )
 }
+
+export const ContactList = (props) => {
+  return(
+<List {...props} bulkActionButtons={false} Set pagination={false} >
+    <Datagrid key="id" >
+    <TextField label="Auteur" source="name" />
+    <TextField label="Email" source="email" />
+    <TextField label="Sujet" source="object" />
+    <TextField label="Message" source="message" />
+    <TextField label="Site web" source="website" />
+    <ShowButton label="Afficher"/>
+    </Datagrid>
+</List>
+)}
+
+export const ContactShow = (props) => {
+  return(
+<Show {...props}>
+    <SimpleShowLayout>
+    <TextField label="Auteur" source="name" />
+    <TextField label="Email" source="email" />
+    <TextField label="Sujet" source="object" />
+    <TextField label="Message" source="message" />
+    <TextField label="Site web" source="website" />
+    </SimpleShowLayout>
+</Show>
+)}
+
+export const MessageList = (props) => {
+  return(
+<List {...props} bulkActionButtons={false} Set pagination={false} >
+    <Datagrid key="id" >
+    <TextField label="Auteur" source="User.username" sortable={false}/>
+    <TextField label="Message" source="content" />
+    <TextField label="Canal" source="Channel.name" sortable={false} />
+    <DeleteButton label="Supprimer"/>
+    </Datagrid>
+</List>
+)}
 
 const httpClient = (url, options = {}) => {
   options.user = {
@@ -252,16 +286,21 @@ const httpClient = (url, options = {}) => {
       token: localStorage.getItem('token')
   };
   return fetchUtils.fetchJson(url, options);
+  
 };
 
-const Dashboard = () => (
-    <Admin authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://ec2-34-202-164-145.compute-1.amazonaws.com/api/backOffice', httpClient)}>
-        <Resource name="users" list={UserList} edit={UserEdit}/>
-        <Resource name="projects" list={ProjectList} create={ProjectCreate} edit={ProjectEdit} />
-        <Resource name="tags" list={TagList} create={TagCreate} edit={TagEdit}/>
-        <Resource name="comments" list={CommentList} edit={CommentEdit} />
 
+
+const Dashboard = () => (
+    <Admin loginPage={Login} authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://localhost:3001/api/backoffice', httpClient)}>
+        <Resource options={{label : 'Utilisateurs', title : "Utilisateurs"}} icon={userIcon} name="users" list={UserList} edit={UserEdit}/>
+        <Resource options={{label : 'Projets'}} icon={projectIcon} name="projects" list={ProjectList} create={ProjectCreate} edit={ProjectEdit} />
+        <Resource options={{label : 'Catégories'}} icon={categoryIcon} name="tags" list={TagList} create={TagCreate} edit={TagEdit}/>
+        <Resource options={{label : 'Commentaires'}} icon={commentIcon} name="comments" list={CommentList} edit={CommentEdit} />
+        <Resource options={{label : 'Messages reçus'}} icon={contactIcon} name="contacts" list={ContactList} show={ContactShow} />
+        <Resource options={{label : 'Messages du chat'}} icon={chatIcon} name="messages" list={MessageList} />
     </Admin>
+    
 );
 
 export default Dashboard;

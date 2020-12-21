@@ -2,15 +2,13 @@ import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
 
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
-        const { username, password } = params;
+        const { email, password } = params;
         const values = {
-            email: username,
+            email: email,
             password : password
         }
-        console.log(params)
-        const request = new Request('http://ec2-34-202-164-145.compute-1.amazonaws.com/api/users/login', {
-            credentials: 'include',
-	    method: 'POST',
+        const request = new Request('http://localhost:3001/api/users/login', {
+	        method: 'POST',
             body: JSON.stringify( values ),
             headers: new Headers({ 'Content-Type': 'application/json' }),
         })
@@ -32,7 +30,7 @@ export default (type, params) => {
       }
     
     if (type === AUTH_CHECK) {
-      return localStorage.getItem('token') ? Promise.resolve() : Promise.reject({ redirectTo: '/no-access' });
+      return localStorage.getItem('token') ? Promise.resolve() : Promise.reject({ redirectTo: '/login' });
       }
   return Promise.reject('Unknown method');
 }
