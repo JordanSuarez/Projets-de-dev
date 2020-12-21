@@ -12,9 +12,9 @@ module.exports = {
         models.Contact.findAll({
         })
         .then((messages) => {
-          const arrayAllComments = Object.values(messages);
-          res.set('X-Total-Count', arrayAllComments.length);
-          return res.status(200).json(allComments);
+          const arrayAllMessages = Object.values(messages);
+          res.set('X-Total-Count', arrayAllMessages.length);
+          return res.status(200).json(messages);
 
         }).catch((error) => {
           return res.status(500).json({ 'Error': 'Erreur lors de la récupréation des données, les messages des contacts n\'ont pas pu être récupérés' })
@@ -30,7 +30,7 @@ module.exports = {
     const isAdmin = jwtUtils.getIsAdminUser(headerAuth);
 
     if (isAdmin == true) {
-      models.Comment.findOne({
+      models.Contact.findOne({
         where : {id : req.params.id},
       })
       .then((message) => {

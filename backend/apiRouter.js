@@ -15,6 +15,7 @@ const projectControllerBackOffice = require('./routes_backOffice/projectControll
 const tagControllerBackOffice = require('./routes_backOffice/tagControllerBackOffice');
 const commentControllerBackOffice = require('./routes_backOffice/commentControllerBackOffice');
 const contactControllerBackOffice = require('./routes_backOffice/contactControllerBackOffice');
+const messageControllerBackOffice = require('./routes_backOffice/messageControllerBackOffice');
 
 // Router
 exports.router = (() => {
@@ -70,7 +71,7 @@ exports.router = (() => {
 
     // BackOffice routes:
     // -Projects routes
-    apiRouter.route('/backOffice/projects/').get(projectController.allProjects); // OK
+    apiRouter.route('/backOffice/projects/').get(projectControllerBackOffice.allProjects); // OK
     apiRouter.route('/backOffice/projects/:id').get(projectController.project); // OK
     apiRouter.route('/backOffice/projects/:id').put(projectControllerBackOffice.updateProject); // OK
     apiRouter.route('/backOffice/projects/:id').delete(projectControllerBackOffice.deleteProject); //OK
@@ -82,13 +83,13 @@ exports.router = (() => {
     apiRouter.route('/backOffice/comments/:id').delete(commentControllerBackOffice.deleteComment); //OK
 
     // -Users routes
-    apiRouter.route('/backOffice/users').get(userController.getUsersList); // OK
+    apiRouter.route('/backOffice/users').get(userControllerBackOffice.getUsersList); // OK
     apiRouter.route('/backOffice/users/:id').get(userControllerBackOffice.getUserById); // OK
     apiRouter.route('/backOffice/users/:id').put(userControllerBackOffice.updateUser); // OK
     apiRouter.route('/backOffice/users/:id').delete(userControllerBackOffice.deleteUser); // OK
 
     // -Tags routes
-    apiRouter.route('/backOffice/tags').get(tagController.getTagList); // OK
+    apiRouter.route('/backOffice/tags').get(tagControllerBackOffice.getTagList); // OK
     apiRouter.route('/backOffice/tags/:id').get(tagController.getTagbyId); // OK
     apiRouter.route('/backOffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
     apiRouter.route('/backOffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
@@ -98,6 +99,10 @@ exports.router = (() => {
     apiRouter.route('/backOffice/contacts').get(contactControllerBackOffice.getContactList); // OK
     apiRouter.route('/backOffice/contacts/:id').get(contactControllerBackOffice.getContactById); // OK
     apiRouter.route('/backOffice/contacts/:id').delete(contactControllerBackOffice.deleteContact); // OK
+
+    // -Messages routes
+    apiRouter.route('/backOffice/messages').get(messageControllerBackOffice.getMessagesList); // OK
+    apiRouter.route('/backOffice/messages/:id').delete(messageControllerBackOffice.deleteMessage);
 
 
     return apiRouter;
