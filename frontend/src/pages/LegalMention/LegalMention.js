@@ -12,17 +12,17 @@ const LegalMention = ({ classes }) => (
     <div className={classes.legalMentionContainer}>
       <h3>Conditions d'utilisation</h3>
       <div>
-        Le site accessible par les url suivants : www.projets-de-dev.fr est exploité dans le respect de la législation française.
-        L'utilisation de ce site est régie par les présentes conditions générales.   En utilisant le site,
+        Le site accessible par les url suivants : www.projetsde.dev est exploité dans le respect de la législation française.
+        L'utilisation de ce site est régie par les présentes conditions générales. En utilisant le site,
         vous reconnaissez avoir pris connaissance de ces conditions et les avoir acceptées.
-        Celles-ci pourront êtres modifiées à tout moment et sans préavis par la société Projets de dev.
+        Celles-ci pourront êtres modifiées à tout moment et sans préavis par les developpeurs de Projets de dev.<br />
         Projets de dev ne saurait être tenu pour responsable en aucune manière d’une mauvaise utilisation du service.
       </div>
       <h3>Limitation de responsabilité</h3>
       <div>
         Les informations contenues sur ce site sont aussi précises que possibles et le site est périodiquement remis à jour,
         mais peut toutefois contenir des inexactitudes, des omissions ou des lacunes. Si vous constatez une lacune,
-        erreur ou ce qui parait être un dysfonctionnement, merci de bien vouloir le signaler par email en décrivant le problème de la manière
+        erreur ou ce qui parait être un dysfonctionnement, merci de bien vouloir le signaler à travers la page de contact en décrivant le problème de la manière
         la plus précise possible (page posant problème, action déclenchante, type d’ordinateur et de navigateur utilisé, …).
         Tout contenu téléchargé se fait aux risques et périls de l'utilisateur et sous sa seule responsabilité. En conséquence,
         Projets de dev ne saurait être tenu responsable d'un quelconque dommage subi par l'ordinateur de l'utilisateur ou
@@ -44,52 +44,40 @@ const LegalMention = ({ classes }) => (
         <h3>Droit d'accès</h3>
         <div>
           En application de cette loi, les internautes disposent d’un droit d’accès, de rectification, de modification et de suppression
-          concernant les données qui les concernent personnellement. Ce droit peut être exercé par voie postale auprès de Projets de dev 49,
-          Boulevard Antoine Gautier 33000 Bordeaux ou par voie électronique à l’adresse email suivante : contact@natural-net.fr.
-          Les informations personnelles collectées ne sont en aucun cas confiées à des tiers hormis pour
-          l’éventuelle bonne exécution de la prestation commandée par l’internaute.
+          concernant les données qui les concernent personnellement. Ce droit peut être exercé à travers la page de contactde Projets de dev,
+          ou par voie électronique à l’adresse email suivante : rgpd@projetsde.dev.
+          Les informations personnelles collectées ne sont en aucun cas confiées à des tiers.
         </div>
         <h3>Confidentialité</h3>
         <div>
-          Vos données personnelles sont confidentielles et ne seront en aucun cas communiquées à des tiers hormis pour la bonne exécution de la prestation.
+          Vos données personnelles sont confidentielles et ne seront en aucun cas communiquées à des tiers.
         </div>
         <h3>Propriété intellectuelle</h3>
         <div>
           Tout le contenu du présent site, incluant, de façon non limitative, les graphismes, images, textes, vidéos, animations,
-          sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de la société Projets de dev à l'exception des marques,
-          logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs.
+          sons, logos, gifs et icônes ainsi que leur mise en forme sont la propriété exclusive de Projets de dev à l'exception des marques,
+          logos ou contenus appartenant à d'autres sociétés partenaires ou auteurs.<br/>
           Toute reproduction, distribution, modification, adaptation, retransmission ou publication, même partielle,
           de ces différents éléments est strictement interdite sans l'accord exprès par écrit de Projets de dev.
           Cette représentation ou reproduction, par quelque procédé que ce soit, constitue une contrefaçon sanctionnée
-          par les articles L.335-2 et suivants du Code de la propriété intellectuelle.
+          par les articles L.335-2 et suivants du Code de la propriété intellectuelle.<br/>
           Le non-respect de cette interdiction constitue une contrefaçon pouvant engager la responsabilité civile et pénale du contrefacteur.
-          En outre, les propriétaires des Contenus copiés pourraient intenter une action en justice à votre encontre.
-          Projets de dev est identiquement propriétaire des "droits des producteurs de bases de données" visés au Livre III, Titre IV,
-          du Code de la Propriété Intellectuelle   (loi n° 98-536 du 1er juillet 1998) relative aux droits d'auteur et aux bases de données.
-          Les utilisateurs et visiteurs du site internet peuvent mettre en place un hyperlien en direction de ce site,
-          mais uniquement en direction de la page d’accueil, accessible à l’URL suivante : www.site-internet-qualite.fr,
-          à condition que ce lien s’ouvre dans une nouvelle fenêtre. En particulier un lien vers une sous page (« lien profond ») est interdit,
-          ainsi que l’ouverture du présent site au sein d’un cadre (« framing »), sauf l'autorisation expresse et préalable de Projets de dev.
-          Pour toute demande d'autorisation ou d'information, veuillez nous contacter par email : contact@natural-net.fr.
-          Des conditions spécifiques sont prévues pour la presse.
-          Par ailleurs, la mise en forme de ce site a nécessité le recours à des sources externes dont nous avons acquis
-          les droits ou dont les droits d'utilisation sont ouverts : Seosight, Designed by themefire Developed by Crumina​.
-          Les illustrations ont été acquises sur Adobe Stock.
+          En outre, les propriétaires des contenus copiés pourraient intenter une action en justice à votre encontre.<br/>
         </div>
       </div>
 
       <h3> Hébergeur</h3>
       <div>
-        <div>Pikachu</div>
-        <div>Plateforme de gestion et création de sites internet</div>
-        <div>www.Pikachu.com</div>
-        <div>contact@Pikachu.com</div>
+        <div>O2Switch</div>
+        <div>o2switch est une société Française offrant des services d'hébergement web depuis 2003</div>
+        <div>https://www.o2switch.fr/</div>
+        <div>support@o2switch.fr</div>
       </div>
 
       <h3>Conditions de service</h3>
       <div>
-        Ce site est proposé en langage ReactJs, pour un meilleur confort d'utilisation et un graphisme plus agréable,
-        nous vous recommandons de recourir à des navigateurs modernes comme Safari, Firefox, Chrome,...
+        Ce site est développé en React avec Materiel UI en front et Node.JS / Express en back, pour un meilleur confort d'utilisation et un graphisme plus agréable,
+        nous vous recommandons de recourir à des navigateurs modernes comme Safari, Firefox ou Chrome.
       </div>
 
       <h3>Informations et exclusion</h3>
@@ -109,29 +97,22 @@ const LegalMention = ({ classes }) => (
       </div>
       <h3>Liens hypertextes</h3>
       <div>
-        Les sites internet de Projets de dev peuvent offrir des liens vers d’autres sites internet ou d’autres ressources disponibles sur Internet.
+        Projets de dev peut offrir des liens vers d’autres sites internet ou d’autres ressources disponibles sur Internet, certains peuvent contenir des liens d'affiliations.
       </div>
       <div>
-        Projets de dev ne dispose d'aucun moyen pour contrôler les sites en connexion avec ses sites internet.
-        Projets de dev ne répond pas de la disponibilité de tels sites et sources externes, ni ne la garantit.
-        Elle ne peut être tenue pour responsable de tout dommage, de quelque nature que ce soit,
+        Projets de dev permet a ses utilisateurs d'ajouter des liens dans les profiles et projets, mais risque de ne pas controler ou vérifier ces derniers<br />
+        Projets de dev ne répond pas de la disponibilité de tels sites et sources externes, ni de leur garantie.<br />
+        Projets de dev  ne peut être tenue pour responsable de tout dommage, de quelque nature que ce soit,
         résultant du contenu de ces sites ou sources externes, et notamment des informations,
-        produits ou services qu’ils proposent, ou de tout usage qui peut être fait de ces éléments.
-        Les risques liés à cette utilisation incombent pleinement à l'internaute, qui doit se conformer à leurs conditions d'utilisation.
-        Les utilisateurs, les abonnés et les visiteurs des sites internet de Projets de dev ne peuvent mettre en place
-        un hyperlien en direction de ce site sans l'autorisation expresse et préalable de Projets de dev.
-        Dans l'hypothèse où un utilisateur ou visiteur souhaiterait mettre en place un hyperlien en direction
-        d’un des sites internet de Projets de dev, il lui appartiendra d'adresser un email accessible sur
-        le site afin de formuler sa demande de mise en place d'un hyperlien. Projets de dev se réserve le
-        droit d’accepter ou de refuser un hyperlien sans avoir à en justifier sa décision.
+        produits ou services qu’ils proposent, ou de tout usage qui peut être fait de ces éléments. <br />
+        Les risques liés à cette utilisation incombent pleinement à l'internaute, qui doit se conformer à leurs conditions d'utilisation. <br />
+        Projets de dev se réserve le droit d’accepter ou de refuser un hyperlien sans avoir à en justifier sa décision. <br />
       </div>
-
-      <h3>Recherche</h3>
+      <h3>Précautions d'usage</h3>
       <div>
         En outre, le renvoi sur un site internet pour compléter une information recherchée ne signifie en aucune
         façon que Projets de dev reconnaît ou accepte quelque responsabilité quant à la teneur ou à l'utilisation dudit site.
       </div>
-      <h3>Précautions d'usage</h3>
       <div>
         Il vous incombe par conséquent de prendre les précautions d'usage nécessaires pour vous assurer
         que ce que vous choisissez d'utiliser ne soit pas entaché d'erreurs voire d'éléments de nature destructrice tels que virus, trojans, etc....
@@ -147,7 +128,7 @@ const LegalMention = ({ classes }) => (
       <h3>Contactez-nous</h3>
       <div>
         Projets de dev est à votre disposition pour tous vos commentaires ou suggestions.
-        Vous pouvez nous écrire en français par courrier électronique à : contact@natural-net.fr.
+        Vous pouvez nous écrire à travers la page de contact.
       </div>
     </div>
   </Base>

@@ -1,12 +1,18 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { getLegalMentionRoute } from 'src/common/routing/routesResolver';
+import { getLegalMentionRoute, getContactRoute, getAboutRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import { classes as classesProps } from 'src/common/classes';
 
 // eslint-disable-next-line arrow-body-style
 const Footer = ({ classes }) => {
   const history = useHistory();
-  const handleHome = () => history.push(getLegalMentionRoute());
+  const handleMentions = () => history.push(getLegalMentionRoute());
+  const handleContact = () => history.push(getContactRoute());
+  const handleAbout = () => history.push(getAboutRoute());
+  const handleHome = () => history.push(getHomeRoute());
+
+
+
 
   return (
     <footer className={classes.footer}>
@@ -22,21 +28,21 @@ const Footer = ({ classes }) => {
         <span
           className={classes.footerLinks}
           name="contact"
-          onClick={handleHome}
+          onClick={handleContact}
         >
           Nous Contacter
         </span>
         <span
           className={classes.footerLinks}
           name="mention-legales"
-          onClick={handleHome}
+          onClick={handleMentions}
         >
           Mentions légales
         </span>
         <span
           className={classes.footerLinks}
           name="a-propos"
-          onClick={handleHome}
+          onClick={handleAbout}
         >
           À Propos
         </span>

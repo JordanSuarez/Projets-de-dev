@@ -40,7 +40,7 @@ const Contact = ({ classes, submitContact }) => {
                 <TextField
                   className={classes.textfield}
                   type="text"
-                  label="Name"
+                  label="Nom"
                   name="name"
                   margin="none"
                   required
@@ -72,7 +72,7 @@ const Contact = ({ classes, submitContact }) => {
                 <TextField
                   className={classes.textfield}
                   type="text"
-                  label="message"
+                  label="Message"
                   name="message"
                   margin="none"
                   required
