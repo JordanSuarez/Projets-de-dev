@@ -30,7 +30,7 @@ const Footer = ({ classes }) => {
           name="contact"
           onClick={handleContact}
         >
-          Nous Contacter
+          Nous contacter
         </span>
         <span
           className={classes.footerLinks}
@@ -44,7 +44,7 @@ const Footer = ({ classes }) => {
           name="a-propos"
           onClick={handleAbout}
         >
-          À Propos
+          À propos
         </span>
       </div>
 

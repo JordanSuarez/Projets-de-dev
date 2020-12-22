@@ -63,7 +63,7 @@ const Profiles = ({
           className={classes.searchBar}
           onInputChange={(event, value) => handleChange(event, value)}
           items={arrayProfiles}
-          label="Recherchez un utilisateur..."
+          label="Rechercher un utilisateur..."
           helperText={isEmpty(searchResults) && !isEmpty(inputValue) ? helperText : ''}
         />
       </div>

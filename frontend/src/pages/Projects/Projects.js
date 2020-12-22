@@ -85,7 +85,7 @@ const Projects = ({
           className={classes.searchBar}
           onInputChange={(event, value) => handleChange(event, value)}
           items={arrayAllProjects}
-          label="Recherchez un projet..."
+          label="Rechercher un projet..."
           helperText={isEmpty(searchResults) && !isEmpty(inputValue) ? helperText : ''}
         />
       </div>
