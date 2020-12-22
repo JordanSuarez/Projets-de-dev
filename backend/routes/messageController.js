@@ -21,7 +21,8 @@ module.exports = {
       }
     }
     }).then((messages) => {
-      return res.status(201).json(messages);
+      const messagesOrder = messages.reverse()
+      return res.status(201).json(messagesOrder);
     }).catch((err) => {
       res.status(404).json({'error': 'Impossible de récupérer les messages' + err });
     })
