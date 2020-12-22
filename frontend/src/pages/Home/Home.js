@@ -61,9 +61,9 @@ const Home = ({
       <img className={classes.image} src={headerImage} alt="header" style={{ backgroundPosition: 'left' }} />
       <div className={classes.home}>
         <div className={classes.textContainer}>
-          <h2 className={classes.subtitle}>º Projets de Dev º</h2>
+          <h2 className={classes.subtitle}>Projets de Dev</h2>
           <p className={classes.homeText}>
-          Le site où on partage les fruits de son expérience en matière de création de projets de dev, que ce soit un projet mené individuellement ou à plusieurs.
+          Le site où on partage le fruit de son expérience en matière de création de projets de dev, que ce soit un projet mené individuellement ou à plusieurs.
           </p>
         </div>
         <h2 className={classes.subtitleProjects}> Derniers projets publiés</h2>

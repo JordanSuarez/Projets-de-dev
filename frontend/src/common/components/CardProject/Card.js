@@ -121,7 +121,7 @@ const CardProject = ({
                     <span
                       className={classes.vote}
                     >
-                      {voteCount} vote
+                      {voteCount} {voteCount > 1 ? 'votes' : 'vote'}
                     </span>
                   )
                   : (

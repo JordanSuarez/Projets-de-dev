@@ -43,7 +43,7 @@ const Form = ({
       setSubmitting(false);
       return setErrorFields({ ...errorFields, tagsMinValue: true });
     }
-    if (formState.tags.length > 5) {
+    if (formState.tags.length > 6) {
       setSubmitting(false);
       return setErrorFields({ ...errorFields, tagsMaxValue: true });
     }
@@ -52,6 +52,7 @@ const Form = ({
       return setErrorFields({ ...errorFields, image: true });
     }
     // return form values and project id from useParams
+    console.log(formState, values)
     return handleSubmitProject({ ...formState, ...values }, id);
   };
 
@@ -143,7 +144,7 @@ const Form = ({
                 {errorFields.tagsMaxValue
                 && (
                 <div className={classes.errorTags}>
-                  * 5 catégories maximum
+                  * 6 catégories maximum
                 </div>
                 )}
                 <Autocomplete
@@ -165,7 +166,7 @@ const Form = ({
                     }
                     else {
                       setErrorFields(
-                        values.length > 5
+                        values.length > 6
                           ? { ...errorFields, tagsMaxValue: true, tagsMinValue: false }
                           : { ...errorFields, tagsMaxValue: false },
                       );
