@@ -1,4 +1,5 @@
 const express = require('express');
+
 const userController = require('./routes/userController');
 const projectController = require('./routes/projectController');
 const tagController = require('./routes/tagController');
@@ -6,7 +7,15 @@ const commentController = require('./routes/commentController');
 const channelController = require('./routes/channelController');
 const messageController = require('./routes/messageController');
 const likeController = require('./routes/likeController');
+const contactController = require('./routes/contactController');
 
+// Controllers BackOffice
+const userControllerBackOffice = require('./routes_backOffice/userControllerBackOffice');
+const projectControllerBackOffice = require('./routes_backOffice/projectControllerBackOffice');
+const tagControllerBackOffice = require('./routes_backOffice/tagControllerBackOffice');
+const commentControllerBackOffice = require('./routes_backOffice/commentControllerBackOffice');
+const contactControllerBackOffice = require('./routes_backOffice/contactControllerBackOffice');
+const messageControllerBackOffice = require('./routes_backOffice/messageControllerBackOffice');
 
 // Router
 exports.router = (() => {
@@ -21,7 +30,13 @@ exports.router = (() => {
     apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/me/delete').delete(userController.deleteMe); //OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
+
+    // Users Like
+    apiRouter.route('/users/me/likes').get(likeController.getLikesByMe); // OK
+    apiRouter.route('/users/:id/likes').get(likeController.getLikesByUserId); // OK
+    apiRouter.route('/users/me/likes-projects').get(likeController.getLikesProjectByMe) // Ok
     
+
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
     apiRouter.route('/projects/:id').get(projectController.project); // OK
@@ -31,6 +46,8 @@ exports.router = (() => {
     
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
+    apiRouter.route('/tags/:id').get(tagController.getTagbyId); // OK
+    
     
     // Likes routes
     apiRouter.route('/projects/:projectId/vote/like').post(likeController.likePost); // OK
@@ -38,6 +55,7 @@ exports.router = (() => {
 
     // Comments routes
     apiRouter.route('/comments/').get(commentController.commentsList);    
+    apiRouter.route('/comments/:id').get(commentController.comment);    
     apiRouter.route('/comments/add').post(commentController.new); // OK
     apiRouter.route('/comments/:id/edit').patch(commentController.edit); // OK
     apiRouter.route('/comments/:id/delete').delete(commentController.deleteComment); // OK
@@ -49,9 +67,44 @@ exports.router = (() => {
     // Messages routes
     apiRouter.route('/messages').get(messageController.getMessagesList); // OK
 
-    // Admin routes
-    apiRouter.route('/users/:id/delete').delete(userController.deleteUser); // OK
-    apiRouter.route('/projects/:id/delete').delete(projectController.deleteProject); //OK
+    // Contact routes
+    apiRouter.route('/contact').post(contactController.new); // OK
+
+    // BackOffice routes:
+    // -Projects routes
+    apiRouter.route('/backOffice/projects/').get(projectControllerBackOffice.allProjects); // OK
+    apiRouter.route('/backOffice/projects/:id').get(projectController.project); // OK
+    apiRouter.route('/backOffice/projects/:id').put(projectControllerBackOffice.updateProject); // OK
+    apiRouter.route('/backOffice/projects/:id').delete(projectControllerBackOffice.deleteProject); //OK
+
+    // -Comment routes
+    apiRouter.route('/backOffice/comments/').get(commentController.commentsList);    
+    apiRouter.route('/backOffice/comments/:id').get(commentController.comment);    
+    apiRouter.route('/backOffice/comments/:id').put(commentControllerBackOffice.updateComment); // OK
+    apiRouter.route('/backOffice/comments/:id').delete(commentControllerBackOffice.deleteComment); //OK
+
+    // -Users routes
+    apiRouter.route('/backOffice/users').get(userControllerBackOffice.getUsersList); // OK
+    apiRouter.route('/backOffice/users/:id').get(userControllerBackOffice.getUserById); // OK
+    apiRouter.route('/backOffice/users/:id').put(userControllerBackOffice.updateUser); // OK
+    apiRouter.route('/backOffice/users/:id').delete(userControllerBackOffice.deleteUser); // OK
+
+    // -Tags routes
+    apiRouter.route('/backOffice/tags').get(tagControllerBackOffice.getTagList); // OK
+    apiRouter.route('/backOffice/tags/:id').get(tagController.getTagbyId); // OK
+    apiRouter.route('/backOffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
+    apiRouter.route('/backOffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
+    apiRouter.route('/backOffice/tags').post(tagControllerBackOffice.createTag); // OK
+
+    // -Contact routes
+    apiRouter.route('/backOffice/contacts').get(contactControllerBackOffice.getContactList); // OK
+    apiRouter.route('/backOffice/contacts/:id').get(contactControllerBackOffice.getContactById); // OK
+    apiRouter.route('/backOffice/contacts/:id').delete(contactControllerBackOffice.deleteContact); // OK
+
+    // -Messages routes
+    apiRouter.route('/backOffice/messages').get(messageControllerBackOffice.getMessagesList); // OK
+    apiRouter.route('/backOffice/messages/:id').delete(messageControllerBackOffice.deleteMessage);
+
 
     return apiRouter;
 })();

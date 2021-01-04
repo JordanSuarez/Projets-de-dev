@@ -1,12 +1,14 @@
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
-  PROJECTS, GET, ALL, TWELVE,
+  PROJECTS, GET, ALL, TWELVE, LIKEPROJECT, POST, IDISLIKE, ILIKE,
 } from 'src/common/callApiHandler/constants';
 import {
   GET_PROJECTS,
   saveAllProjects,
   saveProjectsCurrentPage,
+  ADD_LIKE,
+  ADD_DISLIKE,
 } from 'src/common/redux/actions/projects';
 
 const profiles = (store) => (next) => (action) => {
@@ -23,9 +25,32 @@ const profiles = (store) => (next) => (action) => {
           store.dispatch(saveProjectsCurrentPage(response[0].data));
           store.dispatch(saveAllProjects(response[1].data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
+      next(action);
+      break;
+    }
+    case ADD_LIKE: {
+      const url = getEndpoint(LIKEPROJECT, POST, ILIKE, action.projectId);
+
+      callApi(url, POST)
+        .then(() => {
+        })
+        .catch(() => {
+        });
+
+      next(action);
+      break;
+    }
+    case ADD_DISLIKE: {
+      const url = getEndpoint(LIKEPROJECT, POST, IDISLIKE, action.projectId);
+
+      callApi(url, POST)
+        .then(() => {
+        })
+        .catch(() => {
+        });
+
       next(action);
       break;
     }

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 
 import { getUserProfileRoute } from 'src/common/routing/routesResolver';
@@ -8,6 +6,7 @@ import { Form } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
+import defaultAvatar from 'src/common/assets/images/avatar.png';
 import {
   TextField,
 } from 'mui-rff';
@@ -18,8 +17,8 @@ import {
 } from '@material-ui/core';
 import './styles.scss';
 import Base from 'src/common/components/Base';
+import reziseFile from 'src/common/helpers/imageResizer';
 
-// eslint-disable-next-line arrow-body-style
 const ProfileEdition = ({
   classes,
   getProfile,
@@ -98,8 +97,12 @@ const ProfileEdition = ({
     }
   }, [redirect]);
 
-  const getFiles = (files) => {
-    setFormImage({ userImage: files.base64, imageName: files.name });
+  const getFiles = async (files) => {
+    const imageResized = await reziseFile(files, 300);
+    setFormImage({
+      userImage: imageResized.length > files.base64.length ? files.base64 : imageResized,
+      imageName: files.name,
+    });
   };
 
   return (
@@ -155,7 +158,7 @@ const ProfileEdition = ({
                           onDone={getFiles}
                         />
                       </div>
-                      {(formImage.userImage !== '') && <img src={formImage.userImage} alt="avatar" className={classes.imageInput} />}
+                      <img src={formImage.userImage || defaultAvatar} alt="avatar" className={classes.imageInput} />
                     </div>
                   </div>
                   <div>
@@ -167,7 +170,7 @@ const ProfileEdition = ({
                         onChangePassword(!changePassword);
                       }}
                     >
-                      Je souhaite changer mon mot de passe
+                      modifier mon mot de passe
                     </Button>
                   </div>
                   {changePassword && (
@@ -203,7 +206,7 @@ const ProfileEdition = ({
                       type="submit"
                       disabled={submitting}
                     >
-                      Submit
+                      Valider
                     </Button>
                   </Box>
                 </form>

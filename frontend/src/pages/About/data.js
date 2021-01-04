@@ -1,32 +1,35 @@
 import logoJordan from 'src/common/assets/images/logo-jordan.jpg';
+import logoAlmigra from 'src/common/assets/images/logo-almigra.jpg';
+import logoAlban from 'src/common/assets/images/logo-alban.jpg'
+import logoCeline from 'src/common/assets/images/logo-celine.png'
 
 export default [
   {
     name: 'Almigra',
-    avatar: '',
-    description: 'Product owner - Lead dev back',
+    avatar: logoAlmigra,
+    description: 'Product Owner - Lead Dev back',
     followLink: 'X',
-    profileId: '#',
+    profileId: 4,
   },
   {
     name: 'Alban',
-    avatar: '',
-    description: 'Scrum masster - Dev back',
+    avatar: logoAlban,
+    description: 'Scrum Master - Dev back',
     followLink: 'X',
-    profileId: '#',
+    profileId: 5,
   },
   {
     name: 'Jordan',
     avatar: logoJordan,
-    description: 'Lead dev Front',
+    description: 'Lead Dev Front',
     followLink: 'X',
-    profileId: '#',
+    profileId: 3,
   },
   {
     name: 'Céline',
-    avatar: '',
-    description: 'Git master - Dev front',
+    avatar: logoCeline,
+    description: 'Git Master - Dev Front',
     followLink: 'X',
-    profileId: '#',
+    profileId: 1,
   },
 ];

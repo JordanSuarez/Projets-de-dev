@@ -103,6 +103,7 @@ export default ({ palette }) => ({
     flexWrap: 'wrap',
   },
   submitButton: {
+    textTransform: 'initial',
     margin: '1rem 1.3rem 1rem 2rem',
     color: palette.white,
     backgroundColor: palette.darkBlue,
@@ -112,6 +113,7 @@ export default ({ palette }) => ({
     },
   },
   quitButton: {
+    textTransform: 'initial',
     margin: '1rem 1.3rem 1rem 2rem',
     color: palette.darkBlue,
     '&:hover': {

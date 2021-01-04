@@ -1,16 +1,26 @@
 {
   "name": "backoffice",
+  "homepage": "/backoffice/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.13",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "express-sequelize-crud": "^6.1.2",
     "prop-types": "^15.7.2",
     "ra-data-json-server": "^3.10.4",
+    "ra-data-simple-rest": "^3.10.4",
+    "ra-input-rich-text": "^3.10.1",
+    "ra-language-french": "^3.11.0",
     "react": "^17.0.1",
     "react-admin": "^3.10.4",
     "react-dom": "^17.0.1",
+    "react-file-base64": "^1.0.3",
+    "react-redux": "^7.2.2",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },
@@ -37,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "aor-json-rest-client": "^2.1.0"
   }
 }

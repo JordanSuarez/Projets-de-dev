@@ -4,6 +4,7 @@ export const EMIT_MESSAGE = 'EMIT_MESSAGE';
 export const ADD_MESSAGE = 'ADD_MESSAGE';
 export const GET_MESSAGES = 'GET_MESSAGES';
 export const SAVE_MESSAGES = 'SAVE_MESSAGES';
+export const SAVE_USER_SELECTED = 'SAVE_USER_SELECTED';
 
 // Gestion sidebar open/close
 export const setChat = (status) => ({
@@ -26,6 +27,12 @@ export const getMessages = () => ({
 export const saveMessages = (messages) => ({
   type: SAVE_MESSAGES,
   messages,
+});
+
+// sauvegarde du profil choisi a afficher depuis le chat
+export const saveUserSelected = (profile) => ({
+  type: SAVE_USER_SELECTED,
+  profile,
 });
 
 // ---------------- Socket.io -----------------------

@@ -17,8 +17,7 @@ const profiles = (store) => (next) => (action) => {
         .then((response) => {
           store.dispatch(saveProfiles(response.data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
       next(action);
       break;

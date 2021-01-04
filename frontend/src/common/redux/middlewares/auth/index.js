@@ -7,13 +7,16 @@ import {
   USER_AUTH_VERIFY,
   submitLogoutSuccess,
 } from 'src/common/redux/actions/auth';
+import {
+  setChat
+} from 'src/common/redux/actions/chat';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { getProfileInfos } from 'src/common/redux/actions/userProfile';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
 import {
   setToken, setUserId, removeToken, removeUserId, removeUser,
 } from 'src/common/authentication/authProvider';
-import { getHomeRoute, getLoginRoute } from 'src/common/routing/routesResolver';
+import { getUserProfileRoute, getLoginRoute } from 'src/common/routing/routesResolver';
 import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
@@ -32,12 +35,12 @@ const authMiddleWare = (store) => (next) => (action) => {
         .then(({ data }) => {
           setToken(data.token);
           setUserId(data.userId);
-          store.dispatch(redirect(getHomeRoute()));
+          store.dispatch(setChat('chatClosed'));
+          store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(submitLoginSuccess(data.userId));
           store.dispatch(showSnackbar('', `Hello! ${data.username}`, 'success'));
         })
-        .catch((e) => {
-          console.log(e);
+        .catch(() => {
           store.dispatch(showSnackbar('Oups!', 'Mot de passe ou email incorrect', 'error'));
           store.dispatch(submitLoginError());
         })
@@ -63,7 +66,6 @@ const authMiddleWare = (store) => (next) => (action) => {
           store.dispatch(showSnackbar('', 'Votre compte à bien été créé', 'success'));
         })
         .catch(({ response }) => {
-          console.log(response.data.error);
           store.dispatch(showSnackbar('Oups!', response.data.error, 'error'));
         })
         .finally(() => {

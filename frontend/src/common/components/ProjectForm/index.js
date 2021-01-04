@@ -7,6 +7,7 @@ import styles from './styles';
 
 const mapStateToProps = (state) => ({
   tags: state.project.tags,
+  hasError: state.project.hasError,
 });
 
 export default compose(

@@ -5,12 +5,13 @@ import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
 import styles from './styles';
 
+
 const mapStateToProps = (state) => ({
 
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-  
+
 });
 
 export default compose(

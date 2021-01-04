@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import EditIcon from '@material-ui/icons/Edit';
@@ -9,10 +10,13 @@ import {
   Button,
   IconButton,
   TextField,
+  Grid,
 } from '@material-ui/core';
 import { classes as classesProps } from 'src/common/classes';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
+import defaultAvatar from 'src/common/assets/images/avatar.png';
+import { getProfileRoute } from 'src/common/routing/routesResolver';
 import './style.scss';
 
 const Comments = ({
@@ -103,9 +107,8 @@ const Comments = ({
   const onClickDelete = (comment) => {
     handleCommentDelete({ content: messageUpdate, projectId: idProject }, comment.id);
   };
-
   return (
-    <div className={classes.commentSection}>
+    <Grid item xs={12} sm={12} md={9} lg={9} xl={9} className={classes.commentSection}>
       <div className={classes.containerForm}>
         {isLogged
           ? (
@@ -124,12 +127,12 @@ const Comments = ({
                   required
                 />
                 {emojiPicker}
-                <Button
+                <IconButton
                   className={classes.picker}
                   onClick={triggerPicker}
                 >
                   😍
-                </Button>
+                </IconButton>
 
                 <Box className={classes.containerButton}>
                   <Button
@@ -156,7 +159,8 @@ const Comments = ({
                 <Avatar
                   className={classes.avatar}
                   alt={classes.username}
-                  src={comment.User.userImage}
+                  src={comment.User.userImage || defaultAvatar}
+                  onClick={() => history.push(getProfileRoute(comment.User.id))}
                 />
                 <div className={classes.headerComment}>
                   <div className={classes.usernameContent}>
@@ -214,12 +218,12 @@ const Comments = ({
                       required
                     />
                     {emojiPickerUpdate}
-                    <Button
+                    <IconButton
                       className={classes.pickerUpdate}
                       onClick={triggerPickerUpdate}
                     >
                       😍
-                    </Button>
+                    </IconButton>
 
                     <Box className={classes.containerButton}>
                       <Button
@@ -250,7 +254,7 @@ const Comments = ({
 
       </div>
 
-    </div>
+    </Grid>
 
   );
 };

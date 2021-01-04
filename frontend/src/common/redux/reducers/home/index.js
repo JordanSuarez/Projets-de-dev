@@ -1,6 +1,7 @@
 import {
   SAVE_LATEST_PROJECTS,
-// eslint-disable-next-line import/no-unresolved
+  GET_LATEST_PROJECTS,
+  CLEAR_HOME_STATE,
 } from 'src/common/redux/actions/home';
 
 const initialState = {
@@ -10,11 +11,22 @@ const initialState = {
 
 const home = (state = initialState, action = {}) => {
   switch (action.type) {
+    case GET_LATEST_PROJECTS: {
+      return {
+        ...initialState,
+        loading: true,
+      };
+    }
     case SAVE_LATEST_PROJECTS: {
       return {
         ...state,
         projects: action.projects,
         loading: false,
+      };
+    }
+    case CLEAR_HOME_STATE: {
+      return {
+        ...initialState,
       };
     }
     default: return { ...state };

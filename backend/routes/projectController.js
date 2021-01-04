@@ -60,6 +60,8 @@ module.exports = {
           };
           formatProject.push(newFormat)
         }
+        const arrayAllProjects = Object.values(formatProject);
+        res.set('X-Total-Count', arrayAllProjects.length);
         return res.status(200).json(formatProject)
     })
     .catch((error) => {
@@ -96,7 +98,8 @@ module.exports = {
             project.Tag6,
           ],
           user: project.User,
-          comments: project.Comments
+          comments: project.Comments,
+          createdAt: project.createdAt,
         };
         return res.status(200).json(formatProject)
     })
@@ -180,14 +183,14 @@ module.exports = {
       title: req.body.title,
       description: req.body.description,
       image: req.body.image,
-      githubLink: req.body.githubLink,
-      projectLink: req.body.projectLink,
-      tagId: req.body.tag1,
-      tag2Id: req.body.tag2,
-      tag3Id: req.body.tag3,
-      tag4Id: req.body.tag4,
-      tag5Id: req.body.tag5,
-      tag6Id: req.body.tag6,
+      github_link: req.body.githubLink,
+      project_link: req.body.projectLink,
+      TagId: req.body.tag1,
+      Tag2Id: req.body.tag2 ? req.body.tag2 : null,
+      Tag3Id: req.body.tag3 ? req.body.tag3 : null,
+      Tag4Id: req.body.tag4 ? req.body.tag4 : null,
+      Tag5Id: req.body.tag5 ? req.body.tag5 : null,
+      Tag6Id: req.body.tag6 ? req.body.tag6 : null,
   };
 
     const headerAuth = req.headers['authorization'];
@@ -241,10 +244,6 @@ module.exports = {
       res.status(500).json({ 'Error' : 'Impossible de supprimer le projet'});
 
     })
-
-    
-   
-
   },
  
   deleteProject: (req, res) => {
@@ -266,5 +265,5 @@ module.exports = {
     } else {
       return res.status(401).json({'error': 'vous n\'avez pas l\'autorisation de supprimer ce projet' });
     }
-  }
+  },
 }

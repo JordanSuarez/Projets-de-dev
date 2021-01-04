@@ -3,6 +3,12 @@ import {
   UPDATE_USER_PROFILE,
   saveUserProfile,
   HANDLE_DELETE_USER_PROFILE,
+  GET_PROFILE_LIKES,
+  setMyLikes,
+  saveProjects,
+  GET_PROJECTS,
+  GET_PROFILE_PROJECTS_LIKES,
+  setMyProjectsLikes,
 } from 'src/common/redux/actions/userProfile';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { submitLogoutSuccess } from 'src/common/redux/actions/auth';
@@ -10,7 +16,7 @@ import { getEndpoint } from 'src/common/callApiHandler/endpoints';
 import { callApi, apiUrl } from 'src/common/callApiHandler/urlHandler';
 import { removeToken, getToken, setUser } from 'src/common/authentication/authProvider';
 import {
-  USERS, PATCH, PRIVATE_PROFILE, DELETE, ME,
+  USERS, PATCH, PRIVATE_PROFILE, DELETE, ME, LIKES, PROJECTS, ALL, GET,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import { showSnackbar } from 'src/common/redux/actions/snackbar';
@@ -29,8 +35,7 @@ const userProfile = (store) => (next) => (action) => {
           setUser({ id: data.id, username: data.username, userImage: data.userImage });
           store.dispatch(saveUserProfile(data));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
 
       next(action);
@@ -43,9 +48,8 @@ const userProfile = (store) => (next) => (action) => {
           store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(showSnackbar('', 'Ton profil à bien été modifié!', 'success'));
         })
-        .catch((error) => {
+        .catch(() => {
           store.dispatch(showSnackbar('Oups!', 'Une erreur est survenue. Veuillez réessayer ultérieurement', 'error'));
-          console.log(error);
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
@@ -66,11 +70,57 @@ const userProfile = (store) => (next) => (action) => {
           store.dispatch(redirect(getHomeRoute()));
           store.dispatch(showSnackbar('', 'Votre compte à bien été supprimé', 'success'));
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         })
         .finally(() => {
           store.dispatch(redirectSuccess());
+        });
+
+      next(action);
+      break;
+    }
+    case GET_PROFILE_LIKES: {
+      axios.get(`${apiUrl}/${USERS}/${ME}/${LIKES}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}` || null,
+          },
+        })
+        .then(({ data }) => {
+          const myLikes = data.filter((myLike) => myLike.isLike === 1);
+          store.dispatch(setMyLikes(myLikes));
+        })
+        .catch(() => {
+        });
+
+      next(action);
+      break;
+    }
+    case GET_PROFILE_PROJECTS_LIKES: {
+      axios.get(`${apiUrl}/${USERS}/${ME}/${LIKES}-${PROJECTS}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}` || null,
+          },
+        })
+        .then(({ data }) => {
+          const myLikes = data.filter((myLike) => myLike.isLike === 1);
+          store.dispatch(setMyProjectsLikes(myLikes));
+        })
+        .catch(() => {
+        });
+
+      next(action);
+      break;
+    }
+    case GET_PROJECTS: {
+      const url = getEndpoint(PROJECTS, GET, ALL);
+
+      callApi(url, GET)
+        .then((response) => {
+          store.dispatch(saveProjects(response.data));
+        })
+        .catch(() => {
         });
 
       next(action);

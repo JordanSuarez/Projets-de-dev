@@ -5,10 +5,59 @@ export default ({ palette, breakpoints }) => ({
     margin: '1em auto',
     padding: '1em 0',
   },
-  subtitle: {
-    padding: '1em',
-    fontSize: '1.5em',
+  toggleViewHeader: {
+    order: 4,
+    marginTop: '2rem',
+    display: 'flex',
+    width: '100%',
+    borderBottom: 'solid 1px #bdbdbd',
+    '& :first-child': {
+      marginLeft: '2rem',
+      [breakpoints.down(600)]: {
+        marginLeft: '1rem',
+      },
+    },
+    '& :last-child': {
+      marginRight: '2rem',
+      [breakpoints.down(600)]: {
+        marginRight: '1rem',
+      },
+    },
+  },
+  title: {
+    padding: '1rem',
+    fontSize: '1.2rem',
     color: palette.darkBlue,
+  },
+  subtitle: {
+    padding: '1rem',
+    fontSize: '1.2rem',
+    color: palette.darkBlue,
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    [breakpoints.down(600)]: {
+      fontSize: '1em',
+    },
+  },
+  subtitleActive: {
+    padding: '1rem',
+    fontSize: '1.2rem',
+    display: 'inline-block',
+    position: 'relative',
+    bottom: '-1px',
+    backgroundColor: palette.lightBlue,
+    border: 'solid 1px #bdbdbd',
+    borderRadius: '20px 20px 0 0',
+    borderBottom: 'none',
+    fontWeight: 'bold',
+    color: '#505050',
+    '&:hover': {
+      cursor: 'pointer',
+    },
+    [breakpoints.down(600)]: {
+      fontSize: '1em',
+    },
   },
   rowCenter: {
     padding: '1rem',
@@ -60,6 +109,7 @@ export default ({ palette, breakpoints }) => ({
     borderRadius: '16px',
   },
   button: {
+    textTransform: 'initial',
     backgroundColor: palette.darkBlue,
     color: palette.white,
     margin: '1em',
@@ -70,6 +120,7 @@ export default ({ palette, breakpoints }) => ({
     },
   },
   deleteButton: {
+    textTransform: 'initial',
     backgroundColor: palette.darkBlue,
     color: palette.white,
     margin: '1em',
@@ -84,8 +135,5 @@ export default ({ palette, breakpoints }) => ({
     justifyContent: 'center',
     display: 'flex',
     flexWrap: 'wrap',
-    '& .MuiPaper-root:nth-child(1n)': {
-      backgroundColor: palette.darkBlue,
-    },
   },
 });

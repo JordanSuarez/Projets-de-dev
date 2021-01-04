@@ -1,12 +1,13 @@
 export default ({ breakpoints, palette }) => ({
   card: {
     width: '240px',
+    height: '31rem',
     transition: 'all .2s ease-in-out',
     [breakpoints.up('sm')]: {
       width: '300px',
     },
     margin: '1em',
-    borderRadius: '32px',
+    borderRadius: '20px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
@@ -38,6 +39,9 @@ export default ({ breakpoints, palette }) => ({
   },
 
   title: {
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
     fontSize: '1.5em',
     paddingBottom: '0.5em',
     color: palette.darkBlue,
@@ -57,6 +61,16 @@ export default ({ breakpoints, palette }) => ({
   },
   like: {
     margin: '0.50em',
+    color: 'red',
+    transition: 'all .2s ease-in-out',
+    '&:hover': {
+      cursor: 'pointer',
+      transition: 'all .2s ease-in-out',
+      transform: 'scale(1.1)',
+    },
+  },
+  dontLike: {
+    margin: '0.50em',
     color: palette.white,
     transition: 'all .2s ease-in-out',
     '&:hover': {
@@ -64,6 +78,9 @@ export default ({ breakpoints, palette }) => ({
       transition: 'all .2s ease-in-out',
       transform: 'scale(1.1)',
     },
+  },
+  vote: {
+    color: 'white',
   },
   editIcon: {
     margin: '0.50em',
@@ -124,7 +141,8 @@ export default ({ breakpoints, palette }) => ({
   },
   tag: {
     borderRadius: '8px',
-    margin: '1em 5px 0 0',
+    marginRight: '5px',
+    marginTop: '0.4rem',
     backgroundColor: palette.darkBlue,
     padding: '0.5em',
     color: palette.darkBlue,

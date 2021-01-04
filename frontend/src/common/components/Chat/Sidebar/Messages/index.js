@@ -14,6 +14,7 @@ const mapStateToProps = (state) => ({
     username: state.userProfile.userProfile.username,
     userImage: state.userProfile.userProfile.userImage,
   },
+  loading: state.chat.loading,
 });
 
 const mapsDispatchToProps = (dispatch) => ({

@@ -13,7 +13,7 @@ import { classes as classesProps } from 'src/common/classes';
 import { isEmpty } from 'lodash';
 import { useHistory } from 'react-router-dom';
 import { getProfileRoute } from 'src/common/routing/routesResolver';
-import avatar2 from './avatar.png';
+import avatar2 from 'src/common/assets/images/avatar.png';
 
 const CardAbout = ({
   classes,
@@ -28,7 +28,10 @@ const CardAbout = ({
 
   return (
     <Card className={classes.card}>
-      <CardActionArea className={classes.cardArea}>
+      <CardActionArea
+        className={classes.cardArea}
+        onClick={() => history.push(getProfileRoute(profileId))}
+      >
         <Avatar alt="lePseudo" src={!isEmpty(avatar) ? avatar : avatar2} className={classes.large} />
         <CardContent className={classes.text}>
           <Typography className={classes.title} component="h3">
@@ -59,7 +62,7 @@ CardAbout.propTypes = {
   avatar: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   followLink: PropTypes.string.isRequired,
-  profileId: PropTypes.string.isRequired,
+  profileId: PropTypes.number.isRequired,
   isLogged: bool.isRequired,
 };
 
