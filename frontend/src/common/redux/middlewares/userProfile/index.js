@@ -7,6 +7,8 @@ import {
   setMyLikes,
   saveProjects,
   GET_PROJECTS,
+  GET_PROFILE_PROJECTS_LIKES,
+  setMyProjectsLikes,
 } from 'src/common/redux/actions/userProfile';
 import { redirectSuccess, redirect } from 'src/common/redux/actions/redirection';
 import { submitLogoutSuccess } from 'src/common/redux/actions/auth';
@@ -85,7 +87,25 @@ const userProfile = (store) => (next) => (action) => {
           },
         })
         .then(({ data }) => {
-          store.dispatch(setMyLikes(data));
+          const myLikes = data.filter((myLike) => myLike.isLike === 1);
+          store.dispatch(setMyLikes(myLikes));
+        })
+        .catch(() => {
+        });
+
+      next(action);
+      break;
+    }
+    case GET_PROFILE_PROJECTS_LIKES: {
+      axios.get(`${apiUrl}/${USERS}/${ME}/${LIKES}-${PROJECTS}`,
+        {
+          headers: {
+            Authorization: `Bearer ${getToken()}` || null,
+          },
+        })
+        .then(({ data }) => {
+          const myLikes = data.filter((myLike) => myLike.isLike === 1);
+          store.dispatch(setMyProjectsLikes(myLikes));
         })
         .catch(() => {
         });

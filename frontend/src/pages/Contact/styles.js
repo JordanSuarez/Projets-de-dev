@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 export default ({ palette }) => ({
   container: {
-    padding: '3em 10px 1em 10px',
+    padding: '3em 10px 3em 10px',
   },
 
   content: {
@@ -47,6 +47,12 @@ export default ({ palette }) => ({
   login: {
     textAlign: 'right',
     color: palette.darkBlue,
+  },
+
+  image: {
+    height: '400px',
+    width: '100%',
+    objectFit: 'cover',
   },
 
 });

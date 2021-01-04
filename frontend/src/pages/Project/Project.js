@@ -11,7 +11,7 @@ import githubLogo from 'src/common/assets/images/logo-github.png';
 import profileLogo from 'src/common/assets/images/avatar.png';
 import { getProfileRoute } from 'src/common/routing/routesResolver';
 import ReactQuill from 'react-quill';
-import IconButton from '@material-ui/core/IconButton';
+import IconButton from 'src/common/components/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -85,6 +85,7 @@ const Project = ({
               aria-controls="long-menu"
               aria-haspopup="true"
               onClick={handleClick}
+              title="Lien(s) du projet"
             >
               <MoreHorizIcon className={classes.menuIcon} />
             </IconButton>
@@ -98,7 +99,7 @@ const Project = ({
               {project.githubLink
               && (
               <MenuItem onClick={handleClose} className={classes.link}>
-                <a href={project.githubLink} className={classes.githubLink}>
+                <a href={project.githubLink} className={classes.githubLink} target="_blank" rel="noreferrer">
                   <img src={githubLogo} alt="project-header" />
                   Github
                 </a>
@@ -107,7 +108,7 @@ const Project = ({
               {project.projectLink
                 && (
                 <MenuItem onClick={handleClose} className={classes.link}>
-                  <a href={project.projectLink}>
+                  <a href={project.projectLink} target="_blank" rel="noreferrer">
                     Projet en ligne
                   </a>
                 </MenuItem>

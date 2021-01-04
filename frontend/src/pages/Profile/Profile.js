@@ -6,8 +6,9 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Avatar } from '@material-ui/core';
 import Base from 'src/common/components/Base';
 import CardProject from 'src/common/components/CardProject';
+import Carousel from 'src/common/components/Carousel';
 import { isEmpty } from 'lodash';
-import avatar2 from './avatar.png';
+import avatar2 from 'src/common/assets/images/avatar.png';
 
 const Profile = ({
   classes,
@@ -16,16 +17,49 @@ const Profile = ({
   profile,
   isLogged,
   redirect,
+  getMyLikes,
+  myLikes,
+  clearState,
 }) => {
   const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
+    clearState();
     getProfile(id);
     if (redirect.length > 0) {
       history.push(redirect);
     }
+    if (isLogged) {
+      getMyLikes();
+    }
   }, [redirect]);
+
+  const cardsProjects = profile.projects.map(({
+    id: projectId, title, description, tags, image, vote,
+  }) => {
+    let like = false;
+    myLikes.map((myLike) => {
+      if ((projectId === myLike.projectId) && (myLike.isLike === 1)) {
+        like = true;
+      }
+    });
+    return (
+      <CardProject
+        key={projectId}
+        projectId={projectId}
+        title={title}
+        tags={tags}
+        description={description}
+        userId={profile.id}
+        userImage={profile.userImage}
+        image={image}
+        isLogged={isLogged}
+        like={like}
+        vote={vote}
+      />
+    );
+  });
 
   return (
     <Base loading={loading}>
@@ -56,28 +90,16 @@ const Profile = ({
           </div>
           <div>
             <h2 className={classes.subtitle}>
-              Liste des projets
+              Liste de ses projets
             </h2>
             <div className={classes.cardContainer}>
               {isEmpty(profile.projects) && (
                 <p>Cet utilisateur n'a pas encore de projet</p>
               )}
               {!isEmpty(profile.projects)
-                && profile.projects.map(({
-                  id: projectId, title, description, tags, image,
-                }) => (
-                  <CardProject
-                    key={projectId}
-                    projectId={projectId}
-                    title={title}
-                    tags={tags}
-                    description={description}
-                    userId={profile.id}
-                    userImage={profile.userImage}
-                    image={image}
-                    isLogged={isLogged}
-                  />
-                ))}
+                && (
+                <Carousel items={cardsProjects} />
+                )}
             </div>
           </div>
         </div>
@@ -99,6 +121,9 @@ Profile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
+  getMyLikes: PropTypes.func.isRequired,
+  clearState: PropTypes.func.isRequired,
+  myLikes: PropTypes.array,
 };
 
 Profile.defaultProps = {
@@ -106,6 +131,7 @@ Profile.defaultProps = {
     id: null,
     userImage: '',
   }),
+  myLikes: [],
 };
 
 export default Profile;

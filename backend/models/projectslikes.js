@@ -10,19 +10,20 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+
       models.User.belongsToMany(models.Project, {
-        through: models.ProjectsLikes,
-        foreignKey: 'userId',
-        otherKey: 'projectId',
-        onDelete: 'CASCADE',
-      });
+      through: models.ProjectsLikes,
+      foreignKey: 'userId',
+      otherKey: 'projectId',
+      onDelete: 'CASCADE',      
+    });
 
       models.Project.belongsToMany(models.User, {
-        through: models.ProjectsLikes,
-        foreignKey: 'projectId',
-        otherKey: 'userId',
-        onDelete: 'CASCADE',
-      });
+       through: models.ProjectsLikes,
+       foreignKey: 'projectId',
+       otherKey: 'userId',
+       onDelete: 'CASCADE',
+     });
 
       models.ProjectsLikes.belongsTo(models.User, {
         foreignKey: 'userId',

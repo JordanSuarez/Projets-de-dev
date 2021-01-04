@@ -196,7 +196,7 @@ module.exports = {
 
 		getUsersList: (req, res) => {
 			models.User.findAll({
-				attributes: ['id', 'username', 'userImage', 'email'],
+				attributes: ['id', 'username', 'userImage', 'email', 'bio'],
 			}).then((user) => {
 				if (user) {
 					const arrayAllUsers = Object.values(user);

@@ -4,6 +4,61 @@ const jwtUtils = require('../utils/jwt.utils');
 
 module.exports = {
 
+  allProjects: (req, res) => {
+    
+    let limit = req.query.limit;
+    let offset = req.query.offset;
+    let order = req.query._order;
+    let sort = req.query._sort;
+
+
+
+
+    models.Project.findAll({
+      limit: (limit ? parseInt(limit) : 999),
+      offset: (offset ? parseInt(offset) : 0),
+      order: [
+        [sort, order],
+      ],
+      include: {
+        all:true, 
+        attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'] 
+      },
+      },
+    })
+    .then((project) => {
+      const formatProject = [];
+        for (let element=0; element < project.length; element++) {
+          const newFormat = {
+            id: project[element].id,
+            title: project[element].title,
+            description: project[element].description,
+            github_link: project[element].github_link,
+            project_link: project[element].project_link,
+            image: project[element].image,
+            vote: project[element].vote,
+            tags: [
+              project[element].Tag,
+              project[element].Tag2,
+              project[element].Tag3,
+              project[element].Tag4,
+              project[element].Tag5,
+              project[element].Tag6,
+            ],
+            user: project[element].User,
+            comments: project[element].Comments
+          };
+          formatProject.push(newFormat)
+        }
+        const arrayAllProjects = Object.values(formatProject);
+        res.set('X-Total-Count', arrayAllProjects.length);
+        return res.status(200).json(formatProject)
+    })
+    .catch((error) => {
+    return res.status(500).json(error)
+    })
+  },
+
   updateProject: (req, res) => {
     const id = req.params.id;
 
@@ -15,11 +70,11 @@ module.exports = {
       github_link: req.body.githubLink,
       project_link: req.body.projectLink,
       TagId: req.body.tags[0].id,
-      Tag2Id: req.body.tags[1].id,
-      Tag3Id: req.body.tags[2].id,
-      Tag4Id: req.body.tags[3].id,
-      Tag5Id: req.body.tags[4].id,
-      Tag6Id: req.body.tags[5].id,
+      Tag2Id: req.body.tags[1].id ? req.body.tags[1].id : null,
+      Tag3Id: req.body.tags[2].id ? req.body.tags[2].id : null,
+      Tag4Id: req.body.tags[3].id ? req.body.tags[3].id : null,
+      Tag5Id: req.body.tags[4].id ? req.body.tags[4].id : null,
+      Tag6Id: req.body.tags[5].id ? req.body.tags[5].id : null,
   };
 
   console.log(updatedProject)

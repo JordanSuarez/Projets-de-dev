@@ -3,7 +3,7 @@ export default ({ breakpoints, palette }) => ({
   chatContainerButton: {
     zIndex: '100',
     position: 'fixed',
-    bottom: '80px',
+    bottom: '1.4rem',
     right: '10px',
     color: 'red',
     overflowX: 'none',
@@ -27,7 +27,7 @@ export default ({ breakpoints, palette }) => ({
   },
 
   closedIcon: {
-    color: palette.darkBlue,
+    color: palette.blue,
   },
 
 });

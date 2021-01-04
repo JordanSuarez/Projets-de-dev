@@ -5,6 +5,8 @@ export default ({ palette, breakpoints }) => ({
     minHeight: '5rem',
     display: 'flex',
     justifyContent: 'center',
+    fontFamily: 'Orbitron',
+    fontWeight: 400,
   },
   burger: {
     color: palette.darkBlue,
@@ -31,11 +33,20 @@ export default ({ palette, breakpoints }) => ({
     '&:hover': {
       cursor: 'pointer',
     },
-    [breakpoints.down('sm')]: {
+    [breakpoints.down(450)]: {
+      marginLeft: 'calc(37% - 2rem)',
+    },
+    [breakpoints.down(400)]: {
       marginLeft: 'calc(35% - 2rem)',
     },
-    [breakpoints.down('xs')]: {
-      marginLeft: 'calc(32% - 2rem)',
+    [breakpoints.down(350)]: {
+      marginLeft: 'calc(33% - 2rem)',
+    },
+    [breakpoints.down(300)]: {
+      marginLeft: 'calc(31% - 2rem)',
+    },
+    [breakpoints.down(280)]: {
+      marginLeft: 'calc(28% - 2rem)',
     },
   },
   wrapper: {

@@ -5,15 +5,21 @@ export default ({ breakpoints, palette }) => ({
     flexDirection: 'column',
     height: 'calc(100vh - 80px)',
     padding: '3em 0 1em 0',
+    backgroundColor: palette.darkBlue,
+    color: palette.lightBlue,
     [breakpoints.up('md')]: {
-      width: '80vw',
-      padding: '3em 1em 1em 1em',
+      width: 'calc(100vw - 335px)',
+      padding: '0',
+      margin: '0 0 0 335px',
+    },
+    [breakpoints.up('lg')]: {
+      width: 'calc(100vw - 300px - 300px )',
     },
   },
 
   channelTitleContainer: {
     padding: '1em',
-    borderBottom: 'solid 1px #bdbdbd',
+    borderBottom: 'solid 1px #59B0DF',
   },
 
   channelTitleSelected: {
@@ -21,19 +27,22 @@ export default ({ breakpoints, palette }) => ({
     position: 'relative',
     padding: '1em',
     bottom: '-17px',
-    backgroundColor: palette.lightBlue,
-    border: 'solid 1px #bdbdbd',
+    backgroundColor: palette.darkBlue,
+    border: 'solid 1px #59B0DF',
     borderRadius: '20px 20px 0 0',
     borderBottom: 'none',
     fontSize: '0.75em',
     fontWeight: 'bold',
-    color: '#505050',
+    color: palette.blue,
   },
 
   messages: {
-    backgroundColor: palette.lightBlue,
     overflowX: 'hidden',
     overflowY: 'scroll',
+    [breakpoints.up('md')]: {
+      padding: '0 1em',
+    },
+
   },
 
   alignRight: {
@@ -58,8 +67,8 @@ export default ({ breakpoints, palette }) => ({
     margin: '3px 10px 3px 0',
     minWidth: '130px',
     borderRadius: '0px 8px 8px 8px',
-    backgroundColor: palette.darkBlue,
-    color: 'white',
+    backgroundColor: palette.yellow,
+    color: palette.darkBlue,
     padding: '10px',
     textAlign: 'left',
     position: 'relative',
@@ -98,11 +107,12 @@ export default ({ breakpoints, palette }) => ({
   inputMessage: {
     width: 'calc(100% - 6px)',
     padding: '8px',
-    margin: '10px 3px',
+    margin: '10px ',
     borderRadius: '25px',
     border: 'none',
     outline: 'none',
-    boxShadow: 'inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ffffff',
+    color: palette.lightBlue,
+    boxShadow: 'inset 8px 8px 8px #3c3c3c, inset -8px -8px 8px #4e4e4e;',
     '&:before': {
       borderBottom: 'none',
 
@@ -117,7 +127,8 @@ export default ({ breakpoints, palette }) => ({
   },
 
   picker: {
-    color: '#bdbdbd',
+    color: palette.blue,
+    margin: '0 10px 0 0',
     '&:hover': {
       backgroundColor: 'transparent',
     },
@@ -129,5 +140,6 @@ export default ({ breakpoints, palette }) => ({
       backgroundColor: 'transparent',
     },
   },
+
 
 });

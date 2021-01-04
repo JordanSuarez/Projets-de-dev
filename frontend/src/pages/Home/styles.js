@@ -1,7 +1,7 @@
 export default ({ palette, breakpoints }) => ({
 
   home: {
-    maxWidth: '1200px',
+    maxWidth: '1500px',
     margin: '0 auto',
   },
 
@@ -18,6 +18,7 @@ export default ({ palette, breakpoints }) => ({
   },
 
   subtitleProjects: {
+    margin: '3rem 0rem 1rem 1rem',
     padding: '1rem 0 1em 1em',
     fontSize: '1.5em',
     color: palette.darkBlue,
@@ -71,20 +72,21 @@ export default ({ palette, breakpoints }) => ({
   robot: {
     position: 'absolute',
     left: 'calc(50% - 100px)',
-    top: '-120px',
+    top: '20px',
     width: '200px',
     [breakpoints.up('md')]: {
       width: '300px',
       left: '-150px',
-      top: '-10px',
+      top: '50px',
     },
     [breakpoints.up('lg')]: {
-      top: '-30px',
+      top: '30px',
     },
   },
 
   title: {
-    fontSize: '1.8em',
+    fontSize: '2em',
+    fontWeight: '500',
     paddingBottom: '1em',
     [breakpoints.up('md')]: {
       paddingLeft: '14px',
@@ -92,11 +94,13 @@ export default ({ palette, breakpoints }) => ({
   },
 
   descriptionSite: {
+    fontSize: '1.2em',
+    fontWeight: '300',
     textAlign: 'left',
+    lineHeight: '1.5',
     [breakpoints.up('md')]: {
       padding: '0 1em 1em 1em',
     },
   },
-
 
 });
