@@ -10,7 +10,6 @@ import { getToken, getUserId } from 'src/common/authentication/authProvider';
 const initialState = {
   isLogged: !!getToken(),
   userId: parseInt(getUserId(), 10) || null,
-  userEmail: '',
   hasError: false,
 };
 
@@ -21,7 +20,6 @@ const auth = (state = initialState, action = {}) => {
         ...state,
         isLogged: true,
         userId: action.userId,
-        userEmail: '',
         hasError: false,
       };
     case SUBMIT_LOGIN_ERROR:
@@ -37,7 +35,6 @@ const auth = (state = initialState, action = {}) => {
     case SUBMIT_REGISTER_SUCCESS:
       return {
         ...state,
-        userEmail: action.userEmail,
         hasError: false,
       };
     case CHANGE_HAS_ERROR:
