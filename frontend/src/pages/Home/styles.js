@@ -72,7 +72,7 @@ export default ({ palette, breakpoints }) => ({
   robot: {
     position: 'absolute',
     left: 'calc(50% - 100px)',
-    top: '20px',
+    top: '-120px',
     width: '200px',
     [breakpoints.up('md')]: {
       width: '300px',
@@ -80,7 +80,7 @@ export default ({ palette, breakpoints }) => ({
       top: '50px',
     },
     [breakpoints.up('lg')]: {
-      top: '30px',
+      top: '10px',
     },
   },
 

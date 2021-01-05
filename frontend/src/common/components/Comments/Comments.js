@@ -167,7 +167,7 @@ const Comments = ({
                     <h4 className={classes.username}>{comment.User.username}</h4>
                   </div>
                   <div className={classes.rightHeader}>
-                    <p className={classes.date}>Le&nbsp;{new Date(comment.createdAt).toLocaleString('fr-FR')}</p>
+                    <p className={classes.date}>{`Le ${new Date(comment.createdAt).toLocaleString('fr-FR')}`}</p>
                     {userId === comment.User.id && (
                       <div>
                         <IconButton

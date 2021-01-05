@@ -5,14 +5,10 @@ const jwtUtils = require('../utils/jwt.utils');
 module.exports = {
 
   allProjects: (req, res) => {
-    
     let limit = req.query.limit;
     let offset = req.query.offset;
     let order = req.query._order;
     let sort = req.query._sort;
-
-
-
 
     models.Project.findAll({
       limit: (limit ? parseInt(limit) : 999),
@@ -23,7 +19,7 @@ module.exports = {
       include: {
         all:true, 
         attributes: { exclude: ['password', 'isAdmin', 'updatedAt', 'email'] 
-      },
+        },
       },
     })
     .then((project) => {
