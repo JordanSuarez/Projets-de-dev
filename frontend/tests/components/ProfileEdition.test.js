@@ -38,7 +38,7 @@ const wrapper = shallow(
 );
 
 describe('<ProfileEdition />', () => {
-  it('has name', () => {
+  it('should contain initialValues in Form props', () => {
     const reactFinalForm = wrapper.find(Form);
     expect(reactFinalForm).to.have.lengthOf(1);
 

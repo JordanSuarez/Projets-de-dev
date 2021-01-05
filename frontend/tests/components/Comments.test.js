@@ -34,23 +34,16 @@ const wrapper = shallow(
 );
 
 describe('<Comment />', () => {
-  it('has title', () => {
+  it('should display title if user is logged', () => {
     const title = wrapper.find('h4');
     expect(title).to.have.lengthOf(1);
     expect(isLogged).to.equal(true);
     expect(title.props()).to.have.property('children', ' Ajouter un commentaire: ');
   });
-  it('has textfield', () => {
-    const eventObj = { currentTarget: { value: 'test du commentaire' } };
+  it('should change TextField value on user input', () => {
+    wrapper.find(TextField).simulate('change', { target: { value: 'test du commentaire' } });
     const textField = wrapper.find(TextField);
-    expect(textField).to.have.lengthOf(1);
 
-    expect(textField.props().value).to.equal(inputMessage);
-  });
-  it('has image', () => {
-    const avatar = wrapper.find(Avatar);
-    expect(avatar).to.have.lengthOf(1);
-
-    expect(avatar.props()).to.have.property('src', avatarSrc);
+    expect(textField.prop('value')).to.equal(inputMessage);
   });
 });

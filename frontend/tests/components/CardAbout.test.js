@@ -26,19 +26,19 @@ const wrapper = shallow(
 );
 
 describe('<CardAbout />', () => {
-  it('has name', () => {
+  it('should have a children who contain a username', () => {
     const typography = wrapper.find(Typography);
     expect(typography).to.have.lengthOf(2);
 
     expect((typography.first()).props()).to.have.property('children', name);
   });
-  it('has description', () => {
+  it('should have a children who contain a description', () => {
     const typography = wrapper.find(Typography);
     expect(typography).to.have.lengthOf(2);
 
     expect((typography.last()).props()).to.have.property('children', description);
   });
-  it('has image', () => {
+  it('should have a props src who contain an image', () => {
     const avatar = wrapper.find(Avatar);
     expect(avatar).to.have.lengthOf(1);
 
