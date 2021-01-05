@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { expect } from 'chai';
+import { expect, should } from 'chai';
 import { shallow } from 'enzyme';
 
 import { classes } from 'src/common/classes';
 import { Typography, Avatar } from '@material-ui/core';
+import GradeIcon from '@material-ui/icons/Grade';
 import CardAbout from 'src/common/components/CardAbout/CardAbout';
 
 const name = 'toto';
@@ -12,6 +13,7 @@ const avatarSrc = 'src/common/assets/images/avatar.png';
 const description = '';
 const followLink = '';
 const profileId = 1;
+const isLogged = false;
 
 const wrapper = shallow(
   <CardAbout
@@ -20,7 +22,7 @@ const wrapper = shallow(
     description={description}
     followLink={followLink}
     profileId={profileId}
-    isLogged={false}
+    isLogged={isLogged}
     classes={classes}
   />,
 );
@@ -43,5 +45,9 @@ describe('<CardAbout />', () => {
     expect(avatar).to.have.lengthOf(1);
 
     expect(avatar.props()).to.have.property('src', avatarSrc);
+  });
+  it('should not display GradeIcon if isLogged is false', () => {
+    const cardActions = wrapper.find(GradeIcon);
+    expect(cardActions).to.have.lengthOf(0);
   });
 });

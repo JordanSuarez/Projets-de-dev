@@ -12,8 +12,8 @@ const initialState = {
   hasError: false,
 };
 
-describe('reducer for auth', () => {
-  it('should check if is authReducer a function', () => {
+describe('auth reducer', () => {
+  it('should be a function', () => {
     authReducer.should.be.a('function');
   });
   it('should return initial state', () => {

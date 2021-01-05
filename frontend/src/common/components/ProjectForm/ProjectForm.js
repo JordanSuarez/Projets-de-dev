@@ -52,7 +52,6 @@ const Form = ({
       return setErrorFields({ ...errorFields, image: true });
     }
     // return form values and project id from useParams
-    console.log(formState, values)
     return handleSubmitProject({ ...formState, ...values }, id);
   };
 
@@ -66,10 +65,14 @@ const Form = ({
   };
   const getFiles = async (files) => {
     const imageResized = await reziseFile(files, 1920);
+    const shortImageResized = await reziseFile(files, 600);
+
     setFormState({
       ...formState,
+      // rezise image only if size is bigger than imageResized
       image: imageResized.length > files.base64.length ? files.base64 : imageResized,
       imageName: files.name,
+      shortImage: shortImageResized,
     });
     setErrorFields({ ...errorFields, image: false });
   };
