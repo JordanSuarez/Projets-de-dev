@@ -14,8 +14,8 @@ module.exports = {
 
     register: (req, res) => {
 			
-			const username = req.body.username;
-      const email = req.body.email;
+		const username = req.body.username;
+      	const email = req.body.email;
 	  	const password = req.body.password;
 			
 			if(email == null || username == null || password == null) {
@@ -161,10 +161,8 @@ module.exports = {
 						const newFormat = {
 							id: user.Projects[element].id,
 							title: user.Projects[element].title,
-							description: user.Projects[element].description,
-							github_link: user.Projects[element].github_link,
-							project_link: user.Projects[element].project_link,
-							image: user.Projects[element].image,
+							description: user.Projects[element].shortDescription,
+							image: user.Projects[element].shortImage,
 							vote: user.Projects[element].vote,
 							tags: [
 								user.Projects[element].Tag,
@@ -224,10 +222,8 @@ module.exports = {
 						const newFormat = {
 							id: user.Projects[element].id,
 							title: user.Projects[element].title,
-							description: user.Projects[element].description,
-							github_link: user.Projects[element].github_link,
-							project_link: user.Projects[element].project_link,
-							image: user.Projects[element].image,
+							description: user.Projects[element].shortDescription,
+							image: user.Projects[element].shortImage,
 							vote: user.Projects[element].vote,
 							tags: [
 								user.Projects[element].Tag,
@@ -326,28 +322,15 @@ module.exports = {
 				return res.status(400).json({ 'error': 'Le token est invalide' });
 			}
 
-			/*models.User.findOne({
-				where: { id: userId }
-			}).then(()=> {
-				models.Project.findAll({
-					where: {userId: userId}
-				})
-			})*/
-			
-			
-			
-			
-			
-			
 			models.User.findOne({
 				where: { id: userId }
 			}).then(() => {
 				models.Comment.destroy({
-					where: {userId: userId}
+				where: {userId: userId}
 				}).then(() => {
 					models.ProjectsLikes.destroy({
-						where: {userId: userId}
-					}).then(() => {
+					where: {userId: userId}
+						}).then(() => {
 						models.Project.destroy({
 							where: {userId: userId}						
 						}).then(() => {
@@ -366,10 +349,6 @@ module.exports = {
 					})
 				})
 				})
-			
-			
-				
-
 		},
 		// Check if user token is valid
 		userAuthVerify: (req,res) => {
@@ -382,7 +361,6 @@ module.exports = {
 			} 
 			
 			asyncLib.waterfall([
-
 				(done) => {
 					models.User.findByPk(userId).then(result => {
 						if (result) {
@@ -402,6 +380,4 @@ module.exports = {
 				}
 			]);
 		},
-		 
-			 
 }

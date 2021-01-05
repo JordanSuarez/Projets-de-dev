@@ -16,11 +16,19 @@ module.exports = {
         type: Sequelize.TEXT('long'),
         allowNull: false,
       },
+      shortDescription: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       vote: {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
       image: {
+        type: Sequelize.TEXT('long'),
+        allowNull: true,
+      },
+      shortImage: {
         type: Sequelize.TEXT('long'),
         allowNull: true,
       },
