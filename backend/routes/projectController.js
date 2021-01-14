@@ -11,6 +11,13 @@ module.exports = {
     let offset = req.query.offset;
     let tag1 = req.query.tag1;
 
+    if (limit.isInteger === false){
+      limit = 12
+    }
+    if (offset.isInteger === false){
+      offset = 0
+    }
+
       whereClause = {
         [Op.or]: [
           { tagId: req.query.tag1 },
