@@ -87,10 +87,10 @@ io.on('connection', socket => {
         return io.emit('send_message', formatMessage);
       })
       .catch((err) => {
-        return 'tata';
+        return '';
       });
     }).catch((err) => {
-      return 'tata';
+      return '';
     });
   });
 });

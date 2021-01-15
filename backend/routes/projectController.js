@@ -45,11 +45,14 @@ module.exports = {
     .then((project) => {
       const formatProject = [];
         for (let element=0; element < project.length; element++) {
+          const image = project[element].shortImage !== null ? project[element].shortImage : project[element].image
+          const description = project[element].shortDescription !== '' ? project[element].shortDescription : project[element].description
+         
           const newFormat = {
             id: project[element].id,
             title: project[element].title,
-            description: project[element].shortDescription,
-            image: project[element].shortImage,
+            description: description,
+            image: image,
             vote: project[element].vote,
             tags: [
               project[element].Tag,
