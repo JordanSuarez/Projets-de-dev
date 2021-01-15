@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-
      static associate(models) {
       models.Project.belongsTo(models.User)
       models.Project.belongsTo(models.Tag)
@@ -22,14 +21,15 @@ module.exports = (sequelize, DataTypes) => {
       models.Project.belongsTo(models.Tag, {as: 'Tag5'})
       models.Project.belongsTo(models.Tag, {as: 'Tag6'})
       models.Project.hasMany(models.Comment);
-
     }
   };
   Project.init({
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
+    shortDescription: DataTypes.STRING,
     vote: DataTypes.INTEGER,
-    image: DataTypes.STRING,
+    image: DataTypes.TEXT,
+    shortImage: DataTypes.TEXT,
     github_link: DataTypes.STRING,
     project_link: DataTypes.STRING,
   }, {

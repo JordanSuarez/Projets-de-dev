@@ -7,7 +7,7 @@
     "lint:fix": "eslint --fix src/**/*.js",
     "clean": "rm -rf dist",
     "clean:all": "rm -rf dist node_modules yarn.lock package-lock.json",
-    "test": "cross-env NODE_PATH=./ mocha --require tests/.setup.js tests/**/*.test.js",
+    "test": "cross-env NODE_PATH=./ mocha --require mock-local-storage tests/.setup.js tests/**/*.test.js",
     "test:watch": "cross-env NODE_PATH=./ mocha --watch --require tests/.setup.js tests/**/*.test.js"
   },
   "devDependencies": {
@@ -42,6 +42,7 @@
     "jsdom": "^16.4.0",
     "mini-css-extract-plugin": "^1.1.0",
     "mocha": "^8.2.1",
+    "mock-local-storage": "^1.1.15",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "postcss-loader": "^4.0.4",
     "postcss-preset-env": "^6.7.0",
@@ -61,7 +62,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "3.x.x",
     "@material-ui/styles": "^4.11.1",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "dompurify": "^2.2.3",
     "emoji-mart": "^3.0.0",
     "final-form": "^4.20.1",
@@ -86,6 +87,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
+    "sinon": "^9.2.2",
     "socket.io-client": "^3.0.4"
   }
 }

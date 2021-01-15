@@ -108,9 +108,6 @@ module.exports = {
 		const userId = req.params.id
 
 		if (isAdmin) {
-			
-
-
 			models.User.findOne({
 				where: { id: userId }
 			}).then(() => {
@@ -135,10 +132,9 @@ module.exports = {
 								})
 							})
 						})
+					})
 				})
 			})
-			})
-			
 		} else {
 			return res.status(401).json({'error': 'vous n\'avez pas l\'autorisation de supprimer un utilisateur' });
 		}

@@ -36,7 +36,6 @@ exports.router = (() => {
     apiRouter.route('/users/:id/likes').get(likeController.getLikesByUserId); // OK
     apiRouter.route('/users/me/likes-projects').get(likeController.getLikesProjectByMe) // Ok
     
-
     // Projects routes
     apiRouter.route('/projects/').get(projectController.allProjects); // OK
     apiRouter.route('/projects/:id').get(projectController.project); // OK
@@ -47,7 +46,6 @@ exports.router = (() => {
     // Tags routes
     apiRouter.route('/tags').get(tagController.getTagList); // OK
     apiRouter.route('/tags/:id').get(tagController.getTagbyId); // OK
-    
     
     // Likes routes
     apiRouter.route('/projects/:projectId/vote/like').post(likeController.likePost); // OK
@@ -104,7 +102,6 @@ exports.router = (() => {
     // -Messages routes
     apiRouter.route('/backOffice/messages').get(messageControllerBackOffice.getMessagesList); // OK
     apiRouter.route('/backOffice/messages/:id').delete(messageControllerBackOffice.deleteMessage);
-
 
     return apiRouter;
 })();
