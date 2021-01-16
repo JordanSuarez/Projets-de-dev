@@ -222,11 +222,14 @@ module.exports = {
 				if (user) {
 					const formatProject = [];
 					for (element=0; element < user.Projects.length; element++) {
+						const image = user.Projects[element].shortImage !== null ? user.Projects[element].shortImage : user.Projects[element].image
+						const description = user.Projects[element].shortDescription !== '' ? user.Projects[element].shortDescription : user.Projects[element].description
+
 						const newFormat = {
 							id: user.Projects[element].id,
 							title: user.Projects[element].title,
-							description: user.Projects[element].shortDescription,
-							image: user.Projects[element].shortImage,
+							description: description,
+							image: image,
 							vote: user.Projects[element].vote,
 							tags: [
 								user.Projects[element].Tag,
