@@ -9,17 +9,6 @@ const { REACT_APP_API_PORT } = process.env;
 // BASE URL of api, from .env file
 export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT_APP_API_PORT}/api`;
 
-// Create client instance for axios, send token if exist, else null
-// const axiosInstance = axios.create({
-//   baseURL: apiUrl,
-//   headers: {
-//     s
-//     // 'Content-Type': 'application/json, charset=utf-8',
-//     // Accept: 'application/json',
-//     Authorization: `Bearer ${getToken()}` || null,
-//   },
-// });
-
 /**
  * Call API with all axios instance method (POST, GET, PUT, PATCH, DELETE)
  * Data is empty for GET and DELETE request
@@ -28,7 +17,14 @@ export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT
  * @param data = Data as object like this = {email: userEmail, password: userPassword}
  * @returns Promise, so we can use .then and .catch after callApi
  */
-// eslint-disable-next-line max-len
-// export const callApi = (url, method, data = {}) => axiosInstance[method](url, data).then((response) => response);
 export const callApi = (url, method, data = {}) => (
-  axios[method](`${apiUrl}${url}`, data, { headers: { Authorization: `Bearer ${getToken()}` || null } }).then((response) => response));
+  axios[method](
+    `${apiUrl}${url}`,
+    data,
+    {
+      headers:
+      {
+        Authorization: `Bearer ${getToken()}` || null,
+      },
+    },
+  ).then((response) => response));
