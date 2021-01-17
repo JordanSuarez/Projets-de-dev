@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "adminpda",
-    "password": "Pdd2021.",
+    "password": "Pikachu1",
     "database": "projet_de_dev",
-    "host": "database-1.c5j0a90ydobn.us-east-1.rds.amazonaws.com",
+    "host": "database-1.cgbnetjsmhmu.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
@@ -15,9 +15,9 @@
   },
   "production": {
     "username": "adminpda",
-    "password": "Pdd2021.",
+    "password": "Pikachu1",
     "database": "projet_de_dev",
-    "host": "database-1.c5j0a90ydobn.us-east-1.rds.amazonaws.com",
+    "host": "database-1.cgbnetjsmhmu.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
