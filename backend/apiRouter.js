@@ -30,6 +30,8 @@ exports.router = (() => {
     apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/me/delete').delete(userController.deleteMe); //OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
+    apiRouter.route('/users/admin/login/').post(userController.adminLogin); // OK
+
 
     // Users Like
     apiRouter.route('/users/me/likes').get(likeController.getLikesByMe); // OK
@@ -69,6 +71,9 @@ exports.router = (() => {
     apiRouter.route('/contact').post(contactController.new); // OK
 
     // BackOffice routes:
+
+
+
     // -Projects routes
     apiRouter.route('/backOffice/projects/').get(projectControllerBackOffice.allProjects); // OK
     apiRouter.route('/backOffice/projects/:id').get(projectController.project); // OK
