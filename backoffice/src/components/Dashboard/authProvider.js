@@ -1,5 +1,6 @@
 import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
-
+import {apiUrl} from './Dashboard'
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
         const { email, password } = params;
@@ -7,8 +8,8 @@ export default (type, params) => {
             email: email,
             password : password
         }
-        const request = new Request('http://localhost:5050/api/users/admin/login', {
-            method: 'POST',
+        const request = new Request(`${apiUrl}/users/admin/login`, {
+	        method: 'POST',
             body: JSON.stringify( values ),
             headers: new Headers({ 'Content-Type': 'application/json' }),
         })

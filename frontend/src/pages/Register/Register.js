@@ -14,7 +14,7 @@ const validate = (values) => {
   let validationEmail = null;
   let validationPassword = null;
   const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  const regexPassword = /^(?=.*\d).{4,15}$/;
+  const regexPassword = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
   if (regexEmail.test(values.email)) {
     validationEmail = true;
   }
@@ -28,6 +28,7 @@ const validate = (values) => {
   else {
     validationPassword = false;
   }
+  
 
   if (!values.username) {
     errors.username = 'Ce champ est requis';
@@ -48,7 +49,7 @@ const validate = (values) => {
     errors.password = 'Ce champ est requis';
   }
   if (validationPassword === false) {
-    errors.password = 'Mot de passe invalide, minimum 4 carateres dont un caractere alphanumérique';
+    errors.password = 'Mot de passe invalide, minimum 8 carateres dont un nombre, une majuscule et un caractère spécial';
   }
   if (!values.passwordConfirmation) {
     errors.passwordConfirmation = 'Ce champ est requis';

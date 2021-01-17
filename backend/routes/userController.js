@@ -7,7 +7,7 @@ const asyncLib = require('async');
 
 //constantes
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const PASSWORD_REGEX = /^(?=.*\d).{4,15}$/;
+const PASSWORD_REGEX = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
 
 //Routes
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
 			}
 
 			if (!PASSWORD_REGEX.test(password)) {
-				return res.status(400).json({'error': 'La longueur du mot de passe doit être comprise entre 4 et 15 caractères et doit contenir au moins un caractère numérique'});
+				return res.status(400).json({'error': 'Mot de passe invalide, minimum 8 carateres dont un nombre, une majuscule et un caractère spécial'});
 			}			
 			
 			models.User.findOne({
@@ -219,11 +219,14 @@ module.exports = {
 				if (user) {
 					const formatProject = [];
 					for (element=0; element < user.Projects.length; element++) {
+						const image = user.Projects[element].shortImage !== null ? user.Projects[element].shortImage : user.Projects[element].image
+          				const description = user.Projects[element].shortDescription !== '' ? user.Projects[element].shortDescription : user.Projects[element].description
+         
 						const newFormat = {
 							id: user.Projects[element].id,
 							title: user.Projects[element].title,
-							description: user.Projects[element].shortDescription,
-							image: user.Projects[element].shortImage,
+							description: description,
+							image: image,
 							vote: user.Projects[element].vote,
 							tags: [
 								user.Projects[element].Tag,
@@ -280,11 +283,14 @@ module.exports = {
 				if (user) {
 					const formatProject = [];
 					for (element=0; element < user.Projects.length; element++) {
+						const image = user.Projects[element].shortImage !== null ? user.Projects[element].shortImage : user.Projects[element].image
+						const description = user.Projects[element].shortDescription !== '' ? user.Projects[element].shortDescription : user.Projects[element].description
+
 						const newFormat = {
 							id: user.Projects[element].id,
 							title: user.Projects[element].title,
-							description: user.Projects[element].shortDescription,
-							image: user.Projects[element].shortImage,
+							description: description,
+							image: image,
 							vote: user.Projects[element].vote,
 							tags: [
 								user.Projects[element].Tag,
