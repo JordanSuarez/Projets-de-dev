@@ -289,10 +289,14 @@ const httpClient = (url, options = {}) => {
   
 };
 
-
+const { REACT_APP_API_PROTOCOL } = process.env;
+const { REACT_APP_API_HOST } = process.env;
+const { REACT_APP_API_PORT } = process.env;
+// BASE URL of api, from .env file
+export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT_APP_API_PORT}/api`;
 
 const Dashboard = () => (
-    <Admin loginPage={Login} authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider('http://ec2-34-202-164-145.compute-1.amazonaws.com/api/backOffice', httpClient)}>
+    <Admin loginPage={Login} authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider(apiUrl, httpClient)}>
         <Resource options={{label : 'Utilisateurs', title : "Utilisateurs"}} icon={userIcon} name="users" list={UserList} edit={UserEdit}/>
         <Resource options={{label : 'Projets'}} icon={projectIcon} name="projects" list={ProjectList} create={ProjectCreate} edit={ProjectEdit} />
         <Resource options={{label : 'Catégories'}} icon={categoryIcon} name="tags" list={TagList} create={TagCreate} edit={TagEdit}/>
