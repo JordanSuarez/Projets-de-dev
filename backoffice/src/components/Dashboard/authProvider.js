@@ -1,5 +1,5 @@
 import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
-import {apiUrl} from './Dashboard'
+import { apiUrl } from './Dashboard'
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (type, params) => {
     if (type === AUTH_LOGIN) {

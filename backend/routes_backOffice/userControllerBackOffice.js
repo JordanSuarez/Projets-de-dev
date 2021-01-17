@@ -99,13 +99,13 @@ module.exports = {
 			models.User.update(updateUser, {
 				where: { id: req.params.id }
 			}).then(() => {
-				res.set("x-total-count", total);
+
 				res.status(200).json(updateUser);
 			}).catch((error) => {
 				res.status(500).json({ 'error': 'Le profil n\'a pas pu être mis à jour' });
 			});
 		} else {
-			return res.status(401).json({'error': '' });
+			return res.status(401).json({'error': 'no admin' });
 		}
 	},
 
@@ -147,13 +147,13 @@ module.exports = {
 					bio: user.bio,
 					projects: formatProject, 
 				}
-				res.set("x-total-count", total);
+
 				return res.status(201).json(formatUser);
 			} else {
-				return res.status(404).json({ 'error': /*'L\'utilisateur n\'a pas été trouvé'*/ err});
+				return res.status(404).json({ 'error': 'L\'utilisateur n\'a pas été trouvé'});
 			}
 		}).catch((err) => {
-			return res.status(500).json({ 'error': /*'Impossible de rechercher un utilisateur'*/ err});
+			return res.status(500).json({ 'error': 'Impossible de rechercher un utilisateur'});
 		})
 	},
 
