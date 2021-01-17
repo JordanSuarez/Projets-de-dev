@@ -19,7 +19,9 @@
     "sequelize-cli": "^6.2.0",
     "socket.io": "^3.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^7.18.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"

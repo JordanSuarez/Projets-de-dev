@@ -7,9 +7,8 @@ export default (type, params) => {
             email: email,
             password : password
         }
-        const request = new Request('http://ec2-34-202-164-145.compute-1.amazonaws.com/api/users/login', {
-            credentials: 'include',
-	        method: 'POST',
+        const request = new Request('http://localhost:5050/api/users/admin/login', {
+            method: 'POST',
             body: JSON.stringify( values ),
             headers: new Headers({ 'Content-Type': 'application/json' }),
         })
