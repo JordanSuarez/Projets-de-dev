@@ -2,8 +2,7 @@ import * as React from "react";
 import { Admin, Resource } from 'react-admin';
 import simpleRestProvider from 'ra-data-json-server';
 import {  fetchUtils } from 'react-admin';
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
-
+import { createMuiTheme } from '@material-ui/core/styles';
 import authProvider from './authProvider';
 import commentIcon from '@material-ui/icons/AssistantTwoTone';
 import projectIcon from '@material-ui/icons/ClassTwoTone';
@@ -32,13 +31,6 @@ const theme = createMuiTheme({
     },
   });
 
-  const useStyles = makeStyles({
-    tags: { 
-      '& :empty' : {
-        display: 'none',
-      }
-  },
-  });
   
 const httpClient = (url, options = {}) => {
   options.user = {
@@ -53,7 +45,7 @@ const { REACT_APP_API_PROTOCOL } = process.env;
 const { REACT_APP_API_HOST } = process.env;
 const { REACT_APP_API_PORT } = process.env;
 // BASE URL of api, from .env file
-export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT_APP_API_PORT}/api`;
+export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT_APP_API_PORT}/api/backoffice`;
 
 const Dashboard = () => (
     <Admin loginPage={Login} authProvider={authProvider} theme={theme} dataProvider={simpleRestProvider(apiUrl, httpClient)}>

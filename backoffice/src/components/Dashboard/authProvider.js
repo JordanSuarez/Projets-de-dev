@@ -8,7 +8,7 @@ export default (type, params) => {
             email: email,
             password : password
         }
-        const request = new Request(`${apiUrl}/users/admin/login`, {
+        const request = new Request(`${apiUrl}/login`, {
 	        method: 'POST',
             body: JSON.stringify( values ),
             headers: new Headers({ 'Content-Type': 'application/json' }),
