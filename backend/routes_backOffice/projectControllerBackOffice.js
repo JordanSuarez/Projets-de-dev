@@ -57,23 +57,26 @@ module.exports = {
 
   updateProject: (req, res) => {
     const id = req.params.id;
+    const cuttedDescription = (req.body.description).substring(0, 150)
 
     const updatedProject = {
       id: parseInt(req.params.id, 10),
       title: req.body.title,
       description: req.body.description,
+      shortDescription: cuttedDescription,
       image: req.body.image,
+      shortImage: req.body.shortImage,
       github_link: req.body.githubLink,
       project_link: req.body.projectLink,
       TagId: req.body.tags[0].id,
-      Tag2Id: req.body.tags[1].id ? req.body.tags[1].id : null,
-      Tag3Id: req.body.tags[2].id ? req.body.tags[2].id : null,
-      Tag4Id: req.body.tags[3].id ? req.body.tags[3].id : null,
-      Tag5Id: req.body.tags[4].id ? req.body.tags[4].id : null,
-      Tag6Id: req.body.tags[5].id ? req.body.tags[5].id : null,
-  };
+      Tag2Id: req.body.tags[1] ? req.body.tags[1].id : null,
+      Tag3Id: req.body.tags[2] ? req.body.tags[2].id : null,
+      Tag4Id: req.body.tags[3] ? req.body.tags[3].id : null,
+      Tag5Id: req.body.tags[4] ? req.body.tags[4].id : null,
+      Tag6Id: req.body.tags[5] ? req.body.tags[5].id : null,
+    };
 
-  console.log(updatedProject)
+  console.log(req);
     const headerAuth = req.headers['authorization'];
     const isAdmin = jwtUtils.getIsAdminUser(headerAuth);
 
