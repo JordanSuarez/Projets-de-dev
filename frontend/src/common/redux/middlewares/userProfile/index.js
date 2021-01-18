@@ -37,7 +37,6 @@ const userProfile = (store) => (next) => (action) => {
         })
         .catch(() => {
         });
-
       next(action);
       break;
     }
@@ -75,7 +74,6 @@ const userProfile = (store) => (next) => (action) => {
         .finally(() => {
           store.dispatch(redirectSuccess());
         });
-
       next(action);
       break;
     }
@@ -92,7 +90,6 @@ const userProfile = (store) => (next) => (action) => {
         })
         .catch(() => {
         });
-
       next(action);
       break;
     }
@@ -109,20 +106,17 @@ const userProfile = (store) => (next) => (action) => {
         })
         .catch(() => {
         });
-
       next(action);
       break;
     }
     case GET_PROJECTS: {
       const url = getEndpoint(PROJECTS, GET, ALL);
-
       callApi(url, GET)
         .then((response) => {
           store.dispatch(saveProjects(response.data));
         })
         .catch(() => {
         });
-
       next(action);
       break;
     }

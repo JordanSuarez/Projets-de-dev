@@ -6,4 +6,4 @@ export default {
   path: PROJECT,
   component: Project,
   requireAuthentication: false,
-}
+};

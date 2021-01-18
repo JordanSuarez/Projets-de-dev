@@ -6,4 +6,4 @@ export default {
   path: CONTACT,
   component: Contact,
   requireAuthentication: false,
-}
+};

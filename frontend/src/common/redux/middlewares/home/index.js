@@ -13,7 +13,6 @@ const homeMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_LATEST_PROJECTS: {
       const url = getEndpoint(PROJECTS, GET, TWELVE, action.projectLimit, action.projectOffset);
-
       callApi(url, GET)
         .then((response) => {
           store.dispatch(saveLastestProjects(response.data));
@@ -23,7 +22,6 @@ const homeMiddleware = (store) => (next) => (action) => {
         })
         .catch(() => {
         });
-
       next(action);
       break;
     }

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import {
   GET_PROFILES,
   saveProfiles,
@@ -12,7 +11,6 @@ const profiles = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_PROFILES: {
       const url = getEndpoint(USERS, GET, ALL);
-
       callApi(url, GET)
         .then((response) => {
           store.dispatch(saveProfiles(response.data));

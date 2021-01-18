@@ -1,5 +1,4 @@
 export default ({ breakpoints, palette }) => ({
-  /* ---------- Sidebar---------- */
   chatSidebar: {
     height: '100vh',
     width: '100vw',
@@ -16,11 +15,5 @@ export default ({ breakpoints, palette }) => ({
       flexDirection: 'row',
       padding: '80px 0 0 0',
     },
-
   },
-  messages: {
-
-  },
-
-
 });

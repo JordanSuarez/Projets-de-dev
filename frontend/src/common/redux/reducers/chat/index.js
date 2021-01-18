@@ -7,12 +7,6 @@ import {
 } from 'src/common/redux/actions/chat';
 
 const initialState = {
-  /*
-  status = 0 > chat fermé
-  status = 1 > chat ouvert
-  status = 2 > chat users list ouvert (mobile ou basse resolution)
-  status = 3 > chat user ouvert (mobile ou basse resolution)
-  */
   status: 'chatClosed',
   loading: true,
   messages: [],

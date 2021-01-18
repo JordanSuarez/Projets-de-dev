@@ -16,12 +16,10 @@ export default ({ breakpoints, palette }) => ({
       width: 'calc(100vw - 300px - 300px )',
     },
   },
-
   channelTitleContainer: {
     padding: '1em',
     borderBottom: 'solid 1px #59B0DF',
   },
-
   channelTitleSelected: {
     display: 'inline-block',
     position: 'relative',
@@ -35,16 +33,13 @@ export default ({ breakpoints, palette }) => ({
     fontWeight: 'bold',
     color: palette.blue,
   },
-
   messages: {
     overflowX: 'hidden',
     overflowY: 'scroll',
     [breakpoints.up('md')]: {
       padding: '0 1em',
     },
-
   },
-
   alignRight: {
     display: 'flex',
     flexDirection: 'row',
@@ -53,7 +48,6 @@ export default ({ breakpoints, palette }) => ({
     margin: '30px 0',
     textAlign: 'right',
   },
-
   alignLeft: {
     display: 'flex',
     flexDirection: 'row-reverse',
@@ -61,7 +55,6 @@ export default ({ breakpoints, palette }) => ({
     justifyContent: 'flex-end',
     margin: '30px 0',
   },
-
   message: {
     display: 'inline-block',
     margin: '3px 10px 3px 0',
@@ -74,7 +67,6 @@ export default ({ breakpoints, palette }) => ({
     position: 'relative',
     wordBreak: 'break-word',
   },
-
   myMessage: {
     margin: '3px 0 3px 0',
     minWidth: '130px',
@@ -87,23 +79,19 @@ export default ({ breakpoints, palette }) => ({
     position: 'relative',
     wordBreak: 'break-word',
   },
-
   avatar: {
     margin: '-6px 5px 10px 5px',
     width: '50px',
     height: '50px',
   },
-
   date: {
     fontSize: '10px',
     padding: '0 10px',
   },
-
   form: {
     width: '100%',
     display: 'flex',
   },
-
   inputMessage: {
     width: 'calc(100% - 6px)',
     padding: '8px',
@@ -115,17 +103,14 @@ export default ({ breakpoints, palette }) => ({
     boxShadow: 'inset 8px 8px 8px #3c3c3c, inset -8px -8px 8px #4e4e4e;',
     '&:before': {
       borderBottom: 'none',
-
     },
     '&:hover:not(.Mui-disabled):before': {
       borderBottom: 'none',
-
     },
     '&:after': {
       borderBottom: 'none',
     },
   },
-
   picker: {
     color: palette.blue,
     margin: '0 10px 0 0',
@@ -133,7 +118,6 @@ export default ({ breakpoints, palette }) => ({
       backgroundColor: 'transparent',
     },
   },
-
   submitButton: {
     color: palette.blue,
     '&:hover': {

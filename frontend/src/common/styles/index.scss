@@ -8,13 +8,11 @@
   -o-user-drag: none;
   -ms-user-drag: none;
 }
-
 body {
   background-color: vars.$light-blue ;
   font-family: 'Nunito', sans-serif;
   word-spacing: normal;
 }
-
 #root ::-webkit-scrollbar {
   width: 10px;
 }

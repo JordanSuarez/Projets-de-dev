@@ -10,7 +10,6 @@ import { isEmpty } from 'lodash';
 import SearchBar from 'src/common/components/SearchBar';
 import headerImage from './header-home.jpg';
 
-
 const Profiles = ({
   classes,
   getProfiles,

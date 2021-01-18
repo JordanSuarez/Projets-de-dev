@@ -1,5 +1,4 @@
-export default ({ breakpoints, palette }) => ({/* --------------  Show individual profile --------------- */
-
+export default ({ breakpoints, palette }) => ({
   containerUser: {
     position: 'fixed',
     top: '0',
@@ -24,7 +23,6 @@ export default ({ breakpoints, palette }) => ({/* --------------  Show individua
 
     },
   },
-
   closeUser: {
     zIndex: '30',
     color: palette.blue,
@@ -41,37 +39,30 @@ export default ({ breakpoints, palette }) => ({/* --------------  Show individua
       left: 'inherit',
     },
   },
-
   user: {
     textAlign: 'center',
     padding: '0 1em',
   },
-
   userTitle: {
     margin: '1em auto',
     fontSize: '1.3em',
   },
-
   userImage: {
     margin: '0 auto',
     width: '150px',
     height: '150px',
   },
-
   username: {
     margin: '1em auto',
     fontSize: '1.3em',
   },
-
   userBio: {
     wordBreak: 'break-word',
     margin: '1em auto',
   },
-
   userProfile:{
     backgroundColor: palette.blue,
     color: palette.lightBlue,
     textTransform: 'lowercase',
-
   },
 });

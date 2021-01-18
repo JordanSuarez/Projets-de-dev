@@ -11,11 +11,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapsDispatchToProps = (dispatch) => ({
-
   setStatus: (status) => {
     dispatch(setChat(status));
   },
-
 });
 
 export default compose(

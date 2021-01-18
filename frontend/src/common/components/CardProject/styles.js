@@ -17,18 +17,15 @@ export default ({ breakpoints, palette }) => ({
       cursor: 'pointer',
     },
   },
-
   image: {
     height: '200px',
   },
-
   contentCard: {
     height: '100% !important',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-
   text: {
     display: 'flex',
     flexDirection: 'column',
@@ -37,7 +34,6 @@ export default ({ breakpoints, palette }) => ({
     textAlign: 'center',
     backgroundColor: palette.white,
   },
-
   title: {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
@@ -111,7 +107,6 @@ export default ({ breakpoints, palette }) => ({
       },
     },
   },
-
   avatar: {
     margin: '0.5em',
     transition: 'all .2s ease-in-out',
@@ -159,8 +154,5 @@ export default ({ breakpoints, palette }) => ({
     display: '-webkit-box',
     '-webkit-line-clamp': '3',
     '-webkit-box-orient': 'vertical',
-    // '& p': {
-    //   overflowWrap: 'break-word',
-    // },
   },
 });

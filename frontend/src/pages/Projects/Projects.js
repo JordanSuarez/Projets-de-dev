@@ -11,7 +11,6 @@ import SearchBar from 'src/common/components/SearchBar';
 import { isEmpty } from 'lodash';
 import headerImage from './header-home.jpg';
 
-
 const Projects = ({
   classes,
   getProjects,
