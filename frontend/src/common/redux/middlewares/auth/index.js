@@ -58,7 +58,6 @@ const authMiddleWare = (store) => (next) => (action) => {
         password: action.password,
         username: action.username,
       };
-
       callApi(url, POST, credentials)
         .then(() => {
           store.dispatch(redirect(getLoginRoute()));

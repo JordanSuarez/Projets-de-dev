@@ -21,17 +21,18 @@ const Menu = ({
   const [showMenu, setShowMenu] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
-  /* ------------------------------------------------------- */
   // Affichage de la liste des users si width > 959
   // sinon bouton affichage du bouton pour ouvrir la liste
   const [width, setWidth] = useState(window.innerWidth);
   const updateWidthAndHeight = () => {
     setWidth(window.innerWidth);
   };
+
   useEffect(() => {
     window.addEventListener('resize', updateWidthAndHeight);
     return () => window.removeEventListener('resize', updateWidthAndHeight);
   });
+
   useEffect(() => {
     if (width > 959 && width < 1280) {
       setShowMenu(true);
@@ -40,9 +41,8 @@ const Menu = ({
       setShowMenu(false);
     }
   }, [width]);
-  /* ------------------------------------------------------ */
 
-  // Changement d'onglet selectionné
+  // Change of selected tab
   useEffect(() => {
   }, [status]);
 
@@ -50,12 +50,10 @@ const Menu = ({
     setStatus('menuOpen');
     setShowMenu(true);
   };
-
   const closeMenu = () => {
     setStatus('chatOpen');
     setShowMenu(false);
   };
-
   const openUsersList = () => {
     setStatus('usersListOpen');
   };
@@ -71,9 +69,7 @@ const Menu = ({
       <Button className={classes.showMenu} onClick={openMenu}>
         {showMenu === false && <KeyboardArrowDownIcon />}
       </Button>
-
       <div className={classes.menuContainer}>
-
         {showMenu === true && (
         <>
           <Button className={classes.showMenu} onClick={closeMenu}>

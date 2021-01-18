@@ -3,16 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { getLegalMentionRoute, getContactRoute, getAboutRoute, getHomeRoute } from 'src/common/routing/routesResolver';
 import { classes as classesProps } from 'src/common/classes';
 
-// eslint-disable-next-line arrow-body-style
 const Footer = ({ classes }) => {
   const history = useHistory();
   const handleMentions = () => history.push(getLegalMentionRoute());
   const handleContact = () => history.push(getContactRoute());
   const handleAbout = () => history.push(getAboutRoute());
   const handleHome = () => history.push(getHomeRoute());
-
-
-
 
   return (
     <footer className={classes.footer}>
@@ -47,7 +43,6 @@ const Footer = ({ classes }) => {
           À propos
         </span>
       </div>
-
       <div className={classes.icons}>
         <i className="fab fa-facebook-square" />
         <i className="fab fa-twitter-square" />

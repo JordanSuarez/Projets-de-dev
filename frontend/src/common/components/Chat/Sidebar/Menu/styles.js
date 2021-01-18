@@ -12,7 +12,6 @@ export default ({ breakpoints, palette }) => ({
       width: '320px',
       padding: '130px 0 0 0 ',
     },
-
   },
   showMenu: {
     zIndex: '30',
@@ -24,9 +23,7 @@ export default ({ breakpoints, palette }) => ({
       display: 'none',
       position: 'relative',
     },
-
   },
-
   menu: {
     width: '100vw',
     padding: '4em 0em 1em 0em',
@@ -40,7 +37,6 @@ export default ({ breakpoints, palette }) => ({
       justifyContent: 'flex-start',
     },
   },
-
   menuItem: {
     display: 'flex',
     padding: '1em',
@@ -57,18 +53,13 @@ export default ({ breakpoints, palette }) => ({
   menuItemHidden: {
     display: 'none',
   },
-
   menuItemContent: {
     cursor: 'pointer',
     display: 'flex',
     alignItems: ' center',
     padding: '1em',
     color: palette.blue,
-    [breakpoints.up('md')]: {
-
-    },
   },
-
   menuItemContentSelected: {
     cursor: 'pointer',
     backgroundColor: palette.blue,
@@ -76,20 +67,14 @@ export default ({ breakpoints, palette }) => ({
     borderRadius: '6px',
     color: palette.darkBlue,
     textAlign: 'center',
-    [breakpoints.up('md')]: {
-
-    },
   },
-
   menuItemIcon: {
     marginRight: '1em',
     [breakpoints.up('md')]: {
       marginRight: '0.5em',
       marginLeft: '0.5em',
     },
-
   },
-
   menuItemTitle: {
     [breakpoints.up('md')]: {
       display: 'none',
@@ -98,13 +83,10 @@ export default ({ breakpoints, palette }) => ({
       display: 'block',
     },
   },
-
   menuItemArrow: {
     color: palette.blue,
     [breakpoints.up('md')]: {
       display: 'none',
     },
   },
-  
-
 });

@@ -1,5 +1,4 @@
 export default ({ breakpoints, palette }) => ({
-
   users: {
     position: 'fixed',
     top: '0',
@@ -36,11 +35,9 @@ export default ({ breakpoints, palette }) => ({
       position: 'relative',
     },
   },
-
   listTitle: {
     padding: '2em 0 0 0',
   },
-
   title: {
     display: 'flex',
     flexDirection: 'row',
@@ -53,18 +50,14 @@ export default ({ breakpoints, palette }) => ({
       justifyContent: 'center',
     },
   },
-
   menuItemIcon: {
     marginRight: '1em',
   },
-
   menuItemIconSelected: {
     marginRight: '1em',
     padding: '5em',
     backgroundColor: palette.lightBlue,
-
   },
-
   containerUsers: {
     display: 'flex',
     flexDirection: 'column',
@@ -75,18 +68,14 @@ export default ({ breakpoints, palette }) => ({
     overflowX: 'hidden',
     margin: '1em auto',
     padding: '1em 0 0 0 ',
-
     [breakpoints.up('md')]: {
       padding: '1em 0 0 1em ',
     },
   },
-
   userContent: {
     cursor: 'pointer',
   },
-
   user: {
-
     color: palette.lightBlue,
     display: 'flex',
     flexDirection: 'row',
@@ -95,13 +84,10 @@ export default ({ breakpoints, palette }) => ({
     padding: '5px',
     wordBreak: ' break-word',
   },
-
   listUserImage: {
     margin: '0 auto',
   },
-
   listUsername: {
     padding: '0 0 0 1em',
   },
-
 });

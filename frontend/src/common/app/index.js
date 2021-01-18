@@ -17,7 +17,6 @@ import Chat from 'src/common/components/Chat';
 
 const App = ({ classes }) => {
   const [atTheTopOfThePage, setAtTheTopOfThePage] = useState(true);
-
   // Display scrollButton when scroll event is trigger
   // const handleScroll = () => (
   //   window.pageYOffset > 200
@@ -39,6 +38,10 @@ const App = ({ classes }) => {
           <ScrollButton />
         </IconButton>
         )}
+        {/*
+          The chat is loaded at the launch of the
+          site for possible modifications (notifications ...).
+        */}
         <Chat />
       </Provider>
     </MuiThemeProvider>

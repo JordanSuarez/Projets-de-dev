@@ -3,19 +3,16 @@ export default ({ palette }) => ({
   container: {
     padding: '3em 10px 1em 10px',
   },
-
   content: {
     margin: '0 auto',
     maxWidth: '400px',
     backgroundColor: palette.white,
     padding: '1em 1em',
   },
-
   formTitle: {
     fontSize: '1.3em',
     padding: '0.5em 0',
   },
-
   textfield: {
     marginBottom: '0.5em',
     '& .MuiFormLabel-root.Mui-focused': {
@@ -25,12 +22,10 @@ export default ({ palette }) => ({
       borderColor: palette.darkBlue,
     },
   },
-
   containerButton: {
     display: 'flex',
     justifyContent: 'space-between',
   },
-
   submit: {
     textTransform: 'initial',
     color: palette.white,
@@ -61,7 +56,6 @@ export default ({ palette }) => ({
     alignItems: 'start',
     backGroundColor: 'blue',
   },
-
   inputFile: {
     position: 'relative',
     display: 'flex',
@@ -70,7 +64,6 @@ export default ({ palette }) => ({
     borderRadius: '4px',
     paddingTop: '4px',
   },
-
   customUploadButton: {
     color: '#78797d',
     display: 'flex',

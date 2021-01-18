@@ -7,7 +7,9 @@ const { REACT_APP_API_HOST } = process.env;
 const { REACT_APP_API_PORT } = process.env;
 
 // BASE URL of api, from .env file
-export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT_APP_API_PORT}/api`;
+// If the site is launched on the server remove :${REACT_APP_API_PORT}
+// Local: `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}:${REACT_APP_API_PORT}/api`;
+export const apiUrl = `${REACT_APP_API_PROTOCOL}://${REACT_APP_API_HOST}/api`;
 
 /**
  * Call API with all axios instance method (POST, GET, PUT, PATCH, DELETE)

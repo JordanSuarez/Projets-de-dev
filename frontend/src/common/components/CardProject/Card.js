@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import PropTypes from 'prop-types';
 import {
   Card,
@@ -43,9 +42,11 @@ const CardProject = ({
   const history = useHistory();
   const [isLike, setIsLike] = useState(like);
   const [voteCount, setVoteCount] = useState(vote);
+
   const handleDisplayProject = () => {
     history.push(getProjectRoute(projectId));
   };
+
   const handleDisplayProjectEdit = () => {
     history.push(getEditionProjectRoute(projectId));
   };
@@ -59,6 +60,7 @@ const CardProject = ({
     setIsLike(true);
     setVoteCount(voteCount + 1);
   };
+
   const handleDislikeProject = (id) => {
     setDislike(id);
     setIsLike(false);

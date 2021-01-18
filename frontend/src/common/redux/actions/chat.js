@@ -12,36 +12,36 @@ export const setChat = (status) => ({
   status,
 });
 
-// sauvegarde des messages recu par socket.io dans le state redux
+// save messages received by socket.io in the redux state
 export const addMessage = (message) => ({
   type: ADD_MESSAGE,
   message,
 });
 
-// recupeation des messages en DB a l'ouverture du chat
+// recovery of messages in DB when opening the chat
 export const getMessages = () => ({
   type: GET_MESSAGES,
 });
 
-// sauvegarde des messages
+// save messages
 export const saveMessages = (messages) => ({
   type: SAVE_MESSAGES,
   messages,
 });
 
-// sauvegarde du profil choisi a afficher depuis le chat
+// saving the selected profile to display from the chat
 export const saveUserSelected = (profile) => ({
   type: SAVE_USER_SELECTED,
   profile,
 });
 
 // ---------------- Socket.io -----------------------
-// connection socket.io au chargement de la page
+// socket.io connection when the page loads
 export const connectWebSocket = () => ({
   type: CONNECT_WEBSOCKET,
 });
 
-// envoi message
+// send message
 export const emitMessage = (message, username, userImage) => ({
   type: EMIT_MESSAGE,
   message,

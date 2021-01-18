@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { any, arrayOf } from 'prop-types';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';

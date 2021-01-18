@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 
 const Logout = ({ handleLogout }) => {
   const history = useHistory();
-
   useEffect(() => {
     handleLogout();
     history.push(getHomeRoute());

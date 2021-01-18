@@ -1,4 +1,3 @@
-import { mergeClasses } from '@material-ui/styles';
 import React from 'react';
 
 import Base from 'src/common/components/Base';

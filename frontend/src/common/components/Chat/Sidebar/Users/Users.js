@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import { Avatar, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import GroupIcon from '@material-ui/icons/Group';
 import Loader from 'src/common/components/Loader';
 import avatar from 'src/common/assets/images/avatar.png';
@@ -21,9 +20,9 @@ const Users = ({
   const arrayProfiles = Object.values(profiles);
 
   /* ---------------------- a stocker dans le state ---------------------------- */
-  // Affichage de la liste des users sur la droite si width > 1280
-  // si width entre 960 et 1279 affichage sur la gauche
-  // sinon bouton affichage du bouton pour ouvrir la liste
+  // Display of the list of users on the right if width> 1280
+  // if width between 960 and 1279 display on the left
+  // otherwise button display of the button to open the list
   const [showUserList, setShowUserList] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const updateWidthAndHeight = () => {
@@ -82,7 +81,6 @@ const Users = ({
                     </div>
                   </div>
                 </div>
-
               ))}
             </>
           )}
