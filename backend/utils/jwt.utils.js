@@ -4,16 +4,15 @@ const jwt = require('jsonwebtoken');
 const SIGN_SECRET = process.env.HASH;
 
 // Exported functions
- module.exports = {
+module.exports = {
 	generateTokenForUser: (userData) => {
 		return jwt.sign({
-			userId: userData.id,
-			isAdmin: userData.isAdmin,
-		},
-		SIGN_SECRET,
-		{
-			expiresIn: '3h'
-		})
+				userId: userData.id,
+				isAdmin: userData.isAdmin,
+			},
+			SIGN_SECRET, {
+				expiresIn: '3h'
+			})
 	},
 
 	parseAuthorization: (authorization) => {
@@ -22,28 +21,28 @@ const SIGN_SECRET = process.env.HASH;
 
 	getIsAdminUser: (authorization) => {
 		const token = module.exports.parseAuthorization(authorization);
-		if(token != null) {
+		if (token != null) {
 			try {
 				const jwtToken = jwt.verify(token, SIGN_SECRET);
-				if(jwtToken != null) {
+				if (jwtToken != null) {
 					isAdminUser = jwtToken.isAdmin;
-          return isAdminUser
+					return isAdminUser
 				}
-			} catch(err) {}
+			} catch (err) {}
 		}
-		},
+	},
 
 	getUserId: (authorization) => {
 		const token = module.exports.parseAuthorization(authorization);
-		if(token != null) {
+		if (token != null) {
 			try {
 				const jwtToken = jwt.verify(token, SIGN_SECRET);
-				if(jwtToken != null) {
+				if (jwtToken != null) {
 					UserId = jwtToken.userId;
-          return UserId 
+					return UserId
 				}
-			} catch(err) {}
+			} catch (err) {}
 		}
 		return UserId = -1;
 	}
-} 
+}
