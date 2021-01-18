@@ -1,7 +1,6 @@
 const models   = require('../models');
 
 module.exports = {
-
   new: (req, res) => {
   console.log(req.body)
     const headerAuth = req.headers['authorization'];
@@ -21,6 +20,5 @@ module.exports = {
     .catch((err) => {
       return res.status(500).json({'error': 'Votre message n\'a pas pu être envoyé'});
     });
-      
   },
 }

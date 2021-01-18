@@ -1,9 +1,6 @@
-
-const { Op, where } = require("sequelize");
 const models   = require('../models');
 
 module.exports = {
-
   getMessagesList: (req, res) => {
     let limit = req.query.limit;
     let offset = req.query.offset;

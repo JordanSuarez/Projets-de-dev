@@ -1,4 +1,4 @@
-import { Create, Edit, SimpleForm, TextInput, List, Datagrid, ImageField, TextField, EditButton } from 'react-admin';
+import { Create, Edit, SimpleForm, TextInput, List, Datagrid, ImageField, TextField, EditButton, Toolbar, SaveButton, DeleteButton } from 'react-admin';
 
 
 export const TagList = (props) => {
@@ -22,12 +22,24 @@ export const TagCreate = (props) => {
 </Create>
   )
 }
-
-export const TagEdit = (props) => {
+/*
+const TagEditToolbar = props => (
+    <Toolbar {...props} >
+        <SaveButton />
+        if(){
+            <DeleteButton />
+        }
+    </Toolbar>
+);
+add <SimpleForm toolbar={<TagEditToolbar />}> on return for custom toolbar
+*/
+export const TagEdit = (props, { record }) => {
+    console.log(record);
   return (
     <Edit {...props}>
-    <SimpleForm>
-    <TextInput label="Nom" source="name" />
+        <SimpleForm >
+        <TextInput label="Nom" source="name" />
+
     </SimpleForm>
 </Edit>
   )

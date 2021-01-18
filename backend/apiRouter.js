@@ -71,6 +71,7 @@ exports.router = (() => {
 
     // BackOffice routes:
 
+    // Login Backoffice
     apiRouter.route('/backoffice/login').post(userControllerBackOffice.login); // OK
 
 
@@ -94,7 +95,7 @@ exports.router = (() => {
 
     // -Tags routes
     apiRouter.route('/backoffice/tags').get(tagControllerBackOffice.getTagList); // OK
-    apiRouter.route('/backoffice/tags/:id').get(tagController.getTagbyId); // OK
+    apiRouter.route('/backoffice/tags/:id').get(tagControllerBackOffice.getTagbyId); // OK
     apiRouter.route('/backoffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
     apiRouter.route('/backoffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
     apiRouter.route('/backoffice/tags').post(tagControllerBackOffice.createTag); // OK
