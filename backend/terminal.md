@@ -1,4 +1,4 @@
-``sequelize model:create --attributes "name:string email:string password:string isAdmin:boolean" --name User``
+``sequelize model:create --attributes "username:string email:string bio:string userImage:string password:string isAdmin:boolean" --name User``
 
 ``sequelize model:create --attributes "title:string description:string vote:integer image:string github_link:string project_link:string userId:integer" --name Project``
 

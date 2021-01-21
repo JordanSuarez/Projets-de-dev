@@ -22,7 +22,7 @@ const validate = (values) => {
 };
 
 const Login = ({
-  classes, handleLogin, redirect, initialValues, hasError, changeHasError, isLogged,
+  classes, handleLogin, redirect, hasError, changeHasError, isLogged,
 }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -54,7 +54,6 @@ const Login = ({
           <Form
             className={classes.form}
             onSubmit={handleLogin}
-            initialValues={initialValues}
             validate={validate}
             render={({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} noValidate>
@@ -107,9 +106,6 @@ Login.propTypes = {
   redirect: string.isRequired,
   hasError: bool.isRequired,
   isLogged: bool.isRequired,
-  initialValues: shape({
-    email: string.isRequired,
-  }).isRequired,
 };
 
 export default Login;
