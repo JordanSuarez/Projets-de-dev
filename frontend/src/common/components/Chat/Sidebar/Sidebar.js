@@ -9,7 +9,6 @@ import User from 'src/common/components/Chat/Sidebar/User';
 
 const Sidebar = ({
   classes,
-
 }) => (
   <>
     <div className={classes.chatSidebar}>
@@ -24,10 +23,6 @@ const Sidebar = ({
 
 Sidebar.propTypes = {
   ...classesProps,
-};
-
-Sidebar.defaultProps = {
-
 };
 
 export default Sidebar;

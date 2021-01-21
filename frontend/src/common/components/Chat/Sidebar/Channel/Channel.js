@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import { Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import GroupIcon from '@material-ui/icons/Group';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ForumIcon from '@material-ui/icons/Forum';
 
@@ -16,18 +13,20 @@ const Channel = ({
   status,
 }) => {
   /* ---------------------- a stocker dans le state ---------------------------- */
-  // Affichage de la liste des channel
-  // si width > 960  affichage sur la gauche
-  // sinon bouton affichage du bouton pour ouvrir la liste
+  // Viewing the channel list
+  // if width> 960 display on the left
+  // otherwise button display of the button to open the list
   const [showChannelsList, setShowChannelsList] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const updateWidthAndHeight = () => {
     setWidth(window.innerWidth);
   };
+
   useEffect(() => {
     window.addEventListener('resize', updateWidthAndHeight);
     return () => window.removeEventListener('resize', updateWidthAndHeight);
   });
+
   useEffect(() => {
     if (width > 960) {
       setShowChannelsList(true);
@@ -36,15 +35,14 @@ const Channel = ({
       setShowChannelsList(false);
     }
   }, [width]);
-
   /* ------------------------------------------------------ */
+
   const closedListChannels = () => {
     setStatus('menuOpen');
   };
   return (
     <>
       {((status === 'channelsListOpen') || (showChannelsList === true)) && (
-
       <div className={classes.containerChannels}>
         {width < 960 && (
           <Button className={classes.closedListChannel} onClick={closedListChannels}>
@@ -65,9 +63,7 @@ const Channel = ({
             <ChevronRightIcon className={classes.menuItemArrow} />
           </div>
         </div>
-
       </div>
-
       )}
     </>
   );

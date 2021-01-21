@@ -9,7 +9,6 @@ const profile = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_PROFILE: {
       const url = getEndpoint(USERS, GET, ONE, action.profileId);
-
       callApi(url, GET)
         .then(({ data }) => {
           store.dispatch(saveProfile(data));

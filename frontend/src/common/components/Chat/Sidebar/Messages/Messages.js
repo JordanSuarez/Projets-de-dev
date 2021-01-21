@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import {
@@ -21,9 +20,9 @@ const Messages = ({
   loading,
 }) => {
   const [inputValue, setInputValue] = useState('');
-
   const [emojiPickerState, SetEmojiPicker] = useState(false);
   const messageScroll = useRef(null);
+
   useEffect(() => {
     if (!loading) {
       messageScroll.current.scrollTop = messageScroll.current.scrollHeight;
@@ -75,7 +74,10 @@ const Messages = ({
                 className={userId === currentUserId ? classes.alignRight : classes.alignLeft}
               >
                 <div>
-                  <p className={userId === currentUserId ? classes.pseudoRight : classes.pseudoLeft}>
+                  <p className={
+                      userId === currentUserId ? classes.pseudoRight : classes.pseudoLeft
+                    }
+                  >
                     {User.username}
                   </p>
                   <div className={userId === currentUserId ? classes.myMessage : classes.message}>
@@ -85,7 +87,6 @@ const Messages = ({
                 </div>
                 <Avatar className={classes.avatar} alt="avatar user" src={User.userImage || defaultAvatar} />
               </li>
-
             ))}
           </ul>{emojiPicker}
         </>
@@ -127,10 +128,6 @@ Messages.propTypes = {
   messages: PropTypes.array.isRequired,
   currentUser: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-};
-
-Messages.defaultProps = {
-
 };
 
 export default Messages;

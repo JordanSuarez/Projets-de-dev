@@ -6,4 +6,4 @@ export default {
   path: USER_PROFILE,
   component: UserProfile,
   requireAuthentication: true,
-}
+};

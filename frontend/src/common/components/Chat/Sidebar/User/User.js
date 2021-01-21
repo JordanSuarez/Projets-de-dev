@@ -3,17 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
-  Link,
 } from 'react-router-dom';
 import { getProfileRoute } from 'src/common/routing/routesResolver';
 import PropTypes from 'prop-types';
 import { classes as classesProps } from 'src/common/classes';
 import { Avatar, Button } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import Loader from 'src/common/components/Loader';
 import avatar from './avatar.png';
-
 
 const User = ({
   classes,
@@ -29,10 +25,12 @@ const User = ({
   const updateWidthAndHeight = () => {
     setWidth(window.innerWidth);
   };
+
   useEffect(() => {
     window.addEventListener('resize', updateWidthAndHeight);
     return () => window.removeEventListener('resize', updateWidthAndHeight);
   });
+
   useEffect(() => {
     if (width > 959) {
       // setShowList(true);
@@ -43,15 +41,13 @@ const User = ({
       // console.log(width, ' je veux pas voir la liste');
     }
   }, [width]);
-  /* ------------------------------------------------------ */
+
   const handleDisplayProfile = () => {
     setStatus('chatClosed');
   };
-
   const closedProfileUser = () => {
     setStatus('usersListOpen');
   };
-
   return (
     <>
       {(status === 'userProfileOpen') && (

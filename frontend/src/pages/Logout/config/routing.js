@@ -6,4 +6,4 @@ export default {
   path: LOGOUT,
   component: Logout,
   requireAuthentication: false,
-}
+};

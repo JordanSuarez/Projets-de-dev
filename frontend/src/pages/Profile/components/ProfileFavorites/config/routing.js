@@ -6,4 +6,4 @@ export default {
   path: PROFILE_FAVORITES,
   component: ProfileFavorites,
   requireAuthentication: false,
-}
+};

@@ -6,4 +6,4 @@ export default {
   path: PROFILE_PROJECTS,
   component: ProfileProjects,
   requireAuthentication: false,
-}
+};

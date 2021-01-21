@@ -16,7 +16,7 @@ const Contact = ({ classes, submitContact }) => {
 
   return (
     <Base>
-    <img className={classes.image} src={headerImage} alt="header" />
+      <img className={classes.image} src={headerImage} alt="header" />
       <div className={classes.container}>
         <Box borderRadius={16} className={classes.content} boxShadow={2}>
           <h2 className={classes.formTitle}>Nous contacter</h2>
