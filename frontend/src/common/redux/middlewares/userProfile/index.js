@@ -28,7 +28,7 @@ const userProfile = (store) => (next) => (action) => {
       axios.get(`${apiUrl}/${USERS}/${ME}`,
         {
           headers: {
-            Authorization: `Bearer ${getToken()}` || null,
+            Authorization: `Bearer ${getToken()}`,
           },
         })
         .then(({ data }) => {
