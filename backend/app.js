@@ -43,12 +43,6 @@ app.use((request, response, next) => {
   next();
 });
 
-
-app.get('/', (req, res) => {
-  res.setHeader('Content-Type', 'text/html');
-  res.status(200).send('<h1>Test</h1>');
-});
-
 app.use('/api/', apiRouter);
 
 // Chat

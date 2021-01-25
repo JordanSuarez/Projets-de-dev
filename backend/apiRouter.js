@@ -1,21 +1,22 @@
 const express = require('express');
 
-const userController = require('./routes/userController');
-const projectController = require('./routes/projectController');
-const tagController = require('./routes/tagController');
-const commentController = require('./routes/commentController');
-const channelController = require('./routes/channelController');
-const messageController = require('./routes/messageController');
-const likeController = require('./routes/likeController');
-const contactController = require('./routes/contactController');
+// Controllers frontOffice
+const userController = require('./controllers/userController');
+const projectController = require('./controllers/projectController');
+const tagController = require('./controllers/tagController');
+const commentController = require('./controllers/commentController');
+const channelController = require('./controllers/channelController');
+const messageController = require('./controllers/messageController');
+const likeController = require('./controllers/likeController');
+const contactController = require('./controllers/contactController');
 
 // Controllers BackOffice
-const userControllerBackOffice = require('./routes_backOffice/userControllerBackOffice');
-const projectControllerBackOffice = require('./routes_backOffice/projectControllerBackOffice');
-const tagControllerBackOffice = require('./routes_backOffice/tagControllerBackOffice');
-const commentControllerBackOffice = require('./routes_backOffice/commentControllerBackOffice');
-const contactControllerBackOffice = require('./routes_backOffice/contactControllerBackOffice');
-const messageControllerBackOffice = require('./routes_backOffice/messageControllerBackOffice');
+const userControllerBackOffice = require('./controllers_backoffice/userControllerBackOffice');
+const projectControllerBackOffice = require('./controllers_backoffice/projectControllerBackOffice');
+const tagControllerBackOffice = require('./controllers_backoffice/tagControllerBackOffice');
+const commentControllerBackOffice = require('./controllers_backoffice/commentControllerBackOffice');
+const contactControllerBackOffice = require('./controllers_backoffice/contactControllerBackOffice');
+const messageControllerBackOffice = require('./controllers_backoffice/messageControllerBackOffice');
 
 // Router
 exports.router = (() => {
@@ -30,7 +31,6 @@ exports.router = (() => {
     apiRouter.route('/users/me/edit').patch(userController.updateUserProfile); // OK
     apiRouter.route('/users/me/delete').delete(userController.deleteMe); //OK
     apiRouter.route('/users/:id').get(userController.getUserById); // OK
-
 
     // Users Like
     apiRouter.route('/users/me/likes').get(likeController.getLikesByMe); // OK
@@ -69,11 +69,11 @@ exports.router = (() => {
     // Contact routes
     apiRouter.route('/contact').post(contactController.new); // OK
 
+    
     // BackOffice routes:
 
     // Login Backoffice
     apiRouter.route('/backoffice/login').post(userControllerBackOffice.login); // OK
-
 
     // -Projects routes
     apiRouter.route('/backoffice/projects/').get(projectControllerBackOffice.allProjects); // OK
