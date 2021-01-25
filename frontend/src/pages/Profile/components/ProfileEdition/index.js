@@ -1,7 +1,6 @@
 import { withStyles } from '@material-ui/core';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
-// eslint-disable-next-line import/no-unresolved
 import { getProfileInfos, updateProfile } from 'src/common/redux/actions/userProfile';
 
 import ProfileEdition from './ProfileEdition';

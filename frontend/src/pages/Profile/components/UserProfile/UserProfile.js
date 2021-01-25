@@ -33,7 +33,7 @@ const UserProfile = ({
     }
   }, [redirect]);
 
-  // The AlertDialog context for each case where it will be called
+  // The AlertDialog context
   const [context, setContext] = useState({
     alertId: null,
     title: '',
@@ -78,7 +78,7 @@ const UserProfile = ({
     }
   };
 
-  // Loop on buttons array to not repeat the button component
+  // Loop on array to not repeat the button component
   const buttons = [
     {
       id: 1, method: () => openDeleteModal(alertUserProfile), label: 'Supprimer mon compte',

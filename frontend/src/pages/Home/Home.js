@@ -26,6 +26,8 @@ const Home = ({
 
   const arrayProjects = Object.values(projects);
   const handleDragStart = (e) => e.preventDefault();
+
+  // Carousel
   const cardsProjects = arrayProjects.map((project) => {
     let like = false;
 

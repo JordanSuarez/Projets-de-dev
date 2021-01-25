@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  func, shape, string, bool,
+  func, string, bool,
 } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
