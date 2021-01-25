@@ -13,8 +13,10 @@ const validate = (values) => {
   const errors = {};
   let validationEmail = null;
   let validationPassword = null;
+  let validationUsername = null;
   const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const regexPassword = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+  const regexPseudo = /^[a-zA-Z0-9!]{5,}$/;
   if (regexEmail.test(values.email)) {
     validationEmail = true;
   }
@@ -28,10 +30,17 @@ const validate = (values) => {
   else {
     validationPassword = false;
   }
-  
-
+  if (regexPseudo.test(values.username)) {
+    validationUsername = true;
+  }
+  else {
+    validationPassword = false;
+  }
   if (!values.username) {
     errors.username = 'Ce champ est requis';
+  }
+  if (!validationUsername) {
+    errors.username = 'Le pseudo doit être composé de minimum 5 caractères (lettres et nombre)';
   }
   if (!values.email) {
     errors.email = 'Ce champ est requis';

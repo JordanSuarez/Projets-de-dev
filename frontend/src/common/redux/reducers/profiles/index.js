@@ -1,7 +1,5 @@
-import {
-  SAVE_PROFILES,
-// eslint-disable-next-line import/no-unresolved
-} from 'src/common/redux/actions/profiles';
+import { SAVE_PROFILES } from 'src/common/redux/actions/profiles';
+import { DISABLE_LOADER } from 'src/common/redux/actions/loader';
 
 const initialState = {
   profiles: {},
@@ -14,6 +12,12 @@ const profiles = (state = initialState, action = {}) => {
       return {
         ...state,
         profiles: action.profiles,
+        loading: false,
+      };
+    }
+    case DISABLE_LOADER: {
+      return {
+        ...state,
         loading: false,
       };
     }

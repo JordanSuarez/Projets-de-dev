@@ -10,6 +10,7 @@ import {
   ADD_LIKE,
   ADD_DISLIKE,
 } from 'src/common/redux/actions/projects';
+import { disableLoader } from 'src/common/redux/actions/loader';
 
 const profiles = (store) => (next) => (action) => {
   switch (action.type) {
@@ -26,6 +27,7 @@ const profiles = (store) => (next) => (action) => {
           store.dispatch(saveAllProjects(response[1].data));
         })
         .catch(() => {
+          store.dispatch(disableLoader());
         });
       next(action);
       break;

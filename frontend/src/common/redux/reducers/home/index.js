@@ -1,8 +1,8 @@
 import {
   SAVE_LATEST_PROJECTS,
   GET_LATEST_PROJECTS,
-  CLEAR_HOME_STATE,
 } from 'src/common/redux/actions/home';
+import { DISABLE_LOADER } from 'src/common/redux/actions/loader';
 
 const initialState = {
   projects: {},
@@ -24,9 +24,10 @@ const home = (state = initialState, action = {}) => {
         loading: false,
       };
     }
-    case CLEAR_HOME_STATE: {
+    case DISABLE_LOADER: {
       return {
-        ...initialState,
+        ...state,
+        loading: false,
       };
     }
     default: return { ...state };

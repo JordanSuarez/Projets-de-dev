@@ -117,6 +117,8 @@ const endpoints = {
 // eslint-disable-next-line import/prefer-default-export
 export const getEndpoint = (resource, method, type, meta, offset) => {
   try {
+    // same as endpoints.users.get.all for example
+    // in this case endpoint return /users
     const endpoint = endpoints[resource][method][type];
     if (offset && meta) {
       return (`/${endpoint(meta, offset)}`);

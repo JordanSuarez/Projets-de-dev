@@ -5,10 +5,7 @@ import { connect } from 'react-redux';
 import {
   getProfileInfos, handleDeleteUserProfile, getProfileProjectsLikes,
 } from 'src/common/redux/actions/userProfile';
-import { handleDeleteProject, clearProjectPageState } from 'src/common/redux/actions/project';
-import { clearProjectsState } from 'src/common/redux/actions/projects';
-import { clearHomeState } from 'src/common/redux/actions/home';
-import { clearProfileState } from 'src/common/redux/actions/profile';
+import { handleDeleteProject } from 'src/common/redux/actions/project';
 import UserProfile from './UserProfile';
 import styles from './styles';
 
@@ -32,12 +29,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getMyProjectsLiked: () => {
     dispatch(getProfileProjectsLikes());
-  },
-  clearState: () => {
-    dispatch(clearHomeState());
-    dispatch(clearProjectsState());
-    dispatch(clearProfileState());
-    dispatch(clearProjectPageState());
   },
 });
 

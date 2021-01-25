@@ -57,7 +57,8 @@ const Login = ({
             validate={validate}
             render={({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} noValidate>
-                {errorMessage && <p>Identifiants ou mot de passe invalide</p>}
+                {errorMessage
+                && <p className={classes.error}>Identifiants ou mot de passe invalide</p>}
 
                 <TextField
                   className={classes.textfield}

@@ -21,7 +21,6 @@ const Projects = ({
   isLogged,
   getMyLikes,
   myLikes,
-  clearState,
 }) => {
   const { offset } = useParams();
   const history = useHistory();
@@ -45,7 +44,6 @@ const Projects = ({
   };
 
   useEffect(() => {
-    clearState();
     getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
     if (isLogged) {
       getMyLikes();
@@ -159,7 +157,6 @@ Projects.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   getMyLikes: PropTypes.func.isRequired,
-  clearState: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
 };
 

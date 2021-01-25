@@ -6,8 +6,6 @@ import projectsListRouting from 'src/pages/Projects/config/routing';
 import profileRouting from 'src/pages/Profile/config/routing';
 import userProfileRouting from 'src/pages/Profile/components/UserProfile/config/routing';
 import editionProfileRouting from 'src/pages/Profile/components/ProfileEdition/config/routing';
-import profileFavoritesRouting from 'src/pages/Profile/components/ProfileFavorites/config/routing';
-import profileProjectsRouting from 'src/pages/Profile/components/ProfileProjects/config/routing';
 import profilesListRouting from 'src/pages/Profiles/config/routing';
 import loginRouting from 'src/pages/Login/config/routing';
 import logoutRouting from 'src/pages/Logout/config/routing';
@@ -28,8 +26,6 @@ export const routes = [
   userProfileRouting,
   profilesListRouting,
   editionProfileRouting,
-  profileFavoritesRouting,
-  profileProjectsRouting,
   loginRouting,
   logoutRouting,
   registerRouting,

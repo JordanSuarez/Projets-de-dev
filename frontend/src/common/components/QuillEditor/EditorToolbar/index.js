@@ -13,7 +13,7 @@ export const modules = {
     ['clean'],
   ],
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
+    // toggle to add line breaks
     matchVisual: false,
   },
 };

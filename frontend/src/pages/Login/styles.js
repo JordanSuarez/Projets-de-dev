@@ -47,4 +47,7 @@ export default ({ palette }) => ({
       backgroundColor: palette.darkBlue,
     },
   },
+  error: {
+    color: palette.errorField,
+  },
 });

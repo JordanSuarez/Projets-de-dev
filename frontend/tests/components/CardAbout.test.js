@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { expect, should } from 'chai';
+import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { classes } from 'src/common/classes';

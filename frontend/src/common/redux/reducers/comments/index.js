@@ -1,7 +1,3 @@
-import {
-
-} from 'src/common/redux/actions/comments';
-
 const initialState = {
   comments: {},
   loading: true,

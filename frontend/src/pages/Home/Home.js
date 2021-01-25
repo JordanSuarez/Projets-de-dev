@@ -16,7 +16,6 @@ const Home = ({
   isLogged,
   getMyLikes,
   myLikes,
-  clearState,
 }) => {
   useEffect(() => {
     getProjects('?limit=12', '&offset=0');
@@ -24,6 +23,7 @@ const Home = ({
       getMyLikes();
     }
   }, []);
+
   const arrayProjects = Object.values(projects);
   const handleDragStart = (e) => e.preventDefault();
   const cardsProjects = arrayProjects.map((project) => {
@@ -95,7 +95,6 @@ Home.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   getProjects: PropTypes.func.isRequired,
   getMyLikes: PropTypes.func.isRequired,
-  clearState: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
   projects: PropTypes.shape({
   }).isRequired,

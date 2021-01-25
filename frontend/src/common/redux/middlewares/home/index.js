@@ -8,6 +8,7 @@ import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
   PROJECTS, GET, TWELVE,
 } from 'src/common/callApiHandler/constants';
+import { disableLoader } from 'src/common/redux/actions/loader';
 
 const homeMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -21,6 +22,7 @@ const homeMiddleware = (store) => (next) => (action) => {
           store.dispatch(getProfileLikes());
         })
         .catch(() => {
+          store.dispatch(disableLoader());
         });
       next(action);
       break;

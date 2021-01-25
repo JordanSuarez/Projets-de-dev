@@ -6,7 +6,6 @@ import {
   GET_PROFILE_LIKES,
   SET_MY_PROJECTS_LIKES,
   GET_PROFILE_PROJECTS_LIKES,
-  CLEAR_USERS_PROFILE_STATE,
 } from 'src/common/redux/actions/userProfile';
 import { SUBMIT_LOGOUT_SUCCESS } from 'src/common/redux/actions/auth';
 import { getUser } from 'src/common/authentication/authProvider';
@@ -85,11 +84,6 @@ const userProfile = (state = initialState, action = {}) => {
         ...state,
         projects: action.data,
         loading: false,
-      };
-    }
-    case CLEAR_USERS_PROFILE_STATE: {
-      return {
-        ...initialState,
       };
     }
     default: return { ...state };

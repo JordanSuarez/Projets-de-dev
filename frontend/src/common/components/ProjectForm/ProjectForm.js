@@ -19,9 +19,7 @@ import { classes as classesProps } from 'src/common/classes';
 import FileBase64 from 'react-file-base64';
 import { modules, formats } from 'src/common/components/QuillEditor/EditorToolbar';
 import reziseFile from 'src/common/helpers/imageResizer';
-import { profiles } from './formData/fakeData';
 import fields from './formData/fields';
-
 import './styles.scss';
 
 const Form = ({
@@ -34,10 +32,12 @@ const Form = ({
   const [submitting, setSubmitting] = useState(hasError);
 
   useEffect(() => {
+    // enable submit button
     setSubmitting(false);
   }, [hasError]);
 
   const onSubmit = (values) => {
+    // Disable submit button
     setSubmitting(true);
     if (formState.tags.length === 0) {
       setSubmitting(false);
@@ -55,14 +55,18 @@ const Form = ({
     return handleSubmitProject({ ...formState, ...values }, id);
   };
 
-  // Controlled Inputs
+  // Back to user profile page
   const handleQuitForm = () => {
     history.push(getUserProfileRoute());
   };
+
+  // Hide errors message on change on inputs
   const handleChange = (event) => {
     setErrorFields({ ...errorFields, [event.target.name]: false });
     setFormState({ ...formState, [event.target.name]: event.target.value });
   };
+
+  // Image upload
   const getFiles = async (files) => {
     const imageResized = await reziseFile(files, 1920);
     const shortImageResized = await reziseFile(files, 600);
@@ -76,6 +80,8 @@ const Form = ({
     });
     setErrorFields({ ...errorFields, image: false });
   };
+
+  // Save content of quill editor to the state
   const handleChangeQuillEditorValue = (value) => {
     setFormState({ ...formState, description: value });
   };
@@ -84,11 +90,12 @@ const Form = ({
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
   const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
+  // Set errors if values are required on blur field
   const onBlurField = (event) => {
     if (event.target.name === 'title') {
       return event.target.value === ''
-        ? setErrorFields({ ...errorFields, [event.target.name]: true })
-        : setErrorFields({ ...errorFields, [event.target.name]: false });
+        ? setErrorFields({ ...errorFields, title: true })
+        : setErrorFields({ ...errorFields, title: false });
     }
     return setErrorFields(
       formState.tags.length < 1
@@ -100,6 +107,7 @@ const Form = ({
     );
   };
 
+  // Display helper text for title case
   const getHelperText = (name) => {
     if (name === 'title') {
       return formState.title === '' ? 'Ce champ est requis' : ' ';
@@ -164,6 +172,7 @@ const Form = ({
                   // limitTags={2}
                   size="small"
                   onChange={(event, values) => {
+                    // Check count of tags and return error if empty or gretter than 6
                     if (values.length < 1) {
                       setErrorFields({ ...errorFields, tagsMinValue: true });
                     }
@@ -174,6 +183,7 @@ const Form = ({
                           : { ...errorFields, tagsMaxValue: false },
                       );
                     }
+                    // Save values in state
                     setFormState({ ...formState, tags: values });
                   }}
                   getOptionSelected={(option, value) => option.name === value.name}
@@ -199,33 +209,6 @@ const Form = ({
                   )}
                 />
               </Grid>
-              <Grid item xs={12} sm={12}>
-                {/* <Autocomplete
-                  name="partners"
-                  className={classes.autoComplete}
-                  filterSelectedOptions
-                  multiple
-                  id="partners"
-                  options={profiles}
-                  // limitTags={2}
-                  size="small"
-                  getOptionValue={(option) => option}
-                  getOptionLabel={(option) => option.name}
-                  value={formState.partners}
-                  onChange={(event, values) => {
-                    setFormState({ ...formState, partners: values });
-                  }}
-                  getOptionSelected={(option, value) => option.name === value.name}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="Collaborateur(s)"
-                      placeholder="Collaborateur(s)"
-                    />
-                  )}
-                /> */}
-              </Grid>
             </div>
             <Grid item xs={12} sm={12} className={classes.editorContainer}>
               <ReactQuill
@@ -243,9 +226,9 @@ const Form = ({
               <div className={classes.editorContainer}>
                 <div className={classes.inputFile}>
                   <div className={classes.customUploadButton}>
-                    <label from="nul" className={classes.newButtonUpload}>
+                    <div className={classes.newButtonUpload}>
                       Choisir un fichier
-                    </label>
+                    </div>
                     <p className={classes.fileName}>{formState.imageName} </p>
                     <FileBase64
                       hidden

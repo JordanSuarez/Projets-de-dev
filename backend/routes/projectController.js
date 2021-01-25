@@ -12,13 +12,6 @@ module.exports = {
     let offset = req.query.offset;
     let tag1 = req.query.tag1;
 
-    if (Number.isInteger(limit) === false) {
-      limit = 12
-    };
-    if (Number.isInteger(offset) === false) {
-      offset = 0
-    };
-
     whereClause = {
       [Op.or]: [{
           tagId: req.query.tag1
@@ -42,7 +35,7 @@ module.exports = {
     };
 
     models.Project.findAll({
-        limit: (limit ? parseInt(limit, 10) : 12),
+        limit: (limit ? parseInt(limit, 10) : 1000),
         offset: (offset ? parseInt(offset, 10) : 0),
         where: (tag1 ? whereClause : null),
         order: [
