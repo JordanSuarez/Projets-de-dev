@@ -39,13 +39,13 @@ const authMiddleWare = (store) => (next) => (action) => {
           store.dispatch(redirect(getUserProfileRoute()));
           store.dispatch(submitLoginSuccess(data.userId));
           store.dispatch(showSnackbar('', `Hello! ${data.username}`, 'success'));
+          store.dispatch(getProfileInfos());
         })
         .catch(() => {
           store.dispatch(showSnackbar('Oups!', 'Mot de passe ou email incorrect', 'error'));
           store.dispatch(submitLoginError());
         })
         .finally(() => {
-          store.dispatch(getProfileInfos());
           store.dispatch(redirectSuccess());
         });
       next(action);
@@ -58,7 +58,6 @@ const authMiddleWare = (store) => (next) => (action) => {
         password: action.password,
         username: action.username,
       };
-
       callApi(url, POST, credentials)
         .then(() => {
           store.dispatch(redirect(getLoginRoute()));

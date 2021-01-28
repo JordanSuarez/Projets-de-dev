@@ -9,7 +9,6 @@ const contactMiddleware = (store) => (next) => (action) => {
     case SUBMIT_CONTACT: {
       const url = getEndpoint(CONTACT, POST, CONTACT);
       const credentials = action.message;
-
       callApi(url, POST, credentials)
         .then(() => {
           store.dispatch(showSnackbar('', 'Votre message a été envoyé avec succès', 'success'));
@@ -17,10 +16,8 @@ const contactMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           store.dispatch(showSnackbar('Oups!', error, 'error'));
         });
-
       break;
     }
-
     default:
       next(action);
   }

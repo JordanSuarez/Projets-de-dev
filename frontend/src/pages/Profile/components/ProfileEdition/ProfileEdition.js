@@ -42,9 +42,8 @@ const ProfileEdition = ({
     const errors = {};
     let validationEmail = null;
     let validationPassword = null;
-    // eslint-disable-next-line no-useless-escape
     const regexEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const regexPassword = /^(?=.*\d).{4,15}$/;
+    const regexPassword = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
     if (regexEmail.test(values.email)) {
       validationEmail = true;
     }
@@ -73,7 +72,7 @@ const ProfileEdition = ({
         errors.password = 'Ce champ est requis';
       }
       if (validationPassword === false) {
-        errors.password = 'Mot de passe invalide, minimum 4 carateres dont un caractere alphanumérique';
+        errors.password = 'Mot de passe invalide, minimum 8 carateres dont un nombre, une majuscule et un caractère spécial';
       }
       if (!values.passwordConfirmation) {
         errors.passwordConfirmation = 'Ce champ est requis';
@@ -85,9 +84,10 @@ const ProfileEdition = ({
     return errors;
   };
 
-  const handleUpdateProfile = (event) => {
-    event.userImage = formImage.userImage;
-    handleUpdate(event);
+  const handleUpdateProfile = (formValues) => {
+    // Save user image
+    const values = { ...formValues, userImage: formImage.userImage };
+    handleUpdate(values);
   };
   const history = useHistory();
 
@@ -97,6 +97,7 @@ const ProfileEdition = ({
     }
   }, [redirect]);
 
+  // image upload
   const getFiles = async (files) => {
     const imageResized = await reziseFile(files, 300);
     setFormImage({
@@ -149,9 +150,9 @@ const ProfileEdition = ({
                     <h3 className={classes.imageTitle}>Image de profil:</h3>
                     <div className={classes.inputFile}>
                       <div className={classes.customUploadButton}>
-                        <label from="nul" className={classes.newButtonUpload}>
+                        <div className={classes.newButtonUpload}>
                           Choisir un fichier
-                        </label>
+                        </div>
                         <p className={classes.fileName}> {formImage.imageName} </p>
                         <FileBase64
                           hidden

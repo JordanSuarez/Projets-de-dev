@@ -5,7 +5,6 @@ import {
   HANDLE_EDIT_PROJECT,
   HANDLE_CREATE_PROJECT,
   PROJECT_HAS_ERROR,
-  CLEAR_PROJECT_STATE,
 } from 'src/common/redux/actions/project';
 
 const initialState = {
@@ -30,7 +29,6 @@ const project = (state = initialState, action = {}) => {
   switch (action.type) {
     case FETCH_PROJECT_BY_ID:
       return {
-        ...state,
         ...initialState,
       };
     case SHOW_PROJECT_BY_ID:
@@ -64,10 +62,6 @@ const project = (state = initialState, action = {}) => {
         ...state,
         loading: false,
         hasError: true,
-      };
-    case CLEAR_PROJECT_STATE:
-      return {
-        ...initialState,
       };
     default:
       return { ...state };

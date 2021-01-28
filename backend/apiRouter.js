@@ -1,21 +1,22 @@
 const express = require('express');
 
-const userController = require('./routes/userController');
-const projectController = require('./routes/projectController');
-const tagController = require('./routes/tagController');
-const commentController = require('./routes/commentController');
-const channelController = require('./routes/channelController');
-const messageController = require('./routes/messageController');
-const likeController = require('./routes/likeController');
-const contactController = require('./routes/contactController');
+// Controllers frontOffice
+const userController = require('./controllers/userController');
+const projectController = require('./controllers/projectController');
+const tagController = require('./controllers/tagController');
+const commentController = require('./controllers/commentController');
+const channelController = require('./controllers/channelController');
+const messageController = require('./controllers/messageController');
+const likeController = require('./controllers/likeController');
+const contactController = require('./controllers/contactController');
 
 // Controllers BackOffice
-const userControllerBackOffice = require('./routes_backOffice/userControllerBackOffice');
-const projectControllerBackOffice = require('./routes_backOffice/projectControllerBackOffice');
-const tagControllerBackOffice = require('./routes_backOffice/tagControllerBackOffice');
-const commentControllerBackOffice = require('./routes_backOffice/commentControllerBackOffice');
-const contactControllerBackOffice = require('./routes_backOffice/contactControllerBackOffice');
-const messageControllerBackOffice = require('./routes_backOffice/messageControllerBackOffice');
+const userControllerBackOffice = require('./controllers_backoffice/userControllerBackOffice');
+const projectControllerBackOffice = require('./controllers_backoffice/projectControllerBackOffice');
+const tagControllerBackOffice = require('./controllers_backoffice/tagControllerBackOffice');
+const commentControllerBackOffice = require('./controllers_backoffice/commentControllerBackOffice');
+const contactControllerBackOffice = require('./controllers_backoffice/contactControllerBackOffice');
+const messageControllerBackOffice = require('./controllers_backoffice/messageControllerBackOffice');
 
 // Router
 exports.router = (() => {
@@ -68,40 +69,45 @@ exports.router = (() => {
     // Contact routes
     apiRouter.route('/contact').post(contactController.new); // OK
 
+    
     // BackOffice routes:
+
+    // Login Backoffice
+    apiRouter.route('/backoffice/login').post(userControllerBackOffice.login); // OK
+
     // -Projects routes
-    apiRouter.route('/backOffice/projects/').get(projectControllerBackOffice.allProjects); // OK
-    apiRouter.route('/backOffice/projects/:id').get(projectController.project); // OK
-    apiRouter.route('/backOffice/projects/:id').put(projectControllerBackOffice.updateProject); // OK
-    apiRouter.route('/backOffice/projects/:id').delete(projectControllerBackOffice.deleteProject); //OK
+    apiRouter.route('/backoffice/projects/').get(projectControllerBackOffice.allProjects); // OK
+    apiRouter.route('/backoffice/projects/:id').get(projectController.project); // OK
+    apiRouter.route('/backoffice/projects/:id').put(projectControllerBackOffice.updateProject); // OK
+    apiRouter.route('/backoffice/projects/:id').delete(projectControllerBackOffice.deleteProject); //OK
 
     // -Comment routes
-    apiRouter.route('/backOffice/comments/').get(commentController.commentsList);    
-    apiRouter.route('/backOffice/comments/:id').get(commentController.comment);    
-    apiRouter.route('/backOffice/comments/:id').put(commentControllerBackOffice.updateComment); // OK
-    apiRouter.route('/backOffice/comments/:id').delete(commentControllerBackOffice.deleteComment); //OK
+    apiRouter.route('/backoffice/comments/').get(commentController.commentsList);    
+    apiRouter.route('/backoffice/comments/:id').get(commentController.comment);    
+    apiRouter.route('/backoffice/comments/:id').put(commentControllerBackOffice.updateComment); // OK
+    apiRouter.route('/backoffice/comments/:id').delete(commentControllerBackOffice.deleteComment); //OK
 
     // -Users routes
-    apiRouter.route('/backOffice/users').get(userControllerBackOffice.getUsersList); // OK
-    apiRouter.route('/backOffice/users/:id').get(userControllerBackOffice.getUserById); // OK
-    apiRouter.route('/backOffice/users/:id').put(userControllerBackOffice.updateUser); // OK
-    apiRouter.route('/backOffice/users/:id').delete(userControllerBackOffice.deleteUser); // OK
+    apiRouter.route('/backoffice/users').get(userControllerBackOffice.getUsersList); // OK
+    apiRouter.route('/backoffice/users/:id').get(userControllerBackOffice.getUserById); // OK
+    apiRouter.route('/backoffice/users/:id').put(userControllerBackOffice.updateUser); // OK
+    apiRouter.route('/backoffice/users/:id').delete(userControllerBackOffice.deleteUser); // OK
 
     // -Tags routes
-    apiRouter.route('/backOffice/tags').get(tagControllerBackOffice.getTagList); // OK
-    apiRouter.route('/backOffice/tags/:id').get(tagController.getTagbyId); // OK
-    apiRouter.route('/backOffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
-    apiRouter.route('/backOffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
-    apiRouter.route('/backOffice/tags').post(tagControllerBackOffice.createTag); // OK
+    apiRouter.route('/backoffice/tags').get(tagControllerBackOffice.getTagList); // OK
+    apiRouter.route('/backoffice/tags/:id').get(tagControllerBackOffice.getTagbyId); // OK
+    apiRouter.route('/backoffice/tags/:id').put(tagControllerBackOffice.updateTag); // OK
+    apiRouter.route('/backoffice/tags/:id').delete(tagControllerBackOffice.deleteTag); // OK
+    apiRouter.route('/backoffice/tags').post(tagControllerBackOffice.createTag); // OK
 
     // -Contact routes
-    apiRouter.route('/backOffice/contacts').get(contactControllerBackOffice.getContactList); // OK
-    apiRouter.route('/backOffice/contacts/:id').get(contactControllerBackOffice.getContactById); // OK
-    apiRouter.route('/backOffice/contacts/:id').delete(contactControllerBackOffice.deleteContact); // OK
+    apiRouter.route('/backoffice/contacts').get(contactControllerBackOffice.getContactList); // OK
+    apiRouter.route('/backoffice/contacts/:id').get(contactControllerBackOffice.getContactById); // OK
+    apiRouter.route('/backoffice/contacts/:id').delete(contactControllerBackOffice.deleteContact); // OK
 
     // -Messages routes
-    apiRouter.route('/backOffice/messages').get(messageControllerBackOffice.getMessagesList); // OK
-    apiRouter.route('/backOffice/messages/:id').delete(messageControllerBackOffice.deleteMessage);
+    apiRouter.route('/backoffice/messages').get(messageControllerBackOffice.getMessagesList); // OK
+    apiRouter.route('/backoffice/messages/:id').delete(messageControllerBackOffice.deleteMessage);
 
     return apiRouter;
 })();

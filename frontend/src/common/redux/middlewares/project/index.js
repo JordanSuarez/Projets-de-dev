@@ -20,6 +20,7 @@ import {
   PROJECTS, GET, POST, PATCH, ONE, DELETE, TAGS, ALL,
 } from 'src/common/callApiHandler/constants';
 import { getUserProfileRoute, getNotFoundRoute } from 'src/common/routing/routesResolver';
+import { disableLoader } from 'src/common/redux/actions/loader';
 import { get } from 'lodash';
 import axios from 'axios';
 
@@ -41,6 +42,7 @@ const projectMiddleWare = (store) => (next) => (action) => {
       })
         .catch(() => {
           store.dispatch(redirect(getNotFoundRoute()));
+          store.dispatch(disableLoader());
         })
         .finally(() => {
           store.dispatch(redirectSuccess());

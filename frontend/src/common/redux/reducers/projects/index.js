@@ -2,8 +2,8 @@ import {
   SAVE_ALL_PROJECTS,
   SAVE_PROJECTS_CURRENT_PAGE,
   GET_PROJECTS,
-  CLEAR_PROJECTS_STATE,
 } from 'src/common/redux/actions/projects';
+import { DISABLE_LOADER } from 'src/common/redux/actions/loader';
 
 const initialState = {
   projectsNumber: 1,
@@ -36,9 +36,10 @@ const projects = (state = initialState, action = {}) => {
         loading: false,
       };
     }
-    case CLEAR_PROJECTS_STATE: {
+    case DISABLE_LOADER: {
       return {
-        ...initialState,
+        ...state,
+        loading: false,
       };
     }
     default: return { ...state };

@@ -17,9 +17,6 @@ const Chat = ({
   isLogged,
 }) => {
   /* ---------------------- a stocker dans le state ---------------------------- */
-  // Affichage de la liste des users sur la droite si width > 1280
-  // si width entre 960 et 1279 affichage sur la gauche
-  // sinon bouton affichage du bouton pour ouvrir la liste
   const [showButtonClosed, setShowButtonClosed] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
   const updateWidthAndHeight = () => {
@@ -38,6 +35,7 @@ const Chat = ({
     }
   }, [width]);
   /* ------------------------------------------------------ */
+
   useEffect(() => {
     connectWebSocket();
   }, []);
@@ -58,7 +56,6 @@ const Chat = ({
           </IconButton>
         </div>
       )}
-
       {((status === 'chatOpen' || (status !== 'chatClosed' && status !== 'userProfileOpen' && width > 960)) && isLogged) && (
         <>
           <IconButton className={classes.closeChatButton} aria-label="open chat" onClick={closeChat}>
@@ -80,10 +77,6 @@ Chat.propTypes = {
   status: PropTypes.string.isRequired,
   isLogged: PropTypes.bool.isRequired,
   getMessageList: PropTypes.func.isRequired,
-};
-
-Chat.defaultProps = {
-
 };
 
 export default Chat;

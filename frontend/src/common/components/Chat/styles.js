@@ -25,9 +25,7 @@ export default ({ breakpoints, palette }) => ({
     top: '87px',
     left: '7px',
   },
-
   closedIcon: {
     color: palette.blue,
   },
-
 });

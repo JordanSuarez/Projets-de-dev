@@ -3,40 +3,34 @@ export const SAVE_PROJECTS_CURRENT_PAGE = 'SAVE_PROJECTS_CURRENT_PAGE';
 export const SAVE_ALL_PROJECTS = 'SAVE_ALL_PROJECTS';
 export const ADD_LIKE = 'ADD_LIKE';
 export const ADD_DISLIKE = 'ADD_DISLIKE';
-export const CLEAR_PROJECTS_STATE = 'CLEAR_PROJECTS_STATE';
 
-// Récuperation de tout les projets
+// Get all projects
 export const getProjectsInfos = (projectLimit, projectOffset) => ({
   type: GET_PROJECTS,
   projectLimit,
   projectOffset,
 });
 
-// Sauvegarde de tout les projets
+// Save all projects
 export const saveProjectsCurrentPage = (data) => ({
   type: SAVE_PROJECTS_CURRENT_PAGE,
   projects: { ...data },
 });
 
-// Sauvegarde le nombre de projets (pour la pagination)
+// save the number of projects for pagination & searchbar
 export const saveAllProjects = (data) => ({
   type: SAVE_ALL_PROJECTS,
   projects: { ...data },
 });
 
-// j'aime un projet
+// add like on project
 export const addLike = (projectId) => ({
   type: ADD_LIKE,
   projectId,
 });
 
-// je n'aime plus un projet
+// dislike project
 export const addDislike = (projectId) => ({
   type: ADD_DISLIKE,
   projectId,
-});
-
-// Clear le state de la page projects
-export const clearProjectsState = () => ({
-  type: CLEAR_PROJECTS_STATE,
 });

@@ -1,5 +1,4 @@
 export default ({ breakpoints, palette }) => ({
-
   containerChannels: {
     position: 'fixed',
     top: '0',
@@ -22,7 +21,6 @@ export default ({ breakpoints, palette }) => ({
       top: '149px',
     },
   },
-
   closedListChannel: {
     zIndex: '30',
     color: palette.blue,
@@ -31,7 +29,6 @@ export default ({ breakpoints, palette }) => ({
     right: '0',
     padding: '1em',
   },
-
   title: {
     padding: '1em 1em 1em 2em',
     display: 'flex',
@@ -46,17 +43,14 @@ export default ({ breakpoints, palette }) => ({
   channelIcon: {
     margin: '0 1em 0 0',
   },
-
   channelsList: {
     margin: '0',
     width: '100vw',
     padding: '2em 0em 0em 1em',
-
     [breakpoints.up('md')]: {
       width: '320px',
     },
   },
-
   channelItem: {
     display: 'flex',
     padding: '1em',
@@ -64,7 +58,5 @@ export default ({ breakpoints, palette }) => ({
     alignItems: ' center',
     [breakpoints.up('md')]: {
     },
-
   },
-
 });

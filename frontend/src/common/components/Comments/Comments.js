@@ -79,11 +79,9 @@ const Comments = ({
     onCommentWantUpdate(comment.id);
     SetMessageUpdate(comment.content);
   };
-
   const onCommentUpdate = (comment) => {
     handleCommentUpdate({ content: messageUpdate, projectId: idProject }, comment.id);
   };
-
   let emojiPickerUpdate;
   if (emojiPickerUpdateState) {
     emojiPickerUpdate = (
@@ -133,7 +131,6 @@ const Comments = ({
                 >
                   😍
                 </IconButton>
-
                 <Box className={classes.containerButton}>
                   <Button
                     className={classes.submit}
@@ -150,7 +147,6 @@ const Comments = ({
             <p className={classes.noLogged}> Merci de vous connecter pour poster un commentaire</p>
           )}
       </div>
-
       <div className={classes.commentList}>
         {comments.length > 0 && (
           comments.map((comment) => (
@@ -195,7 +191,6 @@ const Comments = ({
                   </div>
                 </div>
               </div>
-
               {userId === comment.User.id && (
                 <div className={classes.containerFormUpdate}>
                   {commentWantUpdate === comment.id && (
@@ -224,7 +219,6 @@ const Comments = ({
                     >
                       😍
                     </IconButton>
-
                     <Box className={classes.containerButton}>
                       <Button
                         className={classes.submit}
@@ -239,7 +233,6 @@ const Comments = ({
                   )}
                 </div>
               )}
-
               <p className={classes.commentText}>
                 {comment.content}
               </p>
@@ -251,11 +244,8 @@ const Comments = ({
             Il n'y a pas encore de commentaires pour ce projet
           </p>
         )}
-
       </div>
-
     </Grid>
-
   );
 };
 

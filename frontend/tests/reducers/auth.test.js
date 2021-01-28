@@ -22,7 +22,6 @@ describe('auth reducer', () => {
   it('handle action SUBMIT_LOGIN_SUCCESS', () => {
     const userId = 1;
     const action = submitLoginSuccess(userId);
-
     const expectedState = {
       isLogged: true,
       userId,

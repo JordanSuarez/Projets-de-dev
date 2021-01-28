@@ -6,7 +6,6 @@ export const HANDLE_DELETE_PROJECT = 'HANDLE_DELETE_PROJECT';
 export const FETCH_PROJECT_TAGS = 'FETCH_PROJECT_TAGS';
 export const SHOW_PROJECT_TAGS = 'SHOW_PROJECT_TAGS';
 export const PROJECT_HAS_ERROR = 'PROJECT_HAS_ERROR';
-export const CLEAR_PROJECT_STATE = 'CLEAR_PROJECT_STATE';
 
 export const fetchProjectById = (projectId) => ({
   type: FETCH_PROJECT_BY_ID,
@@ -45,8 +44,4 @@ export const showProjectTags = (tags) => ({
 
 export const projectHasError = () => ({
   type: PROJECT_HAS_ERROR,
-});
-
-export const clearProjectPageState = () => ({
-  type: CLEAR_PROJECT_STATE,
 });

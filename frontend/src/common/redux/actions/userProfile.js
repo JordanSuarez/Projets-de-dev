@@ -8,7 +8,6 @@ export const GET_PROJECTS = 'GET_PROJECTS';
 export const SAVE_PROJECTS = 'SAVE_PROJECTS';
 export const GET_PROFILE_PROJECTS_LIKES = 'GET_PROFILE_PROJECTS_LIKES';
 export const SET_MY_PROJECTS_LIKES = 'SET_MY_PROJECTS_LIKES';
-export const CLEAR_USERS_PROFILE_STATE = 'CLEAR_USERS_PROFILE_STATE';
 
 export const getProfileInfos = () => ({
   type: GET_USER_PROFILE,
@@ -53,8 +52,4 @@ export const getProjects = () => ({
 export const saveProjects = (data) => ({
   type: SAVE_PROJECTS,
   data,
-});
-
-export const clearUserProfileState = () => ({
-  type: CLEAR_USERS_PROFILE_STATE,
 });

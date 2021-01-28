@@ -22,28 +22,18 @@ const UserProfile = ({
   handleDeleteUserProfile,
   redirect,
   isLogged,
-  getMyProjectsLiked,
-  myProjectsLiked,
-  clearState,
 }) => {
   const history = useHistory();
   const [toggleWindow, setToggleWindow] = useState(false);
-  const [projectsLiked, setProjectsLiked] = useState([]);
 
   useEffect(() => {
-    clearState();
     getProfile();
-    // getMyProjectsLiked();
     if (redirect.length > 0) {
       history.push(redirect);
     }
   }, [redirect]);
 
-  // useEffect(() => {
-  //   setProjectsLiked(myProjectsLiked);
-  // }, [myProjectsLiked]);
-
-  // The AlertDialog context for each case where it will be called
+  // The AlertDialog context
   const [context, setContext] = useState({
     alertId: null,
     title: '',
@@ -58,7 +48,7 @@ const UserProfile = ({
 
   // Called from delete buttons, and set context where it was called
   // Get the projectId from handleDeleteProject method's CardProject
-  const deleteItem = (item, projectId = null) => {
+  const openDeleteModal = (item, projectId = null) => {
     setContext({
       alertId: item.id,
       title: item.title,
@@ -72,13 +62,15 @@ const UserProfile = ({
   const newProject = () => history.push(getCreationProjectRoute());
 
   // Returns the proper method depending on context
-  const handleAgreeAlertDialog = () => {
+  const agreeDeleteAction = () => {
     switch (alertId) {
       case alertUserProfile.id: {
+        // close modal
         setContext({ ...context, isOpen: false });
         return handleDeleteUserProfile();
       }
       case alertUserProject.id: {
+        // close modal
         setContext({ ...context, isOpen: false });
         return handleDeleteProject(context.projectId);
       }
@@ -86,10 +78,10 @@ const UserProfile = ({
     }
   };
 
-  // Loop on buttons array to not repeat the button component
+  // Loop on array to not repeat the button component
   const buttons = [
     {
-      id: 1, method: () => deleteItem(alertUserProfile), label: 'Supprimer mon compte',
+      id: 1, method: () => openDeleteModal(alertUserProfile), label: 'Supprimer mon compte',
     },
     {
       id: 2, method: editProfile, label: 'Modifier mon compte',
@@ -113,17 +105,11 @@ const UserProfile = ({
       userImage={userProfile.userImage}
       image={image}
       projectOwnerOptions
-      handleDeleteProject={(id) => deleteItem(alertUserProject, id)}
+      handleDeleteProject={(id) => openDeleteModal(alertUserProject, id)}
       isLogged={isLogged}
       like={false}
     />
   ));
-
-  // Remove card from projectsLiked on click
-  const handleClick = (id) => {
-    const test = projectsLiked.filter((myLike) => myLike.projectId !== id);
-    setProjectsLiked(test);
-  };
 
   return (
     <Base loading={loading}>
@@ -135,7 +121,7 @@ const UserProfile = ({
             content={content}
             agreeLabelButton="Accepter"
             disagreeLabelButton="Refuser"
-            onAgree={handleAgreeAlertDialog}
+            onAgree={agreeDeleteAction}
             onCancel={() => setContext({ ...context, isOpen: false })}
           />
           <div className={classes.column}>
@@ -176,12 +162,6 @@ const UserProfile = ({
               >
                 Mes projets
               </h2>
-              {/* <h2
-                className={toggleWindow ? classes.subtitleActive : classes.subtitle}
-                onClick={() => setToggleWindow(true)}
-              >
-                Mes projets préférés
-              </h2> */}
             </div>
           </div>
           {!toggleWindow && (
@@ -195,49 +175,6 @@ const UserProfile = ({
             </div>
           </div>
           )}
-          {/* {toggleWindow && (
-          <div>
-            <div className={classes.cardContainer}>
-              {isEmpty(projectsLiked) && (
-              <p>Je n'ai pas encore de projets préférés</p>
-              )}
-              {!isEmpty(projectsLiked)
-                && (
-                <Carousel items={
-                  projectsLiked.map((myProjectLiked) => {
-                    const { project } = myProjectLiked;
-                    let like = false;
-                    // eslint-disable-next-line max-len
-                    if ((project.id === myProjectLiked.projectId) && (myProjectLiked.isLike === 1)) {
-                      like = true;
-                    }
-                    return (
-                      <>
-                        {(like !== false) && (
-                          <CardProject
-                            key={project.id}
-                            projectId={project.id}
-                            title={project.title}
-                            tags={project.tags}
-                            description={project.description}
-                            userId={project.user.id}
-                            userImage={project.user.userImage}
-                            image={project.image}
-                            isLogged={isLogged}
-                            vote={project.vote}
-                            like={like}
-                            handleClick={handleClick}
-                          />
-                        )}
-                      </>
-                    );
-                  })
-                }
-                />
-                )}
-            </div>
-          </div>
-          )} */}
         </div>
       </>
     </Base>
@@ -253,14 +190,10 @@ UserProfile.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   redirect: PropTypes.string.isRequired,
-  getMyProjectsLiked: PropTypes.func.isRequired,
-  myProjectsLiked: PropTypes.array,
-  clearState: PropTypes.func.isRequired,
   projects: PropTypes.array,
 };
 
 UserProfile.defaultProps = {
-  myProjectsLiked: [],
   projects: [],
 };
 export default UserProfile;

@@ -16,19 +16,18 @@ const Home = ({
   isLogged,
   getMyLikes,
   myLikes,
-  clearState,
 }) => {
   useEffect(() => {
-    clearState();
     getProjects('?limit=12', '&offset=0');
     if (isLogged) {
       getMyLikes();
     }
   }, []);
-  const arrayProjects = Object.values(projects);
 
+  const arrayProjects = Object.values(projects);
   const handleDragStart = (e) => e.preventDefault();
 
+  // Carousel
   const cardsProjects = arrayProjects.map((project) => {
     let like = false;
 
@@ -63,7 +62,8 @@ const Home = ({
         <div className={classes.textContainer}>
           <h2 className={classes.subtitle}>Projets de Dev</h2>
           <p className={classes.homeText}>
-          Le site où on partage le fruit de son expérience en matière de création de projets de dev, que ce soit un projet mené individuellement ou à plusieurs.
+            Le site où on partage le fruit de son expérience en matière de création
+            de projets de dev, que ce soit un projet mené individuellement ou à plusieurs.
           </p>
         </div>
         <h2 className={classes.subtitleProjects}> Derniers projets publiés</h2>
@@ -78,8 +78,11 @@ const Home = ({
             <img className={classes.robot} src={robot} alt="robot" />
             <div className={classes.title}>Projets de dev fait par des Dev’s pour des Dev’s !</div>
             <p className={classes.descriptionSite}>
-              L’idée a germé quand l’un d’entre nous s’est rendu compte qu’il n’était pas facile de partager nos projets et idées de projets avec d’autres personnes.
-              Pour remédier à cette problématique, il a fallu trouver une solution : une plateforme  qui serait à la fois visuelle, pratique et qui permettrait à n’importe quel développeur de partager ses idées et créations rapidement, en quelques clics ! 
+              L’idée a germé quand l’un d’entre nous s’est rendu compte qu’il n’était pas
+              facile de partager nos projets et idées de projets avec d’autres personnes.
+              Pour remédier à cette problématique, il a fallu trouver une solution : une
+              plateforme  qui serait à la fois visuelle, pratique et qui permettrait à n’importe
+              quel développeur de partager ses idées et créations rapidement, en quelques clics !
             </p>
           </div>
         </div>
@@ -94,7 +97,6 @@ Home.propTypes = {
   isLogged: PropTypes.bool.isRequired,
   getProjects: PropTypes.func.isRequired,
   getMyLikes: PropTypes.func.isRequired,
-  clearState: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
   projects: PropTypes.shape({
   }).isRequired,

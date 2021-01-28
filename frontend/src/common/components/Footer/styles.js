@@ -1,5 +1,4 @@
 export default ({ breakpoints, palette }) => ({
-
   footer: {
     width: '100%',
     padding: '3em 0',
@@ -18,7 +17,6 @@ export default ({ breakpoints, palette }) => ({
     },
     color: palette.white,
   },
-
   infos: {
     fontWeight: '400',
     fontSize: '1.5em',
@@ -38,7 +36,6 @@ export default ({ breakpoints, palette }) => ({
 
     },
   },
-
   footerLinks: {
     cursor: 'pointer',
     textAlign: 'end',
@@ -51,7 +48,6 @@ export default ({ breakpoints, palette }) => ({
       color: palette.blue,
     },
   },
-
   icons: {
     fontSize: '1.8em',
     display: 'flex',
@@ -65,6 +61,5 @@ export default ({ breakpoints, palette }) => ({
     [breakpoints.between('xs', 'md')]: {
       marginRight: '0',
     },
-
-  }
+  },
 });

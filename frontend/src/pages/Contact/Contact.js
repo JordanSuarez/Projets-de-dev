@@ -2,11 +2,11 @@ import React from 'react';
 
 import { classes as classesProps } from 'src/common/classes';
 import { Form } from 'react-final-form';
-import headerImage from './header-about.png';
 import { TextField } from 'mui-rff';
 import { Box, Button } from '@material-ui/core';
 import Base from 'src/common/components/Base';
 import { func } from 'prop-types';
+import headerImage from './header-about.png';
 import validate from './validation';
 
 const Contact = ({ classes, submitContact }) => {
@@ -16,7 +16,7 @@ const Contact = ({ classes, submitContact }) => {
 
   return (
     <Base>
-    <img className={classes.image} src={headerImage} alt="header" />
+      <img className={classes.image} src={headerImage} alt="header" />
       <div className={classes.container}>
         <Box borderRadius={16} className={classes.content} boxShadow={2}>
           <h2 className={classes.formTitle}>Nous contacter</h2>

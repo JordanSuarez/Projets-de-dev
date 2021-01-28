@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { hideSnackbar } from 'src/common/redux/actions/snackbar';
 import styles from './styles';
-import Snackbar from './component';
+import Snackbar from './Snackbar';
 
 const mapStateToProps = (state) => ({
   isOpen: state.snackbar.isOpen,

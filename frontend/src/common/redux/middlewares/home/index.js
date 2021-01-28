@@ -8,12 +8,12 @@ import { callApi } from 'src/common/callApiHandler/urlHandler';
 import {
   PROJECTS, GET, TWELVE,
 } from 'src/common/callApiHandler/constants';
+import { disableLoader } from 'src/common/redux/actions/loader';
 
 const homeMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case GET_LATEST_PROJECTS: {
       const url = getEndpoint(PROJECTS, GET, TWELVE, action.projectLimit, action.projectOffset);
-
       callApi(url, GET)
         .then((response) => {
           store.dispatch(saveLastestProjects(response.data));
@@ -22,8 +22,8 @@ const homeMiddleware = (store) => (next) => (action) => {
           store.dispatch(getProfileLikes());
         })
         .catch(() => {
+          store.dispatch(disableLoader());
         });
-
       next(action);
       break;
     }

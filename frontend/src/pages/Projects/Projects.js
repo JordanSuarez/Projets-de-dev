@@ -11,7 +11,6 @@ import SearchBar from 'src/common/components/SearchBar';
 import { isEmpty } from 'lodash';
 import headerImage from './header-home.jpg';
 
-
 const Projects = ({
   classes,
   getProjects,
@@ -22,7 +21,6 @@ const Projects = ({
   isLogged,
   getMyLikes,
   myLikes,
-  clearState,
 }) => {
   const { offset } = useParams();
   const history = useHistory();
@@ -46,7 +44,6 @@ const Projects = ({
   };
 
   useEffect(() => {
-    clearState();
     getProjects(`?limit=${limit}`, `&offset=${currentOffset}`);
     if (isLogged) {
       getMyLikes();
@@ -160,7 +157,6 @@ Projects.propTypes = {
   loading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   getMyLikes: PropTypes.func.isRequired,
-  clearState: PropTypes.func.isRequired,
   myLikes: PropTypes.array,
 };
 

@@ -8,4 +8,4 @@ export default {
   path: PROFILE,
   component: Profile,
   requireAuthentication: false,
-}
+};

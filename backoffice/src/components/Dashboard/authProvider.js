@@ -1,5 +1,6 @@
 import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_CHECK } from 'react-admin';
-
+import { apiUrl } from './Dashboard'
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (type, params) => {
     if (type === AUTH_LOGIN) {
         const { email, password } = params;
@@ -7,8 +8,7 @@ export default (type, params) => {
             email: email,
             password : password
         }
-        const request = new Request('http://ec2-34-202-164-145.compute-1.amazonaws.com/api/users/login', {
-            credentials: 'include',
+        const request = new Request(`${apiUrl}/login`, {
 	        method: 'POST',
             body: JSON.stringify( values ),
             headers: new Headers({ 'Content-Type': 'application/json' }),

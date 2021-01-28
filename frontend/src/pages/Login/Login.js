@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  func, shape, string, bool,
+  func, string, bool,
 } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { classes as classesProps } from 'src/common/classes';
@@ -22,7 +22,7 @@ const validate = (values) => {
 };
 
 const Login = ({
-  classes, handleLogin, redirect, initialValues, hasError, changeHasError, isLogged,
+  classes, handleLogin, redirect, hasError, changeHasError, isLogged,
 }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -54,11 +54,11 @@ const Login = ({
           <Form
             className={classes.form}
             onSubmit={handleLogin}
-            initialValues={initialValues}
             validate={validate}
             render={({ handleSubmit, submitting }) => (
               <form onSubmit={handleSubmit} noValidate>
-                {errorMessage && <p>Identifiants ou mot de passe invalide</p>}
+                {errorMessage
+                && <p className={classes.error}>Identifiants ou mot de passe invalide</p>}
 
                 <TextField
                   className={classes.textfield}
@@ -107,9 +107,6 @@ Login.propTypes = {
   redirect: string.isRequired,
   hasError: bool.isRequired,
   isLogged: bool.isRequired,
-  initialValues: shape({
-    email: string.isRequired,
-  }).isRequired,
 };
 
 export default Login;
